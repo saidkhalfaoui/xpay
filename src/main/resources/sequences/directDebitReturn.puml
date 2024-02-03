@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+"Debtor Bank" -> Bank : Initiate Return payment
+Bank -> "Account Holder" : Fund Return
+Bank --> BankInterface: Reporting Info (CAMT.52 with Reject Code)
+BankInterface--> SepaDDEngine: Return Notification
+SepaDDEngine-> BankInterface: Reverse Credit Transfer
+SepaDDEngine--> Business : Return Notification
+BankInterface->Bank : batch payment file (scheduled job)
+Bank-->Bank: process payment
+Bank->BankInterface: Reporting Information
+BankInterface-->BankInterface : update transaction status
+SepaDDEngine-> BankInterface : get Transaction status
+BankInterface-->SepaDDEngine : transaction status (success)
+
+@enduml

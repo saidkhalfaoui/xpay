@@ -1,0 +1,24 @@
+2024-02-02 16:21:44,856 INFO o.s.b.StartupInfoLogger [main] Starting SepaDDRaboInterfaceApplication using Java 11.0.19 on Said with PID 10384 (C:\Users\User\sepadd\target\classes started by User in C:\Users\User\sepadd)
+2024-02-02 16:21:44,879 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-02-02 16:21:47,907 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2024-02-02 16:21:47,934 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2024-02-02 16:21:47,936 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-02-02 16:21:47,937 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.78]
+2024-02-02 16:21:48,318 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-02-02 16:21:48,319 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3304 ms
+2024-02-02 16:21:49,684 INFO o.s.b.a.e.w.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-02 16:21:49,741 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2024-02-02 16:21:49,780 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2024-02-02 16:21:49,804 INFO o.s.b.StartupInfoLogger [main] Started SepaDDRaboInterfaceApplication in 5.954 seconds (JVM running for 46.764)
+2024-02-02 16:21:51,746 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-10.0.75.1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-02 16:21:51,747 INFO o.s.w.s.FrameworkServlet [RMI TCP Connection(2)-10.0.75.1] Initializing Servlet 'dispatcherServlet'
+2024-02-02 16:21:51,751 INFO o.s.w.s.FrameworkServlet [RMI TCP Connection(2)-10.0.75.1] Completed initialization in 4 ms
+2024-02-02 16:22:01,622 INFO c.h.s.a.DirectDebitApiImpl [http-nio-8080-exec-1] NL91INGB0123456726
+2024-02-02 16:22:04,850 INFO c.h.s.d.TransactionFireStoreDAO [http-nio-8080-exec-1] 2024-02-02T15:21:57.493844000Z
+2024-02-02 16:22:11,697 INFO c.h.s.a.DirectDebitApiImpl [http-nio-8080-exec-3] NL91INGB0123456726
+2024-02-02 16:22:11,795 INFO c.h.s.d.TransactionFireStoreDAO [http-nio-8080-exec-3] 2024-02-02T15:22:04.517371000Z
+2024-02-02 16:22:13,964 INFO c.h.s.a.DirectDebitApiImpl [http-nio-8080-exec-4] NL91INGB0123456726
+2024-02-02 16:22:14,128 INFO c.h.s.d.TransactionFireStoreDAO [http-nio-8080-exec-4] 2024-02-02T15:22:06.847238000Z
+2024-02-02 16:22:22,481 INFO c.h.s.j.DirectDebitJob [pool-2-thread-1] No More transaction found , Jobs completed 
+2024-02-02 16:22:22,801 INFO c.h.s.j.DirectDebitJob [pool-2-thread-1] Job Completed Successfully
+2024-02-02 16:22:22,802 INFO c.h.s.ScheduledJobController [http-nio-8080-exec-5] is Done :true

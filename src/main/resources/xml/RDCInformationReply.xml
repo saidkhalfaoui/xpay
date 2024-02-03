@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RDCInformationReply">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="ContractId"/>     				<!-- contractid of reciever -->
+        <xs:element type="xs:string" name="UniqueReference"/>				<!-- determined from request or by rabobank -->
+        <xs:element type="xs:dateTime" name="TimeStamp"/>						<!-- TimeStamp of reply in format 20130320T09:00:00 -->        
+        <xs:element name="PayloadList" >
+    			<xs:complexType>
+      			<xs:sequence>
+      				<xs:element name="Payload" >
+    						<xs:complexType>
+      						<xs:sequence>
+      							<xs:element type="xs:string" name="FileName" />				<!-- somecamt.xml or somebtl.btl -->
+        						<xs:element type="xs:base64Binary" name="Signature" /><!-- additional details -->
+ 			   			   	  <xs:element type="xs:string" name="PayloadAction"/>		<!-- CAMT or MT940 -->
+       	 						<xs:element type="xs:string" name="PayloadVersion"/>	<!-- e.g. camt.053.001.02 -->
+       	 						<xs:element name="Accounts" minOccurs="0">						<!-- list of all accounts for this info set if available -->
+    									<xs:complexType>
+      									<xs:sequence>
+      										<xs:element name="Account" minOccurs="0">				
+    												<xs:complexType>
+      												<xs:sequence>
+      													<xs:element type="xs:string" name="IBAN"/>
+      												</xs:sequence>
+        										</xs:complexType>
+        									</xs:element>
+        								</xs:sequence>
+        							</xs:complexType>
+      			  			</xs:element>
+      			  		</xs:sequence>
+        				</xs:complexType>
+        			</xs:element>
+        		</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

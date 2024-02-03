@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+package Bank{
+usecase "process direct debit" as UC9
+usecase "process Credit transfer" as UC10
+usecase "Refund Payment"  as UC11
+usecase "Reporting information" as UC12
+}
+package Users {
+  actor Business as c
+  actor "Customer" as fc
+}
+package SEPADDEngine{
+  usecase "Authorize transaction" as UC1
+  usecase "Revoke Authorization" as UC2
+  usecase "Initiate Credit Transfer" as UC3
+  usecase "Initiate Direct Debit" as UC4
+  usecase "Transactions report" as UC4a
+}
+package BankInterface{
+  usecase "Add Transaction" as UC5
+  usecase "Update Transaction" as UC6
+  usecase "Transaction status" as UC7
+  usecase "Refund Transaction" as UC8
+  usecase "batch processing"  as UCbp
+}
+fc --> UC1: account details / signature
+UC1-->UC1 : generate authorization/ store account details
+c -->UC3 : initiate (recurrent) payment order
+UC4-->UC4 : Scheduled Daily Job
+UC3-->UC3 : Scheduled Dilay Job
+UC4-->UC5 : add Direct Debit transaction
+UC4-->UC6 : update transaction
+UC4a-->UC7: get transaction status
+UC3-->UC5 : add Credit transfer transaction
+UC3-->UC6: update transaction
+UCbp-->UC9: direct debit file
+UCbp-->UC10: credit order file
+UC12-->UC7 :process reporting file
+fc-->UC11: refund payment (banking app)
+UC8-->UC5 : add Direct Debit (from business)
+@enduml

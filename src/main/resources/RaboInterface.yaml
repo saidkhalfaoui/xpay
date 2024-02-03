@@ -1,0 +1,352 @@
+openapi: 3.0.0
+info:
+  title: Financial Transactions API
+  version: 1.0.0
+paths:
+  /direct-debit:
+    post:
+      summary: Add Direct Debit Transaction
+      requestBody:
+        description: Direct Debit Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectDebitRequest'
+      responses:
+        '200':
+          description: Successful transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+
+
+
+  /credit-transfer:
+    post:
+      summary: Add Credit Transfer Transaction
+      requestBody:
+        description: Credit Transfer Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditTransferRequest'
+      responses:
+        '200':
+          description: Successful transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+  /get-transaction-status:
+    get:
+      summary: Get Transaction Status
+      parameters:
+        - name: transactionId
+          in: query
+          description: ID of the transaction
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionStatusResponse'
+
+  /delete-transaction:
+    delete:
+      summary: (logical) delete Transaction
+      parameters:
+        - name: transactionId
+          in: query
+          description: ID of the transaction
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionStatusResponse'
+
+
+  /update_transaction:
+    post:
+      summary: Update Direct Debit mandate
+      requestBody:
+        description: update Direct Debit Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdateRequest'
+      responses:
+        '200':
+          description: Transaction status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionupdateresponse'
+components:
+  schemas:
+    TransactionRequest:
+      type: object
+      properties:
+        account_info:
+          $ref: '#/components/schemas/accountinformation'
+
+
+        amount:
+          type: number
+          example: "10.23"
+        currency:
+          type: string
+          example : "EUR"
+        scheduled_execution_date:
+          type: string
+          format: date
+        end_to_end_transaction_reference:
+          type: string
+          example: "f47ac10b58cc4372a5670e02b2c3d479"
+
+
+
+
+
+    DirectDebitRequest:
+      allOf:
+        - $ref: '#/components/schemas/TransactionRequest'
+        - type: object
+          properties:
+            mandate_information:
+              $ref: '#/components/schemas/mandateinformation'
+            authorisation1_code:
+              type: string
+            transaction_type:
+              $ref: '#/components/schemas/transactiontype'
+
+            internal_transaction_reference:
+              type: string
+              example: "f47ac10b58cc4372a5670e02b2c3d479"
+
+
+
+
+
+
+
+
+
+    CreditTransferRequest:
+      allOf:
+        - $ref: '#/components/schemas/TransactionRequest'
+        - type: object
+          properties:
+            additional_info:
+              type: string
+            remittance_info:
+              type: string
+
+    TransactionStatusResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        end_to_end_transaction_reference:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/statusenum'
+        processingStatus:
+          $ref: '#/components/schemas/processingstatusenum'
+          nullable: true
+        lastUpdated:
+          type: string
+
+
+    TransactionResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        end_to_end_transaction_reference:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/statusenum'
+        status_description:
+          type: string
+
+
+
+
+
+
+    TransactionUpdateRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        action :
+          type: string
+          enum: ['UPDATE_AMOUNT' , 'DELETE']
+        updatemandateinformation:
+          $ref: '#/components/schemas/mandateinformation'
+        originialManateInformation:
+          type: string
+    transactionupdateresponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        status:
+          type: string
+          enum: [ 'accpeted', 'processed', 'notfound' ]
+    accountinformation:
+      type: object
+      properties:
+        IBAN:
+          type: string
+          example: "NL91ABNA0123456789"
+        name:
+          type: string
+          example: "Paying Guy"
+        address:
+          $ref: '#/components/schemas/address'
+
+
+
+        alternativeaccountnumber:
+          type: string
+        taxinfo:
+          $ref: '#/components/schemas/taxinfo'
+
+
+    mandateinformation:
+      type: object
+      properties:
+        mandateId:
+          type: string
+          example: "12345678"
+        dateOfsignature:
+          type: string
+          format: date
+        personId:
+          type: string
+          example: "7887115487"
+        isamended:
+          type: boolean
+        electronicsignature:
+          type: string
+
+
+    address:
+      type: object
+      properties:
+        streetName:
+          type: string
+          example: "High Street"
+        streetNumber:
+          type: string
+          example: "99"
+        city:
+          type: string
+          example: "Rotterdam"
+        zipcode :
+          type: string
+          example: "1000AA"
+        country:
+          type: string
+          example: "NL"
+    taxinfo:
+      type: object
+      properties:
+        BSN:
+          type: string
+        KVK:
+          type: string
+
+    date:
+      type: string
+      format: date-time
+    statusenum:
+      type: string
+      enum:
+        - 'created'
+        - 'missing mandatory fields'
+        - 'invalid field values'
+        - 'duplicated'
+        - 'not_found'
+        - 'deleted'
+        - 'processing'
+        - 'completed'
+        - 'cancelled'
+    processingstatusenum:
+      type: string
+      enum:
+        - 'pending'
+        - 'processed'
+        - 'authorized'
+        - 'settled'
+        - 'refunded'
+    transactiontype:
+      type: string
+      enum:
+        - 'FRST'
+        - 'Recurring'
+        - 'Final'
+        - 'One-Off'
+    jobStatus:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/statusenum'
+        startDate:
+          $ref: '#/components/schemas/date'
+      # Schemas used in Database . not part of API
+    DirectDebitRequestData:
+      allOf:
+        - $ref: '#/components/schemas/DirectDebitRequest'
+        - type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/statusenum'
+            processing_status:
+              $ref: '#/components/schemas/processingstatusenum'
+            creation_date:
+              type: string
+              format: date-time
+            last_updated:
+              type: string
+              format: date-time
+
+    CreditTransferRequestData:
+      allOf:
+        - $ref: '#/components/schemas/CreditTransferRequest'
+        - type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/statusenum'
+            processing_status:
+              $ref: '#/components/schemas/processingstatusenum'
+            creation_date:
+              type: string
+              format: date-time
+            last_updated:
+              type: string
+              format: date-time
+
+
+    CreditorInfo:
+      type: object
+      properties:
+        account_info:
+          $ref: '#/components/schemas/accountinformation'
+        isDefault:
+          type: boolean
+
+
