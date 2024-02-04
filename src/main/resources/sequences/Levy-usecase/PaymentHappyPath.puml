@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+"Customer" -> psp : Authorize 1 cent transaction
+psp -> mobeyU: account Info
+mobeyU->HPEngine: add mandate
+HPEngine-> "User Service": add user account
+HPEngine-> "Mandate Service": add Mandate
+mobeyU->HPEngine : add Direct Debit Transaction
+HPEngine->HPEngine: execute Rules [validations ,fee calculation , interface selection , mandate info retreival]
+HPEngine->RaboISO20022: add direct debit transaction
+HPEngine->mobeyU: add direct debit (success))
+RaboISO20022-->RaboISO20022 : create payment 008.001 file
+RaboISO20022->Bank : batch payment file (scheduled job)
+Bank-->Bank: process payment
+Bank->RaboISO20022: Reporting Information
+RaboISO20022-->RaboISO20022 : update transaction status
+HPEngine-> RaboISO20022 : get Transaction status
+RaboISO20022-->HPEngine : transaction status (success)
+
+
+@enduml

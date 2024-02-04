@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Bank->RaboISO20022: Reporting Information (Reject)
+
+RaboISO20022-->BankInterface : update transaction status
+Bank->RaboISO20022: Reporting Information (Reject)
+HPEngine-> RaboISO20022 : get Transaction status
+HPEngine-> HPEngine: execute rules
+loop x times
+HPEngine ->RaboISO20022 : Add Direct Debit (Retry)
+end
+HPEngine -> MobeyU: Reject Notification
+
+@enduml
