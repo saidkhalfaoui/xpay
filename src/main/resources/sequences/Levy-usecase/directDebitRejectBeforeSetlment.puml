@@ -5,13 +5,13 @@ autonumber
 
 Bank->RaboISO20022: Reporting Information (Reject)
 
-RaboISO20022-->BankInterface : update transaction status
+RaboISO20022-->RaboISO20022 : update transaction status
 Bank->RaboISO20022: Reporting Information (Reject)
-HPEngine-> RaboISO20022 : get Transaction status
-HPEngine-> HPEngine: execute rules
+"HenriPay Engine"-> RaboISO20022 : get Transaction status
+"HenriPay Engine"-> "HenriPay Engine": execute rules
 loop x times
-HPEngine ->RaboISO20022 : Add Direct Debit (Retry)
+"HenriPay Engine" ->RaboISO20022 : Add Direct Debit (Retry)
 end
-HPEngine -> MobeyU: Reject Notification
+"HenriPay Engine" -> mobyyou: Reject Notification
 
 @enduml
