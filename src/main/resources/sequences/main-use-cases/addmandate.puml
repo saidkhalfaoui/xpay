@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "Account Holder" as holder
+entity "service provider/partner" as mobyyou
+participant "HenriPay Engine" as HenriPay
+participant "Mandate Service" as mandateService
+participant "User service" as userservice
+participant "Encryption service" as encryptionService
+entity "KYC/AML service [HenriPay/EMI Partner]"  as idCheck
+holder -> mobyyou : Authorize (recurrent) payment
+mobyyou -> HenriPay : Add Mandate {accountInfo ,merchantInfo authorization form}
+HenriPay -> HenriPay : validations , business rules
+HenriPay -> "PSD2 service" : account check
+alt
+HenriPay --> idCheck : KYC/AML check
+end
+HenriPay -> userservice: add user
+userservice -> encryptionService: Encrypt user info
+encryptionService--> userservice: encrypted user info
+userservice -> userservice : Persist user
+HenriPay -> mandateService: add Mandate
+mandateService -> encryptionService : encrypt account info
+encryptionService --> mandateService: encrypted accountInfo
+mandateService-->mandateService: persist mandate
+HenriPay -->mobyyou: add mandate {success}
+
+@enduml
