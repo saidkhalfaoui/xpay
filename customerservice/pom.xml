@@ -13,7 +13,7 @@
     <artifactId>customerservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>customerservice</name>
-    <description>customerservice</description>
+    <description>Customer Service</description>
     <properties>
         <java.version>${parent.java.version}</java.version>
     </properties>

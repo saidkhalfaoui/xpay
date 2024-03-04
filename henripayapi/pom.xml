@@ -13,7 +13,7 @@
     <artifactId>henripayapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>henripayapi</name>
-    <description>henripayapi</description>
+    <description>HenriPay API orchestrator</description>
     <properties>
         <java.version>${parent.java.version}</java.version>
     </properties>

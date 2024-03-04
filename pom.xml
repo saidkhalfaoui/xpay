@@ -13,7 +13,7 @@
 <version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 <name>henripay</name>
-<description>henripay</description>
+<description>HenriPay Parent</description>
 
 
 <properties>
@@ -237,12 +237,12 @@
 		<artifactId>jakarta.xml.bind-api</artifactId>
 		<version>2.3.3</version>
 	</dependency>
-	  <dependency>
+	  <!--<dependency>
 
-      <groupId>net.thegreshams</groupId>
+      <groupId>com.henripay</groupId>
        <artifactId>firebase4j</artifactId>
        <version>0.0.1-SNAPSHOT</version>
-       </dependency>
+       </dependency>-->
 
 	<dependency>
 		<groupId>com.google.cloud</groupId>
@@ -296,17 +296,37 @@
 
 
 	<!-- end::tests[] -->
+
+
+
+
+
 </dependencies>
+
 	<modules>
+		<module>sepaddservice</module>
 		<module>common</module>
 		<module>henripayapi</module>
-		<module>sepaddservice</module>
+
 		<module>mandateservice</module>
 		<module>customerservice</module>
 		<!-- Add other modules if needed -->
 	</modules>
-
-
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 </project>
 

@@ -12,12 +12,26 @@
     <groupId>com.henripay</groupId>
     <artifactId>sepaddservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SepaDD Engine Rabo Interface</name>
+    <name>SepaDD Service</name>
     <description>Sepa DD engine for HenriPay </description>
     <properties>
         <java.version>${parent.java.version}</java.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>arbitrary</classifier>
 
+        </dependency>
+        <!--<dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>-->
+    </dependencies>
    <!-- <dependencies>
         <dependency>
             <groupId>com.google.firebase</groupId>
@@ -236,7 +250,7 @@
         </dependency>
         &lt;!&ndash;   <dependency>
 
-          <groupId>net.thegreshams</groupId>
+          <groupId>com.henripay</groupId>
            <artifactId>firebase4j</artifactId>
            <version>0.0.1-SNAPSHOT</version>
            </dependency>

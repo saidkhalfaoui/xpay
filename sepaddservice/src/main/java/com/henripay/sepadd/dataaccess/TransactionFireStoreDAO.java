@@ -5,12 +5,11 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 
+
 import com.henripay.sepadd.api.model.*;
-
-
 import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
-import net.thegreshams.firebase4j.error.FirebaseException;
-import net.thegreshams.firebase4j.error.JacksonUtilityException;
+import com.henripay.common.firebase4j.error.FirebaseException;
+import com.henripay.common.firebase4j.error.JacksonUtilityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
