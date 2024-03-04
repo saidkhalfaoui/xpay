@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+SepaDDEngine-> BankInterface : add Credit Transfer transaction
+BankInterface-->BankInterface: create payment 002.001 file
+BankInterface-> Bank: batch payment file (scheduled job)
+Bank--> Bank : process payment order
+Bank ->BankInterface : Reporting Information
+BankInterface --> BankInterface : update transaction status
+SepaDDEngine --> BankInterface : get transaction status
+BankInterface-->SepaDDEngine : transaction status (success)
+
+@enduml

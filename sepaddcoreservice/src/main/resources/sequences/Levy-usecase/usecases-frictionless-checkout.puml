@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+package RaboBank{
+usecase "process direct debit" as UC9
+usecase "process Credit transfer" as UC10
+usecase "Refund Payment"  as UC11
+usecase "Reporting information" as UC12
+actor Customer1
+}
+package Users {
+  entity mobyyou as c
+  entity RaboPSP as rabo
+  actor "Customer" as Customer
+}
+package "HenriPay Engine"{
+
+  usecase "process Mandate" as processmandate
+  usecase "process SEPA request" as UC3
+  usecase "Transactions Report" as UC4a
+  usecase "onboard/manage Business Merchant" as onboarding
+
+
+}
+package MandateService{
+  usecase "add Mandate" as addmandate
+  usecase "retreive mandate"
+  usecase "revoke mandate" as UC2
+  }
+
+package CustomerService{
+  usecase "add User"
+  usecase "retreive account details"
+}
+package MerchantService{
+  usecase "add user" as addusermerchant
+  usecase "Verify User"
+}
+package RaboISO20200{
+  usecase "CRUD Transactions" as UC5
+  usecase "batch processing"  as UCbp
+}
+
+
+Customer --> rabo: 1 cent transaction
+processmandate-->addmandate : store mandate details
+processmandate-->"add User": store account details
+c-->processmandate : account/user info
+c -->UC3 : process SEPA request
+UC3-->"retreive account details": get account info
+UC3-->"retreive mandate" :get mandate info
+UC3-->UC3 : Execute Rules
+UC4a-->UC5: get transaction status
+UC3-->UC5 : add Credit transfer transaction
+UCbp-->UC9: direct debit file
+UCbp-->UC10: credit order file
+UC12-->UCbp :process reporting file
+Customer1-->UC11: refund payment (banking app)
+UC4a-->UC5 : add Direct Debit from business (Refund)
+onboarding-->onboarding: execute rules
+onboarding--> addusermerchant
+UC4a-->c:refund/reject/success notifcation
+c-->onboarding: add merchant
+@enduml

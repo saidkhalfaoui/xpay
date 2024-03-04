@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+"Account Holder" -> Bank : Initiate Refund (recurrent) payment
+Bank -> "Account Holder" : Fund Return
+Bank --> BankInterface: Reporting Info (CAMT.52 with Reject Code)
+BankInterface--> SepaDDEngine: Refund Notification
+SepaDDEngine-> BankInterface: Reverse Credit Transfer
+SepaDDEngine--> Business : Refund Notification
+BankInterface->Bank : batch payment file (scheduled job)
+Bank-->Bank: process payment
+Bank->BankInterface: Reporting Information
+BankInterface-->BankInterface : update transaction status
+SepaDDEngine-> BankInterface : get Transaction status
+BankInterface-->SepaDDEngine : transaction status (success)
+
+
+@enduml

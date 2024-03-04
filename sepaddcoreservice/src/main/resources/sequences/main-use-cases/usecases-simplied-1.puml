@@ -1,0 +1,116 @@
+@startuml
+allow_mixing
+top to bottom direction
+skinparam usecase {
+BackgroundColor DarkSeaGreen
+BorderColor DarkSlateGray}
+package Finexp{
+usecase "process direct debit" as UC9
+usecase "process Credit transfer" as UC10
+usecase "Refund Payment"  as UC11
+usecase "Reporting information" as UC12
+usecase "process iDeal" as bankiDeal
+
+}
+package Businesses as customers  {
+  object "Service Provider" as c
+
+c : <img:mobyyou.gif>
+object "Merchants" as merchant
+
+merchant : <img:merchants.jpg>
+
+
+
+}
+package "HenriPay Payment Engine"{
+
+
+
+
+rectangle  {
+  usecase "Pay with Card" as cardprocessing
+  usecase "Pay With iDeal" as iDeal
+  usecase "Pay with SepaDD" as UC3
+}
+  usecase "Customer enrolling" as customerEnrolling
+  usecase "Business Onboarding" as onboarding
+  usecase "Billing and Reporting" as UC4a
+  object "Rules" as rules
+  rules : <img:rules.png>
+
+
+
+}
+package MandateService{
+  usecase "CRUD Mandate" as addmandate
+
+ }
+
+package CustomerService{
+  usecase "CRUD User"
+
+}
+package BusinessService{
+  usecase "CRUD Merchant/Service provider" as addusermerchant
+  usecase "iban4u"
+}
+package CreditCards
+{
+
+object "Payment gateway" as spell
+spell : <img:spell.gif>
+
+}
+
+package PSD2Service
+{
+object "Payment gateway" as spell2
+spell2 : <img:spell.gif>
+
+
+}
+package IdealService
+{
+usecase "get payment Link" as getLink
+}
+
+package SepaDDService{
+  usecase "CRUD SepaDD Transactions" as UC5
+  usecase "batch processing"  as UCbp
+}
+
+
+
+
+
+customerEnrolling-->MandateService
+c -> merchant
+merchant-> c
+
+customers-->customerEnrolling : account/user info
+
+customers -->UC3 : initiate payment
+UC3-->CustomerService: get account info
+UC3-->MandateService
+UC4a-->UC5: get transaction status
+UC3-->UC5
+UCbp-->UC9: direct debit file
+UCbp-->UC10: credit order file
+UC12-->UCbp :process reporting file
+
+UC4a-->UC5 : add Direct Debit from business (Refund)
+
+
+onboarding--> BusinessService
+UC4a-->customers:transaction status / reporting
+customers-->onboarding: onboard merchant/service provider
+customerEnrolling--> PSD2Service
+cardprocessing--> CreditCards
+
+iDeal-->getLink
+getLink-->"bankiDeal"
+
+
+
+@enduml

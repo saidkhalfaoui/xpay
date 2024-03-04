@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "HenriPay Engine" {
+  HTTPs - [HenriPay APIs]
+  [Rules Engine]
+}
+
+node "ISO 20022" {
+  FTP - [Second Component]
+  [Batch processing] --> FTP
+}
+
+cloud {
+  [Example 1]
+}
+
+
+database "PostGres" {
+  folder "Account Records" {
+    [ name , account , info, encryption keyid  ]
+  }
+
+  folder "Mandate info" {
+      [ mandateId , account , info ]
+    }
+  folder "Transaction Logs" {
+  [account hash  , transaction amount , status .. ]
+  }
+
+}
+
+
+[Another Component] --> [Example 1]
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+
+@enduml

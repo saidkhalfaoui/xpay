@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+
+mobyyou->"HenriPay Engine": add Credit Transfer
+"HenriPay Engine"->"HenriPay Engine": execute rules
+"HenriPay Engine"-> RaboISO20022 : add Credit Transfer transaction
+"HenriPay Engine"-> mobyyou: Success
+RaboISO20022-->RaboISO20022: create payment 002.001 file
+RaboISO20022-> Bank: batch payment file (scheduled job)
+Bank--> Bank : process payment order
+Bank ->RaboISO20022 : Reporting Information
+RaboISO20022 --> RaboISO20022 : update transaction status
+"HenriPay Engine" --> RaboISO20022 : get transaction status
+RaboISO20022-->"HenriPay Engine" : transaction status (success)
+
+@enduml

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified"
+           version="1.0">
+    <xs:element name="RDCInitiationRequest" type="RDCInitiationRequest"/>
+    <xs:complexType name="RDCInitiationRequest">
+        <xs:sequence>
+            <xs:element name="ContractId" type="ContractId"/>
+            <xs:element name="PayloadAction" type="PayloadAction"/>
+            <xs:element name="PayloadVersion" type="PayloadVersion"/>
+            <xs:element name="UniqueReference" type="UniqueReference"/>
+            <xs:element name="TimeStamp" type="xs:dateTime"/>
+            <xs:element name="Signature" type="Signature" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="ContractId">
+        <xs:restriction base="xs:normalizedString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PayloadAction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SCT"/>
+            <xs:enumeration value="SDD"/>
+            <xs:enumeration value="BTL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PayloadVersion">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pain.001.001.03"/>
+            <xs:enumeration value="pain.008.001.02"/>
+            <xs:enumeration value="BTL91"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UniqueReference">
+        <xs:restriction base="xs:normalizedString">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Signature">
+        <xs:restriction base="xs:base64Binary">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="4000"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

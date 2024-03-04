@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor "Card Holder" as holder
+entity "Merchant" as merchant
+entity "service provider/partner" as mobyyou
+participant "HenriPay Engine" as HenriPay
+participant "Spell"
+participant "Issuer" as issuer
+holder->merchant: user enters credit card details
+merchant-> mobyyou: add transaction
+mobyyou->HenriPay: add credit card transaction
+HenriPay->HenriPay: validators , business rules
+HenriPay-> "Spell": add credit card transaction
+"Spell"->"Spell": processing checks...
+"Spell"-> issuer: authroization request
+issuer --> "Spell" : authorization response
+"Spell"-->HenriPay: transaction completion {sucess}
+HenriPay-->mobyyou: transaction completion
+
+@enduml
