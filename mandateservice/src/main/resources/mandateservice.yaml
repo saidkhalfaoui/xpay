@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Financial Transactions API
+  version: 1.0.0
+paths:
+  /mandate/:
+    post:
+      summary: create a new mandate
+      description: used for Sepa DD to create a new mandate for a merchant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mandateinformation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: the mandate IDs created.
+                type: array
+                items:
+                  $ref: '#/components/schemas/Id'
+        '400':
+          $ref: '#/components/responses/400'
+
+
+
+  /mandate/{id}:
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Retrieve mandate information from mandate ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Description of mandate ID
+                type: array
+                items:
+                  $ref: '#/components/schemas/mandateinformation'
+        '400':
+          description: Invalid data submitted or request processing error
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    id:
+      name: id
+      required: true
+      in: path
+      description: Object ID (UUID)
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Id:
+      type: string
+      maxLength: 36
+      description: UUID
+
+    mandateinformation:
+      type: object
+      properties:
+        account_info:
+          $ref: '#/components/schemas/accountinformation'
+        mandateId:
+          type: string
+          example: "12345678"
+        dateOfsignature:
+          type: string
+          format: date
+        personId:
+          type: string
+          example: "7887115487"
+        isamended:
+          type: boolean
+        electronicsignature:
+          type: string
+
+    accountinformation:
+      type: object
+      properties:
+        IBAN:
+          type: string
+          example: "NL91ABNA0123456789"
+        name:
+          type: string
+          example: "Paying Guy"
+
