@@ -1,0 +1,94 @@
+@startuml
+allow_mixing
+top to bottom direction
+skinparam usecase {
+BackgroundColor DarkSeaGreen
+BorderColor DarkSlateGray}
+package Finexp{
+usecase "process direct debit" as UC9
+usecase "process Credit transfer" as UC10
+usecase "Refund Payment"  as UC11
+usecase "Reporting information" as UC12
+
+
+}
+package Businesses as customers  {
+  object "Service Provider" as c
+
+c : <img:mobyyou.gif>
+object "Merchants" as merchant
+
+merchant : <img:merchants.jpg>
+
+
+
+}
+package "HenriPay Payment Engine"{
+
+
+
+
+rectangle  {
+  usecase "Pay with Card" as cardprocessing
+
+  usecase "Pay with SepaDD" as UC3
+}
+
+  object "Rules" as rules
+  rules : <img:rules.png>
+
+
+
+}
+package MandateService{
+  object "Tweaky" as Tweaky
+  Tweaky : <img:rules.png>
+ }
+
+
+
+package CreditCards
+{
+
+object "Payment gateway" as spell
+spell : <img:spell.gif>
+
+}
+
+
+package SepaDDService{
+  usecase "CRUD SepaDD Transactions" as UC5
+  usecase "batch processing"  as UCbp
+}
+
+
+
+
+
+
+c -> merchant
+merchant-> c
+
+
+
+customers -->UC3 : initiate payment
+
+UC3-->MandateService
+UC3-->UC5: get transaction status
+UC3-->UC5
+UCbp-->UC9: direct debit file
+UCbp-->UC10: credit order file
+UC12-->UCbp :process reporting file
+
+UC3-->UC5 : add Direct Debit from business (Refund)
+
+
+
+
+cardprocessing--> CreditCards
+
+
+
+
+
+@enduml

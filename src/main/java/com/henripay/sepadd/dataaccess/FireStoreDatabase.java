@@ -9,8 +9,11 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.ImplFirebaseTrampolines;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
+
 import static io.netty.util.internal.ObjectUtil.checkNotNull;
+
 @Component
 public class FireStoreDatabase {
 
@@ -21,12 +24,9 @@ public class FireStoreDatabase {
     private String name;
 
 
-    public  Firestore getDatabase() throws IOException {
+    public Firestore getDatabase() throws IOException {
 
-        if (database==null)
-        {
-
-
+        if (database == null) {
 
 
             InitDataBase();
@@ -37,26 +37,25 @@ public class FireStoreDatabase {
     private static Firestore database;
 
 
+    private Firestore InitDataBase() throws IOException {
 
 
-    private  Firestore InitDataBase() throws IOException {
-
-
-     //   InputStream serviceAccount = TransactionFireStoreDAO.class.getClassLoader().getResourceAsStream("firestoretest-8231d-firebase-adminsdk-ugmps-bd89b0fe7c.json");
+        //   InputStream serviceAccount = TransactionFireStoreDAO.class.getClassLoader().getResourceAsStream("firestoretest-8231d-firebase-adminsdk-ugmps-bd89b0fe7c.json");
         //    GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        GoogleCredentials credentials=GoogleCredentials.getApplicationDefault();
+        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(credentials)
                 .setDatabaseUrl(url)
                 .build();
-        FirebaseApp app= FirebaseApp.initializeApp(options);
+        FirebaseApp app = FirebaseApp.initializeApp(options);
         checkNotNull(app, "FirebaseApp must not be null");
         String projectId = ImplFirebaseTrampolines.getProjectId(app);
       /*  checkArgument(!Strings.isNullOrEmpty(projectId),
                 "Project ID is required for accessing Firestore. Use a service account credential or "
                         + "set the project ID explicitly via FirebaseOptions. Alternatively you can also "
                         + "set the project ID via the GOOGLE_CLOUD_PROJECT environment variable.");
-   */     FirestoreOptions userOptions = ImplFirebaseTrampolines.getFirestoreOptions(app);
+   */
+        FirestoreOptions userOptions = ImplFirebaseTrampolines.getFirestoreOptions(app);
         FirestoreOptions.Builder builder = userOptions != null
                 ? userOptions.toBuilder() : FirestoreOptions.newBuilder();
 
@@ -71,9 +70,6 @@ public class FireStoreDatabase {
                 .getService();
 
         return database;
-
-
-
 
 
     }

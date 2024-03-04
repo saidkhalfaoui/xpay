@@ -17,20 +17,20 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Component
-public class ConfigurationFireStoreDAO  implements ConfigurationDAO {
+public class ConfigurationFireStoreDAO implements ConfigurationDAO {
 
-    private static final String CREDITOR_INFO="creditor-info";
-    private static final String BIC="BIC";
+    private static final String CREDITOR_INFO = "creditor-info";
+    private static final String BIC = "BIC";
     Logger logger = LoggerFactory.getLogger(ConfigurationFireStoreDAO.class);
     @Autowired
     FireStoreDatabase fireStoreDatabase;
-    private  Firestore database;
+    private Firestore database;
 
 
-    public Firestore  getDatabase() {
+    public Firestore getDatabase() {
 
         try {
-            database= fireStoreDatabase.getDatabase();
+            database = fireStoreDatabase.getDatabase();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -41,10 +41,10 @@ public class ConfigurationFireStoreDAO  implements ConfigurationDAO {
 
     @Override
     public List<CreditorInfo> getCreditorInfoList() {
-        database=getDatabase();
-        CollectionReference ref =database.collection(CREDITOR_INFO);
+        database = getDatabase();
+        CollectionReference ref = database.collection(CREDITOR_INFO);
         ApiFuture<QuerySnapshot> querySnapshot = ref.get();
-        List<CreditorInfo> creditorInfoList= new ArrayList<>();
+        List<CreditorInfo> creditorInfoList = new ArrayList<>();
         try {
             for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
                 // Access document data using document.toObject()
@@ -57,32 +57,29 @@ public class ConfigurationFireStoreDAO  implements ConfigurationDAO {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-        return  creditorInfoList;
+        return creditorInfoList;
     }
 
     @Override
 
-    public String getBICfromCode(String bankCode)
-    {
-       database= getDatabase();
+    public String getBICfromCode(String bankCode) {
+        database = getDatabase();
 
-        CollectionReference ref =database.collection(BIC);
+        CollectionReference ref = database.collection(BIC);
         ApiFuture<QuerySnapshot> querySnapshot = ref.get();
-        List<CreditorInfo> creditorInfoList= new ArrayList<>();
+        List<CreditorInfo> creditorInfoList = new ArrayList<>();
         String bic;
         try {
-            QueryDocumentSnapshot document=querySnapshot.get().getDocuments().get(0);
+            QueryDocumentSnapshot document = querySnapshot.get().getDocuments().get(0);
             // Access document data using document.toObject()
             System.out.println("BIC list ID: " + document.getId());
 
 
-            bic=document.get(bankCode).toString();
-            if (bic.isEmpty())
-            {
+            bic = document.get(bankCode).toString();
+            if (bic.isEmpty()) {
                 logger.warn("BIC not found for this iban , returning empty string");
             }
             return bic;
-
 
 
         } catch (InterruptedException e) {

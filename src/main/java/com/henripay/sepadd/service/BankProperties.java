@@ -6,12 +6,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 public class BankProperties {
 
-private String url ;
-private String host;
-private String port;
-private String publicKey ;
-private String sshKey ;
-private String keyStoreLocation;
+    private String url;
+    private String host;
+    private String port;
+    private String publicKey;
+    private String sshKey;
+    private String keyStoreLocation;
 
     public String getKeyStorePassphrase() {
         return keyStorePassphrase;

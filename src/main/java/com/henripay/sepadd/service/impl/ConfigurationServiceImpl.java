@@ -17,8 +17,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 
     @Override
-    public String getBICfromBankCode(String bankCode)
-    {
+    public String getBICfromBankCode(String bankCode) {
         return dao.getBICfromCode(bankCode);
 
     }
@@ -33,13 +32,12 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public CreditorInfo getCreditorInfo(String name) {
 
         // to improve this if needed
-        List<CreditorInfo> creditorInfoList= dao.getCreditorInfoList();
+        List<CreditorInfo> creditorInfoList = dao.getCreditorInfoList();
 
         List<CreditorInfo> filteredCreditorInfoList = creditorInfoList.stream()
                 .filter(creditorInfo -> creditorInfo.getAccountInfo().getName().equals(name))
                 .collect(Collectors.toList());
-        if (filteredCreditorInfoList.size()>1 || filteredCreditorInfoList.size()==0)
-        {
+        if (filteredCreditorInfoList.size() > 1 || filteredCreditorInfoList.size() == 0) {
             return null;
         }
         return filteredCreditorInfoList.get(0);

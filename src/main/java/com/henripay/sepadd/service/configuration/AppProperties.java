@@ -8,29 +8,27 @@ import org.springframework.stereotype.Service;
 
 public class AppProperties {
 
-   public String getUrl() {
-      return url;
-   }
+    public String getUrl() {
+        return url;
+    }
 
-   public void setUrl(String url) {
-      this.url = url;
-   }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-   @Value("${app.database.url}")
-   private String url;
+    @Value("${app.database.url}")
+    private String url;
 
-   public String getName() {
-      return name;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public void setName(String name) {
-      this.name = name;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   @Value("${app.database.name}")
-   private String name;
-
-
+    @Value("${app.database.name}")
+    private String name;
 
 
 }

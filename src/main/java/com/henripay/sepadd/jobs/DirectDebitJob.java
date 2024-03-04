@@ -21,7 +21,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Service
-public class DirectDebitJob extends  BaseJob implements Runnable  {
+public class DirectDebitJob extends BaseJob implements Runnable {
 
     Logger logger = LoggerFactory.getLogger(DirectDebitJob.class);
 
@@ -32,47 +32,37 @@ public class DirectDebitJob extends  BaseJob implements Runnable  {
     private ConfigurationService configurationService;
 
 
-
-
-
-
     public DirectDebitJob() {
 
     }
 
 
-
-
-
     @Override
     public void run() {
 
-        CreditorInfo creditorInfo= configurationService.getDefaultCreditorInfo();
-        DirectDebitPainFile directDebitPainFile= new DirectDebitPainFile(configurationService);
-        directDebitPainFile.buildGroupHeader(null,"test", Date.from(Instant.now()));
+        CreditorInfo creditorInfo = configurationService.getDefaultCreditorInfo();
+        DirectDebitPainFile directDebitPainFile = new DirectDebitPainFile(configurationService);
+        directDebitPainFile.buildGroupHeader(null, "test", Date.from(Instant.now()));
 
         while (!isCancelled) {
             if (!isPaused) {
                 // Execute job steps
 
-             List<DirectDebitRequestData> requestDataList = transactionService.getReadyToProcessDirectDebitTransactions(50/*jobProperties.getBatchSize() to be fixed*/);
-             if (requestDataList.isEmpty())
-             {
-                 logger.info("No More transaction found , Jobs completed ");
-                 isCompleted=true;
-                 break;
-             }
-                for (DirectDebitRequestData requestData : requestDataList)
-                {
+                List<DirectDebitRequestData> requestDataList = transactionService.getReadyToProcessDirectDebitTransactions(50/*jobProperties.getBatchSize() to be fixed*/);
+                if (requestDataList.isEmpty()) {
+                    logger.info("No More transaction found , Jobs completed ");
+                    isCompleted = true;
+                    break;
+                }
+                for (DirectDebitRequestData requestData : requestDataList) {
                     try {
-                        directDebitPainFile.paymentInstruction(creditorInfo , requestData).addTransaction(requestData);
+                        directDebitPainFile.paymentInstruction(creditorInfo, requestData).addTransaction(requestData);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
 
 
                 }
-
 
 
             } else {
@@ -88,7 +78,7 @@ public class DirectDebitJob extends  BaseJob implements Runnable  {
             throw new RuntimeException(e);
         }
 
-       logger.info("Job Completed Successfully");
+        logger.info("Job Completed Successfully");
     }
 
 

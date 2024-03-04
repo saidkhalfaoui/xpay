@@ -12,17 +12,17 @@ import org.jdom2.Document;
  */
 public class PaymentFileHelper {
 
-    public static Document appendToDirectDebitFile(DirectDebitRequestData data)
-    {
+    public static Document appendToDirectDebitFile(DirectDebitRequestData data) {
         return null;
 
     }
-    public OutputStream createDirectDebitFile () throws FileNotFoundException {
+
+    public OutputStream createDirectDebitFile() throws FileNotFoundException {
         return new FileOutputStream("test");
 
     }
-    public OutputStream signDirectDebitFile(byte[] directDebitUnsinged) throws FileNotFoundException
-    {
+
+    public OutputStream signDirectDebitFile(byte[] directDebitUnsinged) throws FileNotFoundException {
         return new FileOutputStream("test");
     }
 }

@@ -17,7 +17,7 @@ public class BaseJob {
         isCompleted = completed;
     }
 
-    protected volatile boolean isCompleted= false;
+    protected volatile boolean isCompleted = false;
     private JobProperties jobProperties;
 
     public void pause() {

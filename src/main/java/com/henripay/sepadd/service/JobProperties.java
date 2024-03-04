@@ -36,13 +36,11 @@ public class JobProperties {
     }
 
 
-
-
     @Override
     public String toString() {
         return "ApplicationProperties{" +
                 "name='" + batchSize + '\'' +
-                ", host='" +  + '\'' +
+                ", host='" + +'\'' +
                 ", timeout=" + timeout +
                 '}';
     }

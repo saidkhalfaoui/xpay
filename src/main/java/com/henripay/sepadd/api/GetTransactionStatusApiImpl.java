@@ -28,8 +28,9 @@ import javax.validation.constraints.NotNull;
 @RestController
 
 public class GetTransactionStatusApiImpl implements GetTransactionStatusApi {
-@Autowired
-private TransactionService transactionService;
+    @Autowired
+    private TransactionService transactionService;
+
     /**
      * GET /getTransactionStatus : Get Transaction Status
      *
@@ -37,23 +38,23 @@ private TransactionService transactionService;
      * @return Transaction status retrieved successfully (status code 200)
      */
     @Autowired
-    public void GetTransactionService (TransactionService transactionService)
-    {
-        this.transactionService= transactionService;
+    public void GetTransactionService(TransactionService transactionService) {
+        this.transactionService = transactionService;
 
     }
-    @ApiOperation(value = "Get Transaction Status", nickname = "getTransactionStatusGet", notes = "", response = TransactionStatusResponse.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Transaction status retrieved successfully", response = TransactionStatusResponse.class) })
+
+    @ApiOperation(value = "Get Transaction Status", nickname = "getTransactionStatusGet", notes = "", response = TransactionStatusResponse.class, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Transaction status retrieved successfully", response = TransactionStatusResponse.class)})
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/get-transaction-status",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/get-transaction-status",
+            produces = {"application/json"}
     )
     public ResponseEntity<TransactionStatusResponse> getTransactionStatusGet(@NotNull @ApiParam(value = "ID of the transaction", required = true) @Valid @RequestParam(value = "transactionId", required = true) String transactionId) {
-        TransactionStatusResponse status= transactionService.queryTransactionByTransactionId (transactionId);
+        TransactionStatusResponse status = transactionService.queryTransactionByTransactionId(transactionId);
 
-        return new ResponseEntity<> (status, HttpStatus.OK);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
 }

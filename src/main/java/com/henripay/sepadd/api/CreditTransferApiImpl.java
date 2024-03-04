@@ -31,33 +31,34 @@ public class CreditTransferApiImpl implements CreditTransferApi {
     Logger logger = LoggerFactory.getLogger(CreditTransferApiImpl.class);
     @Autowired
     private TransactionService transactionService;
+
     @Autowired
-    public void GetTransactionService (TransactionService transactionService)
-    {
-        this.transactionService= transactionService;
+    public void GetTransactionService(TransactionService transactionService) {
+        this.transactionService = transactionService;
 
     }
+
     /**
      * POST /creditTransfer : Add Credit Transfer Transaction
      *
      * @param creditTransferRequest Credit Transfer Request (optional)
      * @return Successful transaction (status code 200)
      */
-    @ApiOperation(value = "Add Credit Transfer Transaction", nickname = "creditTransferPost", notes = "", response = TransactionResponse.class, tags={  })
+    @ApiOperation(value = "Add Credit Transfer Transaction", nickname = "creditTransferPost", notes = "", response = TransactionResponse.class, tags = {})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class) })
+            @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class)})
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/credit-transfer",
-            produces = { "application/json" },
-            consumes = { "application/json" }
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> creditTransferPost(@ApiParam(value = "Credit Transfer Request") @Valid @RequestBody(required = false) CreditTransferRequest creditTransferRequest) {
         logger.info(creditTransferRequest.getAccountInfo().getIBAN());
 
         TransactionResponse response = new TransactionResponse();
         try {
-            response=transactionService.addCreditTransferTransaction(creditTransferRequest);
+            response = transactionService.addCreditTransferTransaction(creditTransferRequest);
         } catch (JacksonUtilityException e) {
             throw new RuntimeException(e);
         } catch (FirebaseException e) {
@@ -66,7 +67,7 @@ public class CreditTransferApiImpl implements CreditTransferApi {
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());
-        return new ResponseEntity<> (response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

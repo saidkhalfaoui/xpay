@@ -105,7 +105,7 @@ components:
           example: "10.23"
         currency:
           type: string
-          example : "EUR"
+          example: "EUR"
         scheduled_execution_date:
           type: string
           format: date
@@ -191,9 +191,9 @@ components:
       properties:
         transactionId:
           type: string
-        action :
+        action:
           type: string
-          enum: ['UPDATE_AMOUNT' , 'DELETE']
+          enum: [ 'UPDATE_AMOUNT' , 'DELETE' ]
         updatemandateinformation:
           $ref: '#/components/schemas/mandateinformation'
         originialManateInformation:
@@ -256,7 +256,7 @@ components:
         city:
           type: string
           example: "Rotterdam"
-        zipcode :
+        zipcode:
           type: string
           example: "1000AA"
         country:

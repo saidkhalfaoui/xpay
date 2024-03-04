@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="RDCInitiationReply">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element type="xs:string" name="ContractId"/>     
-        <xs:element type="xs:string" name="PayloadAction"/>				<!-- from request -->
-        <xs:element type="xs:string" name="PayloadVersion"/>			<!-- from request -->
-        <xs:element type="xs:string" name="UniqueReference"/>			<!-- from request -->
-        <xs:element type="xs:string" name="Status" />    					<!-- ACK or NACK -->
-        <xs:element type="xs:dateTime" name="TimeStamp"/>					<!-- TimeStamp of ack/nack in format 20130320T09:00:00 -->        
-        <xs:element name="Errors" minOccurs="0">
-    			<xs:complexType>
-      			<xs:sequence>
-      				<xs:element name="Error" minOccurs="0">
-    						<xs:complexType>
-      						<xs:sequence>
-      							<xs:element type="xs:string" name="ErrorCode" />		<!-- See technical manual -->
-        						<xs:element type="xs:string" name="ErrorMessage" />	<!-- additional details -->
-        					</xs:sequence>
-        				</xs:complexType>
-        			</xs:element>
-        		</xs:sequence>
-        	</xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="RDCInitiationReply">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="ContractId"/>
+                <xs:element type="xs:string" name="PayloadAction"/>                <!-- from request -->
+                <xs:element type="xs:string" name="PayloadVersion"/>            <!-- from request -->
+                <xs:element type="xs:string" name="UniqueReference"/>            <!-- from request -->
+                <xs:element type="xs:string" name="Status"/>                        <!-- ACK or NACK -->
+                <xs:element type="xs:dateTime"
+                            name="TimeStamp"/>                    <!-- TimeStamp of ack/nack in format 20130320T09:00:00 -->
+                <xs:element name="Errors" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Error" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string"
+                                                    name="ErrorCode"/>        <!-- See technical manual -->
+                                        <xs:element type="xs:string"
+                                                    name="ErrorMessage"/>    <!-- additional details -->
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

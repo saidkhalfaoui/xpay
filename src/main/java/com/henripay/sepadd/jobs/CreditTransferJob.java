@@ -2,9 +2,7 @@ package com.henripay.sepadd.jobs;
 
 import com.henripay.sepadd.api.model.CreditTransferRequestData;
 import com.henripay.sepadd.api.model.CreditorInfo;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
 import com.henripay.sepadd.iso20022.sepa.CreditTransferPainFile;
-import com.henripay.sepadd.iso20022.sepa.sdd.DirectDebitPainFile;
 import com.henripay.sepadd.service.TransactionService;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
 import org.slf4j.Logger;
@@ -19,7 +17,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Service
-public class CreditTransferJob extends  BaseJob implements Runnable {
+public class CreditTransferJob extends BaseJob implements Runnable {
 
     Logger logger = LoggerFactory.getLogger(DirectDebitJob.class);
 
@@ -28,35 +26,33 @@ public class CreditTransferJob extends  BaseJob implements Runnable {
 
     @Autowired
     private ConfigurationService configurationService;
+
     @Override
     public void run() {
 
-        CreditorInfo debitorInfo= configurationService.getDefaultCreditorInfo();  /*rename CreditorInfo*/
-        CreditTransferPainFile creditTransferPainFile= new CreditTransferPainFile(configurationService);
-        creditTransferPainFile.buildGroupHeader(null,"test", Date.from(Instant.now()));
+        CreditorInfo debitorInfo = configurationService.getDefaultCreditorInfo();  /*rename CreditorInfo*/
+        CreditTransferPainFile creditTransferPainFile = new CreditTransferPainFile(configurationService);
+        creditTransferPainFile.buildGroupHeader(null, "test", Date.from(Instant.now()));
 
         while (!isCancelled) {
             if (!isPaused) {
                 // Execute job steps
 
                 List<CreditTransferRequestData> requestDataList = transactionService.getReadyToProcessCreditTransferTransactions(50/*jobProperties.getBatchSize() to be fixed*/);
-                if (requestDataList.isEmpty())
-                {
+                if (requestDataList.isEmpty()) {
                     logger.info("No More transaction found , Jobs completed ");
-                    isCompleted=true;
+                    isCompleted = true;
                     break;
                 }
-                for (CreditTransferRequestData requestData : requestDataList)
-                {
+                for (CreditTransferRequestData requestData : requestDataList) {
                     try {
-                        creditTransferPainFile.paymentGroup(debitorInfo , requestData).addTransaction(requestData);
+                        creditTransferPainFile.paymentGroup(debitorInfo, requestData).addTransaction(requestData);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
 
 
                 }
-
 
 
             } else {

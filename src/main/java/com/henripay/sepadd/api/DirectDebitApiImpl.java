@@ -21,16 +21,15 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-public class DirectDebitApiImpl implements DirectDebitApi{
+public class DirectDebitApiImpl implements DirectDebitApi {
 
     Logger logger = LoggerFactory.getLogger(DirectDebitApiImpl.class);
     @Autowired
     private TransactionService transactionService;
 
     @Autowired
-    public void GetTransactionService (TransactionService transactionService)
-    {
-        this.transactionService= transactionService;
+    public void GetTransactionService(TransactionService transactionService) {
+        this.transactionService = transactionService;
 
     }
 
@@ -41,21 +40,21 @@ public class DirectDebitApiImpl implements DirectDebitApi{
      * @param directDebitRequest Direct Debit Request (optional)
      * @return Successful transaction (status code 200)
      */
-    @ApiOperation(value = "Add Direct Debit Transaction", nickname = "directDebitPost", notes = "", response = TransactionResponse.class, tags={  })
+    @ApiOperation(value = "Add Direct Debit Transaction", nickname = "directDebitPost", notes = "", response = TransactionResponse.class, tags = {})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class) })
+            @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class)})
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/direct-debit",
-            produces = { "application/json" },
-            consumes = { "application/json" }
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> directDebitPost(@ApiParam(value = "Direct Debit Request") @Valid @RequestBody(required = false) DirectDebitRequest directDebitRequest) {
         logger.info(directDebitRequest.getAccountInfo().getIBAN());
 
         TransactionResponse response = new TransactionResponse();
         try {
-            response=transactionService.addDirectDebitTransaction(directDebitRequest);
+            response = transactionService.addDirectDebitTransaction(directDebitRequest);
         } catch (JacksonUtilityException e) {
             throw new RuntimeException(e);
         } catch (FirebaseException e) {
@@ -64,7 +63,7 @@ public class DirectDebitApiImpl implements DirectDebitApi{
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());
-        return new ResponseEntity<> (response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
