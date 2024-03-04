@@ -1,0 +1,3 @@
+[submodule "sepadd"]
+	path = sepadd
+	url = https://github.com/Henripay/sepadd
