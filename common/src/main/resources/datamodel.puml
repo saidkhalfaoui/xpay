@@ -1,0 +1,94 @@
+@startuml
+entity User {
+  * customer_id_identifier
+  --
+  * iban : string
+  * full name : string
+  * token : string
+  address : string
+  activation_date : string
+}
+
+entity Mandate {
+* mandate_identifier
+--
+* customer_id : number <<FK>>
+* merchant_id : number <<FK>>
+* signature_date : date
+* start_date : date
+* end_date : date
+
+
+}
+
+entity Transaction {
+* transaction_id : number
+* transaction_type: enum {sepa_direct_debit, sepad_credit_transfer , credit_card}
+* external_transaction_id: number
+* sender_id : number <<FK>>
+* received_id : number <<FK>>
+* execution_date : date
+optional fileds specific to a transaction type
+}
+
+entity Merchant {
+* merchant_id : number
+* merchant name : string
+* merchant address: string
+* merchant iban : string
+* merchant code : string
+* merchant meta : number <<FK>>
+id_merchant_aggregator: number <<FK>>
+}
+
+entity  Metadata {
+* metadata_id : number
+* transaction_flows : blob
+* metadata : blod
+
+
+}
+
+entity Agregator
+{
+
+* agragator_id : number
+* agregator name : string
+* agregator address: string
+* agregator iban : string
+* agregator meta data : number <<FK>>
+
+}
+
+entity Keys {
+* key id : number
+* key name : string
+* key type : string enum {RSA , EC , 3DES}
+* additional_info : string
+* enc_key_value : string
+second key identifier : number <<FK>>
+
+}
+
+
+User }|..|| Mandate
+Merchant }|..|| Mandate
+User }|..||Transaction
+Mandate }|..||Transaction
+Merchant }|..||Transaction
+Metadata }|..||Merchant
+Metadata }|..||Agregator
+Keys }|..||Keys
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml

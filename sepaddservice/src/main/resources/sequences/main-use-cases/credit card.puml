@@ -8,13 +8,16 @@ participant "Spell"
 participant "Issuer" as issuer
 holder->merchant: user enters credit card details
 merchant-> mobyyou: add transaction
-mobyyou->HenriPay: add credit card transaction
+mobyyou->HenriPay: add credit card transaction (recurring)
 HenriPay->HenriPay: validators , business rules
-HenriPay-> "Spell": add credit card transaction
+HenriPay-> "Spell": /purchace/userinfo
+"Spell"--> HenriPay : {direct_post_url}
+HenriPay->"Spell": direct_post_url/purchase {(recurring)}
 "Spell"->"Spell": processing checks...
 "Spell"-> issuer: authroization request
 issuer --> "Spell" : authorization response
 "Spell"-->HenriPay: transaction completion {sucess}
+HenriPay->"Spell": /direct_post_url/charge {delayed}
 HenriPay-->mobyyou: transaction completion
 
 @enduml
