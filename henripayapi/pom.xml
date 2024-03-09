@@ -2,23 +2,70 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
-
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.henripay</groupId>
+
     <artifactId>henripayapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>henripayapi</name>
     <description>HenriPay API orchestrator</description>
+
     <properties>
-        <java.version>${parent.java.version}</java.version>
+        <camunda.version>7.19.0</camunda.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${camunda.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--camunda-->
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-engine-plugin-spin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.camunda.spin</groupId>
+            <artifactId>camunda-spin-dataformat-all</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -41,7 +88,6 @@
                                 ${project.basedir}/src/main/resources/henripayapi.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <language>java</language>
                             <library>spring-boot</library>
 
                             <apiPackage>com.henripay.henripayapi.api</apiPackage>
@@ -51,12 +97,11 @@
                                   ApiUtil.java
                               </supportingFilesToGenerate>-->
 
-
                             <configOptions>
-                                <java8>true</java8>
+                                <!--                                <java8>true</java8>-->
                                 <dateLibrary>custom</dateLibrary>
                                 <openApiNullable>false</openApiNullable>
-                                 <interfaceOnly>true</interfaceOnly>
+                                <interfaceOnly>true</interfaceOnly>
 
                             </configOptions>
                             <!-- <typeMappings>
@@ -64,38 +109,38 @@
                                  <typeMapping>Date=Date</typeMapping>
                              </typeMappings>-->
 
-                           <!--  <typeMappings>
-                <typeMapping>float=java.math</typeMapping>
-                             </typeMappings>-->
+                            <!--  <typeMappings>
+                 <typeMapping>float=java.math</typeMapping>
+                              </typeMappings>-->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-           <!-- <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.15.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <verbose>true</verbose>
-                    &lt;!&ndash;  <schemaIncludes>
-                          <include>/iso20022/*</include>
-                          <include>camt.053.001.02.xsd</include>
-                          <include>pain.008.001.02.xsd</include>
-                      </schemaIncludes>&ndash;&gt;
+            <!-- <plugin>
+                 <groupId>org.jvnet.jaxb2.maven2</groupId>
+                 <artifactId>maven-jaxb2-plugin</artifactId>
+                 <version>0.15.3</version>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>generate</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                 <configuration>
+                     <verbose>true</verbose>
+                     &lt;!&ndash;  <schemaIncludes>
+                           <include>/iso20022/*</include>
+                           <include>camt.053.001.02.xsd</include>
+                           <include>pain.008.001.02.xsd</include>
+                       </schemaIncludes>&ndash;&gt;
 
-                    <schemaDirectory>src/main/resources/iso20022/xsd</schemaDirectory>
-                    &lt;!&ndash;<generatePackage>nl.irp.sepa.pain.model</generatePackage>&ndash;&gt;
-                </configuration>
-            </plugin>
--->
+                     <schemaDirectory>src/main/resources/iso20022/xsd</schemaDirectory>
+                     &lt;!&ndash;<generatePackage>nl.irp.sepa.pain.model</generatePackage>&ndash;&gt;
+                 </configuration>
+             </plugin>
+ -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
@@ -116,7 +161,7 @@
                         <phase>install</phase>
                         <goals>
                             <goal>build</goal>
-                           <!-- <goal>push</goal>-->
+                            <!-- <goal>push</goal>-->
                         </goals>
                     </execution>
                 </executions>

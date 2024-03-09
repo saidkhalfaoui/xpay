@@ -1,332 +1,335 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<parent>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.7.14</version>
-	<relativePath/> <!-- lookup parent from repository -->
-</parent>
-<groupId>com.henripay</groupId>
-<artifactId>henripay</artifactId>
-<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-<name>henripay</name>
-<description>HenriPay Parent</description>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-<properties>
-	<java.version>11</java.version>
+    <groupId>com.henripay</groupId>
+    <artifactId>henripay</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>henripay</name>
+    <description>HenriPay Parent</description>
 
-</properties>
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
-<dependencies>
-	<dependency>
-		<groupId>com.google.firebase</groupId>
-		<artifactId>firebase-admin</artifactId>
-		<version>9.2.0</version>
-		<exclusions>
-			<exclusion>
-				<groupId>com.google.cloud</groupId>
-				<artifactId>google-cloud-firestore</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.7.18</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
 
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-web</artifactId>
-		<exclusions>
-			<exclusion>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-logging</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <scope>annotationProcessor</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
 
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-log4j2</artifactId>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/com.prowidesoftware/pw-iso20022 -->
-	<!-- <dependency>
-         <groupId>com.prowidesoftware</groupId>
-         <artifactId>pw-iso20022</artifactId>
-         <version>SRU2023-10.1.3</version>
-     </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-log4j2</artifactId>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.prowidesoftware/pw-iso20022 -->
+        <!-- <dependency>
+             <groupId>com.prowidesoftware</groupId>
+             <artifactId>pw-iso20022</artifactId>
+             <version>SRU2023-10.1.3</version>
+         </dependency>-->
 
-	<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
-
-
-	<!-- Thanks for using https://jar-download.com -->
-
-
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-databind</artifactId>
-	</dependency>
-
-	<!-- tag::actuator[] -->
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-actuator</artifactId>
-	</dependency>
-
-	<dependency>
-		<groupId>org.jdom</groupId>
-		<artifactId>jdom2</artifactId>
-		<version>2.0.6</version> <!-- Check for the latest version on Maven Central -->
-	</dependency>
-	<!-- end::actuator[] -->
-
-	<!-- tag::tests[] -->
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-test</artifactId>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot</artifactId>
-		<exclusions>
-			<!--  <exclusion>
-                  <groupId>ch.qos.logback</groupId>
-                  <artifactId>logback-classic</artifactId>
-              </exclusion>-->
-		</exclusions>
-	</dependency>
-
-	<!-- <dependency>
-         <groupId>javax.xml.bind</groupId>
-         <artifactId>jaxb-api</artifactId>
-         <version>2.3.1</version>
-     </dependency>-->
-
-
-	<dependency>
-		<groupId>com.sun.xml.bind</groupId>
-		<artifactId>jaxb-core</artifactId>
-		<version>2.3.0.1</version>
-	</dependency>
-	<dependency>
-		<groupId>javax.xml.bind</groupId>
-		<artifactId>jaxb-api</artifactId>
-		<version>2.3.1</version>
-	</dependency>
-	<dependency>
-		<groupId>com.sun.xml.bind</groupId>
-		<artifactId>jaxb-impl</artifactId>
-		<version>2.3.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.persistence</groupId>
-		<artifactId>org.eclipse.persistence.moxy</artifactId>
-		<version>2.7.7</version> <!-- Use the latest version -->
-	</dependency>
-	<dependency>
-		<groupId>org.javassist</groupId>
-		<artifactId>javassist</artifactId>
-		<version>3.25.0-GA</version>
-	</dependency>
-
-
-	<dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-lang3</artifactId>
-		<version>3.12.0</version>
-		<!--    <exclusions>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.2.0</version>
+            <exclusions>
                 <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
+                    <groupId>com.google.cloud</groupId>
+                    <artifactId>google-cloud-firestore</artifactId>
                 </exclusion>
-            </exclusions>-->
-	</dependency>
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.13.2</version>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>xmlunit</groupId>
-		<artifactId>xmlunit</artifactId>
-		<version>1.6</version>
-		<type>jar</type>
-		<scope>test</scope>
-	</dependency>
-
-	<!-- Joda Time - Java date and time API -->
-	<dependency>
-		<groupId>joda-time</groupId>
-		<artifactId>joda-time</artifactId>
-		<version>2.1</version>
-	</dependency>
-
-	<!--<dependency>
-        <groupId>org.springframework.data</groupId>
-        <artifactId>spring-data-jpa</artifactId>
-        <version>2.7.14</version>
-    </dependency>-->
-
-	<!-- <dependency>
-         <groupId>io.springfox</groupId>
-         <artifactId>springfox-boot-starter</artifactId>
-         <version>3.0.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-     </dependency>-->
-	<dependency>
-		<groupId>io.springfox</groupId>
-		<artifactId>springfox-swagger2</artifactId>
-		<version>3.0.0</version>
-		<exclusions>
-			<exclusion>
-				<groupId>io.swagger.core.v3</groupId>
-				<artifactId>swagger-annotations</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-	<dependency>
-		<groupId>io.swagger.core.v3</groupId>
-		<artifactId>swagger-core-jakarta</artifactId>
-		<version>2.2.7</version>
-	</dependency>
-	<dependency>
-		<groupId>io.springfox</groupId>
-		<artifactId>springfox-swagger-ui</artifactId>
-		<version>3.0.0</version>
-	</dependency>
-
-	<!-- Logging -->
-	<!-- <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-          <version>1.7.36</version>
-         <exclusions>
-             <exclusion>
-                 <groupId>ch.qos.logback</groupId>
-                 <artifactId>logback-classic</artifactId>
-
-             </exclusion>
-             <exclusion>
-                 <groupId>org.slf4j</groupId>
-                 <artifactId>slf4j-log4j12</artifactId>
-             </exclusion>
-         </exclusions>
-      </dependency>-->
-	<!--  <dependency>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-          <version>1.2.12</version>
-      </dependency>-->
-	<!-- Google Guava -->
-
-	<dependency>
-		<groupId>com.google.guava</groupId>
-		<artifactId>guava</artifactId>
-		<version>32.1.3-jre</version>
-	</dependency>
-
-	<dependency>
-		<groupId>jakarta.xml.bind</groupId>
-		<artifactId>jakarta.xml.bind-api</artifactId>
-		<version>2.3.3</version>
-	</dependency>
-	  <!--<dependency>
-
-      <groupId>com.henripay</groupId>
-       <artifactId>firebase4j</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
-       </dependency>-->
-
-	<dependency>
-		<groupId>com.google.cloud</groupId>
-		<artifactId>google-cloud-firestore</artifactId>
-		<version>3.15.7</version>
-	</dependency>
+            </exclusions>
+        </dependency>
 
 
-	<dependency>
-		<groupId>io.swagger.core.v3</groupId>
-		<artifactId>swagger-annotations</artifactId>
-		<version>2.1.6</version> <!-- Use the appropriate version -->
-	</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 
-	<dependency>
-		<groupId>io.swagger</groupId>
-		<artifactId>swagger-annotations</artifactId>
-		<version>1.5.0</version> <!-- Use the appropriate version -->
-	</dependency>
+         <!-- tag::actuator[] -->
 
-	<dependency>
-		<groupId>javax.validation</groupId>
-		<artifactId>validation-api</artifactId>
-		<version>2.0.1.Final</version> <!-- Use the appropriate version -->
-	</dependency>
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-databind</artifactId>
-		<version>2.13.0</version> <!-- Use the appropriate version -->
-	</dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>2.0.6</version> <!-- Check for the latest version on Maven Central -->
+        </dependency>
+        <!-- end::actuator[] -->
+
+        <!-- <dependency>
+             <groupId>javax.xml.bind</groupId>
+             <artifactId>jaxb-api</artifactId>
+             <version>2.3.1</version>
+         </dependency>-->
 
 
-	<dependency>
-		<groupId>org.openapitools</groupId>
-		<artifactId>jackson-databind-nullable</artifactId>
-		<version>0.2.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springdoc</groupId>
-		<artifactId>springdoc-openapi-ui</artifactId>
-		<version>1.7.0</version>
-		<exclusions>
-			<exclusion>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-			</exclusion>
-		</exclusions>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.moxy</artifactId>
+            <version>2.7.7</version> <!-- Use the latest version -->
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.25.0-GA</version>
+        </dependency>
 
-	</dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+            <!--    <exclusions>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>1.6</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Joda Time - Java date and time API -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.7.14</version>
+        </dependency>-->
+
+        <!-- <dependency>
+             <groupId>io.springfox</groupId>
+             <artifactId>springfox-boot-starter</artifactId>
+             <version>3.0.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+         </dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-core-jakarta</artifactId>
+            <version>2.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- Logging -->
+        <!-- <dependency>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+              <version>1.7.36</version>
+             <exclusions>
+                 <exclusion>
+                     <groupId>ch.qos.logback</groupId>
+                     <artifactId>logback-classic</artifactId>
+
+                 </exclusion>
+                 <exclusion>
+                     <groupId>org.slf4j</groupId>
+                     <artifactId>slf4j-log4j12</artifactId>
+                 </exclusion>
+             </exclusions>
+          </dependency>-->
+        <!--  <dependency>
+              <groupId>ch.qos.logback</groupId>
+              <artifactId>logback-classic</artifactId>
+              <version>1.2.12</version>
+          </dependency>-->
+        <!-- Google Guava -->
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.3-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <!--<dependency>
+
+        <groupId>com.henripay</groupId>
+         <artifactId>firebase4j</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         </dependency>-->
+
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-firestore</artifactId>
+            <version>3.15.7</version>
+        </dependency>
 
 
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.1.6</version> <!-- Use the appropriate version -->
+        </dependency>
 
-	<!-- end::tests[] -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.0</version> <!-- Use the appropriate version -->
+        </dependency>
 
 
+        <!--        <dependency>-->
+        <!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--            <artifactId>jackson-databind</artifactId>-->
+        <!--            <version>2.13.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;-->
+        <!--        </dependency>-->
 
 
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
 
-</dependencies>
+        </dependency>
 
-	<modules>
-		<module>sepaddservice</module>
-		<module>common</module>
-		<module>henripayapi</module>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+        </dependency>
 
-		<module>mandateservice</module>
-		<module>customerservice</module>
-		<!-- Add other modules if needed -->
-	</modules>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.1</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+
+        <!-- end::tests[] -->
+
+
+    </dependencies>
+
+    <modules>
+        <module>sepaddservice</module>
+        <module>common</module>
+        <module>henripayapi</module>
+
+        <module>mandateservice</module>
+        <module>customerservice</module>
+        <!-- Add other modules if needed -->
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.12.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>devtools</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>
 

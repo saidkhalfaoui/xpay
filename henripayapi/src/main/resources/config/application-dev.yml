@@ -1,0 +1,35 @@
+
+
+app:
+  name: henripay-api
+  db:
+    provider: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    driverClassName: org.postgresql.Driver
+    database: henripay
+    username: henripay
+    password: henripay
+    host: localhost
+    port: 5432
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    liquibase:
+      enabled: true
+  camunda.bpm:
+    admin-user:
+      id: admin
+      password: QX!8V@FUF@Y2#ps
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # ['configprops', 'env', 'health', 'info', 'logfile', 'loggers', 'prometheus', 'threaddump']
+
+logging:
+  level:
+    com.henripay.henripayapi: DEBUG
+#    org.springframework.web.client: INFO
+#    org.springframework.web: DEBUG
+#    org.springframework.security: DEBUG
