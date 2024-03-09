@@ -1,1 +1,23 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      # No need to specify hibernate.dialect
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5431/mainhp
+    username: postgres
+    password: pgadmin
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+  liquibase:
+    contexts: local
+    enabled: true
+    change-log: db/changelog/db-changelog.yml
+
+
 
