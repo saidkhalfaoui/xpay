@@ -41,7 +41,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -90,7 +90,7 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-         <!-- tag::actuator[] -->
+        <!-- tag::actuator[] -->
 
         <dependency>
             <groupId>org.jdom</groupId>
@@ -294,6 +294,12 @@
 
         <!-- end::tests[] -->
 
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 
