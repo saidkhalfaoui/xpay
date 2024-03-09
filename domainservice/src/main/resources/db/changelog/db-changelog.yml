@@ -1,0 +1,6 @@
+verbose: true
+dropFirst: false
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/sql/migrations
+outputChangeLogFile: liquibaseOutputChangeLog.sql
