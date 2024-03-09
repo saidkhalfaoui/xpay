@@ -1,5 +1,6 @@
 package com.henripay.common.exception;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,5 +29,17 @@ public class HenripayExceptionHandler {
                 notFound,
                 ZonedDateTime.now(ZoneId.of("Z")));
         return new ResponseEntity<>(henripayException, notFound);
+    }
+
+    @ExceptionHandler(value = {DataAccessException.class})
+    public ResponseEntity<Object> handleDataAccessException(DataAccessException e) {
+        HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
+        HenripayException henripayException = new HenripayException(
+                "An error occurred while accessing the data store",
+                e,
+                internalServerError,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+        return new ResponseEntity<>(henripayException, internalServerError);
     }
 }
