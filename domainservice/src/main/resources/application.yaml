@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -7,7 +9,7 @@ spring:
       # No need to specify hibernate.dialect
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://localhost:5431/mainhp
+    url: jdbc:postgresql://localhost:5432/mainhp
     username: postgres
     password: pgadmin
     driverClassName: org.postgresql.Driver
@@ -16,7 +18,7 @@ spring:
       platform: postgres
   liquibase:
     contexts: local
-    enabled: true
+    enabled: false
     change-log: db/changelog/db-changelog.yml
 
 
