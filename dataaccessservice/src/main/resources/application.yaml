@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    active: test  # Specify the active profile, e.g., 'dev' for development environment
+
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -11,21 +14,29 @@ spring:
             use_second_level_cache: true  # Enable cache (optional)
             region:
               factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+
   datasource:
-    url: jdbc:postgresql://localhost:5431/mainhp
+    url: jdbc:postgresql://localhost:5432/mainhp
     username: postgres
     password: pgadmin
     driverClassName: org.postgresql.Driver
+
   sql:
     init:
       platform: postgres
+
   liquibase:
     contexts: local
-    enabled: true
+    enabled: false
     change-log: db/changelog/db-changelog.yml
 
+---
 
+spring:
+  profiles: test  # Configuration for the 'test' profile, used for testing
 
-
-
-
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
