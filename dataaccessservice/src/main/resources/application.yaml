@@ -30,13 +30,3 @@ spring:
     enabled: false
     change-log: db/changelog/db-changelog.yml
 
----
-
-spring:
-  profiles: test  # Configuration for the 'test' profile, used for testing
-
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
