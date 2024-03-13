@@ -7,7 +7,7 @@ spring:
       # No need to specify hibernate.dialect
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://localhost:5431/mainhp
+    url: jdbc:postgresql://localhost:5435/mainhp
     username: postgres
     password: pgadmin
     driverClassName: org.postgresql.Driver

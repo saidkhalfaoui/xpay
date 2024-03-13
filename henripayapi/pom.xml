@@ -6,7 +6,7 @@
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath/>
 
     </parent>
     <groupId>com.henripay</groupId>
@@ -15,7 +15,7 @@
     <name>henripayapi</name>
     <description>HenriPay API orchestrator</description>
     <properties>
-        <java.version>${parent.java.version}</java.version>
+        <java.version>11</java.version>
     </properties>
 
 
@@ -41,7 +41,6 @@
                                 ${project.basedir}/src/main/resources/henripayapi.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <language>java</language>
                             <library>spring-boot</library>
 
                             <apiPackage>com.henripay.henripayapi.api</apiPackage>

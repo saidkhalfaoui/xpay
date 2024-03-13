@@ -15,10 +15,17 @@
     <name>customerservice</name>
     <description>Customer Service</description>
     <properties>
-        <java.version>${parent.java.version}</java.version>
+        <java.version>11</java.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>domainservice</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
 
+        </dependency>
 
+    </dependencies>
 
     <build>
         <plugins>
@@ -26,7 +33,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
@@ -38,39 +44,54 @@
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/customerservice.yaml
+                                ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <language>java</language>
-                            <library>spring-boot</library>
+                            <apiPackage>com.henripay.customerservice.controller</apiPackage>
+                            <modelPackage>com.henripay.customerservice.dto</modelPackage>
 
-                            <apiPackage>com.henripay.cutomerservice.api</apiPackage>
-                            <modelPackage>com.henripay.cutomerservice.model</modelPackage>
-
-                            <!--  <supportingFilesToGenerate>
-                                  ApiUtil.java
-                              </supportingFilesToGenerate>-->
-
-
+                            <supportingFilesToGenerate>
+                                ApiUtil.java
+                            </supportingFilesToGenerate>
                             <configOptions>
-                                <java8>true</java8>
-                                <dateLibrary>custom</dateLibrary>
-                                <openApiNullable>false</openApiNullable>
-                                <interfaceOnly>true</interfaceOnly>
-
+                                <delegatePattern>true</delegatePattern>
+                                <serializableModel>true</serializableModel>
+                                <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
-                            <!-- <typeMappings>
-                                 <typeMapping>DateTime=Instant</typeMapping>
-                                 <typeMapping>Date=Date</typeMapping>
-                             </typeMappings>-->
-
-                            <!--  <typeMappings>
-                 <typeMapping>float=java.math</typeMapping>
-                              </typeMappings>-->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                <version>7.3.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>-->
+<!--                                ${project.basedir}/src/main/resources/swagger/api.yaml-->
+<!--                            </inputSpec>-->
+<!--                            <generatorName>spring</generatorName>-->
+<!--                            <library>spring-boot</library>-->
+<!--                            <apiPackage>com.henripay.customerservice.controller</apiPackage>-->
+<!--                            <modelPackage>com.henripay.customerservice.dto</modelPackage>-->
+
+<!--                            <configOptions>-->
+<!--                                <configOptions>-->
+<!--                                    <delegatePattern>true</delegatePattern>-->
+<!--                                    <serializableModel>true</serializableModel>-->
+<!--                                </configOptions>-->
+
+<!--                            </configOptions>-->
+
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <!-- <plugin>
                  <groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -152,6 +173,5 @@
         </plugins>
         <finalName>customerservice</finalName>
     </build>
-
 
 </project>
