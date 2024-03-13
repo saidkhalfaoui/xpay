@@ -15,7 +15,7 @@
     <name>SepaDD Service</name>
     <description>Sepa DD engine for HenriPay </description>
     <properties>
-        <java.version>${parent.java.version}</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -25,12 +25,6 @@
             <classifier>arbitrary</classifier>
 
         </dependency>
-        <!--<dependency>
-            <groupId>com.henripay</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>-->
     </dependencies>
    <!-- <dependencies>
         <dependency>
