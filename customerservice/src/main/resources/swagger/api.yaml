@@ -8,42 +8,6 @@ servers:
   - url: 'http://localhost:8080/api'
 
 paths:
-  /user:
-    post:
-      summary: Save User
-      operationId: saveUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserDTO'
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDTO'
-
-  /user/{id}:
-    get:
-      summary: Get User By Id
-      operationId: getUserById
-      parameters:
-        - name: id
-          in: path
-          description: Unique Id of an User
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDTO'
   /merchant:
     post:
       summary: Save Merchant
@@ -140,24 +104,73 @@ paths:
           description: Merchant deleted successfully
         '404':
           description: Merchant not found
+  /users:
+    get:
+      summary: List all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTOList'
+    post:
+      summary: Create a new user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+  /users/{customerIdIdentifier}:
+    parameters:
+      - in: path
+        name: customerIdIdentifier
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a user by ID
+      operationId: getUserById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    put:
+      summary: Update a user
+      operationId: updateUser
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    delete:
+      summary: Delete a user
+      operationId: deleteUser
+      responses:
+        '204':
+          description: Successful response
 components:
   schemas:
-    UserDTO:
-      type: object
-      description: Data element for User
-      required:
-        - email
-      properties:
-        id:
-          type: string
-          format: uuid
-        email:
-          type: string
-        firstName:
-          type: string
-          minLength: 3
-        lastName:
-          type: string
     MerchantDTO:
       type: object
       description: d
@@ -185,154 +198,23 @@ components:
             format: int32
           message:
             type: string
-
-#TESSSSSSSSSSSSSSSSST
-#paths:
-#  /merchants:
-#    get:
-#      summary: Retrieve all merchants
-#      operationId: getMerchant
-#      responses:
-#        '200':
-#          description: Successful operation
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  $ref: '#/components/schemas/MerchantDTO'
-#              example:
-#                - merchantId: 1
-#                  merchantName: "Merchant 1"
-#                  merchantAddress: "Address 1"
-#                  merchantIban: "IBAN1"
-#                  merchantCode: "Code1"
-#                  metadataId: 1
-#                  aggregatorId: 1
-#    post:
-#      summary: Create a new merchant
-#      operationId: saveMerchant
-#      requestBody:
-#        required: true
-#        content:
-#          application/json:
-#            schema:
-#              $ref: '#/components/schemas/MerchantDTO'
-#            example:
-#              merchantName: "New Merchant"
-#              merchantAddress: "New Address"
-#              merchantIban: "New IBAN"
-#              merchantCode: "New Code"
-#              metadataId: 1
-#              aggregatorId: 1
-#      responses:
-#        '201':
-#          description: Merchant created successfully
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/MerchantDTO'
-#              example:
-#                merchantId: 2
-#                merchantName: "New Merchant"
-#                merchantAddress: "New Address"
-#                merchantIban: "New IBAN"
-#                merchantCode: "New Code"
-#                metadataId: 1
-#                aggregatorId: 1
-#  /api/merchants/{id}:
-#    parameters:
-#      - name: id
-#        in: path
-#        required: true
-#        schema:
-#          type: integer
-#    get:
-#      summary: Retrieve a specific merchant by ID
-#      operationId: getMerchantById
-#      responses:
-#        '200':
-#          description: Successful operation
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/MerchantDTO'
-#              example:
-#                merchantId: 1
-#                merchantName: "Merchant 1"
-#                merchantAddress: "Address 1"
-#                merchantIban: "IBAN1"
-#                merchantCode: "Code1"
-#                metadataId: 1
-#                aggregatorId: 1
-#        '404':
-#          description: Merchant not found
-#    put:
-#      summary: Update a specific merchant by ID
-#      operationId: updateMerchantById
-#      requestBody:
-#        required: true
-#        content:
-#          application/json:
-#            schema:
-#              $ref: '#/components/schemas/MerchantDTO'
-#            example:
-#              merchantName: "Updated Merchant"
-#              merchantAddress: "Updated Address"
-#              merchantIban: "Updated IBAN"
-#              merchantCode: "Updated Code"
-#              metadataId: 1
-#              aggregatorId: 1
-#      responses:
-#        '200':
-#          description: Merchant updated successfully
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/MerchantDTO'
-#              example:
-#                merchantId: 1
-#                merchantName: "Updated Merchant"
-#                merchantAddress: "Updated Address"
-#                merchantIban: "Updated IBAN"
-#                merchantCode: "Updated Code"
-#                metadataId: 1
-#                aggregatorId: 1
-#        '404':
-#          description: Merchant not found
-#    delete:
-#      summary: Delete a specific merchant by ID
-#      operationId: deleteMerchantById
-#      responses:
-#        '204':
-#          description: Merchant deleted successfully
-#        '404':
-#          description: Merchant not found
-#components:
-#  schemas:
-#    MerchantDTO:
-#      type: object
-#      description: Merchant Data Transfer Object
-#      properties:
-#        merchantId:
-#          type: integer
-#        merchantName:
-#          type: string
-#        merchantAddress:
-#          type: string
-#        merchantIban:
-#          type: string
-#        merchantCode:
-#          type: string
-#        metadataId:
-#          type: integer
-#        aggregatorId:
-#          type: integer
-#    Error:
-#       type: object
-#       properties:
-#         code:
-#           type: integer
-#           format: int32
-#         message:
-#           type: string
+    UserDTO:
+      type: object
+      properties:
+        customerIdIdentifier:
+          type: integer
+        iban:
+          type: string
+        fullName:
+          type: string
+        token:
+          type: string
+        address:
+          type: string
+        activationDate:
+          type: string
+          format: date-time
+    UserDTOList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserDTO'
