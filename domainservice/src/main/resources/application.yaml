@@ -18,7 +18,7 @@ spring:
       platform: postgres
   liquibase:
     contexts: local
-    enabled: false
+    enabled: true
     change-log: db/changelog/db-changelog.yml
 
 
