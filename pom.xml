@@ -297,7 +297,6 @@
         <module>mandateservice</module>
         <module>customerservice</module>
         <module>domainservice</module>
-        <module>dataaccessservice</module>
         <!-- Add other modules if needed -->
     </modules>
     <build>
