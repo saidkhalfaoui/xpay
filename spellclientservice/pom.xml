@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.henripay</groupId>
+		<artifactId>henripay</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+
+	</parent>
+	<groupId>com.henripay</groupId>
+	<artifactId>spellclientservice</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spellclientservice</name>
+	<description>spellclientservice</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.7</version>
+				<configuration>
+					<repository>saidkhalfaoui/${project.artifactId}</repository>
+					<!--<serverId>docker-hub</serverId>-->
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>target/spellclientservice.jar</JAR_FILE>
+					</buildArgs>
+					<googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<!--  <goal>push</goal>-->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<finalName>spellclientservice</finalName>
+	</build>
+
+</project>

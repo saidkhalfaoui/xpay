@@ -297,6 +297,7 @@
         <module>mandateservice</module>
         <module>customerservice</module>
         <module>domainservice</module>
+        <module>spellclientservice</module>
         <!-- Add other modules if needed -->
     </modules>
     <build>
