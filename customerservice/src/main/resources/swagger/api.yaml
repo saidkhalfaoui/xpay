@@ -221,3 +221,27 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UserDTO'
+    MetadataDTO:
+      type: object
+      properties:
+        metadataId:
+          type: integer
+    AggregatorDTO:
+      type: object
+      properties:
+        aggregatorId:
+          type: integer
+          format: int64
+          description: The unique identifier for the aggregator
+        aggregatorName:
+          type: string
+          description: The name of the aggregator
+        aggregatorAddress:
+          type: string
+          description: The address of the aggregator
+        aggregatorIban:
+          type: string
+          description: The IBAN of the aggregator
+        metadata:
+          $ref: '#/components/schemas/MetadataDTO'
+
