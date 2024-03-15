@@ -1,9 +1,9 @@
 package com.henripay.domainservice.repository;
 
-import com.henripay.domainservice.entity.UserEntity;
+import com.henripay.domainservice.entity.MandateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface MandateRepository extends JpaRepository<MandateEntity, Long> {
 }

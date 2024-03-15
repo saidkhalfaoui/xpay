@@ -1,5 +1,5 @@
-drop table if exists metadata;
-drop table if exists keys;
+drop table if exists metadata cascade;
+drop table if exists keys cascade;
 
 create table metadata
 (
@@ -20,8 +20,8 @@ create table keys
 );
 
 
-drop table if exists aggregator;
-drop table if exists merchant;
+drop table if exists aggregator cascade;
+drop table if exists merchant cascade;
 
 create table aggregator
 (
@@ -46,9 +46,9 @@ create table merchant
     constraint fk_merchant_aggregator foreign key (id_merchant_aggregator) references aggregator (aggregator_id)
 );
 
-drop table if exists users;
-drop table if exists mandate;
-drop table if exists transactions;
+drop table if exists users cascade;
+drop table if exists mandate cascade;
+drop table if exists transactions cascade;
 
 create table users
 (
