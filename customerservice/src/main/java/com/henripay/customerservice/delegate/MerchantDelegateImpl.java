@@ -6,6 +6,8 @@ import com.henripay.customerservice.service.impl.MerchantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MerchantDelegateImpl implements MerchantApiDelegate {
     private final MerchantService merchantService;
@@ -15,26 +17,28 @@ public class MerchantDelegateImpl implements MerchantApiDelegate {
 
     @Override
     public ResponseEntity<MerchantDTO> saveMerchant(MerchantDTO merchantDTO) {
+        System. out. println( "merchantDTO.toString()");
+        System. out. println( merchantDTO.toString());
         return ResponseEntity.ok(merchantService.saveMerchant(merchantDTO));
     }
-
     @Override
-    public ResponseEntity<MerchantDTO> getMerchant() {
-        return ResponseEntity.ok(merchantService.getMerchant());
+    public ResponseEntity<List<MerchantDTO>> getMerchants() {
+        return ResponseEntity.ok(merchantService.getAllMerchants());
     }
 
     @Override
-    public ResponseEntity<Void> deleteMerchantById(Integer id) {
-        return MerchantApiDelegate.super.deleteMerchantById(id);
+    public ResponseEntity<Void> deleteMerchantById(Long id) {
+        merchantService.deleteMerchant(id);
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<MerchantDTO> getMerchantById(Integer id) {
-        return MerchantApiDelegate.super.getMerchantById(id);
+    public ResponseEntity<MerchantDTO> getMerchantById(Long id) {
+        return ResponseEntity.ok(merchantService.getMerchantById(id));
     }
 
     @Override
-    public ResponseEntity<MerchantDTO> updateMerchantById(Integer id, MerchantDTO merchantDTO) {
-        return MerchantApiDelegate.super.updateMerchantById(id, merchantDTO);
+    public ResponseEntity<MerchantDTO> updateMerchantById(Long id, MerchantDTO merchantDTO) {
+        return ResponseEntity.ok(merchantService.updateMerchantById(id, merchantDTO));
     }
 }

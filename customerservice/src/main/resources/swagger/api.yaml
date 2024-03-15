@@ -26,14 +26,14 @@ paths:
                 $ref: '#/components/schemas/MerchantDTO'
     get:
       summary: Get Merchant
-      operationId: getMerchant
+      operationId: getMerchants
       responses:
         200:
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MerchantDTO'
+                $ref: '#/components/schemas/MerchantDTOList'
 
   /merchant/{id}:
     parameters:
@@ -175,21 +175,24 @@ components:
       type: object
       description: d
       properties:
-        merchant_id:
+        merchantId:
           type: string
-        merchant_name:
+        merchantName:
           type: string
-        merchant_address:
+        merchantAddress:
           type: string
-        merchant_iban:
+        merchantIban:
           type: string
-        merchant_code:
+        merchantCode:
           type: string
-        merchant_meta:
+        metadata:
           type: integer
-        id_merchant_aggregator:
+        aggregator:
           type: integer
-
+    MerchantDTOList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MerchantDTO'
     Error:
         type: object
         properties:
