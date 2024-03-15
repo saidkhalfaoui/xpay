@@ -22,19 +22,35 @@ public class MetadataRepositoryTest {
 
     @Test
     public void whenFindById_thenReturnMetadata() {
-        // Given
+        // Generate sample byte arrays for demonstration purposes
+        byte[] sampleTransactionFlows = {10, 20, 30, 40};
+        byte[] sampleMetadataBytes = {50, 60, 70};
+
         MetadataEntity metadata = new MetadataEntity();
-        metadata.setTransactionFlows(new byte[]{1, 2, 3});
-        metadata.setMetadata(new byte[]{4, 5, 6});
+        metadata.setTransactionFlows(sampleTransactionFlows);
+        metadata.setMetadata(sampleMetadataBytes);
 
         entityManager.persist(metadata);
         entityManager.flush();
 
-        // When
         MetadataEntity found = metadataRepository.findById(metadata.getMetadataId()).orElse(null);
 
-        // Then
         assertThat(found).isNotNull();
-        assertThat(found.getTransactionFlows()).isEqualTo(metadata.getTransactionFlows());
+        assertThat(found.getTransactionFlows()).isEqualTo(sampleTransactionFlows);
+        assertThat(found.getMetadata()).isEqualTo(sampleMetadataBytes);
+
+        // Test updating metadata
+        byte[] updatedTransactionFlows = {80, 90};
+        byte[] updatedMetadataBytes = {100, 110};
+        metadata.setTransactionFlows(updatedTransactionFlows);
+        metadata.setMetadata(updatedMetadataBytes);
+        metadataRepository.save(metadata);
+
+        assertThat(found.getTransactionFlows()).isEqualTo(updatedTransactionFlows);
+        assertThat(found.getMetadata()).isEqualTo(updatedMetadataBytes);
+
+        // Test deletion
+        metadataRepository.delete(metadata);
+        assertThat(metadataRepository.existsById(metadata.getMetadataId())).isFalse();
     }
 }
