@@ -1,4 +1,4 @@
-package com.henripay.dataaccessservice.unittests;
+package com.henripay.dataaccessservice;
 
 import com.henripay.dataaccessservice.repository.AggregatorRepository;
 import com.henripay.domainservice.entity.AggregatorEntity;

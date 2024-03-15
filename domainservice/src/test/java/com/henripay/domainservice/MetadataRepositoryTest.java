@@ -1,7 +1,7 @@
-package com.henripay.dataaccessservice.unittests;
+package com.henripay.domainservice;
 
-import com.henripay.dataaccessservice.repository.MetadataRepository;
 import com.henripay.domainservice.entity.MetadataEntity;
+import com.henripay.domainservice.repository.MetadataRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

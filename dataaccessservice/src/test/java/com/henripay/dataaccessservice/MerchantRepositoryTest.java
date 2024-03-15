@@ -1,4 +1,4 @@
-package com.henripay.dataaccessservice.unittests;
+package com.henripay.dataaccessservice;
 
 import com.henripay.dataaccessservice.repository.MerchantRepository;
 import com.henripay.domainservice.entity.MerchantEntity;
