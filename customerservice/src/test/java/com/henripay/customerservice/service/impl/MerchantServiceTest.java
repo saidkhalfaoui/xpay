@@ -77,8 +77,7 @@ class MerchantServiceTest {
 
         // Act
         MerchantDTO result = underTest.saveMerchant(merchantDTO);
-        System.out.print(result);
-        System.out.print(expectedMerchantDTO);
+
         // Assert
         assertThat(result).isEqualTo(expectedMerchantDTO);
         verify(merchantRepository, times(1)).save(merchantEntity);

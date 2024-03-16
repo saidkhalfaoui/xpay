@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: MandateDTO API
+  version: 1.0.0
+
+paths:
+  /mandates:
+    get:
+      summary: Get all mandates
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MandateDTO'
+
+    post:
+      summary: Create a new mandate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MandateDTO'
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+
+  /mandates/{mandateIdentifier}:
+    get:
+      summary: Get a mandate
+      parameters:
+        - in: path
+          name: mandateIdentifier
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+
+    put:
+      summary: Update a mandate
+      parameters:
+        - in: path
+          name: mandateIdentifier
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MandateDTO'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+
+    delete:
+      summary: Delete a mandate
+      parameters:
+        - in: path
+          name: mandateIdentifier
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful response
+
+components:
+  schemas:
+    MandateDTO:
+      type: object
+      properties:
+        mandateIdentifier:
+          type: integer
+        customer:
+          $ref: '#/components/schemas/User'
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        signatureDate:
+          type: string
+          format: date
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - customer
+        - merchant
+        - signatureDate
+        - startDate
+
+    User:
+      type: object
+      properties:
+        customerIdIdentifier:
+          type: integer
+        # Other user properties
+
+    Merchant:
+      type: object
+      properties:
+        merchantId:
+          type: integer
+        # Other merchant properties

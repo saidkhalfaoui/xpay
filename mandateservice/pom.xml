@@ -23,6 +23,11 @@
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>domainservice</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 
@@ -36,39 +41,29 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.5.0</version>
+                <version>7.3.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>integer=Long,int=Long</typeMappings>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/mandateservice.yaml
+                                ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.henripay.mandateservice.api</apiPackage>
-                            <modelPackage>com.henripay.mandateservice.api.model</modelPackage>
-                            <!--  <supportingFilesToGenerate>
-                                  ApiUtil.java
-                              </supportingFilesToGenerate>-->
+                            <apiPackage>com.henripay.mandateservice.controller</apiPackage>
+                            <modelPackage>com.henripay.mandateservice.dto</modelPackage>
 
-
+                            <supportingFilesToGenerate>
+                                ApiUtil.java
+                            </supportingFilesToGenerate>
                             <configOptions>
-                                <java8>true</java8>
-                                <dateLibrary>custom</dateLibrary>
-                                <openApiNullable>false</openApiNullable>
-                                <interfaceOnly>true</interfaceOnly>
-
+                                <delegatePattern>true</delegatePattern>
+                                <serializableModel>true</serializableModel>
+                                <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
-                            <!-- <typeMappings>
-                                 <typeMapping>DateTime=Instant</typeMapping>
-                                 <typeMapping>Date=Date</typeMapping>
-                             </typeMappings>
-                             <importMappings>
-                                 <importMapping>Instant=java.time.Instant</importMapping>
-                                 <importMapping>Date=java.util.Date</importMapping>
-                             </importMappings>-->
                         </configuration>
                     </execution>
                 </executions>
