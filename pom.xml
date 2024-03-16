@@ -17,7 +17,7 @@
 
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>21</java.version>
 
     </properties>
 
@@ -199,6 +199,11 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->

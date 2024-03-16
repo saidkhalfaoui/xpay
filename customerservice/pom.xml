@@ -15,15 +15,18 @@
     <name>customerservice</name>
     <description>Customer Service</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${parent.version}</version>
+            <classifier>arbitrary</classifier>
 
         </dependency>
+
+
 
     </dependencies>
 
@@ -123,7 +126,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>saidkhalfaoui/${project.artifactId}</repository>
+                    <repository>henripay/${project.artifactId}</repository>
                     <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>

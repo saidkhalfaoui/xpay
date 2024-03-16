@@ -15,7 +15,7 @@
     <name>mandateservice</name>
     <description>Mandate service</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -103,7 +103,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>saidkhalfaoui/${project.artifactId}</repository>
+                    <repository>henripay/${project.artifactId}</repository>
                     <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>

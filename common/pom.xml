@@ -16,7 +16,7 @@
     <description>Common Libraries</description>
     <packaging>jar</packaging>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
 
 
