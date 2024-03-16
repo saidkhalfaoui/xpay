@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: mainhp
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres²
+      - postgres:/data/postgres
     ports:
       - "5435:5432"
     networks:

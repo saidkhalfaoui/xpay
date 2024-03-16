@@ -6,8 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CutomerserviceApplicationTests {
 
+
     @Test
-    void contextLoads() {
+    public void testSaveAndPrintData() {
     }
 
 }

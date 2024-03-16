@@ -1,4 +1,4 @@
-package com.henripay.dataaccessservice.repository;
+package com.henripay.domainservice.repository;
 
 import com.henripay.domainservice.entity.MetadataEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
