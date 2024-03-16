@@ -17,6 +17,7 @@
 
     <properties>
         <camunda.version>7.19.0</camunda.version>
+        <camunda.mockito>5.15.0</camunda.mockito>
     </properties>
 
     <dependencyManagement>
@@ -49,22 +50,33 @@
         </dependency>
 
         <!--camunda-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+        <!--            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+        <!--            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm</groupId>-->
+        <!--            <artifactId>camunda-engine-plugin-spin</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.spin</groupId>-->
+        <!--            <artifactId>camunda-spin-dataformat-all</artifactId>-->
+        <!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+<!--            <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+            <groupId>org.camunda.community</groupId>
+            <artifactId>camunda-engine-rest-client-complete-springboot-starter</artifactId>
+            <version>7.18.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.camunda.bpm</groupId>
-            <artifactId>camunda-engine-plugin-spin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.camunda.spin</groupId>
-            <artifactId>camunda-spin-dataformat-all</artifactId>
-        </dependency>
+
+
     </dependencies>
 
     <build>

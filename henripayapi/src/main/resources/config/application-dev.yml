@@ -17,9 +17,12 @@ app:
     liquibase:
       enabled: true
   camunda.bpm:
-    admin-user:
-      id: admin
-      password: QX!8V@FUF@Y2#ps
+    client:
+      base-url: http://localhost:8082/engine-rest
+      max-tasks: 100
+    basic-auth:
+      username: demo
+      password: demo
 
 management:
   endpoints:

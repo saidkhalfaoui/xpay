@@ -42,15 +42,21 @@ camunda:
       schema-update: true
     filter:
       create: All
-    admin-user:
-      id: ${app.camunda.bpm.admin-user.id}
-      password: ${app.camunda.bpm.admin-user.password}
-      first-name: Admin
-      last-name:
+#    admin-user:
+#      id: ${app.camunda.bpm.admin-user.id}
+#      password: ${app.camunda.bpm.admin-user.password}
+#      first-name: Admin
+#      last-name:
     history-level: full
     auto-deployment-enabled: true
     job-execution:
       enabled: true
+    client:
+      base-url: ${app.camunda.bpm.client.base-url}
+      max-tasks: ${app.camunda.bpm.client.max-tasks}
+    basic-auth:
+      username: admin
+      password: admin
 
 management:
   endpoints:
