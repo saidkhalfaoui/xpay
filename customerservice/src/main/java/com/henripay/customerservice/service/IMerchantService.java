@@ -6,6 +6,7 @@ import com.henripay.customerservice.dto.MerchantDTO;
 import com.henripay.domainservice.entity.MerchantEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IMerchantService {
@@ -14,4 +15,5 @@ public interface IMerchantService {
     List<MerchantDTO> getAllMerchants();
     void deleteMerchant(Long id);
     MerchantDTO updateMerchantById(Long id, MerchantDTO merchantDTO);
+    MerchantDTO findByIban(String iban);
 }

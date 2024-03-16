@@ -104,6 +104,30 @@ paths:
           description: Merchant deleted successfully
         '404':
           description: Merchant not found
+  /merchant/find-by-iban:
+    get:
+      summary: Find a merchant by IBAN
+      parameters:
+        - in: query
+          name: iban
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantDTO'
+
+#        '404':
+#          description: Merchant not found
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/Error'
+
   /users:
     get:
       summary: List all users
