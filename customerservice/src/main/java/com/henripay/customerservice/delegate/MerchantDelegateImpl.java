@@ -17,8 +17,6 @@ public class MerchantDelegateImpl implements MerchantApiDelegate {
 
     @Override
     public ResponseEntity<MerchantDTO> saveMerchant(MerchantDTO merchantDTO) {
-        System. out. println( "merchantDTO.toString()");
-        System. out. println( merchantDTO.toString());
         return ResponseEntity.ok(merchantService.saveMerchant(merchantDTO));
     }
     @Override
