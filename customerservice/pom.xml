@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <classifier>arbitrary</classifier>
 
         </dependency>
