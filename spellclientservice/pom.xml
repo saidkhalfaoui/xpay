@@ -6,27 +6,46 @@
 		<groupId>com.henripay</groupId>
 		<artifactId>henripay</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 
 	</parent>
-	<groupId>com.henripay</groupId>
+
 	<artifactId>spellclientservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spellclientservice</name>
-	<description>spellclientservice</description>
+	<description>spell client service</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>${parent.java.version}</java.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.spell</groupId>
+			<artifactId>spell</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>1.4.7</version>
 				<configuration>
-					<repository>saidkhalfaoui/${project.artifactId}</repository>
+					<repository>henripay/${project.artifactId}</repository>
 					<!--<serverId>docker-hub</serverId>-->
 					<tag>${project.version}</tag>
 					<buildArgs>
