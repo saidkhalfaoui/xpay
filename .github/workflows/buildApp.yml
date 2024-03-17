@@ -38,8 +38,13 @@ jobs:
 
       - name: Clean with Maven
         run: mvn clean
+
       - name: Compile with Maven
         run: mvn compile
+
+      - name: Set Maven Auth Token
+        run: echo "MAVEN_AUTH_TOKEN=${{ secrets.MAVEN_AUTH_TOKEN }}" >> $GITHUB_ENV
+
       - name: Build with Maven
         run: mvn install
 
