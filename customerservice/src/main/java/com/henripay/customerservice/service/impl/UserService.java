@@ -37,7 +37,8 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO getUserById(Long id) {
-        return null;
+        Optional<UserEntity> merchant = userRepository.findById(id);
+        return  userMapper.toDto(merchant.orElseThrow(() -> new NotFoundException("User not found")));
     }
 
     @Override
