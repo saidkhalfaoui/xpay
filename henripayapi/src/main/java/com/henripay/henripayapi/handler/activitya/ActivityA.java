@@ -34,7 +34,6 @@ public class ActivityA {
                     service.complete(externalTask);
                 }
             } catch (Throwable throwable) {
-                variables.put("Step1", "F");
                 service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };

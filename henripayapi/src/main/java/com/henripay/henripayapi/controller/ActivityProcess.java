@@ -21,31 +21,10 @@ public class ActivityProcess {
     }
 
     @PostMapping("/process/start/{key}")
-    public void startProcess(
-            @PathVariable String key
-    ) throws ApiException {
-        commandService.startProcess(key);
-    }
-
-    @PostMapping("/process-2/start/{key}")
-    public ResponseEntity<String> startProcess2(
-            @PathVariable String key
-    ) throws ApiException {
-        return commandService.startProcess2(key);
-    }
-
-    @PostMapping("/process-mono/start/{key}")
     public Mono<ResponseEntity<String>> startProcessMono(
             @PathVariable String key
     ) throws ApiException {
-        return commandService.startProcessMono(key);
+        return commandService.startProcess(key);
     }
 
-    @PostMapping("/process/send-message/{instanceId}/{messageName}")
-    public void sendMessage(
-            @PathVariable String instanceId,
-            @PathVariable String messageName
-    ) {
-        commandService.sendMessage(messageName, instanceId);
-    }
 }

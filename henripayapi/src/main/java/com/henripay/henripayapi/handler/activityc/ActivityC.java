@@ -27,11 +27,9 @@ public class ActivityC {
                 } else {
                     Thread.sleep(1000);
                     log.info("After 1 second inside Activity C");
-                    variables.put("ActivityC", "C");
                     service.complete(externalTask, variables);
                 }
             } catch (Throwable throwable) {
-                variables.put("ActivityC", "F");
                 service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };
