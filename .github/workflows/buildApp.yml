@@ -2,9 +2,7 @@ name: HenriPay CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "feature/HEN-CI" ]
 
 jobs:
   build-maven:
@@ -58,6 +56,7 @@ jobs:
       - name: Run Liquibase migrations
         run: |
           mvn liquibase:update -Dliquibase.url=jdbc:postgresql://localhost:5432/henripay -Dliquibase.username=postgres -Dliquibase.password=postgres
+      
 
       #TODO: registry
       #- name: Tag Docker image
