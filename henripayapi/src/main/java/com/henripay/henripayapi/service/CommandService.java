@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -54,17 +55,12 @@ public class CommandService {
         );
         //
 
-        VariableValueDto activityA = null;
-        VariableValueDto activityB = null;
-        while (activityA == null || activityB == null
-                || !(activityA.getValue().equals("C") || activityA.getValue().equals("F") )
-                || !(activityB.getValue().equals("C") || activityB.getValue().equals("F"))
-        ) {
+        VariableValueDto step1 = null;
+        while (step1 == null || !(Objects.equals(step1.getValue(), "C") || Objects.equals(step1.getValue(), "F"))) {
             try {
                 Thread.sleep(1000);
                 //var ps = processInstanceApi.getProcessInstance(processInstance.getId());
-                activityB = processInstanceApi.getProcessInstanceVariable(processInstance.getId(), "ActivityA", false);
-                activityA = processInstanceApi.getProcessInstanceVariable(processInstance.getId(), "ActivityA", false);
+                step1 = processInstanceApi.getProcessInstanceVariable(processInstance.getId(), "Step1", false);
             } catch (Throwable e) {
 
             }

@@ -28,11 +28,11 @@ public class ActivityB {
                 } else {
                     Thread.sleep(1000);
                     log.info("After 1 second inside Activity B");
-                    variables.put("ActivityB", "C");
+                    variables.put("Step1", "C");
                     service.complete(externalTask, variables);
                 }
             } catch (Throwable throwable) {
-                variables.put("ActivityB", "F");
+                variables.put("Step1", "F");
                 service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };
