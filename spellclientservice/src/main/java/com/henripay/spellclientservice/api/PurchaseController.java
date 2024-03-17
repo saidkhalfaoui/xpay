@@ -36,27 +36,7 @@ public class PurchaseController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> purchasePost(@RequestBody(required = true) String purchaseRequestDtoStr) {
-        PurchaseRequestDto purchaseRequestDto = new PurchaseRequestDto();
-
-//        ClientDto clientDto = new ClientDto();
-//        clientDto.setEmail("test@test.com");
-//        purchaseRequestDto.setClient(clientDto);
-//
-//        ProductDto productDto = new ProductDto();
-//        productDto.setName("Test");
-//        productDto.setPrice(new BigDecimal(100));
-//        PurchaseDto purchaseDto = new PurchaseDto();
-//        ArrayList<ProductDto> productDtos = new ArrayList<>();
-//        productDtos.add(productDto);
-//        purchaseDto.setProducts(productDtos);
-//        purchaseRequestDto.setPurchase(purchaseDto);
-//
-//        //ObjectMapper objectMapper = new ObjectMapper();
-//
-//        //objectMapper.readValues(purchaseRequestDto, PurchaseRequestDto.class);
-//        logger.warn("Hello "+purchaseRequestDto.toString());
-
+    public ResponseEntity<Object> purchasePost(@RequestBody(required = true) PurchaseRequestDto purchaseRequestDto) {
         Object res = this.purchaseService.doPurchase(purchaseRequestDto);
         return ResponseEntity.ok(res);
     }
