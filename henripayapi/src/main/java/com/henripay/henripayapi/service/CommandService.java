@@ -1,12 +1,15 @@
 package com.henripay.henripayapi.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.client.ExternalTaskClient;
+import org.camunda.bpm.client.topic.TopicSubscription;
 import org.camunda.community.rest.client.api.ProcessDefinitionApi;
 import org.camunda.community.rest.client.api.ProcessInstanceApi;
 import org.camunda.community.rest.client.dto.StartProcessInstanceDto;
 import org.camunda.community.rest.client.dto.VariableValueDto;
 import org.camunda.community.rest.client.invoker.ApiException;
 import org.camunda.community.rest.client.springboot.CamundaHistoryApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,12 +36,14 @@ public class CommandService {
 
     private final ProcessDefinitionApi processDefinitionApi;
     private final ProcessInstanceApi processInstanceApi;
+    private final ExternalTaskClient externalTaskClient;
 
     private final CamundaHistoryApi camundaHistoryApi;
 
-    public CommandService(ProcessDefinitionApi processDefinitionApi, ProcessInstanceApi processInstanceApi, CamundaHistoryApi camundaHistoryApi) {
+    public CommandService(ProcessDefinitionApi processDefinitionApi, ProcessInstanceApi processInstanceApi, ExternalTaskClient externalTaskClient, CamundaHistoryApi camundaHistoryApi) {
         this.processDefinitionApi = processDefinitionApi;
         this.processInstanceApi = processInstanceApi;
+        this.externalTaskClient = externalTaskClient;
         this.camundaHistoryApi = camundaHistoryApi;
 
     }
@@ -143,7 +148,6 @@ public class CommandService {
         return false;
     }
 
-
     public Mono<ResponseEntity<String>> startProcessMono(String processDefinitionKey) throws ApiException {
         log.info("Process : " + processDefinitionKey + " started");
 
@@ -159,10 +163,24 @@ public class CommandService {
                 processDefinitionKey,
                 new StartProcessInstanceDto().variables(variables)
         );
-        log.info("Process : " + processInstance.getId() + " ended");
         //
         return Mono.create(sink -> {
-            pollProcessInstanceStatus(processInstance.getId(), sink);
+            TopicSubscription step1End = externalTaskClient.subscribe("Step1-End")
+                    .lockDuration(10000)
+                    .handler((externalTask, service) -> {
+                        try {
+                            service.complete(externalTask);
+                            sink.success(ResponseEntity
+                                    .status(HttpStatus.OK)
+                                    .body(processInstance.getId())
+                            );
+                        } catch (Throwable throwable) {
+                            service.handleBpmnError(externalTask, "TransactionFailed");
+                        }
+                    })
+                    .open();
+            sink.onDispose(step1End::close);
+            log.info("Process : " + processInstance.getId() + " ended");
         });
     }
 
@@ -181,7 +199,8 @@ public class CommandService {
                     );
                 } else {
                     Mono.delay(ofMillis(500))
-                            .subscribe(ignore -> {});
+                            .subscribe(ignore -> {
+                            });
                 }
             } catch (ApiException ignored) {
             }
