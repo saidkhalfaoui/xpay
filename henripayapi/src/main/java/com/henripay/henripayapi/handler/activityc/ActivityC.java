@@ -6,6 +6,9 @@ import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Component
 public class ActivityC {
@@ -14,18 +17,22 @@ public class ActivityC {
     @ExternalTaskSubscription("ActivityC-Run")
     public ExternalTaskHandler ActivityCRun() throws Exception {
         return (externalTask, service) -> {
-            log.info("Running Activity C");
+            Map<String, Object> variables = new HashMap<>();
             try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            var ex = (String)externalTask.getVariable("ex");
-            if(ex.equals("A"))
-                service.handleBpmnError(externalTask, "ActivityAError");
-            else {
-                log.info("After 5 seconds inside Activity C");
-                service.complete(externalTask);
+                log.info("Running Activity C");
+                var ex = (String) externalTask.getVariable("ex");
+                if (ex.equals("C")) {
+                    log.info("Error in Activity C!");
+                    throw new RuntimeException();
+                } else {
+                    Thread.sleep(1000);
+                    log.info("After 1 second inside Activity C");
+                    variables.put("ActivityC", "C");
+                    service.complete(externalTask, variables);
+                }
+            } catch (Throwable throwable) {
+                variables.put("ActivityC", "F");
+                service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };
     }

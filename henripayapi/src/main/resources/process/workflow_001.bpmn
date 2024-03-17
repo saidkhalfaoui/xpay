@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0">
-  <bpmn:message id="Message_3g3f23c" name="transactionUpdated" />
-  <bpmn:error id="Error_03u90kc" name="Error_0sakqg2" errorCode="001" camunda:errorMessage="error test" />
-  <bpmn:error id="error_94cf382d-87dc-435f-a9f9-0c829e3e9ae3" name="TransactionFailed" errorCode="TransactionFailed" />
-  <bpmn:process id="WF-001" name="WF-001" isExecutable="true">
-    <bpmn:extensionElements />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0yy7wm0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="WF-001" name="WF-001" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:serviceTask id="Activity_1cfb2pi" name="Service ActivityA" camunda:type="external" camunda:topic="ActivityA-Run">
       <bpmn:incoming>Flow_1nj9rl8</bpmn:incoming>
       <bpmn:outgoing>Flow_1skxhdd</bpmn:outgoing>
@@ -28,9 +24,7 @@
       <bpmn:outgoing>Flow_0n8jwzg</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_12u4bvf" messageRef="Message_3g3f23c" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_1urwgeo" name="Rollback ActivityA" isForCompensation="true" camunda:type="external" camunda:topic="ActivityA-Rollback">
-      <bpmn:extensionElements />
-    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1urwgeo" name="Rollback ActivityA" isForCompensation="true" camunda:type="external" camunda:topic="ActivityA-Rollback" />
     <bpmn:serviceTask id="Activity_1q1y5uo" name="Rollback ActivityB" isForCompensation="true" camunda:type="external" camunda:topic="ActivityB-Rollback" />
     <bpmn:serviceTask id="Activity_0r8pr9l" name="Rollback ActivityC" isForCompensation="true" camunda:type="external" camunda:topic="ActivityC-Rollback" />
     <bpmn:subProcess id="subProcess_c25586ac-31eb-4c5d-9d7c-82aa2c77a418" triggeredByEvent="true">
@@ -50,7 +44,6 @@
       <bpmn:sequenceFlow id="sequenceFlow_d8403dd8-50e4-458d-9198-3e1a0cd3646f" sourceRef="ToBeCompensated" targetRef="ErrorHandled" />
     </bpmn:subProcess>
     <bpmn:boundaryEvent id="Event_0p6x8vv" attachedToRef="Activity_1cfb2pi">
-      <bpmn:extensionElements />
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_0pbr5kp" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_1lh2521" attachedToRef="Activity_0fomwwn">
@@ -64,10 +57,12 @@
     <bpmn:sequenceFlow id="Flow_1qxcts9" sourceRef="Activity_0fomwwn" targetRef="Event_1wvm2m0" />
     <bpmn:sequenceFlow id="Flow_0n8jwzg" sourceRef="Event_1wvm2m0" targetRef="Activity_1vnr2wt" />
     <bpmn:sequenceFlow id="Flow_1rvp2yg" sourceRef="Activity_1vnr2wt" targetRef="Event_0ucw77m" />
-    <bpmn:association id="Association_1lj5o51" associationDirection="One" sourceRef="Event_1bgpnn6" targetRef="Activity_0r8pr9l" />
-    <bpmn:association id="Association_07loa1g" associationDirection="One" sourceRef="Event_1lh2521" targetRef="Activity_1q1y5uo" />
     <bpmn:association id="Association_0r4f6ag" associationDirection="One" sourceRef="Event_0p6x8vv" targetRef="Activity_1urwgeo" />
+    <bpmn:association id="Association_07loa1g" associationDirection="One" sourceRef="Event_1lh2521" targetRef="Activity_1q1y5uo" />
+    <bpmn:association id="Association_1lj5o51" associationDirection="One" sourceRef="Event_1bgpnn6" targetRef="Activity_0r8pr9l" />
   </bpmn:process>
+  <bpmn:message id="Message_3g3f23c" name="transactionUpdated" />
+  <bpmn:error id="error_94cf382d-87dc-435f-a9f9-0c829e3e9ae3" name="TransactionFailed" errorCode="TransactionFailed" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="WF-001">
       <bpmndi:BPMNShape id="Activity_1du3t1u_di" bpmnElement="Activity_1cfb2pi">
@@ -136,14 +131,29 @@
           <dc:Bounds x="319" y="354" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BPMNShape_0h3z317" bpmnElement="Event_1bgpnn6">
-        <dc:Bounds x="792" y="142" width="36" height="36" />
+      <bpmndi:BPMNEdge id="Association_0r4f6ag_di" bpmnElement="Association_0r4f6ag">
+        <di:waypoint x="360" y="178" />
+        <di:waypoint x="360" y="240" />
+        <di:waypoint x="380" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_07loa1g_di" bpmnElement="Association_07loa1g">
+        <di:waypoint x="580" y="178" />
+        <di:waypoint x="580" y="240" />
+        <di:waypoint x="620" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1lj5o51_di" bpmnElement="Association_1lj5o51">
+        <di:waypoint x="810" y="178" />
+        <di:waypoint x="810" y="240" />
+        <di:waypoint x="850" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_05jdprp_di" bpmnElement="Event_0p6x8vv">
+        <dc:Bounds x="342" y="142" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0nkb49p" bpmnElement="Event_1lh2521">
         <dc:Bounds x="562" y="142" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_05jdprp_di" bpmnElement="Event_0p6x8vv">
-        <dc:Bounds x="342" y="142" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_0h3z317" bpmnElement="Event_1bgpnn6">
+        <dc:Bounds x="792" y="142" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1nj9rl8_di" bpmnElement="Flow_1nj9rl8">
         <di:waypoint x="188" y="120" />
@@ -164,21 +174,6 @@
       <bpmndi:BPMNEdge id="Flow_1rvp2yg_di" bpmnElement="Flow_1rvp2yg">
         <di:waypoint x="810" y="120" />
         <di:waypoint x="922" y="120" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1lj5o51_di" bpmnElement="Association_1lj5o51">
-        <di:waypoint x="810" y="178" />
-        <di:waypoint x="810" y="240" />
-        <di:waypoint x="850" y="240" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_07loa1g_di" bpmnElement="Association_07loa1g">
-        <di:waypoint x="580" y="178" />
-        <di:waypoint x="580" y="240" />
-        <di:waypoint x="620" y="240" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0r4f6ag_di" bpmnElement="Association_0r4f6ag">
-        <di:waypoint x="360" y="178" />
-        <di:waypoint x="360" y="240" />
-        <di:waypoint x="380" y="240" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

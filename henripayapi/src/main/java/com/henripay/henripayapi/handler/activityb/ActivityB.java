@@ -18,18 +18,22 @@ public class ActivityB {
     @ExternalTaskSubscription("ActivityB-Run")
     public ExternalTaskHandler ActivityBRun() throws Exception {
         return (externalTask, service) -> {
-            log.info("Running Activity B");
+            Map<String, Object> variables = new HashMap<>();
             try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            var ex = (String) externalTask.getVariable("ex");
-            if (ex.equals("A"))
-                service.handleBpmnError(externalTask, "ActivityAError");
-            else {
-                log.info("After 5 seconds inside Activity B");
-                service.complete(externalTask);
+                log.info("Running Activity B");
+                var ex = (String) externalTask.getVariable("ex");
+                if (ex.equals("B")) {
+                    log.info("Error in Activity B!");
+                    throw new RuntimeException();
+                } else {
+                    Thread.sleep(1000);
+                    log.info("After 1 second inside Activity B");
+                    variables.put("ActivityB", "C");
+                    service.complete(externalTask, variables);
+                }
+            } catch (Throwable throwable) {
+                variables.put("ActivityB", "F");
+                service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };
     }
@@ -39,9 +43,6 @@ public class ActivityB {
     public ExternalTaskHandler ActivityBRollback() throws Exception {
         return (externalTask, service) -> {
             log.info("Rollback Activity B");
-            Map<String, Object> variables = new HashMap<>();
-            variables.put("ActivityB", "C");
-            //
             service.complete(externalTask);
         };
     }

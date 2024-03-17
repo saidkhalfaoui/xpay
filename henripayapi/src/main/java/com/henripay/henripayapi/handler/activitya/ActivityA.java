@@ -21,28 +21,22 @@ public class ActivityA {
     @ExternalTaskSubscription("ActivityA-Run")
     public ExternalTaskHandler ActivityARun() throws Exception {
         return (externalTask, service) -> {
-            log.info("Running Activity A");
+            Map<String, Object> variables = new HashMap<>();
             try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            var ex = (String) externalTask.getVariable("ex");
-            if (ex.equals("A")) {
-                log.info("Error in Activity A!");
-                //int retries = externalTask.getRetries();
-                //long retryTimeout = 2000L;
-                //service.handleFailure(externalTask, "error", "Error details", 0, retryTimeout);
-                //
-                //service.handleBpmnError(externalTask, "TransactionFailed");
-                //service.handleFailure(externalTask, "transactionFailed", "Error details", 0, 1000L);
-                //throw new RuntimeException("recipient-not-found");
-
-            } else {
-                log.info("After 5 seconds inside Activity A");
-                Map<String, Object> variables = new HashMap<>();
-                variables.put("ActivityA", "C");
-                service.complete(externalTask, variables);
+                log.info("Running Activity A");
+                var ex = (String) externalTask.getVariable("ex");
+                if (ex.equals("A")) {
+                    log.info("Error in Activity A!");
+                    throw new RuntimeException();
+                } else {
+                    Thread.sleep(1000);
+                    log.info("After 1 second inside Activity A");
+                    variables.put("ActivityA", "C");
+                    service.complete(externalTask, variables);
+                }
+            } catch (Throwable throwable) {
+                variables.put("ActivityA", "F");
+                service.handleBpmnError(externalTask, "TransactionFailed", "", variables);
             }
         };
     }
