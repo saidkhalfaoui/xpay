@@ -19,6 +19,7 @@ public class PurchaseApiClient implements ApiClient<PurchaseRequestDto, Object> 
 
     @Override
     public Object makeCall(PurchaseRequestDto params) {
+        // the URL will be extracted from here
         ResponseEntity<Object> response = restTemplate.postForEntity("https://gate.henripay.com/api/v1/purchases/", params, Object.class);
         return response.getBody();
     }

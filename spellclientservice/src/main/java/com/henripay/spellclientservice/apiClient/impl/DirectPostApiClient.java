@@ -20,6 +20,7 @@ public class DirectPostApiClient implements ApiClient<DirectPostRequestDto, Obje
 
     @Override
     public Object makeCall(DirectPostRequestDto params) {
+        // the URL will be extracted from here
         ResponseEntity<Object> response = restTemplate.postForEntity("https://payments.henripay.com/p/", params, Object.class);
         return response.getBody();
     }
