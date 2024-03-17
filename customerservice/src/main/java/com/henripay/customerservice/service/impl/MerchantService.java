@@ -47,8 +47,7 @@ public class MerchantService implements IMerchantService {
     public MerchantDTO updateMerchantById(Long id, MerchantDTO merchantDTO) {
         MerchantEntity merchant = merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Merchant not found"));
         mapper.updateFromDto(merchantDTO, merchant);
-        merchantRepository.save(merchant);
-        return mapper.toDto(merchant);
+        return mapper.toDto(merchantRepository.save(merchant));
     }
 
     @Override
