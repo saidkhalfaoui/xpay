@@ -7,6 +7,7 @@ paths:
   /mandates:
     get:
       summary: Get all mandates
+      operationId: getAllMandates
       responses:
         '200':
           description: Successful response
@@ -19,6 +20,7 @@ paths:
 
     post:
       summary: Create a new mandate
+      operationId: saveMandate
       requestBody:
         required: true
         content:
@@ -34,14 +36,15 @@ paths:
                 $ref: '#/components/schemas/MandateDTO'
 
   /mandates/{mandateIdentifier}:
+    parameters:
+      - in: path
+        name: mandateIdentifier
+        required: true
+        schema:
+          type: integer
     get:
       summary: Get a mandate
-      parameters:
-        - in: path
-          name: mandateIdentifier
-          required: true
-          schema:
-            type: integer
+      operationId: getMandateById
       responses:
         '200':
           description: Successful response
@@ -52,12 +55,8 @@ paths:
 
     put:
       summary: Update a mandate
-      parameters:
-        - in: path
-          name: mandateIdentifier
-          required: true
-          schema:
-            type: integer
+      operationId: updateMandateById
+
       requestBody:
         required: true
         content:
@@ -74,12 +73,7 @@ paths:
 
     delete:
       summary: Delete a mandate
-      parameters:
-        - in: path
-          name: mandateIdentifier
-          required: true
-          schema:
-            type: integer
+      operationId: deleteMandate
       responses:
         '204':
           description: Successful response
@@ -91,10 +85,13 @@ components:
       properties:
         mandateIdentifier:
           type: integer
+          format: int64
         customer:
-          $ref: '#/components/schemas/User'
+          type: integer
+          format: int64
         merchant:
-          $ref: '#/components/schemas/Merchant'
+          type: integer
+          format: int64
         signatureDate:
           type: string
           format: date
@@ -110,16 +107,3 @@ components:
         - signatureDate
         - startDate
 
-    User:
-      type: object
-      properties:
-        customerIdIdentifier:
-          type: integer
-        # Other user properties
-
-    Merchant:
-      type: object
-      properties:
-        merchantId:
-          type: integer
-        # Other merchant properties
