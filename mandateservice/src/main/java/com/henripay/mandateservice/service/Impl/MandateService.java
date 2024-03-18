@@ -9,11 +9,13 @@ import com.henripay.domainservice.repository.UserRepository;
 import com.henripay.mandateservice.dto.MandateDTO;
 import com.henripay.mandateservice.mapper.MandateMapper;
 import com.henripay.mandateservice.service.IMandateService;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
+@Service
 public class MandateService implements IMandateService {
     private final MandateRepository mandateRepository;
     private final UserRepository userRepository;
