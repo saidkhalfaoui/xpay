@@ -21,8 +21,8 @@ public class AggregatorRepositoryTest {
     private AggregatorRepository aggregatorRepository;
 
     @Test
-    public void whenFindById_thenReturnAggregator() {
-        // Given
+    public void test() {
+
         AggregatorEntity aggregator = new AggregatorEntity();
         aggregator.setAggregatorName("Test Aggregator 5");
         aggregator.setAggregatorAddress("Test Address 5");
@@ -31,11 +31,21 @@ public class AggregatorRepositoryTest {
         entityManager.persist(aggregator);
         entityManager.flush();
 
-        // When
         AggregatorEntity found = aggregatorRepository.findById(aggregator.getAggregatorId()).orElse(null);
 
-        // Then
         assertThat(found).isNotNull();
         assertThat(found.getAggregatorName()).isEqualTo(aggregator.getAggregatorName());
+
+        aggregator.setAggregatorName("UpdatedName");
+        aggregatorRepository.save(aggregator);
+
+        assertThat(found.getAggregatorName()).isEqualTo(aggregator.getAggregatorName());
+
+        assertThat(aggregatorRepository.findAll()).size().isEqualTo(1);
+
+        aggregatorRepository.delete(aggregator);
+        assertThat(aggregatorRepository.existsById(aggregator.getAggregatorId())).isFalse();
     }
+
+
 }

@@ -55,5 +55,4 @@ public class MerchantService implements IMerchantService {
         Optional<MerchantEntity> merchant = merchantRepository.findByMerchantIban(iban);
         return  mapper.toDto(merchant.orElseThrow(() -> new NotFoundException("Merchant not found")));
     }
-
 }

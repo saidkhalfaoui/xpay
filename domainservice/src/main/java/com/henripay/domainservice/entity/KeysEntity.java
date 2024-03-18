@@ -1,15 +1,15 @@
 package com.henripay.domainservice.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -46,9 +46,6 @@ public class KeysEntity implements Serializable {
     @NotNull
     @Column(name = "enc_key_value")
     private String encKeyValue;
-
-    @Column(name = "second_key_identifier")
-    private Integer secondKeyIdentifier;
 
     @ManyToOne
     @JoinColumn(name = "second_key_identifier", referencedColumnName = "key_id", insertable = false, updatable = false)

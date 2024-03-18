@@ -6,6 +6,7 @@
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>domainservice</artifactId>
@@ -14,7 +15,7 @@
     <name>domainservice</name>
     <description>domainservice</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
 
 
@@ -97,6 +98,23 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>arbitrary</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
