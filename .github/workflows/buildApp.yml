@@ -36,16 +36,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Clean with Maven
+      - name: Clean Maven Project
         run: mvn clean
 
-      - name: Compile with Maven
+      - name: Compile Maven Project
         run: mvn compile
 
       - name: Set Maven Auth Token
         run: echo "MAVEN_AUTH_TOKEN=${{ secrets.MAVEN_AUTH_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Build with Maven
+      - name: Build Maven Project
         run: mvn install
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
