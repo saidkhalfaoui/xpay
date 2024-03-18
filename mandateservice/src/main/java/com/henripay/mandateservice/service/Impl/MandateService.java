@@ -64,9 +64,14 @@ public class MandateService implements IMandateService {
 
     @Override
     public MandateDTO updateMandateById(Long id, MandateDTO mandateDTO) {
-        MandateEntity mandate = mandateRepository.findById(id).orElseThrow(() -> new BadRequestException("Bad Request"));
+        if(!merchantRepository.existsById(mandateDTO.getMerchant()) || !userRepository.existsById(mandateDTO.getCustomer())){
+            throw new BadRequestException("Bad Request");
+        }
+        MandateEntity mandate = mandateRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Bad Request"));
         mandateMapper.updateFromDto(mandateDTO, mandate);
-        return mandateMapper.toDto(mandateRepository.save(mandate));
+        MandateEntity saveMandate = mandateRepository.save(mandate);
+        return mandateMapper.toDto(saveMandate);
     }
 
     public boolean isMandateExists(UserEntity customer, MerchantEntity merchant) {
