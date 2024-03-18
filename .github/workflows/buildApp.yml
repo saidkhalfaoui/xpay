@@ -42,8 +42,14 @@ jobs:
       - name: Compile Maven Project
         run: mvn compile
 
-      - name: Set Maven Auth Token
-        run: echo "MAVEN_AUTH_TOKEN=${{ secrets.MAVEN_AUTH_TOKEN }}" >> $GITHUB_ENV
+      - uses: s4u/maven-settings-action@v2.3.0
+        with:
+          servers: |
+            [{
+                "id": "Henripay",
+                "password": "${{ secrets.MAVEN_AUTH_TOKEN }}"
+            }]
+      #  "username": "${{ secrets.USER_PACKAGE_READ }}",
 
       - name: Build Maven Project
         run: mvn install
