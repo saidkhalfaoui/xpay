@@ -42,6 +42,8 @@ paths:
         required: true
         schema:
           type: integer
+          format: int64
+
     get:
       summary: Get a mandate
       operationId: getMandateById

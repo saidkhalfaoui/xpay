@@ -48,7 +48,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <typeMappings>integer=Long,int=Long</typeMappings>
+<!--                            <typeMappings>integer=Long,int=Long</typeMappings>-->
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
