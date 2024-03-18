@@ -2,22 +2,16 @@ package com.henripay.spellclientservice.api;
 
 import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
 import com.henripay.spellclientservice.service.DirectPostService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
-@RequestMapping("/direct-post")
 public class DirectPostController {
 
     private final DirectPostService directPostService;
-    Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 
     @Autowired
     public DirectPostController(DirectPostService directPostService) {
@@ -25,13 +19,10 @@ public class DirectPostController {
     }
 
 
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+    @PostMapping(
+            value = "/direct-post"
     )
-    public ResponseEntity<Object> directPost(@RequestBody(required = true)DirectPostRequestDto directPostRequestDto) {
+    public ResponseEntity<Object> directPost(@RequestBody(required = true) DirectPostRequestDto directPostRequestDto) {
         Object res = this.directPostService.doDirectPost(directPostRequestDto);
 
         return ResponseEntity.ok(res);

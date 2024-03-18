@@ -5,6 +5,7 @@ import com.henripay.spellclientservice.api.model.ProductDto;
 import com.henripay.spellclientservice.api.model.PurchaseDto;
 import com.henripay.spellclientservice.api.model.PurchaseRequestDto;
 import com.henripay.spellclientservice.service.PurchaseService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +18,19 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
-@RequestMapping("/purchase")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
-    Logger logger = LoggerFactory.getLogger(PurchaseController.class);
-
 
     @Autowired
     public PurchaseController(PurchaseService purchaseService) {
         this.purchaseService = purchaseService;
     }
 
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+    @PostMapping(
+            value = "/purchase"
     )
     public ResponseEntity<Object> purchasePost(@RequestBody(required = true) PurchaseRequestDto purchaseRequestDto) {
         Object res = this.purchaseService.doPurchase(purchaseRequestDto);
