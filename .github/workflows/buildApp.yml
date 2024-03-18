@@ -44,7 +44,7 @@ jobs:
 
       - name: Set Maven config path
         run: |
-          echo "<settingsSecurity><master>{encrypted_password}</master></settingsSecurity>" > ~/.m2/settings-security.xml
+          echo "<settingsSecurity><master>{G9Mh/KkOBk0HYYaaz9h4vXTxtIXrSHtUrL2swWA992c=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
         env:
           encrypted_password: ${{ secrets.MAVEN_AUTH_TOKEN }}  # Assuming you have a secret for the password
 
