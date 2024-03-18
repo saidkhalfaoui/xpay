@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public interface MandateMapper {
 
-    @Mapping(target = "merchantId", ignore = true)
+    @Mapping(target = "mandateIdentifier", ignore = true)
     @Mapping(target = "merchant.merchantId", source = "merchant")
     @Mapping(target = "customer.customerIdIdentifier", source = "customer")
     MandateEntity toEntity(MandateDTO source);
