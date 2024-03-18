@@ -1,19 +1,17 @@
 package com.henripay.domainservice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.io.Serializable;
 
-@Data
+@Setter
+@Getter
 @ToString
 @SuperBuilder
 @AllArgsConstructor
@@ -50,4 +48,5 @@ public class AggregatorEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "aggregator_meta_data", referencedColumnName = "metadata_id")
     private MetadataEntity metadata;
+
 }

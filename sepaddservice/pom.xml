@@ -6,16 +6,16 @@
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
 
     </parent>
     <groupId>com.henripay</groupId>
     <artifactId>sepaddservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SepaDD Service</name>
-    <description>Sepa DD engine for HenriPay </description>
+    <description>Sepa DD engine for HenriPay</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -26,279 +26,279 @@
 
         </dependency>
     </dependencies>
-   <!-- <dependencies>
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>9.2.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.cloud</groupId>
-                    <artifactId>google-cloud-firestore</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+    <!-- <dependencies>
+         <dependency>
+             <groupId>com.google.firebase</groupId>
+             <artifactId>firebase-admin</artifactId>
+             <version>9.2.0</version>
+             <exclusions>
+                 <exclusion>
+                     <groupId>com.google.cloud</groupId>
+                     <artifactId>google-cloud-firestore</artifactId>
+                 </exclusion>
+             </exclusions>
+         </dependency>
 
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-web</artifactId>
+             <exclusions>
+                 <exclusion>
+                     <groupId>org.springframework.boot</groupId>
+                     <artifactId>spring-boot-starter-logging</artifactId>
+                 </exclusion>
+             </exclusions>
+         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-        &lt;!&ndash; https://mvnrepository.com/artifact/com.prowidesoftware/pw-iso20022 &ndash;&gt;
-        &lt;!&ndash; <dependency>
-             <groupId>com.prowidesoftware</groupId>
-             <artifactId>pw-iso20022</artifactId>
-             <version>SRU2023-10.1.3</version>
-         </dependency>&ndash;&gt;
-
-
-        &lt;!&ndash; https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl &ndash;&gt;
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter</artifactId>
+         </dependency>
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-log4j2</artifactId>
+         </dependency>
+         &lt;!&ndash; https://mvnrepository.com/artifact/com.prowidesoftware/pw-iso20022 &ndash;&gt;
+         &lt;!&ndash; <dependency>
+              <groupId>com.prowidesoftware</groupId>
+              <artifactId>pw-iso20022</artifactId>
+              <version>SRU2023-10.1.3</version>
+          </dependency>&ndash;&gt;
 
 
-        &lt;!&ndash; Thanks for using https://jar-download.com &ndash;&gt;
+         &lt;!&ndash; https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl &ndash;&gt;
 
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
+         &lt;!&ndash; Thanks for using https://jar-download.com &ndash;&gt;
 
-        &lt;!&ndash; tag::actuator[] &ndash;&gt;
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.jdom</groupId>
-            <artifactId>jdom2</artifactId>
-            <version>2.0.6</version> &lt;!&ndash; Check for the latest version on Maven Central &ndash;&gt;
-        </dependency>
-        &lt;!&ndash; end::actuator[] &ndash;&gt;
+         <dependency>
+             <groupId>com.fasterxml.jackson.core</groupId>
+             <artifactId>jackson-databind</artifactId>
+         </dependency>
 
-        &lt;!&ndash; tag::tests[] &ndash;&gt;
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-            <exclusions>
-                &lt;!&ndash;  <exclusion>
-                      <groupId>ch.qos.logback</groupId>
-                      <artifactId>logback-classic</artifactId>
-                  </exclusion>&ndash;&gt;
-            </exclusions>
-        </dependency>
+         &lt;!&ndash; tag::actuator[] &ndash;&gt;
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-actuator</artifactId>
+         </dependency>
 
-        &lt;!&ndash; <dependency>
+         <dependency>
+             <groupId>org.jdom</groupId>
+             <artifactId>jdom2</artifactId>
+             <version>2.0.6</version> &lt;!&ndash; Check for the latest version on Maven Central &ndash;&gt;
+         </dependency>
+         &lt;!&ndash; end::actuator[] &ndash;&gt;
+
+         &lt;!&ndash; tag::tests[] &ndash;&gt;
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-test</artifactId>
+             <scope>test</scope>
+         </dependency>
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot</artifactId>
+             <exclusions>
+                 &lt;!&ndash;  <exclusion>
+                       <groupId>ch.qos.logback</groupId>
+                       <artifactId>logback-classic</artifactId>
+                   </exclusion>&ndash;&gt;
+             </exclusions>
+         </dependency>
+
+         &lt;!&ndash; <dependency>
+              <groupId>javax.xml.bind</groupId>
+              <artifactId>jaxb-api</artifactId>
+              <version>2.3.1</version>
+          </dependency>&ndash;&gt;
+
+
+         <dependency>
+             <groupId>com.sun.xml.bind</groupId>
+             <artifactId>jaxb-core</artifactId>
+             <version>2.3.0.1</version>
+         </dependency>
+         <dependency>
              <groupId>javax.xml.bind</groupId>
              <artifactId>jaxb-api</artifactId>
              <version>2.3.1</version>
+         </dependency>
+         <dependency>
+             <groupId>com.sun.xml.bind</groupId>
+             <artifactId>jaxb-impl</artifactId>
+             <version>2.3.1</version>
+         </dependency>
+         <dependency>
+             <groupId>org.eclipse.persistence</groupId>
+             <artifactId>org.eclipse.persistence.moxy</artifactId>
+             <version>2.7.7</version> &lt;!&ndash; Use the latest version &ndash;&gt;
+         </dependency>
+         <dependency>
+             <groupId>org.javassist</groupId>
+             <artifactId>javassist</artifactId>
+             <version>3.25.0-GA</version>
+         </dependency>
+
+
+         <dependency>
+             <groupId>org.apache.commons</groupId>
+             <artifactId>commons-lang3</artifactId>
+             <version>3.12.0</version>
+             &lt;!&ndash;    <exclusions>
+                     <exclusion>
+                         <groupId>ch.qos.logback</groupId>
+                         <artifactId>logback-classic</artifactId>
+                     </exclusion>
+                 </exclusions>&ndash;&gt;
+         </dependency>
+         <dependency>
+             <groupId>junit</groupId>
+             <artifactId>junit</artifactId>
+             <version>4.13.2</version>
+             <scope>test</scope>
+         </dependency>
+         <dependency>
+             <groupId>xmlunit</groupId>
+             <artifactId>xmlunit</artifactId>
+             <version>1.6</version>
+             <type>jar</type>
+             <scope>test</scope>
+         </dependency>
+
+         &lt;!&ndash; Joda Time - Java date and time API &ndash;&gt;
+         <dependency>
+             <groupId>joda-time</groupId>
+             <artifactId>joda-time</artifactId>
+             <version>2.1</version>
+         </dependency>
+
+         &lt;!&ndash;<dependency>
+             <groupId>org.springframework.data</groupId>
+             <artifactId>spring-data-jpa</artifactId>
+             <version>2.7.14</version>
          </dependency>&ndash;&gt;
 
-
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.3.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.moxy</artifactId>
-            <version>2.7.7</version> &lt;!&ndash; Use the latest version &ndash;&gt;
-        </dependency>
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.25.0-GA</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-            &lt;!&ndash;    <exclusions>
-                    <exclusion>
-                        <groupId>ch.qos.logback</groupId>
-                        <artifactId>logback-classic</artifactId>
-                    </exclusion>
-                </exclusions>&ndash;&gt;
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>xmlunit</groupId>
-            <artifactId>xmlunit</artifactId>
-            <version>1.6</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-
-        &lt;!&ndash; Joda Time - Java date and time API &ndash;&gt;
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.1</version>
-        </dependency>
-
-        &lt;!&ndash;<dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>2.7.14</version>
-        </dependency>&ndash;&gt;
-
-        &lt;!&ndash; <dependency>
+         &lt;!&ndash; <dependency>
+              <groupId>io.springfox</groupId>
+              <artifactId>springfox-boot-starter</artifactId>
+              <version>3.0.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+          </dependency>&ndash;&gt;
+         <dependency>
              <groupId>io.springfox</groupId>
-             <artifactId>springfox-boot-starter</artifactId>
-             <version>3.0.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-         </dependency>&ndash;&gt;
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>3.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger.core.v3</groupId>
-                    <artifactId>swagger-annotations</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-core-jakarta</artifactId>
-            <version>2.2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        &lt;!&ndash; Logging &ndash;&gt;
-        &lt;!&ndash; <dependency>
-              <groupId>org.slf4j</groupId>
-              <artifactId>slf4j-api</artifactId>
-              <version>1.7.36</version>
+             <artifactId>springfox-swagger2</artifactId>
+             <version>3.0.0</version>
              <exclusions>
                  <exclusion>
-                     <groupId>ch.qos.logback</groupId>
-                     <artifactId>logback-classic</artifactId>
-
-                 </exclusion>
-                 <exclusion>
-                     <groupId>org.slf4j</groupId>
-                     <artifactId>slf4j-log4j12</artifactId>
+                     <groupId>io.swagger.core.v3</groupId>
+                     <artifactId>swagger-annotations</artifactId>
                  </exclusion>
              </exclusions>
-          </dependency>&ndash;&gt;
-        &lt;!&ndash;  <dependency>
-              <groupId>ch.qos.logback</groupId>
-              <artifactId>logback-classic</artifactId>
-              <version>1.2.12</version>
-          </dependency>&ndash;&gt;
-        &lt;!&ndash; Google Guava &ndash;&gt;
+         </dependency>
+         <dependency>
+             <groupId>io.swagger.core.v3</groupId>
+             <artifactId>swagger-core-jakarta</artifactId>
+             <version>2.2.7</version>
+         </dependency>
+         <dependency>
+             <groupId>io.springfox</groupId>
+             <artifactId>springfox-swagger-ui</artifactId>
+             <version>3.0.0</version>
+         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>32.1.3-jre</version>
-        </dependency>
+         &lt;!&ndash; Logging &ndash;&gt;
+         &lt;!&ndash; <dependency>
+               <groupId>org.slf4j</groupId>
+               <artifactId>slf4j-api</artifactId>
+               <version>1.7.36</version>
+              <exclusions>
+                  <exclusion>
+                      <groupId>ch.qos.logback</groupId>
+                      <artifactId>logback-classic</artifactId>
 
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.3</version>
-        </dependency>
-        &lt;!&ndash;   <dependency>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>slf4j-log4j12</artifactId>
+                  </exclusion>
+              </exclusions>
+           </dependency>&ndash;&gt;
+         &lt;!&ndash;  <dependency>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+               <version>1.2.12</version>
+           </dependency>&ndash;&gt;
+         &lt;!&ndash; Google Guava &ndash;&gt;
 
-          <groupId>com.henripay</groupId>
-           <artifactId>firebase4j</artifactId>
-           <version>0.0.1-SNAPSHOT</version>
-           </dependency>
-&ndash;&gt;
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-firestore</artifactId>
-            <version>3.15.7</version>
-        </dependency>
+         <dependency>
+             <groupId>com.google.guava</groupId>
+             <artifactId>guava</artifactId>
+             <version>32.1.3-jre</version>
+         </dependency>
 
+         <dependency>
+             <groupId>jakarta.xml.bind</groupId>
+             <artifactId>jakarta.xml.bind-api</artifactId>
+             <version>2.3.3</version>
+         </dependency>
+         &lt;!&ndash;   <dependency>
 
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>2.1.6</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
-        </dependency>
+           <groupId>com.henripay</groupId>
+            <artifactId>firebase4j</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+ &ndash;&gt;
+         <dependency>
+             <groupId>com.google.cloud</groupId>
+             <artifactId>google-cloud-firestore</artifactId>
+             <version>3.15.7</version>
+         </dependency>
 
 
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.7.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+         <dependency>
+             <groupId>io.swagger.core.v3</groupId>
+             <artifactId>swagger-annotations</artifactId>
+             <version>2.1.6</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+         </dependency>
 
-        &lt;!&ndash; end::tests[] &ndash;&gt;
-    </dependencies>-->
+         <dependency>
+             <groupId>io.swagger</groupId>
+             <artifactId>swagger-annotations</artifactId>
+             <version>1.5.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+         </dependency>
+
+         <dependency>
+             <groupId>javax.validation</groupId>
+             <artifactId>validation-api</artifactId>
+             <version>2.0.1.Final</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+         </dependency>
+         <dependency>
+             <groupId>com.fasterxml.jackson.core</groupId>
+             <artifactId>jackson-databind</artifactId>
+             <version>2.13.0</version> &lt;!&ndash; Use the appropriate version &ndash;&gt;
+         </dependency>
+
+
+         <dependency>
+             <groupId>org.openapitools</groupId>
+             <artifactId>jackson-databind-nullable</artifactId>
+             <version>0.2.1</version>
+         </dependency>
+         <dependency>
+             <groupId>org.springdoc</groupId>
+             <artifactId>springdoc-openapi-ui</artifactId>
+             <version>1.7.0</version>
+             <exclusions>
+                 <exclusion>
+                     <groupId>com.fasterxml.jackson.core</groupId>
+                     <artifactId>jackson-databind</artifactId>
+                 </exclusion>
+             </exclusions>
+         </dependency>
+
+         &lt;!&ndash; end::tests[] &ndash;&gt;
+     </dependencies>-->
 
 
     <build>
@@ -378,7 +378,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>saidkhalfaoui/${project.artifactId}</repository>
+                    <repository>henripay/${project.artifactId}</repository>
                     <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>
@@ -393,7 +393,7 @@
                         <phase>install</phase>
                         <goals>
                             <goal>build</goal>
-                          <!--  <goal>push</goal>-->
+                            <!--  <goal>push</goal>-->
                         </goals>
                     </execution>
                 </executions>

@@ -22,26 +22,35 @@ public class MerchantService implements IMerchantService {
     }
     @Override
     public MerchantDTO saveMerchant(MerchantDTO merchantDTO) {
-        MerchantEntity merchant = mapper.merchantDtoToMerchantEntity(merchantDTO);
+        MerchantEntity merchant = mapper.toEntity(merchantDTO);
         MerchantEntity savedMerchant =  merchantRepository.save(merchant);
-        return  mapper.merchantEntityToMerchantDto(savedMerchant);
+        return  mapper.toDto(savedMerchant);
     }
 
     @Override
     public MerchantDTO getMerchantById(Long id) {
         Optional<MerchantEntity> merchant = merchantRepository.findById(id);
-        return  mapper.merchantEntityToMerchantDto(merchant.orElseThrow(() -> new NotFoundException("Merchant not found")));
+        return  mapper.toDto(merchant.orElseThrow(() -> new NotFoundException("Merchant not found")));
     }
 
     @Override
     public List<MerchantDTO> getAllMerchants() {
-        return mapper.merchantEntitiesToMerchantDTOS (merchantRepository.findAll());
+        return mapper.toDtoList (merchantRepository.findAll());
     }
 
     @Override
     public void deleteMerchant(Long id) {
-          merchantRepository.deleteById(id);
+        merchantRepository.deleteById(id);
     }
+
+    @Override
+    public MerchantDTO updateMerchantById(Long id, MerchantDTO merchantDTO) {
+        MerchantEntity merchant = merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Merchant not found"));
+        mapper.updateFromDto(merchantDTO, merchant);
+        merchantRepository.save(merchant);
+        return mapper.toDto(merchant);
+    }
+
 
 //    public MerchantDTO saveMerchant(MerchantDTO merchantDTO) {
 //        MerchantDTO merchant = new MerchantDTO();
@@ -58,19 +67,20 @@ public class MerchantService implements IMerchantService {
 //        // Return the created merchant
 //        return merchant;
 //    }
-    public MerchantDTO getMerchant() {
-        MerchantDTO merchant = new MerchantDTO();
+//    public MerchantDTO getMerchant() {
+//        MerchantDTO merchant = new MerchantDTO();
+//
+//        // Set values for the merchant properties
+//        merchant.setMerchantId("123456789"); // Set a sample merchant ID
+//        merchant.setMerchantName("Example Merchant");
+//        merchant.setMerchantAddress("123 Main Street, City");
+//        merchant.setMerchantIban("GB29XABC12345612345678"); // Set a sample IBAN
+//        merchant.setMerchantCode("M123");
+//        merchant.setMerchantMeta(42); // Set a sample meta value
+//        merchant.setIdMerchantAggregator(9876); // Set a sample aggregator ID
+//
+//        // Return the created merchant
+//        return merchant;
+//    }
 
-        // Set values for the merchant properties
-        merchant.setMerchantId("123456789"); // Set a sample merchant ID
-        merchant.setMerchantName("Example Merchant");
-        merchant.setMerchantAddress("123 Main Street, City");
-        merchant.setMerchantIban("GB29XABC12345612345678"); // Set a sample IBAN
-        merchant.setMerchantCode("M123");
-        merchant.setMerchantMeta(42); // Set a sample meta value
-        merchant.setIdMerchantAggregator(9876); // Set a sample aggregator ID
-
-        // Return the created merchant
-        return merchant;
-    }
 }

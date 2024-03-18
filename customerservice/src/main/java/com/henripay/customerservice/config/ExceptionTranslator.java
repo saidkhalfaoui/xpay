@@ -16,11 +16,11 @@ public class ExceptionTranslator {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Error> userNotFoundException(final UserNotFoundException e) {
-        return ResponseEntity.ok(getError(e.getMessage(), HttpStatus.NOT_FOUND.value()));
+        return ResponseEntity.ok(getError(e.getMessage(), (long) HttpStatus.NOT_FOUND.value()));
     }
 
 
-    private Error getError(String message, Integer code) {
+    private Error getError(String message, Long code) {
         Error error = new Error();
         error.setMessage(message);
         error.setCode(code);

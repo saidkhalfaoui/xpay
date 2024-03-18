@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   jpa:
     database: POSTGRESQL
     show-sql: true

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Tarek" context="test">
+        <comment>Insert test data</comment>
+        <insert tableName="metadata">
+            <column name="transaction_flows" valueComputed="gen_random_bytes(16)"/>
+            <column name="metadata" valueComputed="gen_random_bytes(16)"/>
+        </insert>
+        <insert tableName="keys">
+            <column name="key_name" value="test_key_1"/>
+            <column name="key_type" value="rsa"/>
+            <column name="additional_info" value="test_info"/>
+            <column name="enc_key_value" value="test_value"/>
+        </insert>
+        <insert tableName="aggregator">
+            <column name="aggregator_name" value="Test Aggregator"/>
+            <column name="aggregator_address" value="123 Main St."/>
+            <column name="aggregator_iban" value="DE89370400440532013000"/>
+            <column name="aggregator_meta_data"
+                    valueComputed="(SELECT metadata_id FROM metadata ORDER BY metadata_id DESC LIMIT 1)"/>
+        </insert>
+        <insert tableName="merchant">
+            <column name="merchant_name" value="Test Merchant"/>
+            <column name="merchant_address" value="456 Oak Ave."/>
+            <column name="merchant_iban" value="FR1420041010050500013M02606"/>
+            <column name="merchant_code" value="TM001"/>
+            <column name="merchant_meta"
+                    valueComputed="(SELECT metadata_id FROM metadata ORDER BY metadata_id DESC LIMIT 1)"/>
+            <column name="id_merchant_aggregator"
+                    valueComputed="(SELECT aggregator_id FROM aggregator ORDER BY aggregator_id DESC LIMIT 1)"/>
+        </insert>
+        <insert tableName="users">
+            <column name="iban" value="GB33BUKB20201555555555"/>
+            <column name="full_name" value="John Doe"/>
+            <column name="token" value="abc123"/>
+            <column name="address" value="789 Elm St."/>
+            <column name="activation_date" valueDate="2023-03-01"/>
+        </insert>
+        <insert tableName="mandate">
+            <column name="customer_id"
+                    valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
+            <column name="merchant_id"
+                    valueComputed="(SELECT merchant_id FROM merchant ORDER BY merchant_id DESC LIMIT 1)"/>
+            <column name="signature_date" valueDate="2023-02-15"/>
+            <column name="start_date" valueDate="2023-03-01"/>
+            <column name="end_date" valueDate="2025-03-01"/>
+        </insert>
+        <insert tableName="transactions">
+            <column name="transaction_type" value="sepa_direct_debit"/>
+            <column name="external_transaction_id" valueNumeric="12345"/>
+            <column name="sender_id"
+                    valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
+            <column name="received_id"
+                    valueComputed="(SELECT merchant_id FROM merchant ORDER BY merchant_id DESC LIMIT 1)"/>
+            <column name="execution_date" valueDate="2023-03-05"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2" author="Tarek" context="test">
+        <comment>Insert more test data</comment>
+        <insert tableName="metadata">
+            <column name="transaction_flows" valueComputed="gen_random_bytes(16)"/>
+            <column name="metadata" valueComputed="gen_random_bytes(16)"/>
+        </insert>
+        <insert tableName="keys">
+            <column name="key_name" value="test_key_2"/>
+            <column name="key_type" value="ec"/>
+            <column name="additional_info" value="another_test_info"/>
+            <column name="enc_key_value" value="another_test_value"/>
+            <column name="second_key_identifier"
+                    valueComputed="(SELECT key_id FROM keys ORDER BY key_id DESC LIMIT 1)"/>
+        </insert>
+        <insert tableName="aggregator">
+            <column name="aggregator_name" value="Another Aggregator"/>
+            <column name="aggregator_address" value="789 Maple Rd."/>
+            <column name="aggregator_iban" value="IT60X0542811101000000123456"/>
+            <column name="aggregator_meta_data"
+                    valueComputed="(SELECT metadata_id FROM metadata ORDER BY metadata_id DESC LIMIT 1)"/>
+        </insert>
+        <insert tableName="merchant">
+            <column name="merchant_name" value="Another Merchant"/>
+            <column name="merchant_address" value="321 Pine St."/>
+            <column name="merchant_iban" value="ES9121000418450200051332"/>
+            <column name="merchant_code" value="AM002"/>
+            <column name="merchant_meta"
+                    valueComputed="(SELECT metadata_id FROM metadata ORDER BY metadata_id DESC LIMIT 1)"/>
+            <column name="id_merchant_aggregator"
+                    valueComputed="(SELECT aggregator_id FROM aggregator ORDER BY aggregator_id DESC LIMIT 1)"/>
+        </insert>
+        <insert tableName="users">
+            <column name="iban" value="BE68539007547034"/>
+            <column name="full_name" value="Jane Smith"/>
+            <column name="token" value="xyz789"/>
+            <column name="address" value="456 Cedar Ln."/>
+            <column name="activation_date" valueDate="2023-02-01"/>
+        </insert>
+        <insert tableName="mandate">
+            <column name="customer_id"
+                    valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
+            <column name="merchant_id"
+                    valueComputed="(SELECT merchant_id FROM merchant ORDER BY merchant_id DESC LIMIT 1)"/>
+            <column name="signature_date" valueDate="2023-01-20"/>
+            <column name="start_date" valueDate="2023-02-01"/>
+            <column name="end_date" valueDate="2025-02-01"/>
+        </insert>
+        <insert tableName="transactions">
+            <column name="transaction_type" value="sepad_credit_transfer"/>
+            <column name="external_transaction_id" valueNumeric="67890"/>
+            <column name="sender_id"
+                    valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
+            <column name="received_id"
+                    valueComputed="(SELECT merchant_id FROM merchant ORDER BY merchant_id DESC LIMIT 1)"/>
+            <column name="execution_date" valueDate="2023-03-10"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

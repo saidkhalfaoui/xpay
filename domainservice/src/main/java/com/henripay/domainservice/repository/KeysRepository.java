@@ -1,9 +1,9 @@
 package com.henripay.domainservice.repository;
 
-import com.henripay.domainservice.entity.MerchantEntity;
+import com.henripay.domainservice.entity.KeysEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MerchantRepository extends JpaRepository<MerchantEntity, Long> {
+public interface KeysRepository extends JpaRepository<KeysEntity, Long> {
 }

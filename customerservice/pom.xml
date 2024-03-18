@@ -6,7 +6,7 @@
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
 
     </parent>
     <groupId>com.henripay</groupId>
@@ -15,15 +15,18 @@
     <name>customerservice</name>
     <description>Customer Service</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>${parent.java.version}</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
+            <classifier>arbitrary</classifier>
 
         </dependency>
+
+
 
     </dependencies>
 
@@ -43,6 +46,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>integer=Long,int=Long</typeMappings>
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
@@ -122,7 +126,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>saidkhalfaoui/${project.artifactId}</repository>
+                    <repository>henripay/${project.artifactId}</repository>
                     <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>

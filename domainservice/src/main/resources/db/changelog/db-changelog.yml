@@ -3,4 +3,7 @@ dropFirst: false
 databaseChangeLog:
   - includeAll:
       path: db/changelog/sql/migrations
+  - includeAll:
+      path: db/changelog/sql/testdata  # Include XML test data files
+      encoding: UTF-8
 outputChangeLogFile: liquibaseOutputChangeLog.sql

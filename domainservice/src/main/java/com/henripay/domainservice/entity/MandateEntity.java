@@ -1,17 +1,15 @@
 package com.henripay.domainservice.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-@ToString
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor

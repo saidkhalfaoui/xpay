@@ -13,4 +13,5 @@ public interface IMerchantService {
     MerchantDTO getMerchantById(Long id);
     List<MerchantDTO> getAllMerchants();
     void deleteMerchant(Long id);
+    MerchantDTO updateMerchantById(Long id, MerchantDTO merchantDTO);
 }
