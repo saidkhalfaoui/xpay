@@ -34,6 +34,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /mandates/{mandateIdentifier}:
     parameters:
@@ -54,6 +60,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
     put:
       summary: Update a mandate
@@ -72,6 +84,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
     delete:
       summary: Delete a mandate
@@ -79,6 +97,13 @@ paths:
       responses:
         '204':
           description: Successful response
+
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:
@@ -108,4 +133,12 @@ components:
         - merchant
         - signatureDate
         - startDate
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
 

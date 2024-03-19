@@ -42,6 +42,7 @@ paths:
         required: true
         schema:
           type: integer
+          format: int64
     get:
       summary: Retrieve a specific merchant by ID
       operationId: getMerchantById
@@ -161,6 +162,7 @@ paths:
         required: true
         schema:
           type: integer
+          format: int64
     get:
       summary: Get a user by ID
       operationId: getUserById
@@ -211,8 +213,10 @@ components:
           type: string
         metadata:
           type: integer
+          format: int64
         aggregator:
           type: integer
+          format: int64
     MerchantDTOList:
       type: array
       items:
@@ -222,7 +226,7 @@ components:
         properties:
           code:
             type: integer
-            format: int32
+            format: int64
           message:
             type: string
     UserDTO:
@@ -230,6 +234,7 @@ components:
       properties:
         customerIdIdentifier:
           type: integer
+          format: int64
         iban:
           type: string
         fullName:
@@ -250,6 +255,7 @@ components:
       properties:
         metadataId:
           type: integer
+          format: int64
     AggregatorDTO:
       type: object
       properties:

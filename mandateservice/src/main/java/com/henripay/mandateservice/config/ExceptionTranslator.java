@@ -1,24 +1,22 @@
-package com.henripay.customerservice.config;
+package com.henripay.mandateservice.config;
 
-import com.henripay.customerservice.dto.Error;
-import com.henripay.customerservice.exception.UserNotFoundException;
+import com.henripay.mandateservice.dto.Error;
+import com.henripay.mandateservice.exception.NoValidInput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/*
- *  @author: DevProblems(Sarang Kumar A Tak)
- *  Youtube channel: https://youtube.com/@devproblems
- */
+import javax.ws.rs.BadRequestException;
+
+
 @ControllerAdvice
 public class ExceptionTranslator {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Error> userNotFoundException(final UserNotFoundException e) {
-        return ResponseEntity.ok(getError(e.getMessage(), (long) HttpStatus.NOT_FOUND.value()));
+    @ExceptionHandler(NoValidInput.class)
+    public ResponseEntity<Error> invalidInputValidation(final NoValidInput e) {
+        return   ResponseEntity.status(HttpStatus.BAD_REQUEST).body(getError(e.getMessage(), (long) HttpStatus.NOT_FOUND.value()));
     }
-
 
     private Error getError(String message, Long code) {
         Error error = new Error();
