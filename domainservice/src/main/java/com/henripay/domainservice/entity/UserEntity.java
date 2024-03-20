@@ -47,4 +47,19 @@ public class UserEntity implements Serializable {
 
     @Column(name = "activation_date")
     private LocalDateTime activationDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserEntity that = (UserEntity) o;
+
+        return customerIdIdentifier.equals(that.customerIdIdentifier);
+    }
+
+    @Override
+    public int hashCode() {
+        return customerIdIdentifier.hashCode();
+    }
 }

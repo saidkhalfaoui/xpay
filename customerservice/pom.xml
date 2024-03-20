@@ -46,7 +46,13 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <typeMappings>integer=Long,int=Long</typeMappings>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>integer=Long,int=Long</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
@@ -66,61 +72,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.openapitools</groupId>-->
-<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                <version>7.3.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <inputSpec>-->
-<!--                                ${project.basedir}/src/main/resources/swagger/api.yaml-->
-<!--                            </inputSpec>-->
-<!--                            <generatorName>spring</generatorName>-->
-<!--                            <library>spring-boot</library>-->
-<!--                            <apiPackage>com.henripay.customerservice.controller</apiPackage>-->
-<!--                            <modelPackage>com.henripay.customerservice.dto</modelPackage>-->
-
-<!--                            <configOptions>-->
-<!--                                <configOptions>-->
-<!--                                    <delegatePattern>true</delegatePattern>-->
-<!--                                    <serializableModel>true</serializableModel>-->
-<!--                                </configOptions>-->
-
-<!--                            </configOptions>-->
-
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
-            <!-- <plugin>
-                 <groupId>org.jvnet.jaxb2.maven2</groupId>
-                 <artifactId>maven-jaxb2-plugin</artifactId>
-                 <version>0.15.3</version>
-                 <executions>
-                     <execution>
-                         <goals>
-                             <goal>generate</goal>
-                         </goals>
-                     </execution>
-                 </executions>
-                 <configuration>
-                     <verbose>true</verbose>
-                     &lt;!&ndash;  <schemaIncludes>
-                           <include>/iso20022/*</include>
-                           <include>camt.053.001.02.xsd</include>
-                           <include>pain.008.001.02.xsd</include>
-                       </schemaIncludes>&ndash;&gt;
-
-                     <schemaDirectory>src/main/resources/iso20022/xsd</schemaDirectory>
-                     &lt;!&ndash;<generatePackage>nl.irp.sepa.pain.model</generatePackage>&ndash;&gt;
-                 </configuration>
-             </plugin>
- -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>

@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: MandateDTO API
+  version: 1.0.0
+
+paths:
+  /mandates:
+    get:
+      summary: Get all mandates
+      operationId: getAllMandates
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MandateDTO'
+
+    post:
+      summary: Create a new mandate
+      operationId: saveMandate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MandateDTO'
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /mandates/{mandateIdentifier}:
+    parameters:
+      - in: path
+        name: mandateIdentifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      summary: Get a mandate
+      operationId: getMandateById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      summary: Update a mandate
+      operationId: updateMandateById
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MandateDTO'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MandateDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Delete a mandate
+      operationId: deleteMandate
+      responses:
+        '204':
+          description: Successful response
+
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    MandateDTO:
+      type: object
+      properties:
+        mandateIdentifier:
+          type: integer
+          format: int64
+        customer:
+          type: integer
+          format: int64
+        merchant:
+          type: integer
+          format: int64
+        signatureDate:
+          type: string
+          format: date
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - customer
+        - merchant
+        - signatureDate
+        - startDate
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+
