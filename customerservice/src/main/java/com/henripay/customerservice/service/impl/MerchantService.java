@@ -40,6 +40,7 @@ public class MerchantService implements IMerchantService {
 
     @Override
     public void deleteMerchant(Long id) {
+        merchantRepository.findById(id).orElseThrow(() -> new InvalidInput("Merchant not found"));
         merchantRepository.deleteById(id);
     }
 

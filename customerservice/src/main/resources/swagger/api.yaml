@@ -94,8 +94,12 @@ paths:
                 merchantCode: "Updated Code"
                 metadataId: 1
                 aggregatorId: 1
-        '404':
-          description: Merchant not found
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
     delete:
       summary: Delete a specific merchant by ID
@@ -121,13 +125,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MerchantDTO'
-
-#        '404':
-#          description: Invalid Input
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/Error'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /users:
     get:
@@ -173,6 +176,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDTO'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     put:
       summary: Update a user
       operationId: updateUser
@@ -189,12 +198,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDTO'
+
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete a user
       operationId: deleteUser
       responses:
         '204':
           description: Successful response
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     MerchantDTO:
@@ -202,7 +224,8 @@ components:
       description: d
       properties:
         merchantId:
-          type: string
+          type: integer
+          format: int64
         merchantName:
           type: string
         merchantAddress:
