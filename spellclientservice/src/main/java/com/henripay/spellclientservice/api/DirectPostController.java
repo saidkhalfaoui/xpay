@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Slf4j
 @RestController
 public class DirectPostController {
@@ -22,8 +24,11 @@ public class DirectPostController {
     @PostMapping(
             value = "/direct-post"
     )
-    public ResponseEntity<Object> directPost(@RequestBody(required = true) DirectPostRequestDto directPostRequestDto) {
-        Object res = this.directPostService.doDirectPost(directPostRequestDto);
+    public ResponseEntity<Object> directPost(
+            @RequestBody(required = true) DirectPostRequestDto directPostRequestDto,
+            @RequestParam(name = "url") String url
+             ) throws IOException {
+        Object res = this.directPostService.doDirectPost(url, directPostRequestDto);
 
         return ResponseEntity.ok(res);
     }

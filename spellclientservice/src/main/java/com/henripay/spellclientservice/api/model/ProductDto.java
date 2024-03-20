@@ -11,15 +11,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductDto {
     @NotNull
-    @NotBlank(message = "Product name shoudln't be blank")
+    @NotBlank(message = "Product name shouldn't be blank")
     private String name;
 
-    @NotNull(message = "Product price shoudln't be null")
+    @NotNull(message = "Product price shouldn't be null")
     @DecimalMin(value = "0", message = "Min Value should be greater than 0")
     private BigDecimal price;
-
-    @Override
-    public String toString() {
-        return "Product Name: "+this.name + " Price: "+this.price;
-    }
 }

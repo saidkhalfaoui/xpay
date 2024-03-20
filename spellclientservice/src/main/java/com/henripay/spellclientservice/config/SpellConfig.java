@@ -2,7 +2,7 @@ package com.henripay.spellclientservice.config;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spell")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 public class SpellConfig {
     private String apiKey;
-    private String brandId;
-    private String endpointUrl;
+    private String henriApiKey;
+    private String baseUrl;
+    private String successRedirect;
+    private String failureRedirect;
 }
