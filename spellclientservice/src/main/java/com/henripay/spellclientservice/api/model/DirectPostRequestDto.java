@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class DirectPostRequestDto {
     @JsonProperty("cardholder_name")
     private String cardholderName;
