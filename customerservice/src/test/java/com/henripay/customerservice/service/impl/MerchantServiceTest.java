@@ -9,11 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
-
 import com.henripay.domainservice.exception.InvalidInput;
-
 import org.mockito.InjectMocks;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
