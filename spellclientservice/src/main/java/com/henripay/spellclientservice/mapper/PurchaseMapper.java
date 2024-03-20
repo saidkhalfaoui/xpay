@@ -21,6 +21,7 @@ public interface PurchaseMapper {
     @Mapping(target = "client.email", source = "clientEmail")
     @Mapping(target = "purchase.products", source = "products")
     @Mapping(target = "brandId", source = "brandId")
+    @Mapping(target = "purchase.currency", source = "currency")
     Purchase toPurchase(PurchaseRequestDto purchaseRequestDto);
 
     default ClientDetails mapClientDetails(PurchaseRequestDto purchaseRequestDto) {

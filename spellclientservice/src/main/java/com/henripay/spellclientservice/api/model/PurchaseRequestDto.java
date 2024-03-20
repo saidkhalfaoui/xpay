@@ -23,4 +23,6 @@ public class PurchaseRequestDto {
 
     @JsonProperty(value = "brand_id")
     private String brandId;
+
+    private String currency;
 }

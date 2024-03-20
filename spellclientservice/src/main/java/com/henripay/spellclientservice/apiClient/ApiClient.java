@@ -1,6 +1,5 @@
 package com.henripay.spellclientservice.apiClient;
 
-import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 
