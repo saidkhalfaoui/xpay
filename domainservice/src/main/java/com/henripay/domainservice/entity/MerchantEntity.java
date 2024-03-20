@@ -54,4 +54,19 @@ public class MerchantEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_merchant_aggregator", referencedColumnName = "aggregator_id")
     private AggregatorEntity aggregator;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MerchantEntity that = (MerchantEntity) o;
+
+        return merchantId.equals(that.merchantId);
+    }
+
+    @Override
+    public int hashCode() {
+        return merchantId.hashCode();
+    }
 }
