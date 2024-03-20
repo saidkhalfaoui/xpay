@@ -1,16 +1,12 @@
 package com.henripay.customerservice.service.impl;
 
 import com.henripay.customerservice.dto.UserDTO;
-import com.henripay.customerservice.mapper.MerchantMapper;
 import com.henripay.customerservice.mapper.UserMapper;
 import com.henripay.customerservice.service.IUserService;
-import com.henripay.domainservice.entity.MerchantEntity;
 import com.henripay.domainservice.entity.UserEntity;
-import com.henripay.domainservice.repository.MerchantRepository;
+import com.henripay.domainservice.exception.InvalidInput;
 import com.henripay.domainservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +34,7 @@ public class UserService implements IUserService {
     @Override
     public UserDTO getUserById(Long id) {
         Optional<UserEntity> merchant = userRepository.findById(id);
-        return  userMapper.toDto(merchant.orElseThrow(() -> new NotFoundException("User not found")));
+        return  userMapper.toDto(merchant.orElseThrow(() -> new InvalidInput("User not found")));
     }
 
     @Override
@@ -48,12 +44,13 @@ public class UserService implements IUserService {
 
     @Override
     public void deleteUser(Long id) {
+        userRepository.findById(id).orElseThrow(() -> new InvalidInput("User not found"));
         userRepository.deleteById(id);
     }
 
     @Override
     public UserDTO updateUserById(Long id, UserDTO userDTO) {
-        UserEntity user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new InvalidInput("User not found"));
         userMapper.updateFromDto(userDTO, user);
         return userMapper.toDto(userRepository.save(user));
     }
@@ -61,7 +58,7 @@ public class UserService implements IUserService {
     @Override
     public UserDTO findByIban(String iban) {
         Optional<UserEntity> user = userRepository.findByIban(iban);
-        return userMapper.toDto(user.orElseThrow(() -> new NotFoundException("Merchant not found")));
+        return userMapper.toDto(user.orElseThrow(() -> new InvalidInput("Merchant not found")));
     }
 
     @Override
