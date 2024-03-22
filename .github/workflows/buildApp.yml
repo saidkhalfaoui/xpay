@@ -43,11 +43,12 @@ jobs:
         run: mvn compile
 
       - name: Set Maven config path
-        run: |
-          echo "<settingsSecurity><master>{yLY4cEe6jlMHHLPQHifOpBp2Y0/3rnJdBgvbjgCA/GE=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
-          mvn -epm ~/.m2/settings-security.xml
-        env:
-          encrypted_password: ${{ secrets.MAVEN_AUTH_TOKEN }}  # Assuming you have a secret for the password
+      - uses: s4u/maven-settings-action@v3
+      #        run: |
+      #          echo "<settingsSecurity><master>{yLY4cEe6jlMHHLPQHifOpBp2Y0/3rnJdBgvbjgCA/GE=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
+      #          mvn -epm ~/.m2/settings-security.xml
+      #        env:
+      #          encrypted_password: ${{ secrets.MAVEN_AUTH_TOKEN }}  # Assuming you have a secret for the password
 
       - name: Build Maven Project
         run: mvn install -DskipTests
