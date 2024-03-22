@@ -36,9 +36,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Clean Maven Cache
-        run: mvn clean cache
-
       - name: Clean Maven Project
         run: mvn clean
 
@@ -46,7 +43,7 @@ jobs:
         run: mvn compile
 
       - name: Set Maven config path
-        uses: s4u/maven-settings-action@v2
+        uses: s4u/maven-settings-action@v2.2.1
       #        run: |
       #          echo "<settingsSecurity><master>{yLY4cEe6jlMHHLPQHifOpBp2Y0/3rnJdBgvbjgCA/GE=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
       #          mvn -epm ~/.m2/settings-security.xml
