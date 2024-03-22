@@ -35,19 +35,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      # Copy the settings.xml file to the Maven directory
+      - name: Copy settings.xml
+        run: cp  settings.xml ~/.m2/settings.xml
+
       - name: Clean Maven Project
         run: mvn clean
 
       - name: Compile Maven Project
         run: mvn compile
 
-      - name: Set up Maven settings
-        run: |
-          echo "<settingsSecurity><master>${{ secrets.MAVEN_AUTH_TOKEN }}</master></settingsSecurity>" > ~/.m2/settings-security.xml
+      #      - name: Set up Maven settings
+      #        run: |
+      #          echo "<settingsSecurity><master>${{ secrets.MAVEN_AUTH_TOKEN }}</master></settingsSecurity>" > ~/.m2/settings-security.xml
 
-      - name: Debug Maven Secret
-        run: |
-          echo "Maven Auth Token: ${{ secrets.MAVEN_AUTH_TOKEN }}"
+      #      - name: Debug Maven Secret
+      #        run: |
+      #          echo "Maven Auth Token: ${{ secrets.MAVEN_AUTH_TOKEN }}"
 
       - name: Build Maven Project
         run: mvn install -DskipTests
