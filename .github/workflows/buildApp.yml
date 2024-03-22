@@ -36,12 +36,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Clean Maven Cache
+        run: mvn clean cache
+
       - name: Clean Maven Project
         run: mvn clean
 
       - name: Compile Maven Project
         run: mvn compile
-          mvn clean cache
 
       - name: Set Maven config path
         uses: s4u/maven-settings-action@v2
