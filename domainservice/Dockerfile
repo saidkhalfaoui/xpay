@@ -19,7 +19,15 @@ RUN apt-get update && apt-get install -y \
 COPY src/main/resources/db/changelog/db-changelog.yml /liquibase/changeLog/
 
 # Run Liquibase update command
-CMD ["liquibase", "update", "--changelog", "/liquibase/changeLog/db-changelog.yml", "--url", "jdbc:postgresql://localhost:5432/mainhp", "--username", "postgres", "--password", "pgadmin"]
+CMD ["liquibase", \
+     "--logLevel=INFO", \
+     "--logFile=/liquibase/logs/liquibase.log", \
+     "update", \
+     "--changelog=/liquibase/changeLog/db-changelog.yml", \
+     "--url=jdbc:postgresql://localhost:5432/mainhp", \
+     "--username=postgres", \
+     "--password=pgadmin"]
 
-# Volumes (optional) to persist change log files
+# Volumes (optional) to persist logs and change log files
+VOLUME /liquibase/logs
 VOLUME /liquibase/changeLog
