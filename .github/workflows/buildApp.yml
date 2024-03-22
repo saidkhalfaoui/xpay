@@ -44,10 +44,7 @@ jobs:
 
       - name: Set up Maven settings
         run: |
-          echo "<settingsSecurity><master>${{encrypted_password}}</master></settingsSecurity>" > ~/.m2/settings-security.xml
-          mvn -epm ~/.m2/settings-security.xml
-        env:
-          encrypted_password: ${{ secrets.MAVEN_AUTH_TOKEN }}  # Assuming you have a secret for the password
+          echo "<settingsSecurity><master>${{ secrets.MAVEN_AUTH_TOKEN }}</master></settingsSecurity>" > ~/.m2/settings-security.xml
 
       - name: Build Maven Project
         run: mvn install -DskipTests
