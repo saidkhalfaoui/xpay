@@ -41,10 +41,11 @@ jobs:
 
       - name: Compile Maven Project
         run: mvn compile
+          mvn clean cache
 
       - name: Set Maven config path
         run: mvn clean cache
-        uses: s4u/maven-settings-action@v3.0.0
+        uses: s4u/maven-settings-action@v2
       #        run: |
       #          echo "<settingsSecurity><master>{yLY4cEe6jlMHHLPQHifOpBp2Y0/3rnJdBgvbjgCA/GE=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
       #          mvn -epm ~/.m2/settings-security.xml
