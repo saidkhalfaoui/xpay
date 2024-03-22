@@ -24,6 +24,9 @@ spring:
     username: ${app.db.username}
     password: ${app.db.password}
     driverClassName: ${app.db.driverClassName}
+    hikari:
+      minimumIdle: 10
+      maximumPoolSize: 1000
   sql:
     init:
       platform: postgres

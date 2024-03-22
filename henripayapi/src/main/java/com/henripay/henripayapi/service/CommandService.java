@@ -1,15 +1,16 @@
 package com.henripay.henripayapi.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 @Slf4j
-@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor = Throwable.class)
 @Service
 public class CommandService {
 
@@ -22,9 +23,11 @@ public class CommandService {
     public void startProcess(String processDefinitionKey) {
         log.info("Process : " + processDefinitionKey + " started");
 
-        HashMap<String, Object> vars = new HashMap<>();
-        runtimeService.startProcessInstanceByKey(processDefinitionKey, vars);
+        UUID uuid = UUID.randomUUID();
 
-        log.info("Process : " + processDefinitionKey + " ended");
+        HashMap<String, Object> vars = new HashMap<>();
+        var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
+
+        log.info("Process : " + processInstance.getProcessInstanceId() + " ended");
     }
 }
