@@ -19,7 +19,7 @@ app:
   camunda.bpm:
     client:
       base-url: http://localhost:8082/engine-rest
-      max-tasks: 100
+      max-tasks: 1
     basic-auth:
       username: demo
       password: demo

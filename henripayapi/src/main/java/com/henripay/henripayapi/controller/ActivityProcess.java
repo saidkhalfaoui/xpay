@@ -20,11 +20,25 @@ public class ActivityProcess {
         this.commandService = commandService;
     }
 
+    @PostMapping("/process-direct/start/{key}")
+    public ResponseEntity<String> startProcessDisrect(
+            @PathVariable String key
+    ) throws ApiException {
+        return commandService.startProcessDirect(key);
+    }
+
     @PostMapping("/process/start/{key}")
-    public Mono<ResponseEntity<String>> startProcessMono(
+    public Mono<Object> startProcessMono(
             @PathVariable String key
     ) throws ApiException {
         return commandService.startProcess(key);
+    }
+
+    @PostMapping("/process-callback/start/{key}")
+    public Mono<Object> startProcessCallback(
+            @PathVariable String key
+    ) throws ApiException {
+        return commandService.startProcessCallback(key);
     }
 
 }
