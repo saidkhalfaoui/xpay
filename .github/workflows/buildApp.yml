@@ -44,7 +44,6 @@ jobs:
           mvn clean cache
 
       - name: Set Maven config path
-        run: mvn clean cache
         uses: s4u/maven-settings-action@v2
       #        run: |
       #          echo "<settingsSecurity><master>{yLY4cEe6jlMHHLPQHifOpBp2Y0/3rnJdBgvbjgCA/GE=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
