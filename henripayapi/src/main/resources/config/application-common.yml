@@ -25,7 +25,7 @@ spring:
     password: ${app.db.password}
     driverClassName: ${app.db.driverClassName}
     hikari:
-      minimumIdle: 10
+      minimumIdle: 100
       maximumPoolSize: 1000
   sql:
     init:
@@ -37,6 +37,7 @@ spring:
   jmx:
     default-domain: ${spring.application.name}
 
+##https://docs.camunda.org/manual/7.20/user-guide/spring-boot-integration/configuration/#camunda-engine-properties
 camunda:
   bpm:
     enabled: true
@@ -54,6 +55,8 @@ camunda:
     auto-deployment-enabled: true
     job-execution:
       enabled: true
+      core-pool-size: 100
+      max-pool-size: 100
 
 management:
   endpoints:

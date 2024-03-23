@@ -11,7 +11,7 @@
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_0pbr5kp" />
     </bpmn:boundaryEvent>
     <bpmn:serviceTask id="Activity_1urwgeo" name="Rollback ActivityA" isForCompensation="true" camunda:expression="${rollbackActivityA}" />
-    <bpmn:serviceTask id="Activity_0fomwwn" name="Service ActivityB" camunda:delegateExpression="${activityB}">
+    <bpmn:serviceTask id="Activity_0fomwwn" name="Service ActivityB" camunda:asyncAfter="true" camunda:delegateExpression="${activityB}">
       <bpmn:incoming>Flow_0gwyp0f</bpmn:incoming>
       <bpmn:outgoing>Flow_1qxcts9</bpmn:outgoing>
     </bpmn:serviceTask>

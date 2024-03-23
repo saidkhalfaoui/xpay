@@ -2,7 +2,6 @@ package com.henripay.henripayapi.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +19,7 @@ public class CommandService {
         this.runtimeService = runtimeService;
     }
 
-    public void startProcess(String processDefinitionKey) {
+    public String startProcess(String processDefinitionKey) {
         log.info("Process : " + processDefinitionKey + " started");
 
         UUID uuid = UUID.randomUUID();
@@ -29,5 +28,7 @@ public class CommandService {
         var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
 
         log.info("Process : " + processInstance.getProcessInstanceId() + " ended");
+
+        return processInstance.getProcessInstanceId();
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ActivityProcess {
 
-
     private final CommandService commandService;
 
     public ActivityProcess(CommandService commandService) {
@@ -19,7 +18,7 @@ public class ActivityProcess {
 
     // start process example
     @PostMapping("/process/start/{key}")
-    public void startProcess(@PathVariable String key) {
-        commandService.startProcess(key);
+    public String startProcess(@PathVariable String key) {
+        return commandService.startProcess(key);
     }
 }

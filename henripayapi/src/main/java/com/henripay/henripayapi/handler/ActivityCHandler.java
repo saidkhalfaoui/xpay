@@ -15,7 +15,7 @@ public class ActivityCHandler {
             log.info("Running Activity C");
             //throw new RuntimeException("I'm supposed to fail.");
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 log.info("After 5 seconds inside Activity C");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
