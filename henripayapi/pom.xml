@@ -8,6 +8,7 @@
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
+
     </parent>
 
     <artifactId>henripayapi</artifactId>
@@ -146,7 +147,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>saidkhalfaoui/${project.artifactId}</repository>
+                    <repository>henripay/${project.artifactId}</repository>
                     <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>

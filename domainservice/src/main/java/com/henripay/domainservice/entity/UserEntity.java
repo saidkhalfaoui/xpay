@@ -1,0 +1,65 @@
+package com.henripay.domainservice.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+@Data
+@ToString
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+public class UserEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id_identifier")
+    private Long customerIdIdentifier;
+
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    @Column(name = "iban")
+    private String iban;
+
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "token", unique = true)
+    private String token;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "activation_date")
+    private LocalDateTime activationDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserEntity that = (UserEntity) o;
+
+        return customerIdIdentifier.equals(that.customerIdIdentifier);
+    }
+
+    @Override
+    public int hashCode() {
+        return customerIdIdentifier.hashCode();
+    }
+}

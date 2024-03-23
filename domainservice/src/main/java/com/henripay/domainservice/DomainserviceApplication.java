@@ -1,13 +1,13 @@
-package com.henripay.cutomerservice;
+package com.henripay.domainservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CutomerserviceApplication {
+public class DomainserviceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CutomerserviceApplication.class, args);
+        SpringApplication.run(DomainserviceApplication.class, args);
     }
 
 }
