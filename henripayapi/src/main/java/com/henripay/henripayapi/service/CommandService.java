@@ -2,6 +2,8 @@ package com.henripay.henripayapi.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,16 @@ public class CommandService {
 
         HashMap<String, Object> vars = new HashMap<>();
         var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
+        //
+        if (processInstance instanceof ProcessInstanceWithVariables) {
+            Object bpmnError = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnError");
+            if (bpmnError != null && bpmnError.equals("TransactionFailed")) {
+                throw new RuntimeException("Process error");
+            }
+        }
 
         log.info("Process : " + processInstance.getProcessInstanceId() + " ended");
 
-        return processInstance.getProcessInstanceId();
+        return processInstance.getId();
     }
 }
