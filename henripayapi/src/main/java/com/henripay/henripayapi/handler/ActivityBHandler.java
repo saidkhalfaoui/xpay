@@ -1,6 +1,7 @@
 package com.henripay.henripayapi.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class ActivityBHandler {
     public JavaDelegate activityB() {
         return execution -> {
             log.info("Running Activity B");
-            //throw new RuntimeException("I'm supposed to fail.");
+            //throw new BpmnError("TransactionFailed", "Transaction Error in Activity B");
             try {
                 Thread.sleep(1000);
                 log.info("After 5 seconds inside Activity B");
