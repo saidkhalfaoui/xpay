@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
     @NotNull
     @NotBlank(message = "Product name shouldn't be blank")

@@ -12,6 +12,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PurchaseRequestDto {
     @NotBlank(message = "Shouldn't be blank")
     @NotNull(message = "Shouldn't be null")

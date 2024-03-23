@@ -7,5 +7,5 @@ import java.io.IOException;
 
 @Component
 public interface ApiClient {
-     <T> Object makeCall(HttpMethod httpMethod, String url, T params, String apiKey) throws IOException;
+     <T, R> R makeCall(HttpMethod httpMethod, String url, T params, String apiKey,Class<R> responseType) throws IOException;
 }

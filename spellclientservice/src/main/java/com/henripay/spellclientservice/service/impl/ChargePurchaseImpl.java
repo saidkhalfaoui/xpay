@@ -4,6 +4,7 @@ import com.henripay.spellclientservice.api.model.ChargePurchaseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
 import com.henripay.spellclientservice.service.ChargePurchaseService;
+import com.spell.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,15 @@ public class ChargePurchaseImpl implements ChargePurchaseService {
     }
 
     @Override
-    public Object doChargePurchase(String purchaseId, ChargePurchaseDto chargePurchaseDto) throws IOException {
+    public Purchase doChargePurchase(String purchaseId, ChargePurchaseDto chargePurchaseDto) throws IOException {
 
-        return this.apiClient.makeCall(
+        Purchase purchase = this.apiClient.makeCall(
                 HttpMethod.POST,
                 this.spellConfig.getBaseUrl()+"/purchases/"+purchaseId+"/charge/",
                 chargePurchaseDto,
-                this.spellConfig.getApiKey()
+                this.spellConfig.getApiKey(),
+                Purchase.class
         );
+        return purchase;
     }
 }

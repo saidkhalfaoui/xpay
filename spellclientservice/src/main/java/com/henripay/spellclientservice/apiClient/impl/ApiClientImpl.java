@@ -20,14 +20,14 @@ public class ApiClientImpl implements ApiClient {
     }
 
     @Override
-    public <T> Object makeCall(HttpMethod httpMethod, String url, T params, String apiKey) throws IOException {
+    public <T, R> R makeCall(HttpMethod httpMethod, String url, T params, String apiKey, Class<R> responseType) throws IOException {
         String reqBody = HttpReqHelper.castToReqBody(params);
 
-        ResponseEntity<Object> response = restTemplate.exchange(
+        ResponseEntity<R> response = restTemplate.exchange(
                 url,
                 httpMethod,
                 HttpReqHelper.prepReqEntity(reqBody, apiKey),
-                Object.class
+                responseType
         );
 
         return response.getBody();

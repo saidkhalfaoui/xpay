@@ -1,13 +1,10 @@
 package com.henripay.spellclientservice.service.impl;
 
 import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
-import com.henripay.spellclientservice.api.model.PurchaseRequestDto;
+import com.henripay.spellclientservice.api.model.DirectPostResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
-import com.henripay.spellclientservice.mapper.PurchaseMapper;
 import com.henripay.spellclientservice.service.DirectPostService;
-import com.spell.model.PurchaseDetails;
-import com.spell.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -27,8 +24,14 @@ public class DirectPostServiceImpl implements DirectPostService {
     }
 
     @Override
-    public Object doDirectPost(String directPostUrl, DirectPostRequestDto directPostRequestDto) throws IOException {
+    public DirectPostResponseDto doDirectPost(String directPostUrl, DirectPostRequestDto directPostRequestDto) throws IOException {
 
-        return this.apiClient.makeCall(HttpMethod.POST, directPostUrl+"?s2s=true", directPostRequestDto, this.spellConfig.getHenriApiKey());
+        return this.apiClient.makeCall(
+                HttpMethod.POST,
+                directPostUrl+"?s2s=true",
+                directPostRequestDto,
+                this.spellConfig.getHenriApiKey(),
+                DirectPostResponseDto.class
+        );
     }
 }
