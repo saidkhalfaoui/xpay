@@ -11,14 +11,13 @@ import java.util.List;
 @Service
 public class MerchantDelegateImpl implements MerchantApiDelegate {
     private final MerchantService merchantService;
+
     public MerchantDelegateImpl(MerchantService merchantService) {
         this.merchantService = merchantService;
     }
 
     @Override
     public ResponseEntity<MerchantDTO> saveMerchant(MerchantDTO merchantDTO) {
-        System. out. println( "merchantDTO.toString()");
-        System. out. println( merchantDTO.toString());
         return ResponseEntity.ok(merchantService.saveMerchant(merchantDTO));
     }
     @Override
@@ -35,6 +34,11 @@ public class MerchantDelegateImpl implements MerchantApiDelegate {
     @Override
     public ResponseEntity<MerchantDTO> getMerchantById(Long id) {
         return ResponseEntity.ok(merchantService.getMerchantById(id));
+    }
+
+    @Override
+    public ResponseEntity<MerchantDTO> merchantFindByIbanGet(String iban) {
+        return ResponseEntity.ok(merchantService.findByIban(iban));
     }
 
     @Override

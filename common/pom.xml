@@ -6,7 +6,7 @@
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
 
     </parent>
     <groupId>com.henripay</groupId>
@@ -20,25 +20,24 @@
     </properties>
 
 
-
     <build>
         <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
-                    <executions>
-                        <execution>
-                            <id>test</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                            <configuration>
-                                <classifier>arbitrary</classifier>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>arbitrary</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
             <plugin>
@@ -47,47 +46,48 @@
             </plugin>
 
 
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>  <configuration>
-                    <source>1.8</source>  <target>1.8</target>
-                </configuration>
-                </plugin>
-              <!--  <groupId>org.apache.maven.plugins</groupId>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-compile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <execution>
-                        <id>default-testCompile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>install</id>
-                        <goals>
-                            <goal>install</goal>
-                        </goals>
-                    </execution>-->
-                    <!--<execution>
-                        <id>testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin> -->
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!--  <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>default-compile</id>
+                      <phase>none</phase>
+                  </execution>
+                  <execution>
+                      <id>default-testCompile</id>
+                      <phase>none</phase>
+                  </execution>
+                  <execution>
+                      <id>compile</id>
+                      <phase>compile</phase>
+                      <goals>
+                          <goal>compile</goal>
+                      </goals>
+                  </execution>
+                  <execution>
+                      <id>install</id>
+                      <goals>
+                          <goal>install</goal>
+                      </goals>
+                  </execution>-->
+            <!--<execution>
+                <id>testCompile</id>
+                <phase>test-compile</phase>
+                <goals>
+                    <goal>testCompile</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin> -->
         </plugins>
     </build>
 

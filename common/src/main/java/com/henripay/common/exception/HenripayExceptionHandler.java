@@ -32,4 +32,5 @@ public class HenripayExceptionHandler {
         );
         return new ResponseEntity<>(henripayException, internalServerError);
     }
+
 }
