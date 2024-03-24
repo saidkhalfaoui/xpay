@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor "Card Holder" as holder
+entity "POS Terminal" as POS
+
+entity "Mobyyou" as mobyyou
+participant "HenriPay" as HenriPay
+participant "Acquirer" as Acq
+participant "Issuer" as issuer
+holder->POS: user checks in to the Grab&Go store
+POS-> HenriPay: Pre-Authentication {50 euro , mcc= grocery store}
+HenriPay ->Acq:  Pre-Authentication
+Acq -> issuer : ISO200 message [pre-auth]
+issuer -> Acq : ISO210 message [approved]
+Acq -> HenriPay: Pre-auth response
+HenriPay-> mobyyou : Pre-auth response {transactionId, userid}
+mobyyou--> mobyyou: calculate final amount
+mobyyou->HenriPay: Pre-Auth completion {transactionId , final amount}
+HenriPay->HenriPay: validators , business rules
+HenriPay-> Acq:  Pre-Auth completion {pan , final amount}
+Acq -> issuer: ISO220 message [pre-auth completion]
+issuer-> Acq: ISO230 message [approved]
+Acq --> HenriPay : Pre-Auth completion response
+HenriPay-->mobyyou: transaction completion
+
+@enduml
