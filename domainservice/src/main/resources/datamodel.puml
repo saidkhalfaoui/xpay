@@ -65,9 +65,20 @@ entity Keys {
 * key name : string
 * key type : string enum {RSA , EC , 3DES}
 * additional_info : string
-* enc_key_value : string
+* key_value : string (either actual key value or key reference)
+* key_index : number
 second key identifier : number <<FK>>
 
+}
+
+entity KeyProfile {
+* key profile id : number
+* key profile name : string
+* key length : number
+* key type : enum {DES , 3DES , AES , RSA } [google key types ]
+* key usage : list [ENCRYPT , DECRYPT , SIGN , VERIFY , DERIVE , WRAP , UNWRAP]
+* storage_key profile : id_profile
+* key_source : enum [GENERATED , IMPORTED , DERIVED ]
 }
 
 
