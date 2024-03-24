@@ -63,7 +63,7 @@ entity Agregator
 entity Keys {
 * key id : number
 * key name : string
-* key type : string enum {RSA , EC , 3DES}
+* keyprofile_id : number
 * additional_info : string
 * key_value : string (either actual key value or key reference)
 * key_index : number
