@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "Mobyyou" {
+   [Mobyyou app]
+  [Pos Terminal]
+}
+
+package "HenriPay" {
+  HTTP -[Spell]
+  HTTP -[Sepadd]
+  [orchestrator]
+}
+
+package Fixnp&Partners{
+  HTTP -[Shift4]
+  SFTP -[Sepadd batch]
+}
+
+
+
+
+
+[Sepadd] --> [Sepadd batch]
+[Pos Terminal] --> [Shift4]
+[Spell] --> [Shift4]
+[Mobyyou app] --> [Spell]
+
+@enduml
