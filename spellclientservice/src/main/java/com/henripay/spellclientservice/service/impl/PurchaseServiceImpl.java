@@ -24,19 +24,20 @@ public class PurchaseServiceImpl implements PurchaseService {
         this.apiClient = apiClient;
         this.spellConfig = spellConfig;
     }
+
     @Override
     public Object doPurchase(PurchaseRequestDto requestDto) throws IOException {
         Purchase purchase = this.purchaseMapper.toPurchase(requestDto);
         purchase.setSuccessRedirect(this.spellConfig.getSuccessRedirect());
         purchase.setFailureRedirect(this.spellConfig.getFailureRedirect());
 
-        Object  jsonres =  this.apiClient.makeCall(
+        Object jsonres = this.apiClient.makeCall(
                 HttpMethod.POST,
                 this.spellConfig.getBaseUrl() + "/purchases/",
                 purchase,
                 this.spellConfig.getApiKey(),
                 Object.class
-                );
+        );
 
         return jsonres;
     }

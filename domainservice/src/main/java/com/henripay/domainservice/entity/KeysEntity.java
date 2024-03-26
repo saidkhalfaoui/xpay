@@ -50,4 +50,8 @@ public class KeysEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "second_key_identifier", referencedColumnName = "key_id", insertable = false, updatable = false)
     private KeysEntity secondKey;
+
+    @ManyToOne
+    @JoinColumn(name = "key_profile_id", referencedColumnName = "key_profile_id", insertable = false, updatable = false)
+    private KeyProfileEntity keyProfile;
 }

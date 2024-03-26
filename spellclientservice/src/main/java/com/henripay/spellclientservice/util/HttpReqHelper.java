@@ -18,7 +18,7 @@ public class HttpReqHelper {
         return objectMapper.writeValueAsString(params);
     }
 
-    public static HttpEntity<?> prepReqEntity(String bodyReq, String apiKey){
+    public static HttpEntity<?> prepReqEntity(String bodyReq, String apiKey) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + apiKey);

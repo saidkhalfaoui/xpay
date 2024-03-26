@@ -11,7 +11,7 @@ public class PurchaseResDto extends Purchase {
         super(brandId, client, purchase);
     }
 
-    public PurchaseResDto(){
+    public PurchaseResDto() {
         super(null, new ClientDetails(""), null);
     }
 }

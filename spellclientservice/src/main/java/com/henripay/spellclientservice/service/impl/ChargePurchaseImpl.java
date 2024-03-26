@@ -27,7 +27,7 @@ public class ChargePurchaseImpl implements ChargePurchaseService {
 
         Purchase purchase = this.apiClient.makeCall(
                 HttpMethod.POST,
-                this.spellConfig.getBaseUrl()+"/purchases/"+purchaseId+"/charge/",
+                this.spellConfig.getBaseUrl() + "/purchases/" + purchaseId + "/charge/",
                 chargePurchaseDto,
                 this.spellConfig.getApiKey(),
                 Purchase.class

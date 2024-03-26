@@ -1,0 +1,4 @@
+crypto:
+  googleKms:
+    projectId: "hpprjtest"
+    location: "us-central1"

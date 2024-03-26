@@ -21,11 +21,12 @@ public class RefundPurchaseImpl implements RefundPurchaseService {
         this.apiClient = apiClient;
         this.spellConfig = spellConfig;
     }
+
     @Override
     public Purchase doRefundPurchase(String purchaseId, RefundPurchaseDto refundPurchaseDto) throws IOException {
         return this.apiClient.makeCall(
                 HttpMethod.POST,
-                this.spellConfig.getBaseUrl()+"/purchases/"+purchaseId+"/refund/",
+                this.spellConfig.getBaseUrl() + "/purchases/" + purchaseId + "/refund/",
                 refundPurchaseDto,
                 this.spellConfig.getApiKey(),
                 Purchase.class

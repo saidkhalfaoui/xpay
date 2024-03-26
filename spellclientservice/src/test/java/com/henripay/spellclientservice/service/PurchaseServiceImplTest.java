@@ -16,9 +16,8 @@ import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PurchaseServiceImplTest {
@@ -78,7 +77,7 @@ public class PurchaseServiceImplTest {
         verify(spellConfig, times(1)).getFailureRedirect();
         verify(spellConfig, times(1)).getBaseUrl();
         verify(spellConfig, times(1)).getApiKey();
-        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
+        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl + "/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
 
     }
 
@@ -111,6 +110,6 @@ public class PurchaseServiceImplTest {
         verify(spellConfig, times(1)).getFailureRedirect();
         verify(spellConfig, times(1)).getBaseUrl();
         verify(spellConfig, times(1)).getApiKey();
-        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
+        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl + "/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
     }
 }

@@ -28,7 +28,7 @@ public class DirectPostServiceImpl implements DirectPostService {
 
         return this.apiClient.makeCall(
                 HttpMethod.POST,
-                directPostUrl+"?s2s=true",
+                directPostUrl + "?s2s=true",
                 directPostRequestDto,
                 this.spellConfig.getHenriApiKey(),
                 DirectPostResponseDto.class
