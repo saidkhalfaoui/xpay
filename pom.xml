@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
+        <version>3.1.10</version>
     </parent>
     <groupId>com.henripay</groupId>
     <artifactId>henripay</artifactId>
@@ -301,7 +301,7 @@
         <module>mandateservice</module>
         <module>customerservice</module>
         <module>domainservice</module>
-        <module>spellclientservice</module>
+<!--        <module>spellclientservice</module>-->
         <!-- Add other modules if needed -->
     </modules>
     <build>
@@ -327,6 +327,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>devtools</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>
 

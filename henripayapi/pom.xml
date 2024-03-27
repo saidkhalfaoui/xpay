@@ -17,7 +17,7 @@
     <description>HenriPay API orchestrator</description>
 
     <properties>
-        <camunda.version>7.19.0</camunda.version>
+        <camunda.version>7.21.0-alpha4</camunda.version>
     </properties>
 
     <dependencyManagement>

@@ -32,7 +32,7 @@ public class CommandService {
         if (processInstance instanceof ProcessInstanceWithVariables) {
             Object bpmnError = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnError");
             if (bpmnError != null && bpmnError.equals("TransactionFailed")) {
-                throw new RuntimeException("Process error");
+                //throw new RuntimeException("Process error");
             }
         }
 

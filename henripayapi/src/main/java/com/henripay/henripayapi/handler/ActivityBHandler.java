@@ -14,13 +14,14 @@ public class ActivityBHandler {
     public JavaDelegate activityB() {
         return execution -> {
             log.info("Running Activity B");
-            //throw new BpmnError("TransactionFailed", "Transaction Error in Activity B");
-            try {
-                Thread.sleep(1000);
-                log.info("After 5 seconds inside Activity B");
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            throw new BpmnError("TransactionFailed", "TransactionFailed");
+//            throw new MyException("TransactionFailed", 22_222);
+//            try {
+//                Thread.sleep(1000);
+//                log.info("After 5 seconds inside Activity B");
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
         };
     }
 
