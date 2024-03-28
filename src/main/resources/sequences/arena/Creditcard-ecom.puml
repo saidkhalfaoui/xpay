@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor "Card Holder" as holder
+
+entity "Mobyyou App" as mobyyou
+participant "HenriPay" as henriPay
+participant "Acquirer" as acq
+participant "Issuer" as issuer
+holder->mobyyou: user enters credit card details
+mobyyou->henriPay : credit card details /purchase
+
+henriPay-> Network: tokenize card for recurrent payment
+holder-> issuer: 3D secure verification
+issuer-> henriPay : 3D secure completed
+henriPay-> mobyyou : add credit card completed
+
+henriPay->acq : 0 euro transaction CIT
+acq--> issuer: ISO100 authorization
+issuer-> acq : ISO110 authorization response
+mobyyou-> mobyyou : generate daily bill
+mobyyou-> henriPay : /charge {amount , userid }
+henriPay-> henriPay: business rules
+henriPay-> acq: MIT transaction request {token , amount}
+acq --> issuer : ISO100 authorization
+issuer -> acq : ISO100 authorization
+acq->henriPay : MIT transaction response {sucess}
+henriPay-->mobyyou: transaction completion {sucess}
+
+@enduml

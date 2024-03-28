@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor "Card Holder" as holder
+
+
+entity "Mobyyou" as mobyyou
+participant "HenriPay" as HenriPay
+
+participant "Issuer" as issuer
+holder->mobyyou: user enters account details
+mobyyou-> issuer : initiate 1 cent iDeal transaction
+mobyyou->mobyyou: create mandate
+mobyyou->mobyyou : calculate amount [daily]
+mobyyou->HenriPay : initiate sepadd /collection {mandateid , amount}
+HenriPay->HenriPay: validators , business rules , add transaction to file
+HenriPay-->mobyyou : {success}
+HenriPay-->HenriPay : create payment 008.001 file
+HenriPay-->Finxp : batch payment file (scheduled job)
+Finxp--> Finxp : process batch file
+Finxp->HenriPay: Report file
+HenriPay->HenriPay : process reporting file , update transaction status
+HenriPay-> mobyyou : send transaction status notification
+
+HenriPay-->HenriPay : create payment 002.001 file  (CT transactions)
+HenriPay-->Finxp : batch payment file (scheduled job)
+Finxp-->Finxp : process payment order
+Finxp -> HenriPay: Report File
+HenriPay->HenriPay : process reporting file , update transaction status
+HenriPay-> mobyyou : send transaction status notification
+
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+"Customer" -> psp : Authorize 1 cent transaction
+psp -> mobyyou: account Info
+mobyyou->"HenriPay Engine": add mandate
+"HenriPay Engine"-> "User Service": add user account
+"HenriPay Engine"-> "Mandate Service": add Mandate
+mobyyou->"HenriPay Engine" : add Direct Debit Transaction
+"HenriPay Engine"->"HenriPay Engine": execute Rules [validations ,fee calculation , interface selection , mandate info retreival]
+"HenriPay Engine"->RaboISO20022: add direct debit transaction
+"HenriPay Engine"->mobyyou: add direct debit (success))
+RaboISO20022-->RaboISO20022 : create payment 008.001 file
+RaboISO20022->Bank : batch payment file (scheduled job)
+Bank-->Bank: process payment
+Bank->RaboISO20022: Reporting Information
+RaboISO20022-->RaboISO20022 : update transaction status
+"HenriPay Engine"-> RaboISO20022 : get Transaction status
+RaboISO20022-->"HenriPay Engine" : transaction status (success)
+
+
+@enduml
