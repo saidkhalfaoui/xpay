@@ -18,15 +18,12 @@
         <java.version>${parent.java.version}</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.henripay</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
+            <classifier>arbitrary</classifier>
         </dependency>
     </dependencies>
 

@@ -4,15 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.io.Serializable;
 
-@Setter
-@Getter
-@ToString
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
