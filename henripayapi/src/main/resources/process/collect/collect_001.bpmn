@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02wmn0x" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02wmn0x" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:process id="Process_17fzafv" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_1g2frue" />
     <bpmn:startEvent id="StartEvent_1" name="Start">
@@ -25,11 +25,11 @@
     <bpmn:sequenceFlow id="Flow_1oxsqhc" sourceRef="Activity_0kxrlh3" targetRef="Activity_0wed1bk" />
     <bpmn:sequenceFlow id="Flow_0b8eraj" sourceRef="Activity_0wed1bk" targetRef="Activity_1flb89p" />
     <bpmn:sequenceFlow id="Flow_0bop0zu" sourceRef="Activity_1flb89p" targetRef="Activity_1tk00ki" />
-    <bpmn:serviceTask id="Activity_0wed1bk" name="Get user details">
+    <bpmn:serviceTask id="Activity_0wed1bk" name="Get user details" camunda:delegateExpression="${getUserDetails}">
       <bpmn:incoming>Flow_1oxsqhc</bpmn:incoming>
       <bpmn:outgoing>Flow_0b8eraj</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1flb89p" name="Get Mandate details">
+    <bpmn:serviceTask id="Activity_1flb89p" name="Get Mandate details" camunda:delegateExpression="${getMandateDetails}">
       <bpmn:incoming>Flow_0b8eraj</bpmn:incoming>
       <bpmn:outgoing>Flow_0bop0zu</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -101,21 +101,8 @@
         <dc:Bounds x="700" y="167" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0kjbe7y_di" bpmnElement="Activity_1ftqd52">
-        <dc:Bounds x="220" y="167" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1i4qbfr_di" bpmnElement="Activity_0znh7dy">
-        <dc:Bounds x="300" y="300" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0aau7s7" bpmnElement="Activity_0gd8iab" isExpanded="true">
         <dc:Bounds x="530" y="430" width="270" height="120" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1ygi89u" bpmnElement="Event_1bkedsf">
-        <dc:Bounds x="555" y="472" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="190" y="397" width="90" height="20" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0hi2qbi" bpmnElement="Event_0a6wwcw">
         <dc:Bounds x="722" y="472" width="36" height="36" />
@@ -129,6 +116,12 @@
           <dc:Bounds x="276" y="397" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ygi89u" bpmnElement="Event_1bkedsf">
+        <dc:Bounds x="555" y="472" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="397" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1pgzo1c" bpmnElement="Flow_1opmza6">
         <di:waypoint x="591" y="490" />
         <di:waypoint x="641" y="490" />
@@ -140,6 +133,13 @@
         <di:waypoint x="677" y="490" />
         <di:waypoint x="722" y="490" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0kjbe7y_di" bpmnElement="Activity_1ftqd52">
+        <dc:Bounds x="220" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1i4qbfr_di" bpmnElement="Activity_0znh7dy">
+        <dc:Bounds x="300" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1nkmfh4_di" bpmnElement="TextAnnotation_1nkmfh4">
         <dc:Bounds x="280" y="430" width="100" height="55" />
         <bpmndi:BPMNLabel />
