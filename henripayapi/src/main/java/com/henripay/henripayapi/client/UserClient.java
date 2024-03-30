@@ -1,4 +1,4 @@
-package com.henripay.henripayapi.service;
+package com.henripay.henripayapi.client;
 
 import com.henripay.henripayapi.apiClient.ApiClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
@@ -12,12 +12,12 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class UserService {
+public class UserClient {
 
     private final ApiClient apiClient;
     private final String userServiceUrl;
 
-    public UserService(ApiClient apiClient, AppUrlsConfig appUrlsConfig) {
+    public UserClient(ApiClient apiClient, AppUrlsConfig appUrlsConfig) {
         this.apiClient = apiClient;
         this.userServiceUrl = appUrlsConfig.getUserServiceUrl();
     }

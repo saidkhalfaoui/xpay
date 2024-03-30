@@ -1,6 +1,7 @@
 package com.henripay.henripayapi.service;
 
 import com.henripay.henripayapi.apiClient.ApiClient;
+import com.henripay.henripayapi.client.MandateClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class MandateServiceTest {
+class MandateClientTest {
 
     @Mock
     private ApiClient apiClient;
@@ -26,12 +27,12 @@ class MandateServiceTest {
     @Mock
     private AppUrlsConfig appUrlsConfig;
 
-    private MandateService mandateService;
+    private MandateClient mandateClient;
 
     @BeforeEach
     void setUp() {
         when(appUrlsConfig.getMandateServiceUrl()).thenReturn("http://example.com/mandate-service");
-        mandateService = new MandateService(apiClient, appUrlsConfig);
+        mandateClient = new MandateClient(apiClient, appUrlsConfig);
     }
 
     @Test
@@ -47,7 +48,7 @@ class MandateServiceTest {
                 .thenReturn(expectedMandateDetails);
 
         // Act
-        Map<String, Object> actualMandateDetails = mandateService.getMandateDetails(mandateId);
+        Map<String, Object> actualMandateDetails = mandateClient.getMandateDetails(mandateId);
 
         // Assert
         assertEquals(expectedMandateDetails, actualMandateDetails);
@@ -63,7 +64,7 @@ class MandateServiceTest {
                 .thenThrow(new RestClientException("API client error"));
 
         // Act & Assert
-        org.junit.jupiter.api.Assertions.assertThrows(RestClientException.class, () -> mandateService.getMandateDetails(mandateId));
+        org.junit.jupiter.api.Assertions.assertThrows(RestClientException.class, () -> mandateClient.getMandateDetails(mandateId));
         verify(apiClient, times(1)).makeCall(HttpMethod.GET, getMandateDetailsUrl, null, Map.class);
     }
 }

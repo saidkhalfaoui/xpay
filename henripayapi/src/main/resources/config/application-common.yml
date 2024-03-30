@@ -52,7 +52,7 @@ camunda:
       first-name: Admin
       last-name:
     history-level: full
-    auto-deployment-enabled: true
+    auto-deployment-enabled: ${app.camunda.bpm.auto-deployment}
     job-execution:
       enabled: true
       core-pool-size: 100

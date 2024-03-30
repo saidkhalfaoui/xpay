@@ -1,6 +1,7 @@
 package com.henripay.henripayapi.service;
 
 import com.henripay.henripayapi.apiClient.ApiClient;
+import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,19 +21,19 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceTest {
+class UserClientTest {
 
     @Mock
     private ApiClient apiClient;
 
-    private UserService userService;
+    private UserClient userClient;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
         AppUrlsConfig appUrlsConfig = new AppUrlsConfig();
         appUrlsConfig.setUserServiceUrl("http://example.com");
-        userService = new UserService(apiClient, appUrlsConfig);
+        userClient = new UserClient(apiClient, appUrlsConfig);
     }
 
     @Test
@@ -47,7 +48,7 @@ class UserServiceTest {
         when(apiClient.makeCall(HttpMethod.GET, expectedUrl, null, Map.class)).thenReturn(userDetails);
 
         // Act
-        Map<String, Object> result = userService.getUserDetails(userId);
+        Map<String, Object> result = userClient.getUserDetails(userId);
 
         // Assert
         assertNotNull(result);
@@ -62,7 +63,7 @@ class UserServiceTest {
         when(apiClient.makeCall(any(), any(), any(), any())).thenThrow(new RestClientException("Error"));
 
         // Act and Assert
-        assertThrows(RestClientException.class, () -> userService.getUserDetails(userId));
+        assertThrows(RestClientException.class, () -> userClient.getUserDetails(userId));
     }
 }
 

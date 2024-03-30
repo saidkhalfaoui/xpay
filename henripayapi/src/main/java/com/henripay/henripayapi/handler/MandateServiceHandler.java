@@ -1,6 +1,6 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.henripayapi.service.UserService;
+import com.henripay.henripayapi.client.MandateClient;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -11,19 +11,22 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-public class GetUserDetailsHandler {
-    private final UserService userService;
+public class MandateServiceHandler {
 
-    public GetUserDetailsHandler(UserService userService){
-        this.userService = userService;
+    private final MandateClient mandateClient;
+
+    public MandateServiceHandler(MandateClient mandateClient) {
+        this.mandateClient = mandateClient;
+
     }
+
     @Bean
-    public JavaDelegate getUserDetails(){
+    public JavaDelegate getMandateDetails() {
         return execution -> {
-            log.info("Running getUserDetails");
+            log.info("Running getMandateDetails");
             try {
-                Integer customerId = (Integer) execution.getVariable("customerId");
-                execution.setVariable("userDetails",this.userService.getUserDetails(customerId));
+                Integer mandateId = (Integer) execution.getVariable("mandateId");
+                execution.setVariable("mandateDetails", this.mandateClient.getMandateDetails(mandateId));
             } catch (RestClientException | IOException e) {
                 throw new RuntimeException(e);
             }

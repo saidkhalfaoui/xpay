@@ -1,4 +1,4 @@
-package com.henripay.henripayapi.handler;
+package com.henripay.henripayapi.web.error;
 
 import org.camunda.bpm.engine.ProcessEngineException;
 

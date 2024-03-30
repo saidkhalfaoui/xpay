@@ -1,4 +1,4 @@
-package com.henripay.henripayapi.service;
+package com.henripay.henripayapi.client;
 
 import com.henripay.henripayapi.apiClient.ApiClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.util.Map;
 
 @Service
-public class MandateService {
+public class MandateClient {
     private final ApiClient apiClient;
     private final String mandateServiceUrl;
 
 
-    public MandateService(ApiClient apiClient, AppUrlsConfig appUrlsConfig) {
+    public MandateClient(ApiClient apiClient, AppUrlsConfig appUrlsConfig) {
         this.apiClient = apiClient;
         this.mandateServiceUrl = appUrlsConfig.getMandateServiceUrl();
     }
