@@ -5,24 +5,26 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-
+        <version>3.2.3-SNAPSHOT</version>
     </parent>
-    <groupId>com.henripay</groupId>
+
     <artifactId>mandateservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mandateservice</name>
-    <description>Mandate service</description>
+    <name>Mandate Service</name>
+    <description>Mandate Service</description>
+    <packaging>jar</packaging>
+
     <properties>
+        <!--suppress UnresolvedMavenProperty -->
         <java.version>${parent.java.version}</java.version>
     </properties>
+
     <dependencies>
 
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
             <classifier>arbitrary</classifier>
         </dependency>
     </dependencies>
@@ -45,7 +47,6 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-<!--                            <typeMappings>integer=Long,int=Long</typeMappings>-->
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
@@ -79,14 +80,7 @@
                 </executions>
                 <configuration>
                     <verbose>true</verbose>
-                    <!--  <schemaIncludes>
-                          <include>/iso20022/*</include>
-                          <include>camt.053.001.02.xsd</include>
-                          <include>pain.008.001.02.xsd</include>
-                      </schemaIncludes>-->
-
                     <schemaDirectory>src/main/resources/iso20022/xsd</schemaDirectory>
-                    <!--<generatePackage>nl.irp.sepa.pain.model</generatePackage>-->
                 </configuration>
             </plugin>
 
@@ -96,7 +90,6 @@
                 <version>1.4.7</version>
                 <configuration>
                     <repository>henripay/${project.artifactId}</repository>
-                    <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/mandateservice.jar</JAR_FILE>
@@ -144,7 +137,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>mandateservice</finalName>
     </build>
 
 </project>

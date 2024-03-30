@@ -8,13 +8,23 @@ jobs:
   build-maven:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '21'
+          java-version: '17'
           distribution: 'temurin'
           cache: maven
 
@@ -26,31 +36,27 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Copy the settings.xml file to the Maven directory
-      - name: Copy settings.xml
-        run: cp  settings.xml ~/.m2/settings.xml
-
-      - name: Clean Maven Project
+      - name: Clean with Maven
         run: mvn clean
-
-      - name: Compile Maven Project
+      - name: Compile with Maven
         run: mvn compile
+      - name: Build with Maven
+        run: mvn install
 
-      - name: Set up Maven settingsSecurity
+      # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+
+      - name: Run containers and set up PostgreSQL
         run: |
-          mkdir -p ~/.m2
-          echo "<settingsSecurity><master>${{ secrets.MAVEN_AUTH_TOKEN }}</master></settingsSecurity>" > ~/.m2/settings-security.xml
+          docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:14
+          sleep 15
+          docker exec -it postgres psql -U postgres -c "CREATE DATABASE henripay;"
 
-      - name: Set up Maven settings
+      - name: Run Liquibase migrations
         run: |
-          echo "<settings><servers><server><id>github</id><username>${{ secrets.MAVEN_USERNAME }}</username><password>${{ secrets.MAVEN_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
-
-      - name: Build Maven Project
-        run: mvn install -DskipTests
-
-      #      # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-      #      - name: Update dependency graph
-      #        uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+          mvn liquibase:update -Dliquibase.url=jdbc:postgresql://localhost:5432/henripay -Dliquibase.username=postgres -Dliquibase.password=postgres
+      
 
       #TODO: registry
       #- name: Tag Docker image

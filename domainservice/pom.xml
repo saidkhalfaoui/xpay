@@ -5,19 +5,19 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>3.2.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>domainservice</artifactId>
-    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>domainservice</name>
-    <description>domainservice</description>
+    <name>Domain Service</name>
+    <description>Domain Service</description>
+    <packaging>jar</packaging>
+
     <properties>
+        <!--suppress UnresolvedMavenProperty -->
         <java.version>${parent.java.version}</java.version>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -30,24 +30,17 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
             <version>2.2</version>
         </dependency>
 
-
-        <!-- in-memory database  -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -64,7 +57,6 @@
                 <version>1.4.7</version>
                 <configuration>
                     <repository>henripay/${project.artifactId}</repository>
-                    <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
@@ -112,6 +104,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
