@@ -35,6 +35,31 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      
+
+      #      - uses: actions/checkout@v3
+      #        with:
+      #          repository: 'https://github.com/<username>/<repository-name>.git'
+      #          ref: main
+      #      - name: Set up Maven (if needed)
+      #        uses: actions/setup-java@v3
+      #        with:
+      #          java-version: '17'  # Adjust Java version as needed
+      #          cache: 'maven'        # Cache Maven packages to improve performance
+      #      - name: Install dependencies (modify for your project)
+      #        run: mvn install
+      #
+      #      - uses: actions/checkout@v3
+      #        with:
+      #          repository: 'https://github.com/<username>/<repository-name>.git'
+      #          ref: second
+      #      - name: Set up Maven (if needed)
+      #        uses: actions/setup-java@v3
+      #        with:
+      #          java-version: '17'  # Adjust Java version as needed
+      #          cache: 'maven'        # Cache Maven packages to improve performance
+      #      - name: Install dependencies (modify for your project)
+      #        run: mvn install
 
       - name: Clean with Maven
         run: mvn clean
