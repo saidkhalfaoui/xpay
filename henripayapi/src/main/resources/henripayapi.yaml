@@ -927,7 +927,7 @@ paths:
 
 
 
-  /colection/{id}:
+  /collection/{id}:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
