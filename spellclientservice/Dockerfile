@@ -9,3 +9,4 @@ ADD target/spellclientservice-0.0.1-SNAPSHOT.jar /app/app.jar
 #CMD curl  -f http://localhost:8080/api/health || exit 1
 # Run the jar file
 CMD ["java" , "-jar" ,"/app/app.jar"]
+

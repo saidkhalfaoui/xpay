@@ -19,7 +19,7 @@
         <module>mandateservice</module>
         <module>customerservice</module>
         <module>domainservice</module>
-        <!--        <module>spellclientservice</module>-->
+        <module>spellclientservice</module>
     </modules>
 
 </project>
