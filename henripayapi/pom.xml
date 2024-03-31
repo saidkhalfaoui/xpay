@@ -73,11 +73,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.3.0</version>
@@ -87,34 +82,29 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>integer=Long,int=Long</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/henripayapi.yaml
+                                ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <library>spring-boot</library>
+                            <apiPackage>com.henripay.henripayapi.controller</apiPackage>
+                            <modelPackage>com.henripay.henripayapi.dto</modelPackage>
 
-                            <apiPackage>com.henripay.henripayapi.api</apiPackage>
-                            <modelPackage>com.henripay.henripayapi.model</modelPackage>
-
-                            <!--  <supportingFilesToGenerate>
-                                  ApiUtil.java
-                              </supportingFilesToGenerate>-->
-
+                            <supportingFilesToGenerate>
+                                ApiUtil.java
+                            </supportingFilesToGenerate>
                             <configOptions>
-                                <!--                                <java8>true</java8>-->
-                                <dateLibrary>custom</dateLibrary>
-                                <openApiNullable>false</openApiNullable>
-                                <interfaceOnly>true</interfaceOnly>
-
+                                <delegatePattern>true</delegatePattern>
+                                <serializableModel>true</serializableModel>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <unhandledException>true</unhandledException>
                             </configOptions>
-                            <!-- <typeMappings>
-                                 <typeMapping>DateTime=Instant</typeMapping>
-                                 <typeMapping>Date=Date</typeMapping>
-                             </typeMappings>-->
-
-                            <!--  <typeMappings>
-                 <typeMapping>float=java.math</typeMapping>
-                              </typeMappings>-->
                         </configuration>
                     </execution>
                 </executions>

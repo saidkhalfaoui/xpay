@@ -15,7 +15,8 @@ public class MandateServiceHandler {
 
     private final MandateClient mandateClient;
 
-    public MandateServiceHandler(MandateClient mandateClient) {
+    public MandateServiceHandler
+            (MandateClient mandateClient) {
         this.mandateClient = mandateClient;
 
     }

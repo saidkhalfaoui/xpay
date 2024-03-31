@@ -1861,8 +1861,6 @@ components:
       type: string
       maxLength: 36
       description: UUID
-
-
     Balance:
       type: object
       description: Company Balance in a specific currency
@@ -1953,7 +1951,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/UnixTimestamp'
     BillingTemplate:
-
       required:
         - purchase
         - is_subscription
@@ -2016,11 +2013,8 @@ components:
           default: false
 
         subscription_period:
-
-
-
-
           type: integer
+          format: int64
           minimum: 1
           maximum: 256
           default: 1
@@ -2030,8 +2024,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/PeriodUnits'
         subscription_due_period:
-
           type: integer
+          format: int64
           minimum: 1
           maximum: 256
           default: 7
@@ -2041,27 +2035,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/PeriodUnits'
         subscription_charge_period_end:
-
           type: boolean
           default: false
         subscription_trial_periods:
-
           type: integer
+          format: int64
           minimum: 0
           maximum: 256
           default: 0
         subscription_active:
-
           type: boolean
           default: false
         subscription_has_active_clients:
-
           type: boolean
           readOnly: true
         force_recurring:
           type: boolean
           default: false
-
         upsell_campaigns:
           type: array
           items:
@@ -2144,7 +2134,6 @@ components:
       maxLength: 128
       description: City name
     Client:
-
       allOf:
         - $ref: '#/components/schemas/BaseModel'
         - $ref: '#/components/schemas/ClientDetails'
@@ -2302,7 +2291,6 @@ components:
       type: string
       maxLength: 2
       format: ISO 3166-1 alpha-2
-
     Currency:
       type: string
       maxLength: 3
@@ -2317,7 +2305,6 @@ components:
       description: Email address
     Event:
       type: string
-
       enum:
         - purchase.created
         - purchase.paid
@@ -2474,7 +2461,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
     PaymentDetails:
-
       properties:
         is_outgoing:
           type: boolean
@@ -2538,7 +2524,6 @@ components:
             - $ref: '#/components/schemas/UnixTimestamp'
     PaymentMethod:
       type: string
-
       enum:
         - unknown
     Payout:
@@ -2732,6 +2717,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/MoneyAmount'
         discount:
+          type: integer
+          format: int64
           minimum: 0
           description: Total discount per this product in invoice
           default: 0
@@ -2767,7 +2754,6 @@ components:
         IltQATpjlNaJMlRPjbcaiW7dsO3BuF9ZOMGksSOnyYm/AgMBAAE=
         -----END PUBLIC KEY-----
     Purchase:
-
       required:
         - client
         - purchase
@@ -3199,6 +3185,8 @@ components:
           type: string
           maxLength: 10000
         debt:
+          type: integer
+          format: int64
           default: 0
           x-summary: Will be added/substracted to the invoice total, if present.
           x-minValue: '`total` * -1'
@@ -3284,7 +3272,6 @@ components:
             e.g. "Your invoice for June".
     PurchaseStatus:
       type: string
-
       default: created
       readOnly: true
       enum:
@@ -3323,7 +3310,6 @@ components:
       example: '2020-04-30'
     TransactionFlow:
       type: string
-
       enum:
         - api
         - direct_post
@@ -3349,7 +3335,6 @@ components:
         - wpfunnels
     TransactionProduct:
       type: string
-
       enum:
         - bank_payment
         - chargeback
@@ -3374,7 +3359,6 @@ components:
           properties:
             all:
               type: integer
-
       example:
         turnover: 93408
         fee_sell: 1750
@@ -3399,7 +3383,6 @@ components:
     Webhook:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
-
           required:
             - title
             - events
@@ -3462,6 +3445,9 @@ components:
     collectioninformation:
       type: object
       properties:
+        customersId:
+          type: string
+          example: "124567"
         mandateId:
           type: string
           example: "124567"
@@ -3478,3 +3464,20 @@ components:
 
         status:
           type: string
+    UserDTO:
+      type: object
+      properties:
+        customerIdIdentifier:
+          type: integer
+          format: int64
+        iban:
+          type: string
+        fullName:
+          type: string
+        token:
+          type: string
+        address:
+          type: string
+        activationDate:
+          type: string
+          format: date-time
