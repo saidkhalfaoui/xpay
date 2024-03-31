@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'HenriPay/henripay-parent.git'
-          ref: 3.2.3
+          branch: 3.2.3
 
       - name: Install parent project
         run: mvn clean install
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'HenriPay/henripay-parent.git'
-          ref: 3.1.10
+          branch: 3.1.10
 
       - name: Install parent project
         run: mvn clean install
