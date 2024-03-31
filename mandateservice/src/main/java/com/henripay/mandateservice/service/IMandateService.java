@@ -1,6 +1,5 @@
 package com.henripay.mandateservice.service;
 
-import com.henripay.domainservice.entity.MandateEntity;
 import com.henripay.mandateservice.dto.MandateDTO;
 
 import java.util.List;

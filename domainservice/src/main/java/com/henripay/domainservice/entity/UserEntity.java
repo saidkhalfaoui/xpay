@@ -1,17 +1,19 @@
 package com.henripay.domainservice.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.proxy.HibernateProxy;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Data
 @ToString
@@ -49,17 +51,18 @@ public class UserEntity implements Serializable {
     private LocalDateTime activationDate;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         UserEntity that = (UserEntity) o;
-
-        return customerIdIdentifier.equals(that.customerIdIdentifier);
+        return getCustomerIdIdentifier() != null && Objects.equals(getCustomerIdIdentifier(), that.getCustomerIdIdentifier());
     }
 
     @Override
-    public int hashCode() {
-        return customerIdIdentifier.hashCode();
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

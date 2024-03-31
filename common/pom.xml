@@ -5,17 +5,17 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-
+        <version>3.2.3-SNAPSHOT</version>
     </parent>
-    <groupId>com.henripay</groupId>
+
     <artifactId>common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>common</name>
+    <name>Common Libraries</name>
     <description>Common Libraries</description>
     <packaging>jar</packaging>
+
     <properties>
+        <!--suppress UnresolvedMavenProperty -->
         <java.version>${parent.java.version}</java.version>
     </properties>
 
@@ -55,39 +55,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--  <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <executions>
-                  <execution>
-                      <id>default-compile</id>
-                      <phase>none</phase>
-                  </execution>
-                  <execution>
-                      <id>default-testCompile</id>
-                      <phase>none</phase>
-                  </execution>
-                  <execution>
-                      <id>compile</id>
-                      <phase>compile</phase>
-                      <goals>
-                          <goal>compile</goal>
-                      </goals>
-                  </execution>
-                  <execution>
-                      <id>install</id>
-                      <goals>
-                          <goal>install</goal>
-                      </goals>
-                  </execution>-->
-            <!--<execution>
-                <id>testCompile</id>
-                <phase>test-compile</phase>
-                <goals>
-                    <goal>testCompile</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin> -->
         </plugins>
     </build>
 
