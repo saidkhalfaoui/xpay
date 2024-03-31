@@ -1,0 +1,214 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPathTemplate": "/api/v1/purchase/{id}/charge"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "type": "string",
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "created_on": 1619740800,
+          "updated_on": 1619740800,
+          "client": {
+            "bank_account": "string",
+            "bank_code": "string",
+            "email": "user@example.com",
+            "phone": "+44 45643564564",
+            "full_name": "string",
+            "personal_code": "string",
+            "street_address": "string",
+            "country": "st",
+            "city": "string",
+            "zip_code": "string",
+            "state": "string",
+            "shipping_street_address": "string",
+            "shipping_country": "st",
+            "shipping_city": "string",
+            "shipping_zip_code": "string",
+            "shipping_state": "string",
+            "cc": [
+              "user@example.com"
+            ],
+            "bcc": [
+              "user@example.com"
+            ],
+            "legal_name": "string",
+            "brand_name": "string",
+            "registration_number": "string",
+            "tax_number": "string"
+          },
+          "purchase": {
+            "currency": "str",
+            "products": [
+              {
+                "name": "string",
+                "quantity": "1",
+                "price": 0,
+                "discount": 0,
+                "tax_percent": "0",
+                "category": "string"
+              }
+            ],
+            "total": 0,
+            "language": "Default value is controlled in Company -> Brand section of merchant portal separately per each Brand used (default value, if no changes are made, is `en`). Brand to be used with corresponding Purchase/BillingTemplate specified using brand_id.",
+            "notes": "string",
+            "debt": 0,
+            "subtotal_override": null,
+            "total_tax_override": null,
+            "total_discount_override": null,
+            "total_override": null,
+            "request_client_details": [],
+            "timezone": "Europe/Oslo",
+            "due_strict": false,
+            "email_message": "string"
+          },
+          "payment": {
+            "is_outgoing": false,
+            "payment_type": "purchase",
+            "amount": 0,
+            "currency": "str",
+            "net_amount": 0,
+            "fee_amount": 0,
+            "pending_amount": 0,
+            "pending_unfreeze_on": 1619740800,
+            "description": "string",
+            "paid_on": 1619740800,
+            "remote_paid_on": 1619740800
+          },
+          "issuer_details": {
+            "website": "string",
+            "legal_street_address": "string",
+            "legal_country": "st",
+            "legal_city": "string",
+            "legal_zip_code": "string",
+            "bank_accounts": [
+              {
+                "bank_account": "string",
+                "bank_code": "string"
+              }
+            ],
+            "legal_name": "string",
+            "brand_name": "string",
+            "registration_number": "string",
+            "tax_number": "string"
+          },
+          "transaction_data": {
+            "payment_method": "string",
+            "extra": {},
+            "country": "string",
+            "attempts": [
+              {
+                "type": "execute",
+                "successful": true,
+                "payment_method": "string",
+                "extra": {},
+                "country": "string",
+                "client_ip": "string",
+                "processing_time": 1619740800,
+                "error": {
+                  "code": "string",
+                  "message": "string"
+                }
+              }
+            ]
+          },
+          "status": "created",
+          "status_history": [
+            {
+              "status": "created",
+              "timestamp": 1619740800,
+              "related_object": {
+                "type": "string",
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+              }
+            }
+          ],
+          "viewed_on": 1619740800,
+          "company_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "is_test": true,
+          "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "brand_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "billing_template_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "client_id": null,
+          "send_receipt": false,
+          "is_recurring_token": true,
+          "recurring_token": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "skip_capture": false,
+          "force_recurring": false,
+          "reference_generated": "string",
+          "reference": "string",
+          "issued": "2020-04-30",
+          "due": 1619740800,
+          "refund_availability": "all",
+          "refundable_amount": 0,
+          "currency_conversion": {
+            "original_currency": "string",
+            "original_amount": 0,
+            "exchange_rate": 0
+          },
+          "payment_method_whitelist": [
+            "string"
+          ],
+          "success_redirect": "string",
+          "failure_redirect": "string",
+          "cancel_redirect": "string",
+          "success_callback": "string",
+          "creator_agent": "string",
+          "platform": "web",
+          "product": "purchases",
+          "created_from_ip": "string",
+          "invoice_url": "string",
+          "checkout_url": "string",
+          "direct_post_url": "string",
+          "marked_as_paid": true,
+          "order_id": "string",
+          "upsell_campaigns": [
+            "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          ],
+          "referral_campaign_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "referral_code": "string",
+          "referral_code_generated": "string",
+          "referral_code_details": {
+            "campaign_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "reward_type": "gift",
+            "discount_amount": 0,
+            "discount_percent": 0
+          },
+          "retain_level_details": {
+            "campaign_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "discount_amount": 0,
+            "discount_percent": 0
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/api/v1/purchase/{id}/charge"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "error": "Invalid request body"
+        },
+        "transformers": {
+          "request-body-transformer": {
+            "matchingXPathValue": {
+              "expression": "count(/purchase) = 0"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

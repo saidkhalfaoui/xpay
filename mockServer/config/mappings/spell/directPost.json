@@ -1,0 +1,67 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPattern": "/api/v1/p/(.*)\\?s2s=true",
+        "urlPathPattern": "/api/v1/p/{id}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "status": "3DS_required",
+          "Method": "POST",
+          "URL": "https://payments.henripay.com/s2s/test-acs/",
+          "PaReq": "txOkay",
+          "MD": "SAMPLE_MD",
+          "callback_url": "https://payments.henripay.com/s2s/ee0b6470-5b4c-4bb0-95c8-501bae9f367b/3ds-redirect/zQpRP_0_zzAxRD96AAJvpB10UfAX0AW01dYjy6CjIfU/"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/api/v1/p/.*",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "body": "{\"error\": \"Resource not found\"}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/api/v1/p/([^/]+)\\?s2s=(.*)",
+        "urlPathPattern": "/api/v1/p/{id}",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "body": "{\"error\": \"Invalid parameter value\"}",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "transformers": {
+          "body": {
+            "function": "random",
+            "rules": [
+              {
+                "matchingXPath": "/request/queryParameters/queryParameter/name='s2s' and /request/queryParameters/queryParameter/values/value='false'",
+                "transformerParameters": {
+                  "minimum": 0,
+                  "maximum": 10,
+                  "probability": 0.2
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
