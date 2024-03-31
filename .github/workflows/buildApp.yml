@@ -29,8 +29,16 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          repository: 'https://github.com/tlacheheb/henripay-parent.git'
-          ref: main
+          repository: 'https://github.com/HenriPay/henripay-parent.git'
+          ref: 3.2.3
+
+      - name: Install parent project
+        run: mvn clean install
+
+      - uses: actions/checkout@v3
+        with:
+          repository: 'https://github.com/HenriPay/henripay-parent.git'
+          ref: 3.1.10
 
       - name: Install parent project
         run: mvn clean install
