@@ -22,8 +22,8 @@ public class UserServiceHandler {
         return execution -> {
             log.info("Running getUserDetails");
             try {
-                Integer customerId = (Integer) execution.getVariable("customerId");
-                execution.setVariable("userDetails",this.userClient.getUserDetails(customerId));
+                Long customerIdIdentifier = (Long) execution.getVariable("customerIdIdentifier");
+                execution.setVariable("userDetails",this.userClient.getUserDetails(customerIdIdentifier));
             } catch (RestClientException | IOException e) {
                 throw new RuntimeException(e);
             }

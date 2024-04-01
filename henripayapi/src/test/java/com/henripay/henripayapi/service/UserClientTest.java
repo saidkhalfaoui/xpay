@@ -39,7 +39,7 @@ class UserClientTest {
     @Test
     void testGetUserDetails_Success() throws IOException {
         // Arrange
-        Integer userId = 123;
+        Long userId = 123L;
         String expectedUrl = "http://example.com/users/123";
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("id", userId);
@@ -48,18 +48,18 @@ class UserClientTest {
         when(apiClient.makeCall(HttpMethod.GET, expectedUrl, null, Map.class)).thenReturn(userDetails);
 
         // Act
-        Map<String, Object> result = userClient.getUserDetails(userId);
+        var result = userClient.getUserDetails(userId);
 
         // Assert
         assertNotNull(result);
-        assertEquals(userId, result.get("id"));
-        assertEquals("John Doe", result.get("name"));
+        assertEquals(userId, result.getCustomerIdIdentifier());
+        assertEquals("John Doe", result.getFullName());
     }
 
     @Test
     void testGetUserDetails_RestClientException() throws IOException {
         // Arrange
-        Integer userId = 123;
+        Long userId = 123L;
         when(apiClient.makeCall(any(), any(), any(), any())).thenThrow(new RestClientException("Error"));
 
         // Act and Assert

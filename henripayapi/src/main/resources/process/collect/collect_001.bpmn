@@ -8,15 +8,15 @@
     <bpmn:endEvent id="Event_1jivh9n" name="End">
       <bpmn:incoming>Flow_08pnu29</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0kxrlh3" name="Business rules validation">
+    <bpmn:serviceTask id="Activity_0kxrlh3" name="Business rules validation" camunda:delegateExpression="${doNothing}">
       <bpmn:incoming>Flow_0svzn8n</bpmn:incoming>
       <bpmn:outgoing>Flow_1oxsqhc</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1tk00ki" name="Add direct debut transaction">
+    <bpmn:serviceTask id="Activity_1tk00ki" name="Add direct debut transaction" camunda:expression="${doNothing}">
       <bpmn:incoming>Flow_0bop0zu</bpmn:incoming>
       <bpmn:outgoing>Flow_08pnu29</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1ipp3i0" name="Cancel &#34;Add direct debut transaction&#34;" isForCompensation="true" />
+    <bpmn:serviceTask id="Activity_1ipp3i0" name="Cancel &#34;Add direct debut transaction&#34;" isForCompensation="true" camunda:delegateExpression="${doNothing}" />
     <bpmn:boundaryEvent id="Event_0oba89r" attachedToRef="Activity_1tk00ki">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1qhozgm" />
     </bpmn:boundaryEvent>
@@ -50,14 +50,14 @@
       </bpmn:startEvent>
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="Flow_0svzn8n" sourceRef="Activity_1ftqd52" targetRef="Activity_0kxrlh3" />
-    <bpmn:serviceTask id="Activity_1ftqd52" name="Prepare Collect">
+    <bpmn:serviceTask id="Activity_1ftqd52" name="Prepare Collect" camunda:delegateExpression="${doNothing}">
       <bpmn:incoming>Flow_0kx5gjl</bpmn:incoming>
       <bpmn:outgoing>Flow_0svzn8n</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:boundaryEvent id="Event_0qcjw67" attachedToRef="Activity_1ftqd52">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_0jw71wf" />
     </bpmn:boundaryEvent>
-    <bpmn:serviceTask id="Activity_0znh7dy" name="Cancel Collect" isForCompensation="true" />
+    <bpmn:serviceTask id="Activity_0znh7dy" name="Cancel Collect" isForCompensation="true" camunda:delegateExpression="${doNothing}" />
     <bpmn:textAnnotation id="TextAnnotation_1nkmfh4">
       <bpmn:text>Rollback &amp; make Collect have failed</bpmn:text>
     </bpmn:textAnnotation>

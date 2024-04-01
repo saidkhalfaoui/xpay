@@ -1,6 +1,7 @@
 package com.henripay.henripayapi.handler;
 
 import com.henripay.henripayapi.client.UserClient;
+import com.henripay.henripayapi.dto.UserDTO;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,17 +34,17 @@ class UserClientHandlerTest {
     @Test
     void testGetUserDetails() throws Exception {
         // Arrange
-        int customerId = 123;
+        Long customerId = 123L;
         Map<String, Object> variables = new HashMap<>();
 
-        Map<String, Object> expectedUser = new HashMap<>();
-        expectedUser.put("id", customerId);
-        expectedUser.put("name", "John Doe");
-        expectedUser.put("IBAN", "CH93 0076 2011 6238 5295 7");
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setCustomerIdIdentifier(customerId);
+        expectedUser.setFullName("John Doe");
+        expectedUser.setIban("CH93 0076 2011 6238 5295 7");
 
         variables.put("customerId", customerId);
         when(execution.getVariable("customerId")).thenReturn(customerId);
-        when(userClient.getUserDetails(anyInt())).thenReturn(expectedUser);
+        when(userClient.getUserDetails(anyLong())).thenReturn(expectedUser);
 
         // Act
         handler.getUserDetails().execute(execution);
@@ -57,7 +58,7 @@ class UserClientHandlerTest {
     @Test
     void testGetUserDetailsWithException() throws IOException {
         // Arrange
-        int customerId = 123;
+        Long customerId = 123L;
         Map<String, Object> variables = new HashMap<>();
         variables.put("customerId", customerId);
         when(execution.getVariable("customerId")).thenReturn(customerId);

@@ -14,9 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>SepaDD Service</name>
     <description>Sepa DD engine for HenriPay</description>
-    <properties>
-        <java.version>${parent.java.version}</java.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.henripay</groupId>
