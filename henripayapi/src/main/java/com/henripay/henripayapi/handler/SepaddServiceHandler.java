@@ -13,12 +13,12 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Log4j2
-public class AddDirectDebitTransactionHandler {
+public class SepaddServiceHandler {
 
     private final SepaddClient sepaddClient;
 
 
-    public AddDirectDebitTransactionHandler(AppUrlsConfig appUrlsConfig) {
+    public SepaddServiceHandler(AppUrlsConfig appUrlsConfig) {
         this.sepaddClient = ApiClient.getApiService(appUrlsConfig.getSepaddServiceUrl(), SepaddClient.class);
     }
 
