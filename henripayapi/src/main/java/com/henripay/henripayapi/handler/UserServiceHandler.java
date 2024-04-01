@@ -4,6 +4,7 @@ import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
 import com.henripay.henripayapi.dto.UserDetailsDto;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-@Slf4j
+@Log4j2
 public class UserServiceHandler {
     private final UserClient userClient;
 
