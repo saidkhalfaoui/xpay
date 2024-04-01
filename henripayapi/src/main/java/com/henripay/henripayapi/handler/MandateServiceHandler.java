@@ -1,23 +1,24 @@
 package com.henripay.henripayapi.handler;
 
+import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.MandateClient;
-import lombok.extern.slf4j.Slf4j;
+import com.henripay.henripayapi.config.AppUrlsConfig;
+import com.henripay.henripayapi.dto.MandateDetailsDto;
+import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
+import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 
 @Component
-@Slf4j
+@Log4j2
 public class MandateServiceHandler {
 
     private final MandateClient mandateClient;
 
-    public MandateServiceHandler(MandateClient mandateClient) {
-        this.mandateClient = mandateClient;
-
+    public MandateServiceHandler(AppUrlsConfig appUrlsConfig) {
+        this.mandateClient = ApiClient.getApiService(appUrlsConfig.getMandateServiceUrl(), MandateClient.class);
     }
 
     @Bean
@@ -26,8 +27,11 @@ public class MandateServiceHandler {
             log.info("Running getMandateDetails");
             try {
                 Integer mandateId = (Integer) execution.getVariable("mandateId");
-                execution.setVariable("mandateDetails", this.mandateClient.getMandateDetails(mandateId));
-            } catch (RestClientException | IOException e) {
+                Mono<MandateDetailsDto> response = this.mandateClient.getMandateDetails(mandateId);
+                response.subscribe(mandateDetails -> {
+                    execution.setVariable("mandateDetails", mandateDetails);
+                });
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         };

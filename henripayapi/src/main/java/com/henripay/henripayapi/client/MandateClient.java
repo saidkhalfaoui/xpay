@@ -1,28 +1,12 @@
 package com.henripay.henripayapi.client;
 
-import com.henripay.henripayapi.apiClient.ApiClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
+import com.henripay.henripayapi.dto.MandateDetailsDto;
+import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.bind.annotation.PathVariable;
+import reactor.core.publisher.Mono;
 
-import java.io.IOException;
-import java.util.Map;
+public interface MandateClient {
 
-@Service
-public class MandateClient {
-    private final ApiClient apiClient;
-    private final String mandateServiceUrl;
-
-
-    public MandateClient(ApiClient apiClient, AppUrlsConfig appUrlsConfig) {
-        this.apiClient = apiClient;
-        this.mandateServiceUrl = appUrlsConfig.getMandateServiceUrl();
-    }
-
-    public Map<String, Object> getMandateDetails(Integer mandateId) throws IOException, RestClientException {
-        String getMandateDetailsUrl = this.mandateServiceUrl + "/mandates/" + mandateId;
-        return this.apiClient.makeCall(HttpMethod.GET, getMandateDetailsUrl, null, Map.class);
-
-    }
+    @GetExchange("/mandates/{id}")
+    Mono<MandateDetailsDto> getMandateDetails(@PathVariable("id") Integer id);
 }

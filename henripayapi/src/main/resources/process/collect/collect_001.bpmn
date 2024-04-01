@@ -12,11 +12,11 @@
       <bpmn:incoming>Flow_0svzn8n</bpmn:incoming>
       <bpmn:outgoing>Flow_1oxsqhc</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1tk00ki" name="Add direct debut transaction">
+    <bpmn:serviceTask id="Activity_1tk00ki" name="Add direct debut transaction" camunda:delegateExpression="${addDirectDebitTransaction}">
       <bpmn:incoming>Flow_0bop0zu</bpmn:incoming>
       <bpmn:outgoing>Flow_08pnu29</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1ipp3i0" name="Cancel &#34;Add direct debut transaction&#34;" isForCompensation="true" />
+    <bpmn:serviceTask id="Activity_1ipp3i0" name="Cancel &#34;Add direct debut transaction&#34;" isForCompensation="true" camunda:expression="${cancelAddDirectDebitTransaction}" />
     <bpmn:boundaryEvent id="Event_0oba89r" attachedToRef="Activity_1tk00ki">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1qhozgm" />
     </bpmn:boundaryEvent>

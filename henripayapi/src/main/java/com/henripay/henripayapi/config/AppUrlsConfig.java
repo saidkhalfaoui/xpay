@@ -10,4 +10,5 @@ import org.springframework.context.annotation.Configuration;
 public class AppUrlsConfig {
     private String userServiceUrl;
     private String mandateServiceUrl;
+    private String sepaddServiceUrl;
 }
