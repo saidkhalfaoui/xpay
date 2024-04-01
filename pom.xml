@@ -13,12 +13,12 @@
         <java.version>21</java.version>
     </properties>
     <modules>
-        <module>sepaddservice</module>
         <module>common</module>
-        <module>henripayapi</module>
-        <module>mandateservice</module>
         <module>customerservice</module>
         <module>domainservice</module>
+        <module>henripayapi</module>
+        <module>mandateservice</module>
+        <module>sepaddservice</module>
         <module>spellclientservice</module>
     </modules>
 

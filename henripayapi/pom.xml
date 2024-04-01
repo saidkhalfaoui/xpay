@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>3.2.3-SNAPSHOT</version>
+        <version>3.1.10-SNAPSHOT</version>
     </parent>
 
     <artifactId>henripayapi</artifactId>
