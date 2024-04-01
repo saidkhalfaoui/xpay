@@ -5,28 +5,27 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-
+        <version>3.2.3-SNAPSHOT</version>
     </parent>
-    <groupId>com.henripay</groupId>
+
     <artifactId>customerservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>customerservice</name>
+    <name>Customer Service</name>
     <description>Customer Service</description>
+    <packaging>jar</packaging>
 
+    <properties>
+        <!--suppress UnresolvedMavenProperty -->
+        <java.version>${parent.java.version}</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.henripay</groupId>
             <artifactId>domainservice</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
             <classifier>arbitrary</classifier>
-
         </dependency>
-
-
-
     </dependencies>
 
     <build>
@@ -77,7 +76,6 @@
                 <version>1.4.7</version>
                 <configuration>
                     <repository>henripay/${project.artifactId}</repository>
-                    <!--<serverId>docker-hub</serverId>-->
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/customerservice.jar</JAR_FILE>
@@ -125,7 +123,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>customerservice</finalName>
     </build>
 
 </project>

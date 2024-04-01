@@ -1,6 +1,7 @@
 package com.henripay.spellclientservice.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PurchaseRequestDto {
     @NotBlank(message = "Shouldn't be blank")
     @NotNull(message = "Shouldn't be null")
@@ -22,7 +24,6 @@ public class PurchaseRequestDto {
     @NotEmpty(message = "Shouldn't be empty")
     private List<ProductDto> products;
 
-    @JsonProperty(value = "brand_id")
     private String brandId;
 
     private String currency;

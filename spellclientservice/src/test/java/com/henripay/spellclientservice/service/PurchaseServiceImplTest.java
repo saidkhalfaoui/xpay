@@ -1,9 +1,11 @@
 package com.henripay.spellclientservice.service;
 
 import com.henripay.spellclientservice.api.model.PurchaseRequestDto;
+import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
 import com.henripay.spellclientservice.mapper.PurchaseMapper;
+import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
 import com.henripay.spellclientservice.service.impl.PurchaseServiceImpl;
 import com.spell.model.Purchase;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +18,6 @@ import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,6 +29,9 @@ public class PurchaseServiceImplTest {
 
     @Mock
     private PurchaseMapper purchaseMapper;
+
+    @Mock
+    private PurchaseResponseMapper purchaseResponseMapper;
 
     @Mock
     private SpellConfig spellConfig;
@@ -42,7 +46,7 @@ public class PurchaseServiceImplTest {
     public void setUp() {
         requestDto = new PurchaseRequestDto();
         expectedPurchase = new Purchase();
-        purchaseService = new PurchaseServiceImpl(purchaseMapper, apiClient, spellConfig);
+        purchaseService = new PurchaseServiceImpl(purchaseMapper, purchaseResponseMapper, apiClient, spellConfig);
     }
 
     @Test
@@ -52,8 +56,9 @@ public class PurchaseServiceImplTest {
         String baseUrl = "https://api.example.com";
         String apiKey = "api-key";
 
-        // Mock the behavior of PurchaseMapper.toPurchase()
+        // Mock the behavior of the mappers
         when(purchaseMapper.toPurchase(requestDto)).thenReturn(expectedPurchase);
+        when(purchaseResponseMapper.mapFromJson(anyString())).thenReturn(new PurchaseResponseDto());
 
         // Mock the behavior of SpellConfig
         when(spellConfig.getSuccessRedirect()).thenReturn(successRedirect);
@@ -62,11 +67,11 @@ public class PurchaseServiceImplTest {
         when(spellConfig.getApiKey()).thenReturn(apiKey);
 
         // Mock the behavior of ApiClient.makeCall()
-        when(apiClient.makeCall(any(HttpMethod.class), anyString(), any(Purchase.class), anyString(), eq(Object.class)))
-                .thenReturn(new Object());
+        when(apiClient.makeCall(any(HttpMethod.class), anyString(), any(Purchase.class), anyString(), eq(String.class)))
+                .thenReturn("{}");
 
         // Call the doPurchase method
-        Object result = purchaseService.doPurchase(requestDto);
+        PurchaseResponseDto result = purchaseService.doPurchase(requestDto);
 
         // Verify the result
         // Add assertions to verify the result against the expectedPurchase
@@ -78,7 +83,7 @@ public class PurchaseServiceImplTest {
         verify(spellConfig, times(1)).getFailureRedirect();
         verify(spellConfig, times(1)).getBaseUrl();
         verify(spellConfig, times(1)).getApiKey();
-        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
+        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(String.class));
 
     }
 
@@ -89,7 +94,7 @@ public class PurchaseServiceImplTest {
         String baseUrl = "https://api.example.com";
         String apiKey = "api-key";
 
-        // Mock the behavior of PurchaseMapper.toPurchase()
+        // Mock the behavior of the mappers
         when(purchaseMapper.toPurchase(requestDto)).thenReturn(expectedPurchase);
 
         // Mock the behavior of SpellConfig
@@ -99,7 +104,7 @@ public class PurchaseServiceImplTest {
         when(spellConfig.getApiKey()).thenReturn(apiKey);
 
         // Mock the behavior of ApiClient.makeCall() to throw an IOException
-        when(apiClient.makeCall(any(HttpMethod.class), anyString(), any(Purchase.class), anyString(), eq(Object.class)))
+        when(apiClient.makeCall(any(HttpMethod.class), anyString(), any(Purchase.class), anyString(), eq(String.class)))
                 .thenThrow(new IOException("Failed to make the purchase"));
 
         // Call the doPurchase method and assert that it throws an IOException
@@ -111,6 +116,6 @@ public class PurchaseServiceImplTest {
         verify(spellConfig, times(1)).getFailureRedirect();
         verify(spellConfig, times(1)).getBaseUrl();
         verify(spellConfig, times(1)).getApiKey();
-        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(Object.class));
+        verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl+"/purchases/"), eq(expectedPurchase), eq(apiKey), eq(String.class));
     }
 }
