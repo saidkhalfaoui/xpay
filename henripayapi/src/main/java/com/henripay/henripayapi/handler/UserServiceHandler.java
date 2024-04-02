@@ -5,7 +5,6 @@ import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
 import com.henripay.henripayapi.model.UserDTO;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class UserServiceHandler {
         return execution -> {
             log.info("Running getUserDetails");
             try {
-                Integer customerId = (Integer) execution.getVariable("customerId");
+                Long customerId = (Long) execution.getVariable("customerId");
                 Mono<UserDTO> response = this.userClient.getUserDetails(customerId);
                 response.subscribe(userDTO -> {
                     execution.setVariable("userDetails", userDTO);

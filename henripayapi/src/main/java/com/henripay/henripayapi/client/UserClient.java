@@ -9,5 +9,5 @@ import reactor.core.publisher.Mono;
 public interface UserClient {
 
     @GetExchange("/users/{id}")
-    Mono<UserDTO> getUserDetails(@PathVariable("id") Integer userId);
+    Mono<UserDTO> getUserDetails(@PathVariable("id") Long userId);
 }
