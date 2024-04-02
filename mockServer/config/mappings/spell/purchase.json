@@ -1,0 +1,176 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/v1/purchases/"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "client": {
+            "client_type": null,
+            "email": "test@test.com",
+            "phone": "",
+            "full_name": "",
+            "personal_code": "",
+            "legal_name": "",
+            "brand_name": "",
+            "registration_number": "",
+            "tax_number": "",
+            "bank_account": "",
+            "bank_code": "",
+            "street_address": "",
+            "city": "",
+            "zip_code": "",
+            "country": "",
+            "state": "",
+            "shipping_street_address": "",
+            "shipping_city": "",
+            "shipping_zip_code": "",
+            "shipping_country": "",
+            "shipping_state": "",
+            "cc": [],
+            "bcc": [],
+            "delivery_methods": [
+              {
+                "method": "email",
+                "options": {}
+              }
+            ]
+          },
+          "purchase": {
+            "currency": "EUR",
+            "products": [
+              {
+                "name": "test",
+                "price": 100,
+                "quantity": "1.0000",
+                "discount": 0,
+                "tax_percent": "0.00",
+                "category": ""
+              }
+            ],
+            "language": "en",
+            "notes": "",
+            "debt": 0,
+            "subtotal_override": null,
+            "total_tax_override": null,
+            "total_discount_override": null,
+            "total_override": null,
+            "total": 100,
+            "request_client_details": [],
+            "timezone": "UTC",
+            "due_strict": false,
+            "email_message": "",
+            "shipping_options": [],
+            "payment_method_details": {},
+            "has_upsell_products": false
+          },
+          "payment": null,
+          "issuer_details": {
+            "brand_name": "DEMO BRAND",
+            "website": "",
+            "legal_name": "DEMO BRAND",
+            "registration_number": "",
+            "tax_number": "",
+            "legal_street_address": "",
+            "legal_country": "LV",
+            "legal_city": "",
+            "legal_zip_code": "",
+            "bank_accounts": [
+              {
+                "bank_account": "",
+                "bank_code": ""
+              }
+            ]
+          },
+          "transaction_data": {
+            "payment_method": "",
+            "flow": "payform",
+            "extra": {},
+            "country": "",
+            "attempts": []
+          },
+          "status": "created",
+          "status_history": [
+            {
+              "status": "created",
+              "timestamp": 1711548503
+            }
+          ],
+          "viewed_on": null,
+          "force_recurring": false,
+          "company_id": "aa62b5a4-dcaf-41d4-823d-acb4aaf05be9",
+          "is_test": true,
+          "user_id": null,
+          "brand_id": "ea83f656-7461-496e-a479-9f5ac3a66bc3",
+          "billing_template_id": null,
+          "order_id": null,
+          "client_id": "5636d9ca-9514-4926-b97b-0db0ad6fd514",
+          "send_receipt": false,
+          "is_recurring_token": false,
+          "recurring_token": null,
+          "skip_capture": false,
+          "reference_generated": "HP136",
+          "reference": "",
+          "issued": "2024-03-27",
+          "due": 1711552103,
+          "refund_availability": "none",
+          "refundable_amount": 0,
+          "currency_conversion": null,
+          "payment_method_whitelist": null,
+          "success_redirect": "https://henripay.com",
+          "failure_redirect": "https://henripay.com/fail",
+          "cancel_redirect": "",
+          "success_callback": "",
+          "marked_as_paid": false,
+          "upsell_campaigns": [],
+          "referral_campaign_id": null,
+          "referral_code": null,
+          "referral_code_details": null,
+          "referral_code_generated": null,
+          "retain_level_details": null,
+          "can_retrieve": false,
+          "can_chargeback": false,
+          "creator_agent": "",
+          "platform": "api",
+          "product": "purchases",
+          "created_from_ip": "41.104.180.91",
+          "invoice_url": null,
+          "checkout_url": "https://localhost:8080/api/v1/p/9717f8ab-42e9-4686-a037-294cb454ed8c/",
+          "direct_post_url": "https://localhost:8080/api/v1/p/9717f8ab-42e9-4686-a037-294cb454ed8c/",
+          "created_on": 1711548503,
+          "updated_on": 1711548503,
+          "type": "purchase",
+          "id": "9717f8ab-42e9-4686-a037-294cb454ed8c"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/v1/purchases/"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "error": "Invalid request body"
+        },
+        "transformers": {
+          "request-body-transformer": {
+            "matchingXPathValue": {
+              "expression": "count(/purchase/products) = 0"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

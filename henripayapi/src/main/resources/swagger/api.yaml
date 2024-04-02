@@ -1156,7 +1156,7 @@ paths:
       summary: List all billing template clients for this billing template.
       tags:
         - Billing
-  /billing_templates/{id}/clients/{id}/:
+  /billing_templates/{id}/clients/{id_c}/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
@@ -1321,7 +1321,7 @@ paths:
 
       tags:
         - Clients
-  /clients/{id}/recurring_tokens/{id}/:
+  /clients/{id}/recurring_tokens/{id_rt}/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
@@ -3445,9 +3445,10 @@ components:
     collectioninformation:
       type: object
       properties:
-        customersId:
-          type: string
-          example: "124567"
+        customerIdIdentifier:
+          type: integer
+          format: int64
+          example: 124567
         mandateId:
           type: string
           example: "124567"
