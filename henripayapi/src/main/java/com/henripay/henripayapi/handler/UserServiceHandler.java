@@ -3,7 +3,7 @@ package com.henripay.henripayapi.handler;
 import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.dto.UserDetailsDto;
+import com.henripay.henripayapi.model.UserDTO;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -25,9 +25,9 @@ public class UserServiceHandler {
             log.info("Running getUserDetails");
             try {
                 Integer customerId = (Integer) execution.getVariable("customerId");
-                Mono<UserDetailsDto> response = this.userClient.getUserDetails(customerId);
-                response.subscribe(userDetailsDto -> {
-                    execution.setVariable("userDetails", userDetailsDto);
+                Mono<UserDTO> response = this.userClient.getUserDetails(customerId);
+                response.subscribe(userDTO -> {
+                    execution.setVariable("userDetails", userDTO);
                 });
             } catch (Exception e) {
                 throw new RuntimeException(e);

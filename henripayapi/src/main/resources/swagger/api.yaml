@@ -3464,6 +3464,8 @@ components:
 
         status:
           type: string
+
+    # Schemas Used in the Orchestrator. Not part of API
     UserDTO:
       type: object
       properties:
@@ -3481,3 +3483,169 @@ components:
         activationDate:
           type: string
           format: date-time
+
+    address:
+      type: object
+      properties:
+        streetName:
+          type: string
+          example: "High Street"
+        streetNumber:
+          type: string
+          example: "99"
+        city:
+          type: string
+          example: "Rotterdam"
+        zipcode:
+          type: string
+          example: "1000AA"
+        country:
+          type: string
+          example: "NL"
+
+    accountinformationRequest:
+      type: object
+      properties:
+        IBAN:
+          type: string
+          example: "NL91ABNA0123456789"
+        name:
+          type: string
+          example: "Paying Guy"
+        address:
+          $ref: '#/components/schemas/address'
+
+    TransactionRequest:
+      type: object
+      properties:
+        account_info:
+          $ref: '#/components/schemas/accountinformationRequest'
+
+    mandateinformationRequest:
+      type: object
+      properties:
+        mandateId:
+          type: string
+          example: "12345678"
+        dateOfsignature:
+          type: string
+          format: date
+        personId:
+          type: string
+          example: "7887115487"
+        isamended:
+          type: boolean
+        electronicsignature:
+          type: string
+
+    transactiontype:
+      type: string
+      enum:
+        - 'FRST'
+        - 'Recurring'
+        - 'Final'
+        - 'One-Off'
+
+    DirectDebitRequest:
+      allOf:
+        - $ref: '#/components/schemas/TransactionRequest'
+        - type: object
+          properties:
+            mandate_information:
+              $ref: '#/components/schemas/mandateinformationRequest'
+            authorisation1_code:
+              type: string
+            transaction_type:
+              $ref: '#/components/schemas/transactiontype'
+
+            internal_transaction_reference:
+              type: string
+              example: "f47ac10b58cc4372a5670e02b2c3d479"
+
+    statusenum:
+      type: string
+      enum:
+        - 'created'
+        - 'missing mandatory fields'
+        - 'invalid field values'
+        - 'duplicated'
+        - 'not_found'
+        - 'deleted'
+        - 'processing'
+        - 'completed'
+        - 'cancelled'
+
+    TransactionResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        end_to_end_transaction_reference:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/statusenum'
+        status_description:
+          type: string
+
+    CreditTransferRequest:
+      allOf:
+        - $ref: '#/components/schemas/TransactionRequest'
+        - type: object
+          properties:
+            additional_info:
+              type: string
+            remittance_info:
+              type: string
+
+    processingstatusenum:
+      type: string
+      enum:
+        - 'pending'
+        - 'processed'
+        - 'authorized'
+        - 'settled'
+        - 'refunded'
+
+    TransactionStatusResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        end_to_end_transaction_reference:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/statusenum'
+        processingStatus:
+          $ref: '#/components/schemas/processingstatusenum'
+          nullable: true
+        lastUpdated:
+          type: string
+
+    MandateDTO:
+      type: object
+      properties:
+        mandateIdentifier:
+          type: integer
+          format: int64
+        customer:
+          type: integer
+          format: int64
+        merchant:
+          type: integer
+          format: int64
+        signatureDate:
+          type: string
+          format: date
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - customer
+        - merchant
+        - signatureDate
+        - startDate

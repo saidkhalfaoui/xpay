@@ -10,7 +10,7 @@ public class ApiClient {
     public static  <R> R getApiService(String baseUrl, Class<R> serviceType) {
         WebClient webClient =  WebClient.builder().baseUrl(baseUrl).build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(webClient);
-        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(webClientAdapter).build();
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
         return factory.createClient(serviceType);
     }
 
