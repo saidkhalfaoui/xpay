@@ -3,9 +3,8 @@ package com.henripay.henripayapi.handler;
 import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.SepaddClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.model.DirectDebitRequest;
-import com.henripay.henripayapi.model.CreditTransferRequest;
-import com.henripay.henripayapi.model.TransactionResponse;
+import com.henripay.henripayapi.dto.DirectDebitRequest;
+import com.henripay.henripayapi.dto.TransactionResponse;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -44,11 +43,11 @@ public class SepaddServiceHandler {
         return execution -> {
             log.info("Running addCreditTransferTransaction");
             try {
-                CreditTransferRequest creditTransferRequest = (CreditTransferRequest) execution.getVariable("creditTransferRequest");
-                Mono<TransactionResponse> response = this.sepaddClient.addCreditTransaction(creditTransferRequest);
-                response.subscribe(addCreditTransactionResponse -> {
-                    execution.setVariable("addCreditTransactionResponse",addCreditTransactionResponse);
-                });
+//                var creditTransferRequest = (CreditTransferRequest) execution.getVariable("creditTransferRequest");
+//                var response = this.sepaddClient.addCreditTransaction(creditTransferRequest);
+//                response.subscribe(addCreditTransactionResponse -> {
+//                    execution.setVariable("addCreditTransactionResponse",addCreditTransactionResponse);
+//                });
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

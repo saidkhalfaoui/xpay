@@ -1,8 +1,8 @@
 package com.henripay.henripayapi.client;
 
-import com.henripay.henripayapi.model.UserDTO;
-import org.springframework.web.service.annotation.GetExchange;
+import com.henripay.henripayapi.dto.UserDTO;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.service.annotation.GetExchange;
 import reactor.core.publisher.Mono;
 
 

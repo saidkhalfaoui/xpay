@@ -47,6 +47,13 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>integer=Long,int=Long</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
@@ -61,6 +68,7 @@
                                 <delegatePattern>true</delegatePattern>
                                 <serializableModel>true</serializableModel>
                                 <useSpringBoot3>true</useSpringBoot3>
+                                <unhandledException>true</unhandledException>
                             </configOptions>
                         </configuration>
                     </execution>

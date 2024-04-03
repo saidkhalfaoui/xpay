@@ -1,9 +1,10 @@
 package com.henripay.henripayapi.handler;
 
 import com.henripay.common.apiClient.ApiClient;
+import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.MandateClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.model.MandateDTO;
+import com.henripay.henripayapi.dto.MandateDTO;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -26,11 +27,11 @@ public class MandateServiceHandler {
         return execution -> {
             log.info("Running getMandateDetails");
             try {
-                Integer mandateId = (Integer) execution.getVariable("mandateId");
-                Mono<MandateDTO> response = this.mandateClient.getMandateDetails(mandateId);
-                response.subscribe(mandateDetails -> {
-                    execution.setVariable("mandateDetails", mandateDetails);
-                });
+                Long mandateId = (Long) execution.getVariable("mandateId");
+                var mandateDetails = this.mandateClient.getMandateDetails(mandateId)
+                        .blockOptional()
+                        .orElseThrow(() -> new ResourceNotFoundException("Mandate not found"));
+                execution.setVariable("mandateDetails", mandateDetails);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

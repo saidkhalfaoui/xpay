@@ -22,9 +22,9 @@ app:
       password: QX!8V@FUF@Y2#ps
     auto-deployment: false
   urls:
-    mandate-service-url: http://localhost:8080
-    user-service-url:
-    sepadd-service-url: http://localhost:8080
+    mandate-service-url: http://localhost:7083/api/v1
+    user-service-url:  http://localhost:7082/api/v1
+    sepadd-service-url: http://localhost:7081/api/v1
 
 management:
   endpoints:

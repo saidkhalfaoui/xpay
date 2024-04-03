@@ -1,6 +1,5 @@
 package com.henripay.customerservice.service;
 
-import com.henripay.customerservice.dto.MerchantDTO;
 import com.henripay.customerservice.dto.UserDTO;
 
 import java.util.List;
