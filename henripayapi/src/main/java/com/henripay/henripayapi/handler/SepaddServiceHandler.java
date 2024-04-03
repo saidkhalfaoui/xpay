@@ -27,11 +27,11 @@ public class SepaddServiceHandler {
         return execution -> {
             log.info("Running addDirectDebitTransaction");
             try {
-                DirectDebitRequest directDebitRequest = (DirectDebitRequest) execution.getVariable("directDebitRequest");
-                Mono<TransactionResponse> response = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
-                response.subscribe(addDirectDebitTransactionResponse -> {
-                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
-                });
+//                DirectDebitRequest directDebitRequest = (DirectDebitRequest) execution.getVariable("directDebitRequest");
+//                Mono<TransactionResponse> response = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
+//                response.subscribe(addDirectDebitTransactionResponse -> {
+//                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
+//                });
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -59,11 +59,11 @@ public class SepaddServiceHandler {
     public JavaDelegate cancelAddDirectDebitTransaction(){
         return execution -> {
             // TODO: refactor delete transaction
-            String directDebitRequest = (String) execution.getVariable("transactionId");
-            Mono<TransactionResponse> response = this.sepaddClient.deleteTransaction(directDebitRequest);
-            response.subscribe(deleteTransactionResponseDto -> {
-                execution.setVariable("deleteTransactionResponse", deleteTransactionResponseDto);
-            });
+//            String directDebitRequest = (String) execution.getVariable("transactionId");
+//            Mono<TransactionResponse> response = this.sepaddClient.deleteTransaction(directDebitRequest);
+//            response.subscribe(deleteTransactionResponseDto -> {
+//                execution.setVariable("deleteTransactionResponse", deleteTransactionResponseDto);
+//            });
             log.error("addDirectDebitTransaction failed");
         };
     }
