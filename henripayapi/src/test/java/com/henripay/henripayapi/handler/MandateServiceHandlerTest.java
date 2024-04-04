@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class MandateServiceHandlerTest {
@@ -44,14 +45,13 @@ public class MandateServiceHandlerTest {
     }
 
     @Test
-    public void testGetMandateDetails_Exception() throws Exception {
+    public void testGetMandateDetails_Exception() {
         // Arrange
         Long mandateId = 1L;
         when(execution.getVariable("mandateId")).thenReturn(mandateId);
         when(mandateClient.getMandateDetails(mandateId)).thenReturn(Mono.error(new RuntimeException("Service unavailable")));
 
         // Act & Assert
-        // The test should not throw an exception since the exception is caught in the method
-        mandateServiceHandler.getMandateDetails().execute(execution);
+        assertThrows(RuntimeException.class, () -> mandateServiceHandler.getMandateDetails().execute(execution));
     }
 }

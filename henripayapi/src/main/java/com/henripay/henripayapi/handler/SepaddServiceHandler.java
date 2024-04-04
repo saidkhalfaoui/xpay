@@ -1,15 +1,13 @@
 package com.henripay.henripayapi.handler;
 
 import com.henripay.henripayapi.client.SepaddClient;
-import com.henripay.henripayapi.dto.TransactionResponse;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 @Component
-@Log4j2
+@Slf4j
 public class SepaddServiceHandler {
 
     private final SepaddClient sepaddClient;

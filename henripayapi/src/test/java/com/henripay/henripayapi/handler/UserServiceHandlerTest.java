@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,6 +53,6 @@ public class UserServiceHandlerTest {
 
         // Act & Assert
         // The test should not throw an exception since the exception is caught in the method
-        userServiceHandler.getUserDetails().execute(execution); //.//apply(execution);
+        assertThrows(RuntimeException.class, () -> userServiceHandler.getUserDetails().execute(execution));
     }
 }

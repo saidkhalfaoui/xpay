@@ -1,16 +1,14 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.apiClient.ApiClient;
 import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.UserClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-@Log4j2
+@Slf4j
 public class UserServiceHandler {
     private final UserClient userClient;
 
