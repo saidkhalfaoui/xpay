@@ -113,25 +113,30 @@ components:
           type: string
           example: "f47ac10b58cc4372a5670e02b2c3d479"
 
-
-
-
-
     DirectDebitRequest:
-      allOf:
-        - $ref: '#/components/schemas/TransactionRequest'
-        - type: object
-          properties:
-            mandate_information:
-              $ref: '#/components/schemas/mandateinformation'
-            authorisation1_code:
-              type: string
-            transaction_type:
-              $ref: '#/components/schemas/transactiontype'
-
-            internal_transaction_reference:
-              type: string
-              example: "f47ac10b58cc4372a5670e02b2c3d479"
+      type: object
+      properties:
+        meta_data:
+          type: string
+        amount:
+          type: number
+          example: "10.23"
+        currency:
+          type: string
+          example: "EUR"
+        scheduled_execution_date:
+          type: string
+          format: date
+        end_to_end_transaction_reference:
+          type: string
+          example: "f47ac10b58cc4372a5670e02b2c3d479"
+        authorisation1_code:
+          type: string
+        transaction_type:
+          $ref: '#/components/schemas/transactiontype'
+        internal_transaction_reference:
+          type: string
+          example: "f47ac10b58cc4372a5670e02b2c3d479"
 
 
 

@@ -26,6 +26,12 @@
             <version>${project.version}</version>
             <classifier>arbitrary</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>domainservice</artifactId>
+            <version>${project.version}</version>
+            <classifier>arbitrary</classifier>
+        </dependency>
     </dependencies>
 
     <build>

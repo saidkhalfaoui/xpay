@@ -3,14 +3,34 @@ package com.henripay.domainservice.entity.type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum ActionEnum {
-    UPDATE_AMOUNT("UPDATE_AMOUNT"),
+public enum Statusenum {
 
-    DELETE("DELETE");
+    ACCPETED("accpeted"),
+    PROCESSED("processed"),
+    NOTFOUND("notfound"),
+
+    CREATED("created"),
+
+    MISSING_MANDATORY_FIELDS("missing mandatory fields"),
+
+    INVALID_FIELD_VALUES("invalid field values"),
+
+    DUPLICATED("duplicated"),
+
+    NOT_FOUND("not_found"),
+
+    DELETED("deleted"),
+
+    PROCESSING("processing"),
+
+    COMPLETED("completed"),
+
+    CANCELLED("cancelled");
+
 
     private String value;
 
-    ActionEnum(String value) {
+    Statusenum(String value) {
         this.value = value;
     }
 
@@ -25,12 +45,13 @@ public enum ActionEnum {
     }
 
     @JsonCreator
-    public static ActionEnum fromValue(String value) {
-        for (ActionEnum b : ActionEnum.values()) {
+    public static Statusenum fromValue(String value) {
+        for (Statusenum b : Statusenum.values()) {
             if (b.value.equals(value)) {
                 return b;
             }
         }
         throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
 }

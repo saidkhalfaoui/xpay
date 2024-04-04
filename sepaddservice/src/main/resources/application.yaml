@@ -1,3 +1,4 @@
+
 app:
   database:
     url: "sepadd-test-database.eur3.firebasedatabase.app"
@@ -10,3 +11,5 @@ my:
 spring:
   jackson:
     default-property-inclusion: NON_NULL
+  profiles:
+    active: local
