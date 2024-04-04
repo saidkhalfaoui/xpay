@@ -3524,6 +3524,18 @@ components:
       properties:
         account_info:
           $ref: '#/components/schemas/accountinformationRequest'
+        amount:
+          type: number
+          example: "10.23"
+        currency:
+          type: string
+          example: "EUR"
+        scheduled_execution_date:
+          type: string
+          format: date
+        end_to_end_transaction_reference:
+          type: string
+          example: "f47ac10b58cc4372a5670e02b2c3d479"
 
     mandateinformationRequest:
       type: object
