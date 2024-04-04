@@ -1,4 +1,4 @@
-package com.henripay.henripayapi.web.error;
+package com.henripay.common.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

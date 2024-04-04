@@ -1,18 +1,15 @@
 package com.henripay.henripayapi.service;
 
+import com.henripay.common.apiClient.ApiClient;
+import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.UserClient;
+import com.henripay.henripayapi.config.AppUrlsConfig;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
-import com.henripay.henripayapi.dto.UserDTO;
-import com.henripay.henripayapi.web.error.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,8 +22,8 @@ public class CollectionService {
     private final UserClient userClient;
     private final RuntimeService runtimeService;
 
-    public CollectionService(UserClient userClient, RuntimeService runtimeService) {
-        this.userClient = userClient;
+    public CollectionService(RuntimeService runtimeService, AppUrlsConfig appUrlsConfig) {
+        this.userClient = ApiClient.getApiService(appUrlsConfig.getUserServiceUrl(), UserClient.class);
         this.runtimeService = runtimeService;
     }
 
@@ -34,10 +31,10 @@ public class CollectionService {
 
         var processDefinitionKey = ProcessConstants.COLLECTION_PROCESS_KEY;
 
-        var customerDetails = userClient.getUserDetails(collectioninformation.getCustomerIdIdentifier());
-        if (customerDetails == null) {
-            throw new ResourceNotFoundException("Customer not found");
-        }
+        var customerDetails = userClient
+                .getUserDetails(collectioninformation.getCustomerIdIdentifier())
+                .blockOptional()
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
 
         log.info("Process : " + processDefinitionKey + " started");
 

@@ -4,7 +4,6 @@ package com.henripay.customerservice.service;
 import com.henripay.customerservice.dto.MerchantDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface IMerchantService {

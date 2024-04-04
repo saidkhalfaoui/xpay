@@ -479,8 +479,10 @@ info:
 
     Please note the provider is not responsible for any financial losses
     incurred due to not implementing payload signature verification.
+
 servers:
   - url: /api/v1
+
 paths:
   /purchases/:
     post:
@@ -3450,8 +3452,9 @@ components:
           format: int64
           example: 124567
         mandateId:
-          type: string
-          example: "124567"
+          type: integer
+          format: int64
+          example: 124567
         amount:
           type: number
           format: float

@@ -1,8 +1,6 @@
 package com.henripay.henripayapi.handler;
 
 import com.henripay.henripayapi.client.SepaddClient;
-import com.henripay.henripayapi.dto.DirectDebitRequest;
-import com.henripay.henripayapi.dto.CreditTransferRequest;
 import com.henripay.henripayapi.dto.TransactionResponse;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -26,11 +24,11 @@ public class SepaddServiceHandler {
         return execution -> {
             log.info("Running addDirectDebitTransaction");
             try {
-                DirectDebitRequest directDebitRequest = (DirectDebitRequest) execution.getVariable("directDebitRequest");
-                Mono<TransactionResponse> response = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
-                response.subscribe(addDirectDebitTransactionResponse -> {
-                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
-                });
+//                DirectDebitRequest directDebitRequest = (DirectDebitRequest) execution.getVariable("directDebitRequest");
+//                Mono<TransactionResponse> response = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
+//                response.subscribe(addDirectDebitTransactionResponse -> {
+//                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
+//                });
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -42,11 +40,11 @@ public class SepaddServiceHandler {
         return execution -> {
             log.info("Running addCreditTransferTransaction");
             try {
-                CreditTransferRequest creditTransferRequest = (CreditTransferRequest) execution.getVariable("creditTransferRequest");
-                Mono<TransactionResponse> response = this.sepaddClient.addCreditTransaction(creditTransferRequest);
-                response.subscribe(addCreditTransactionResponse -> {
-                    execution.setVariable("addCreditTransactionResponse",addCreditTransactionResponse);
-                });
+//                var creditTransferRequest = (CreditTransferRequest) execution.getVariable("creditTransferRequest");
+//                var response = this.sepaddClient.addCreditTransaction(creditTransferRequest);
+//                response.subscribe(addCreditTransactionResponse -> {
+//                    execution.setVariable("addCreditTransactionResponse",addCreditTransactionResponse);
+//                });
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -58,11 +56,11 @@ public class SepaddServiceHandler {
     public JavaDelegate cancelAddDirectDebitTransaction(){
         return execution -> {
             // TODO: refactor delete transaction
-            String directDebitRequest = (String) execution.getVariable("transactionId");
-            Mono<TransactionResponse> response = this.sepaddClient.deleteTransaction(directDebitRequest);
-            response.subscribe(deleteTransactionResponseDto -> {
-                execution.setVariable("deleteTransactionResponse", deleteTransactionResponseDto);
-            });
+//            String directDebitRequest = (String) execution.getVariable("transactionId");
+//            Mono<TransactionResponse> response = this.sepaddClient.deleteTransaction(directDebitRequest);
+//            response.subscribe(deleteTransactionResponseDto -> {
+//                execution.setVariable("deleteTransactionResponse", deleteTransactionResponseDto);
+//            });
             log.error("addDirectDebitTransaction failed");
         };
     }
