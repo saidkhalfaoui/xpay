@@ -1,13 +1,10 @@
 package com.henripay.henripayapi.handler;
 
-<<<<<<< HEAD
-import com.henripay.henripayapi.client.MandateClient;
-=======
+
 import com.henripay.common.apiClient.ApiClient;
 import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.MandateClient;
 import com.henripay.henripayapi.config.AppUrlsConfig;
->>>>>>> feature/HEN-8
 import com.henripay.henripayapi.dto.MandateDTO;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
