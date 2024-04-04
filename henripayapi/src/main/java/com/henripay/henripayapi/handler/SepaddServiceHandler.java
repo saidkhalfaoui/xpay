@@ -1,11 +1,9 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.SepaddClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.model.DirectDebitRequest;
-import com.henripay.henripayapi.model.CreditTransferRequest;
-import com.henripay.henripayapi.model.TransactionResponse;
+import com.henripay.henripayapi.dto.DirectDebitRequest;
+import com.henripay.henripayapi.dto.CreditTransferRequest;
+import com.henripay.henripayapi.dto.TransactionResponse;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +17,8 @@ public class SepaddServiceHandler {
     private final SepaddClient sepaddClient;
 
 
-    public SepaddServiceHandler(AppUrlsConfig appUrlsConfig) {
-        this.sepaddClient = ApiClient.getApiService(appUrlsConfig.getSepaddServiceUrl(), SepaddClient.class);
+    public SepaddServiceHandler(SepaddClient sepaddClient) {
+        this.sepaddClient = sepaddClient;
     }
 
     @Bean

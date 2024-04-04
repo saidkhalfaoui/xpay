@@ -1,8 +1,8 @@
 package com.henripay.henripayapi.client;
 
-import com.henripay.henripayapi.model.CreditTransferRequest;
-import com.henripay.henripayapi.model.DirectDebitRequest;
-import com.henripay.henripayapi.model.TransactionResponse;
+import com.henripay.henripayapi.dto.CreditTransferRequest;
+import com.henripay.henripayapi.dto.DirectDebitRequest;
+import com.henripay.henripayapi.dto.TransactionResponse;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.DeleteExchange;
 import org.springframework.web.service.annotation.PostExchange;

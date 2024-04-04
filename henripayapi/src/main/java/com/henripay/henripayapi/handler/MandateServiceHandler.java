@@ -1,9 +1,7 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.apiClient.ApiClient;
 import com.henripay.henripayapi.client.MandateClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.model.MandateDTO;
+import com.henripay.henripayapi.dto.MandateDTO;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +15,8 @@ public class MandateServiceHandler {
 
     private final MandateClient mandateClient;
 
-    public MandateServiceHandler(AppUrlsConfig appUrlsConfig) {
-        this.mandateClient = ApiClient.getApiService(appUrlsConfig.getMandateServiceUrl(), MandateClient.class);
+    public MandateServiceHandler(MandateClient mandateClient) {
+        this.mandateClient = mandateClient;
     }
 
     @Bean
@@ -26,7 +24,7 @@ public class MandateServiceHandler {
         return execution -> {
             log.info("Running getMandateDetails");
             try {
-                Integer mandateId = (Integer) execution.getVariable("mandateId");
+                Long mandateId = (Long) execution.getVariable("mandateId");
                 Mono<MandateDTO> response = this.mandateClient.getMandateDetails(mandateId);
                 response.subscribe(mandateDetails -> {
                     execution.setVariable("mandateDetails", mandateDetails);
