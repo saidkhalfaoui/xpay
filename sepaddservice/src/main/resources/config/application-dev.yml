@@ -1,0 +1,38 @@
+app:
+  name: henripay-api
+  db:
+    provider: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    driverClassName: org.postgresql.Driver
+    database: mainhp
+    username: postgres
+    password: pgadmin
+    host: localhost
+    port: 5432
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    liquibase:
+      enabled: true
+
+  database:
+    url: "sepadd-test-database.eur3.firebasedatabase.app"
+    name: "sepadd-test-database"
+    test: asa
+
+my:
+  test:
+    value: test
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # ['configprops', 'env', 'health', 'info', 'logfile', 'loggers', 'prometheus', 'threaddump']
+
+logging:
+  level:
+    com.henripay: DEBUG
+#    org.springframework.web.client: INFO
+#    org.springframework.web: DEBUG
+#    org.springframework.security: DEBUG
