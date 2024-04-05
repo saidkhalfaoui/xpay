@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
-@SpringBootApplication
-
+@SpringBootApplication(scanBasePackages = "com.henripay")
 public class SepaDDRaboInterfaceApplication {
 
     public static void main(String[] args) {
