@@ -15,8 +15,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <!--suppress UnresolvedMavenProperty -->
-        <java.version>${parent.java.version}</java.version>
     </properties>
 
     <dependencies>
@@ -26,14 +24,15 @@
             <version>${project.version}</version>
             <classifier>arbitrary</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>

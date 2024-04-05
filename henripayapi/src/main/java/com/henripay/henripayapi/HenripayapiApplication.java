@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @EnableProcessApplication
 @EnableConfigurationProperties
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.henripay")
 public class HenripayapiApplication {
 
     public static void main(String[] args) {

@@ -1,9 +1,7 @@
 package com.henripay.henripayapi.service;
 
-import com.henripay.common.apiClient.ApiClient;
 import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.UserClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +9,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -19,22 +16,24 @@ import java.util.UUID;
 @Service
 public class CollectionService {
 
-    private final UserClient userClient;
+    private final UserClient userServiceClient;
     private final RuntimeService runtimeService;
 
-    public CollectionService(RuntimeService runtimeService, AppUrlsConfig appUrlsConfig) {
-        this.userClient = ApiClient.getApiService(appUrlsConfig.getUserServiceUrl(), UserClient.class);
+    public CollectionService(RuntimeService runtimeService, UserClient userServiceClient) {
         this.runtimeService = runtimeService;
+        this.userServiceClient = userServiceClient;
     }
 
-    public String createCollection(Collectioninformation collectioninformation) throws IOException {
+    public String createCollection(Collectioninformation collectioninformation) {
 
         var processDefinitionKey = ProcessConstants.COLLECTION_PROCESS_KEY;
 
-        var customerDetails = userClient
+        var userDetails = userServiceClient
                 .getUserDetails(collectioninformation.getCustomerIdIdentifier())
-                .blockOptional()
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+                .blockOptional();
+        if (userDetails.isEmpty()) {
+            throw new ResourceNotFoundException("User not found");
+        }
 
         log.info("Process : " + processDefinitionKey + " started");
 
@@ -44,7 +43,7 @@ public class CollectionService {
         vars.put("collectionInformation", collectioninformation);
         vars.put("mandateId", collectioninformation.getMandateId());
         vars.put("customerId", collectioninformation.getCustomerIdIdentifier());
-        vars.put("customerDetails", customerDetails);
+        vars.put("customerDetails", userDetails.get());
         //
         var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
         //

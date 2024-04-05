@@ -1,25 +1,21 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.apiClient.ApiClient;
-import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.MandateClient;
-import com.henripay.henripayapi.config.AppUrlsConfig;
-import com.henripay.henripayapi.dto.MandateDTO;
 import lombok.extern.log4j.Log4j2;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 
 @Component
 @Log4j2
 public class MandateServiceHandler {
 
-    private final MandateClient mandateClient;
+    private final MandateClient mandateServiceClient;
 
-    public MandateServiceHandler(AppUrlsConfig appUrlsConfig) {
-        this.mandateClient = ApiClient.getApiService(appUrlsConfig.getMandateServiceUrl(), MandateClient.class);
+    public MandateServiceHandler(MandateClient mandateServiceClient) {
+        this.mandateServiceClient = mandateServiceClient;
     }
 
     @Bean
@@ -28,12 +24,15 @@ public class MandateServiceHandler {
             log.info("Running getMandateDetails");
             try {
                 Long mandateId = (Long) execution.getVariable("mandateId");
-                var mandateDetails = this.mandateClient.getMandateDetails(mandateId)
-                        .blockOptional()
-                        .orElseThrow(() -> new ResourceNotFoundException("Mandate not found"));
-                execution.setVariable("mandateDetails", mandateDetails);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                var mandateDetails = this.mandateServiceClient.getMandateDetails(mandateId)
+                        .blockOptional();
+                if (mandateDetails.isEmpty()) {
+                    throw new BpmnError("TransactionFailed", "Mandate not found");
+                } else {
+                    execution.setVariable("mandateDetails", mandateDetails.get());
+                }
+            } catch (Throwable e) {
+                throw new BpmnError("TransactionFailed", "Error fetching mandate details" + e.getMessage());
             }
         };
     }

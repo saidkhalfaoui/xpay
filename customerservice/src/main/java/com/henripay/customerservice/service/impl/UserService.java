@@ -1,5 +1,6 @@
 package com.henripay.customerservice.service.impl;
 
+import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.customerservice.dto.UserDTO;
 import com.henripay.customerservice.mapper.UserMapper;
 import com.henripay.customerservice.service.IUserService;
@@ -7,6 +8,7 @@ import com.henripay.domainservice.entity.UserEntity;
 import com.henripay.domainservice.exception.InvalidInput;
 import com.henripay.domainservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +17,7 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper){
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
     }
@@ -23,18 +25,20 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
-        if(isUserExists(userDTO.getIban())){
+        if (isUserExists(userDTO.getIban())) {
             return findByIban(userDTO.getIban());
         }
         UserEntity merchant = userMapper.toEntity(userDTO);
-        UserEntity savedMerchant =  userRepository.save(merchant);
+        UserEntity savedMerchant = userRepository.save(merchant);
         return userMapper.toDto(savedMerchant);
     }
 
     @Override
     public UserDTO getUserById(Long id) {
-        Optional<UserEntity> merchant = userRepository.findById(id);
-        return  userMapper.toDto(merchant.orElseThrow(() -> new InvalidInput("User not found")));
+        var user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return userMapper.toDto(user);
     }
 
     @Override
@@ -44,8 +48,10 @@ public class UserService implements IUserService {
 
     @Override
     public void deleteUser(Long id) {
-        userRepository.findById(id).orElseThrow(() -> new InvalidInput("User not found"));
-        userRepository.deleteById(id);
+        var user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        userRepository.delete(user);
     }
 
     @Override
