@@ -1,13 +1,14 @@
 package com.henripay.henripayapi.handler;
 
-
 import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.MandateClient;
 import lombok.extern.slf4j.Slf4j;
+import com.henripay.henripayapi.client.MandateClient;
+import lombok.extern.log4j.Log4j2;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
 
 @Component
 @Slf4j
@@ -26,11 +27,14 @@ public class MandateServiceHandler {
             try {
                 Long mandateId = (Long) execution.getVariable("mandateId");
                 var mandateDetails = this.mandateClient.getMandateDetails(mandateId)
-                        .blockOptional()
-                        .orElseThrow(() -> new ResourceNotFoundException("Mandate not found"));
-                execution.setVariable("mandateDetails", mandateDetails);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                        .blockOptional();
+                if (mandateDetails.isEmpty()) {
+                    throw new BpmnError("TransactionFailed", "Mandate not found");
+                } else {
+                    execution.setVariable("mandateDetails", mandateDetails.get());
+                }
+            } catch (Throwable e) {
+                throw new BpmnError("TransactionFailed", "Error fetching mandate details" + e.getMessage());
             }
         };
     }

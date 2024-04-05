@@ -15,8 +15,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <!--suppress UnresolvedMavenProperty -->
-        <java.version>${parent.java.version}</java.version>
     </properties>
 
     <dependencies>
@@ -32,11 +30,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>

@@ -12,7 +12,6 @@ public class SepaddServiceHandler {
 
     private final SepaddClient sepaddClient;
 
-
     public SepaddServiceHandler(SepaddClient sepaddClient) {
         this.sepaddClient = sepaddClient;
     }
