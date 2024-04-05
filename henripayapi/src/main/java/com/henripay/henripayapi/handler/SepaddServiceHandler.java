@@ -1,20 +1,19 @@
 package com.henripay.henripayapi.handler;
 
 import com.henripay.henripayapi.client.SepaddClient;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-@Log4j2
+@Slf4j
 public class SepaddServiceHandler {
 
-    private final SepaddClient sepaddServiceClient;
+    private final SepaddClient sepaddClient;
 
-
-    public SepaddServiceHandler(SepaddClient sepaddServiceClient) {
-        this.sepaddServiceClient = sepaddServiceClient;
+    public SepaddServiceHandler(SepaddClient sepaddClient) {
+        this.sepaddClient = sepaddClient;
     }
 
     @Bean
@@ -23,7 +22,7 @@ public class SepaddServiceHandler {
             log.info("Running addDirectDebitTransaction");
             try {
 //                DirectDebitRequest directDebitRequest = (DirectDebitRequest) execution.getVariable("directDebitRequest");
-//                Mono<TransactionResponse> response = this.sepaddServiceClient.addDirectDebitTransaction(directDebitRequest);
+//                Mono<TransactionResponse> response = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
 //                response.subscribe(addDirectDebitTransactionResponse -> {
 //                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
 //                });
