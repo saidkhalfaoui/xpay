@@ -1,6 +1,5 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.UserClient;
 import lombok.extern.slf4j.Slf4j;
 import com.henripay.henripayapi.client.UserClient;

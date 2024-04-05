@@ -1,10 +1,7 @@
 package com.henripay.henripayapi.handler;
 
-import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.henripayapi.client.MandateClient;
 import lombok.extern.slf4j.Slf4j;
-import com.henripay.henripayapi.client.MandateClient;
-import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
