@@ -1,7 +1,6 @@
 package com.henripay.common.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.henripay.common.error.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,14 +15,6 @@ public class HenripayExceptionHandlerReactor extends ResponseEntityExceptionHand
 
     public HenripayExceptionHandlerReactor(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-    }
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-//                .build();
-                .body(ex.getMessage());
     }
 
     @ExceptionHandler(WebClientResponseException.class)

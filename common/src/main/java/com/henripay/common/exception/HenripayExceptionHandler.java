@@ -1,6 +1,5 @@
 package com.henripay.common.exception;
 
-import com.henripay.common.error.ResourceNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +20,6 @@ public class HenripayExceptionHandler extends ResponseEntityExceptionHandler {
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("Z")));
         return new ResponseEntity<>(henripayException, badRequest);
-    }
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(value = {DataAccessException.class})

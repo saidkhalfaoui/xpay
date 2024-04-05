@@ -1,6 +1,6 @@
 package com.henripay.henripayapi.service;
 
-import com.henripay.common.error.ResourceNotFoundException;
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
@@ -32,7 +32,7 @@ public class CollectionService {
                 .getUserDetails(collectioninformation.getCustomerIdIdentifier())
                 .blockOptional();
         if (userDetails.isEmpty()) {
-            throw new ResourceNotFoundException("User not found");
+            throw new InvalidInput("User not found");
         }
 
         log.info("Process : " + processDefinitionKey + " started");

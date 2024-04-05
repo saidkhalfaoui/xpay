@@ -1,4 +1,4 @@
-package com.henripay.domainservice.exception;
+package com.henripay.common.exception;
 
 public class InvalidInput extends RuntimeException {
 

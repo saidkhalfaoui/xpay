@@ -1,6 +1,5 @@
 package com.henripay.customerservice.service.impl;
 
-import com.henripay.common.error.ResourceNotFoundException;
 import com.henripay.customerservice.dto.UserDTO;
 import com.henripay.customerservice.mapper.UserMapper;
 import com.henripay.customerservice.service.IUserService;
@@ -37,7 +36,7 @@ public class UserService implements IUserService {
     public UserDTO getUserById(Long id) {
         var user = userRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new InvalidInput("User not found"));
         return userMapper.toDto(user);
     }
 
@@ -50,8 +49,8 @@ public class UserService implements IUserService {
     public void deleteUser(Long id) {
         var user = userRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        userRepository.delete(user);
+                .orElseThrow(() -> new InvalidInput("User not found"));
+        userRepository.deleteById(user.getCustomerIdIdentifier());
     }
 
     @Override
