@@ -1,11 +1,14 @@
 package com.henripay.domainservice.entity;
 
+import com.henripay.domainservice.entity.type.Statusenum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -49,7 +52,7 @@ public class TransactionEntity implements Serializable {
     @JoinColumn(name = "received_id", referencedColumnName = "merchant_id")
     private MerchantEntity receiver;
 
-    @Column(name = "execution_date", nullable = false)
+    @Column(name = "execution_date")
     private LocalDate executionDate;
 
     @Column(name = "amount")
@@ -64,8 +67,9 @@ public class TransactionEntity implements Serializable {
     @Column(name = "end_to_end_transaction_reference")
     private String endToEndTransactionReference;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Statusenum status;
 
     @Column(name = "additional_info")
     private String additionalInfo;
@@ -93,5 +97,14 @@ public class TransactionEntity implements Serializable {
 
     @Column(name = "nature")
     private String nature;
+
+    public JsonNode getMetaData() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readTree(this.metaData);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deserializing JSON data", e);
+        }
+    }
 
 }

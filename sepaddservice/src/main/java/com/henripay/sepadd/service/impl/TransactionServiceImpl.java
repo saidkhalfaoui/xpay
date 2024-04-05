@@ -2,6 +2,7 @@ package com.henripay.sepadd.service.impl;
 
 import com.henripay.common.exception.InvalidInput;
 import com.henripay.domainservice.entity.TransactionEntity;
+import com.henripay.domainservice.entity.type.Statusenum;
 import com.henripay.domainservice.repository.TransactionRepository;
 import com.henripay.sepadd.dto.*;
 import com.henripay.sepadd.mapper.*;
@@ -55,7 +56,7 @@ public class TransactionServiceImpl implements TransactionService {
     private TransactionResponse addTransaction(TransactionEntity entity, String transactionNature) {
         TransactionEntity transactionEntity;
         transactionEntity = entity;
-        transactionEntity.setStatus(String.valueOf(Statusenum.CREATED));
+        transactionEntity.setStatus(Statusenum.CREATED);
         transactionEntity.setProcessingStatus(String.valueOf(Processingstatusenum.PENDING));
         transactionEntity.setCreationDate(LocalDate.now());
         transactionEntity.setLastUpdated(LocalDate.now());
@@ -63,7 +64,7 @@ public class TransactionServiceImpl implements TransactionService {
         transactionEntity.setTransactionId(transactionId);
         transactionEntity.setNature(transactionNature);
         transactionRepository.save(transactionEntity);
-        return new TransactionResponse().transactionId(transactionId).status(Statusenum.CREATED).statusDescription("Created Successfully");
+        return new TransactionResponse().transactionId(transactionId).status(com.henripay.sepadd.dto.Statusenum.CREATED).statusDescription("Created Successfully");
     }
 
     @Override
@@ -73,7 +74,7 @@ public class TransactionServiceImpl implements TransactionService {
             throw new InvalidInput("Transaction not found");
         }
         transaction.get().setLastUpdated(LocalDate.now());
-        transaction.get().setStatus(String.valueOf(Statusenum.DELETED));
+        transaction.get().setStatus(Statusenum.DELETED);
         TransactionEntity transactionEntity = transactionRepository.save(transaction.get());
         return transactionStatusResponseMapper.toDto(transactionEntity);
     }

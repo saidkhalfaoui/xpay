@@ -5,7 +5,7 @@ app:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     driverClassName: org.postgresql.Driver
     database: mainhp
-    username: henripay
+    username: postgres
     password: pgadmin
     host: localhost
     port: 5432

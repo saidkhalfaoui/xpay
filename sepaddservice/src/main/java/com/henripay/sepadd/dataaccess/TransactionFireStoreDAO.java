@@ -15,12 +15,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 
 
@@ -180,43 +177,43 @@ public class TransactionFireStoreDAO implements TransactionDAO {
 
 
         TransactionStatusResponse transactionStatusResponse = new TransactionStatusResponse();
-        transactionStatusResponse.setTransactionId(transactionId);
+//        transactionStatusResponse.setTransactionId(transactionId);
+//
+//        try {
+//
+//            DocumentSnapshot documentSnapshot1 = querySnapshot1.get();
+//            if (documentSnapshot1.exists()) {
+//
+//                docRef1.update(TransactionJsonObjectMapper.LAST_UPDATED, Timestamp.now());
+//                WriteResult result = docRef1.update("status", Statusenum.DELETED).get();
+//                if (result.getUpdateTime() != null) {
+//                    logger.info("deleted transaction" + result.getUpdateTime());
+//                    transactionStatusResponse.setTransactionId(transactionId);
+//
+//                    var localDate = result.getUpdateTime().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+//                    transactionStatusResponse.setLastUpdated(localDate);
+//                    transactionStatusResponse.setStatus(Statusenum.DELETED);
+//                }
+//                return transactionStatusResponse;
+//
+//
+//            }
+//
+//
+//            throw new NoSuchElementException();
+//
+//
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        } catch (ExecutionException e) {
+//            throw new RuntimeException(e);
+//        } catch (NoSuchElementException e) {
+//            logger.error("Transaction Not found");
+//            transactionStatusResponse.setStatus(Statusenum.NOT_FOUND);
+//            return transactionStatusResponse;
+//        }
 
-        try {
-
-            DocumentSnapshot documentSnapshot1 = querySnapshot1.get();
-            if (documentSnapshot1.exists()) {
-
-                docRef1.update(TransactionJsonObjectMapper.LAST_UPDATED, Timestamp.now());
-                WriteResult result = docRef1.update("status", Statusenum.DELETED).get();
-                if (result.getUpdateTime() != null) {
-                    logger.info("deleted transaction" + result.getUpdateTime());
-                    transactionStatusResponse.setTransactionId(transactionId);
-
-                    var localDate = result.getUpdateTime().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                    transactionStatusResponse.setLastUpdated(localDate);
-                    transactionStatusResponse.setStatus(Statusenum.DELETED);
-                }
-                return transactionStatusResponse;
-
-
-            }
-
-
-            throw new NoSuchElementException();
-
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchElementException e) {
-            logger.error("Transaction Not found");
-            transactionStatusResponse.setStatus(Statusenum.NOT_FOUND);
-            return transactionStatusResponse;
-        }
-
-
+        return null;
     }
 
 

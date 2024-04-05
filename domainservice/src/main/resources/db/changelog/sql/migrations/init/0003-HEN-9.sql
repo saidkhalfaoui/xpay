@@ -7,7 +7,7 @@ CREATE TABLE transactions
     external_transaction_id          INTEGER,
     sender_id                        BIGINT,
     received_id                      BIGINT,
-    execution_date                   date                                                NOT NULL,
+    execution_date date,
     amount                           DECIMAL,
     currency                         VARCHAR(255),
     scheduled_execution_date         date,
@@ -20,7 +20,7 @@ CREATE TABLE transactions
     last_updated                     date,
     authorisation_1_code             VARCHAR(255),
     internal_transaction_reference   VARCHAR(255),
-    meta_data                        jsonb,
+    meta_data      text,
     nature                           VARCHAR(255)
 );
 
