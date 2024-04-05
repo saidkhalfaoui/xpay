@@ -1,9 +1,9 @@
 package com.henripay.henripayapi.service;
 
-import com.henripay.common.exception.InvalidInput;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
+import com.henripay.henripayapi.web.error.InvalidInput;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;

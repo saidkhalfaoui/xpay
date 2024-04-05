@@ -1,6 +1,6 @@
 package com.henripay.mandateservice.config;
 
-import com.henripay.domainservice.exception.InvalidInput;
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.mandateservice.dto.Error;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

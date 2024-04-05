@@ -925,7 +925,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/Id'
         '400':
-          $ref: '#/components/responses/400'
+          description: Invalid data submitted or request processing error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 
 
@@ -3665,3 +3669,11 @@ components:
         - merchant
         - signatureDate
         - startDate
+    Error:
+        type: object
+        properties:
+          code:
+            type: integer
+            format: int64
+          message:
+            type: string

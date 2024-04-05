@@ -1,8 +1,7 @@
 package com.henripay.customerservice.config;
 
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.customerservice.dto.Error;
-import com.henripay.domainservice.exception.InvalidInput;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

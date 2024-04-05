@@ -2,7 +2,7 @@ package com.henripay.customerservice.service.impl;
 import com.henripay.customerservice.dto.UserDTO;
 import com.henripay.customerservice.mapper.UserMapper;
 import com.henripay.domainservice.entity.UserEntity;
-import com.henripay.domainservice.exception.InvalidInput;
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.domainservice.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

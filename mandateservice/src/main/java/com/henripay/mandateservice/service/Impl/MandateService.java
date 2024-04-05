@@ -3,7 +3,7 @@ package com.henripay.mandateservice.service.Impl;
 import com.henripay.domainservice.entity.MandateEntity;
 import com.henripay.domainservice.entity.MerchantEntity;
 import com.henripay.domainservice.entity.UserEntity;
-import com.henripay.domainservice.exception.InvalidInput;
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.domainservice.repository.MandateRepository;
 import com.henripay.domainservice.repository.MerchantRepository;
 import com.henripay.domainservice.repository.UserRepository;

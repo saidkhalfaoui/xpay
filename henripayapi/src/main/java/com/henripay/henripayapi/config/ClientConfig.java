@@ -19,7 +19,7 @@ public class ClientConfig {
     }
 
     @Bean
-    UserClient userServiceClient() {
+    UserClient userClient() {
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->
@@ -38,7 +38,7 @@ public class ClientConfig {
     }
 
     @Bean
-    MandateClient mandateServiceClient() {
+    MandateClient mandateClient() {
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->
@@ -56,7 +56,7 @@ public class ClientConfig {
     }
 
     @Bean
-    SepaddClient sepaddServiceClient() {
+    SepaddClient sepaddClient() {
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->

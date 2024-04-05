@@ -1,4 +1,4 @@
-package com.henripay.common.apiClient;
+package com.henripay.common.api;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
