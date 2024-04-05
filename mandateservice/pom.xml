@@ -15,8 +15,9 @@
     <packaging>jar</packaging>
 
     <properties>
-        <!--suppress UnresolvedMavenProperty -->
-        <java.version>${parent.java.version}</java.version>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -27,16 +28,19 @@
             <version>${project.version}</version>
             <classifier>arbitrary</classifier>
         </dependency>
+
+         <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+            <classifier>arbitrary</classifier>
+        </dependency>
+
     </dependencies>
 
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
@@ -47,6 +51,13 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>integer=Long,int=Long</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
@@ -61,6 +72,7 @@
                                 <delegatePattern>true</delegatePattern>
                                 <serializableModel>true</serializableModel>
                                 <useSpringBoot3>true</useSpringBoot3>
+                                <unhandledException>true</unhandledException>
                             </configOptions>
                         </configuration>
                     </execution>

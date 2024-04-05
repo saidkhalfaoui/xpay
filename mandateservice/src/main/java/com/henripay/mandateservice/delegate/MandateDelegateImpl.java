@@ -3,14 +3,14 @@ package com.henripay.mandateservice.delegate;
 import com.henripay.mandateservice.controller.MandatesApiDelegate;
 import com.henripay.mandateservice.dto.MandateDTO;
 import com.henripay.mandateservice.service.Impl.MandateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
+@Slf4j
+@RestController
 public class MandateDelegateImpl implements MandatesApiDelegate {
     private final MandateService mandateService;
 

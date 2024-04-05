@@ -1,0 +1,96 @@
+
+server:
+  compression:
+    enabled: true
+  port: 7080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: ${app.name}
+  jpa:
+    database: ${app.db.provider}
+    show-sql: ${app.db.show-sql}
+    open-in-view: false
+    database-platform: ${app.db.database-platform}
+    hibernate:
+      ddl-auto: ${app.db.hibernate.ddl-auto}
+  datasource:
+    url: jdbc:${app.db.provider}://${app.db.host}:${app.db.port}/${app.db.database}
+    username: ${app.db.username}
+    password: ${app.db.password}
+    driverClassName: ${app.db.driverClassName}
+    hikari:
+      minimumIdle: 100
+      maximumPoolSize: 1000
+  sql:
+    init:
+      platform: postgres
+#  liquibase:
+#    contexts: local
+#    enabled: ${app.db.liquibase.enabled}
+#    change-log: db/changelog/db-changelog.yml
+  jmx:
+    default-domain: ${spring.application.name}
+
+##https://docs.camunda.org/manual/7.20/user-guide/spring-boot-integration/configuration/#camunda-engine-properties
+camunda:
+  bpm:
+    enabled: true
+    database:
+      type: postgres
+      schema-update: true
+    filter:
+      create: All
+    admin-user:
+      id: ${app.camunda.bpm.admin-user.id}
+      password: ${app.camunda.bpm.admin-user.password}
+      first-name: Admin
+      last-name:
+    history-level: full
+    auto-deployment-enabled: ${app.camunda.bpm.auto-deployment}
+    job-execution:
+      enabled: true
+      core-pool-size: 100
+      max-pool-size: 100
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ['health', 'info']
+    jmx:
+      domain: ${spring.application.name}
+  endpoint:
+    health:
+      show-details: when_authorized
+  info:
+    git:
+      mode: full
+  health:
+    mail:
+      enabled: false # When using the MailService, configure an SMTP server and set this to true
+  metrics:
+    enable:
+      http: true
+      jvm: true
+      logback: true
+      process: true
+      system: true
+    distribution:
+      percentiles-histogram:
+        all: true
+      percentiles:
+        all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
+    tags:
+      application: ${spring.application.name}
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true

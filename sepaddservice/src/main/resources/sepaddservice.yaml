@@ -2,6 +2,10 @@ openapi: 3.0.0
 info:
   title: Financial Transactions API
   version: 1.0.0
+
+servers:
+  - url: '/api/v1'
+
 paths:
   /direct-debit:
     post:

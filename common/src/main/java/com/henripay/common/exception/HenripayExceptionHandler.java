@@ -3,14 +3,15 @@ package com.henripay.common.exception;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-@ControllerAdvice
-public class HenripayExceptionHandler {
+@RestControllerAdvice
+public class HenripayExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {HenripayRequestException.class})
     public ResponseEntity<Object> handleHenripayBadRequestException(HenripayRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;

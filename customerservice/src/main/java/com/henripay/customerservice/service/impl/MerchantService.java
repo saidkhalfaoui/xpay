@@ -1,10 +1,10 @@
 package com.henripay.customerservice.service.impl;
 
+import com.henripay.common.exception.InvalidInput;
 import com.henripay.customerservice.dto.MerchantDTO;
 import com.henripay.customerservice.mapper.MerchantMapper;
 import com.henripay.customerservice.service.IMerchantService;
 import com.henripay.domainservice.entity.MerchantEntity;
-import com.henripay.domainservice.exception.InvalidInput;
 import com.henripay.domainservice.repository.MerchantRepository;
 import org.springframework.stereotype.Service;
 
