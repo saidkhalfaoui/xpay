@@ -1,23 +1,16 @@
 package com.henripay.sepadd.iso20022.sepa;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.henripay.sepadd.iso20022.sepa.Utils.*;
-
 import com.henripay.sepadd.api.model.Accountinformation;
 import com.henripay.sepadd.api.model.CreditTransferRequestData;
 import com.henripay.sepadd.api.model.CreditorInfo;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
-import iso.std.iso._20022.tech.xsd.pain_001_001.ChargeBearerType1Code;
-import iso.std.iso._20022.tech.xsd.pain_001_001.CreditTransferTransactionInformation10;
-import iso.std.iso._20022.tech.xsd.pain_001_001.CustomerCreditTransferInitiationV03;
-import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
-import iso.std.iso._20022.tech.xsd.pain_001_001.GroupHeader32;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentIdentification1;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentInstructionInformation3;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentMethod3Code;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentTypeInformation19;
-import iso.std.iso._20022.tech.xsd.pain_001_001.ServiceLevel8Choice;
+import iso.std.iso._20022.tech.xsd.pain_001_001.*;
+import org.joda.time.LocalDate;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,12 +19,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.datatype.DatatypeConfigurationException;
-
-import org.joda.time.LocalDate;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.henripay.sepadd.iso20022.sepa.Utils.*;
 
 /**
  * The Customer SEPA Credit Transfer Initiation message is sent by the initiating party to the debtor bank. It
@@ -321,27 +310,27 @@ public class CreditTransferPainFile extends BasePainFile {
 
             // Only 'SLEV' is allowed.
             //creditTransferTransactionInformation.setChrgBr(ChargeBearerType1Code.SLEV);
-
-            // Financial institution servicing an account for the creditor.
-            Accountinformation accountinformation = creditTransferRequestData.getAccountInfo();
-            if (accountinformation != null) {
-                String iban = creditTransferRequestData.getAccountInfo().getIBAN();
-                if (!iban.isEmpty()) {
-                    String bic = getBIC(IBANUtils.getBankCode(iban));
-
-                    creditTransferTransactionInformation.setCdtrAgt(createFinInstnId(bic));
-
-                    // Party to which an amount of money is due.
-
-
-                    // Unambiguous identification of the account of the creditor to which a credit entry will
-                    // be posted as a result of the payment transaction.
-                    creditTransferTransactionInformation.setCdtrAcct(createAccount(iban));
-
-
-                }
-                creditTransferTransactionInformation.setCdtr(createParty(accountinformation.getName()));
-            }
+//
+//            // Financial institution servicing an account for the creditor.
+//            Accountinformation accountinformation = creditTransferRequestData.getAccountInfo();
+//            if (accountinformation != null) {
+//                String iban = creditTransferRequestData.getAccountInfo().getIBAN();
+//                if (!iban.isEmpty()) {
+//                    String bic = getBIC(IBANUtils.getBankCode(iban));
+//
+//                    creditTransferTransactionInformation.setCdtrAgt(createFinInstnId(bic));
+//
+//                    // Party to which an amount of money is due.
+//
+//
+//                    // Unambiguous identification of the account of the creditor to which a credit entry will
+//                    // be posted as a result of the payment transaction.
+//                    creditTransferTransactionInformation.setCdtrAcct(createAccount(iban));
+//
+//
+//                }
+//                creditTransferTransactionInformation.setCdtr(createParty(accountinformation.getName()));
+//            }
 
 
             creditTransferTransactionInformation.setRmtInf(createRmtInf(creditTransferRequestData.getRemittanceInfo()));

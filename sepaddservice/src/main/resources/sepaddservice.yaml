@@ -96,10 +96,8 @@ components:
     TransactionRequest:
       type: object
       properties:
-        account_info:
-          $ref: '#/components/schemas/accountinformation'
-
-
+        meta_data:
+          type: string
         amount:
           type: number
           example: "10.23"
@@ -168,9 +166,9 @@ components:
           $ref: '#/components/schemas/statusenum'
         processingStatus:
           $ref: '#/components/schemas/processingstatusenum'
-          nullable: true
         lastUpdated:
           type: string
+          format: date
 
 
     TransactionResponse:

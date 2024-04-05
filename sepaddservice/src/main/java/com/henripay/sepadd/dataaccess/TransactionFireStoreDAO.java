@@ -140,7 +140,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
                 }
 
 
-                transactionStatusResponse.setLastUpdated(request.getLastUpdated().toString());
+                transactionStatusResponse.setLastUpdated(request.getLastUpdated());
                 return transactionStatusResponse;
             }
 
@@ -190,7 +190,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
                 if (result.getUpdateTime() != null) {
                     logger.info("deleted transaction" + result.getUpdateTime());
                     transactionStatusResponse.setTransactionId(transactionId);
-                    transactionStatusResponse.setLastUpdated(result.getUpdateTime().toString());
+                    transactionStatusResponse.setLastUpdated(result.getUpdateTime().toDate());
                     transactionStatusResponse.setStatus(Statusenum.DELETED);
                 }
                 return transactionStatusResponse;

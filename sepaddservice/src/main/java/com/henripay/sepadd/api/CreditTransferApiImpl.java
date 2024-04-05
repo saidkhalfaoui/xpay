@@ -1,15 +1,14 @@
 package com.henripay.sepadd.api;
 
+import com.henripay.common.firebase4j.error.FirebaseException;
+import com.henripay.common.firebase4j.error.JacksonUtilityException;
 import com.henripay.sepadd.api.model.CreditTransferRequest;
-
 import com.henripay.sepadd.api.model.TransactionResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import com.henripay.common.firebase4j.error.FirebaseException;
-import com.henripay.common.firebase4j.error.JacksonUtilityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class CreditTransferApiImpl implements CreditTransferApi {
             consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> creditTransferPost(@ApiParam(value = "Credit Transfer Request") @Valid @RequestBody(required = false) CreditTransferRequest creditTransferRequest) {
-        logger.info(creditTransferRequest.getAccountInfo().getIBAN());
+        logger.info(creditTransferRequest.getMetaData());
 
         TransactionResponse response = new TransactionResponse();
         try {
