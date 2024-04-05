@@ -1,12 +1,14 @@
 package com.henripay.sepadd.api;
 
-import com.henripay.sepadd.api.model.DirectDebitRequest;
-
-import com.henripay.sepadd.api.model.TransactionResponse;
-import com.henripay.sepadd.service.TransactionService;
-import io.swagger.annotations.*;
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.api.model.DirectDebitRequest;
+import com.henripay.sepadd.api.model.TransactionResponse;
+import com.henripay.sepadd.service.TransactionService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +52,12 @@ public class DirectDebitApiImpl implements DirectDebitApi {
             consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> directDebitPost(@ApiParam(value = "Direct Debit Request") @Valid @RequestBody(required = false) DirectDebitRequest directDebitRequest) {
-        logger.info(directDebitRequest.getAccountInfo().getIBAN());
+        logger.info(directDebitRequest.getMetaData());
 
         TransactionResponse response = new TransactionResponse();
         try {
             response = transactionService.addDirectDebitTransaction(directDebitRequest);
-        } catch (JacksonUtilityException e) {
-            throw new RuntimeException(e);
-        } catch (FirebaseException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (JacksonUtilityException | FirebaseException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());

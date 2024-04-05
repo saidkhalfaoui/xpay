@@ -1,38 +1,17 @@
 package com.henripay.sepadd.iso20022.sepa.sdd;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createAccount;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createAmount;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createFinInstnId;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createIdParty;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createParty;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createPaymentIdentification;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createXMLGregorianCalendar;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createXMLGregorianCalendarDate;
-
 import com.henripay.sepadd.api.model.CreditorInfo;
 import com.henripay.sepadd.api.model.DirectDebitRequestData;
-import com.henripay.sepadd.api.model.Mandateinformation;
 import com.henripay.sepadd.dataaccess.model.CreditorInfoJsonObjectMapper;
 import com.henripay.sepadd.iso20022.sepa.BasePainFile;
 import com.henripay.sepadd.iso20022.sepa.IBANUtils;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ChargeBearerType1Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.CustomerDirectDebitInitiationV02;
-import iso.std.iso._20022.tech.xsd.pain_008_001.DirectDebitTransaction6;
-import iso.std.iso._20022.tech.xsd.pain_008_001.DirectDebitTransactionInformation9;
-import iso.std.iso._20022.tech.xsd.pain_008_001.Document;
-import iso.std.iso._20022.tech.xsd.pain_008_001.GroupHeader39;
-import iso.std.iso._20022.tech.xsd.pain_008_001.LocalInstrument2Choice;
-import iso.std.iso._20022.tech.xsd.pain_008_001.MandateRelatedInformation6;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ObjectFactory;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentInstructionInformation4;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentMethod2Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentTypeInformation20;
-import iso.std.iso._20022.tech.xsd.pain_008_001.Purpose2Choice;
-import iso.std.iso._20022.tech.xsd.pain_008_001.SequenceType1Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ServiceLevel8Choice;
+import iso.std.iso._20022.tech.xsd.pain_008_001.*;
+import org.joda.time.LocalDate;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,11 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import org.joda.time.LocalDate;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.*;
 
 
 /**
@@ -213,58 +189,58 @@ public class DirectDebitPainFile extends BasePainFile {
             DirectDebitTransactionInformation9 directDebitTransactionInformation = new DirectDebitTransactionInformation9();
 
             // Set of elements used to reference a payment instruction.
-            directDebitTransactionInformation.setPmtId(createPaymentIdentification(directDebitRequestData.getEndToEndTransactionReference() /*change this */, directDebitRequestData.getEndToEndTransactionReference()));
-
-            // Amount of money to be moved between the debtor and creditor, before deduction
-            // of charges, expressed in the currency as ordered by the initiating party.
-            directDebitTransactionInformation.setInstdAmt(createAmount(directDebitRequestData.getAmount()));
-
-            //adding Mandate Information :
-            Mandateinformation mandateinformation = directDebitRequestData.getMandateInformation();
-            if (mandateinformation != null) {
-                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), LocalDate.fromDateFields(mandateinformation.getDateOfsignature()), mandateinformation.getPersonId()));
-            }
-
-            // adding Account infor
-            if (!directDebitRequestData.getAccountInfo().getIBAN().isEmpty())
-            // Financial institution servicing an account for the debtor.
-            {
-                String iban = directDebitRequestData.getAccountInfo().getIBAN();
-                String bic = getBIC(IBANUtils.getBankCode(iban));
-
-                directDebitTransactionInformation.setDbtrAgt(createFinInstnId(bic));
-                // Party that owes an amount of money to the (ultimate) creditor.
-                directDebitTransactionInformation.setDbtr(createParty(directDebitRequestData.getAccountInfo().getName()));
-                directDebitTransactionInformation.setDbtrAcct(createAccount(directDebitRequestData.getAccountInfo().getIBAN()));
-
-                //TODO:
-                Purpose2Choice purpose = new Purpose2Choice();
-                purpose.setCd("OTHR");
-                directDebitTransactionInformation.setPurp(purpose);
-            }
-
-            // TODO later if needed
-            //directDebitTransactionInformation.setRmtInf( createRmtInf(directDebitRequestData.getRemittanceInfo) );
-
-            paymentInstructionInformation.getDrctDbtTxInf().add(directDebitTransactionInformation);
-
-            // TODO:
-            BigDecimal ctrlSum = groupHeader.getCtrlSum();
-            ctrlSum = ctrlSum.add(directDebitRequestData.getAmount());
-            groupHeader.setCtrlSum(ctrlSum);
-
-            int nbOfTxs = Integer.parseInt(groupHeader.getNbOfTxs());
-            nbOfTxs = nbOfTxs + 1;
-            groupHeader.setNbOfTxs(String.valueOf(nbOfTxs));
-
-            // TODO:
-            BigDecimal ictrlSum = paymentInstructionInformation.getCtrlSum();
-            ictrlSum = ictrlSum.add(directDebitRequestData.getAmount());
-            paymentInstructionInformation.setCtrlSum(ictrlSum);
-
-            int inbOfTxs = Integer.parseInt(paymentInstructionInformation.getNbOfTxs());
-            inbOfTxs = inbOfTxs + 1;
-            paymentInstructionInformation.setNbOfTxs(String.valueOf(inbOfTxs));
+//            directDebitTransactionInformation.setPmtId(createPaymentIdentification(directDebitRequestData.getEndToEndTransactionReference() /*change this */, directDebitRequestData.getEndToEndTransactionReference()));
+//
+//            // Amount of money to be moved between the debtor and creditor, before deduction
+//            // of charges, expressed in the currency as ordered by the initiating party.
+//            directDebitTransactionInformation.setInstdAmt(createAmount(directDebitRequestData.getAmount()));
+//
+//            //adding Mandate Information :
+//            Mandateinformation mandateinformation = directDebitRequestData.getMandateInformation();
+//            if (mandateinformation != null) {
+//                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), LocalDate.fromDateFields(mandateinformation.getDateOfsignature()), mandateinformation.getPersonId()));
+//            }
+//
+//            // adding Account infor
+//            if (!directDebitRequestData.getAccountInfo().getIBAN().isEmpty())
+//            // Financial institution servicing an account for the debtor.
+//            {
+//                String iban = directDebitRequestData.getAccountInfo().getIBAN();
+//                String bic = getBIC(IBANUtils.getBankCode(iban));
+//
+//                directDebitTransactionInformation.setDbtrAgt(createFinInstnId(bic));
+//                // Party that owes an amount of money to the (ultimate) creditor.
+//                directDebitTransactionInformation.setDbtr(createParty(directDebitRequestData.getAccountInfo().getName()));
+//                directDebitTransactionInformation.setDbtrAcct(createAccount(directDebitRequestData.getAccountInfo().getIBAN()));
+//
+//                //TODO:
+//                Purpose2Choice purpose = new Purpose2Choice();
+//                purpose.setCd("OTHR");
+//                directDebitTransactionInformation.setPurp(purpose);
+//            }
+//
+//            // TODO later if needed
+//            //directDebitTransactionInformation.setRmtInf( createRmtInf(directDebitRequestData.getRemittanceInfo) );
+//
+//            paymentInstructionInformation.getDrctDbtTxInf().add(directDebitTransactionInformation);
+//
+//            // TODO:
+//            BigDecimal ctrlSum = groupHeader.getCtrlSum();
+//            ctrlSum = ctrlSum.add(directDebitRequestData.getAmount());
+//            groupHeader.setCtrlSum(ctrlSum);
+//
+//            int nbOfTxs = Integer.parseInt(groupHeader.getNbOfTxs());
+//            nbOfTxs = nbOfTxs + 1;
+//            groupHeader.setNbOfTxs(String.valueOf(nbOfTxs));
+//
+//            // TODO:
+//            BigDecimal ictrlSum = paymentInstructionInformation.getCtrlSum();
+//            ictrlSum = ictrlSum.add(directDebitRequestData.getAmount());
+//            paymentInstructionInformation.setCtrlSum(ictrlSum);
+//
+//            int inbOfTxs = Integer.parseInt(paymentInstructionInformation.getNbOfTxs());
+//            inbOfTxs = inbOfTxs + 1;
+//            paymentInstructionInformation.setNbOfTxs(String.valueOf(inbOfTxs));
 
 
             return directDebitTransactionInformation;

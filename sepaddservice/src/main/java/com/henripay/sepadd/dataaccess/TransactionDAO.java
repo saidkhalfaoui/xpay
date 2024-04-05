@@ -1,9 +1,11 @@
 package com.henripay.sepadd.dataaccess;
 
-import com.henripay.sepadd.api.model.*;
-
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.api.model.CreditTransferRequest;
+import com.henripay.sepadd.api.model.CreditTransferRequestData;
+import com.henripay.sepadd.api.model.DirectDebitRequestData;
+import com.henripay.sepadd.api.model.TransactionStatusResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -24,7 +26,7 @@ public interface TransactionDAO {
 
     List<DirectDebitRequestData> getReadyToProcessDirectDebitTransactions(int batchSize);
 
-    List<CreditTransferRequestData> getReadyToProcessCreditTransferransactions(int batchSize);
+    List<CreditTransferRequestData> getReadyToProcessCreditTransferTransactions(int batchSize);
 
 
 }

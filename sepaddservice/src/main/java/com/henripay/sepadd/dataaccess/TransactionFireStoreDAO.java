@@ -4,12 +4,10 @@ package com.henripay.sepadd.dataaccess;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
-
-
-import com.henripay.sepadd.api.model.*;
-import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.api.model.*;
+import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 
 
@@ -256,6 +257,11 @@ public class TransactionFireStoreDAO implements TransactionDAO {
 
         return directDebitRequestDataList;
 
+    }
+
+    @Override
+    public List<CreditTransferRequestData> getReadyToProcessCreditTransferTransactions(int batchSize) {
+        return null;
     }
 
     public List<QueryDocumentSnapshot> fetchandUpdateReadyToProcessTransactions(String collectionType, Statusenum status, int batchsize) {
