@@ -2,7 +2,7 @@ package com.henripay.sepadd.iso20022.sepa;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.henripay.sepadd.api.model.Address;
+import com.henripay.sepadd.dto.Address;
 import iso.std.iso._20022.tech.xsd.pain_001_001.AccountIdentification4Choice;
 import iso.std.iso._20022.tech.xsd.pain_001_001.ActiveOrHistoricCurrencyAndAmount;
 import iso.std.iso._20022.tech.xsd.pain_001_001.AmountType3Choice;

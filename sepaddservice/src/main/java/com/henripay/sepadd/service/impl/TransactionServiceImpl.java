@@ -3,7 +3,7 @@ package com.henripay.sepadd.service.impl;
 import com.henripay.common.exception.InvalidInput;
 import com.henripay.domainservice.entity.TransactionEntity;
 import com.henripay.domainservice.repository.TransactionRepository;
-import com.henripay.sepadd.api.model.*;
+import com.henripay.sepadd.dto.*;
 import com.henripay.sepadd.mapper.*;
 import com.henripay.sepadd.service.TransactionService;
 import org.springframework.stereotype.Service;

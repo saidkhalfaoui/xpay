@@ -1,9 +1,9 @@
-package com.henripay.sepadd.api;
+package com.henripay.sepadd.controller;
 
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
-import com.henripay.sepadd.api.model.CreditTransferRequest;
-import com.henripay.sepadd.api.model.TransactionResponse;
+import com.henripay.sepadd.dto.CreditTransferRequest;
+import com.henripay.sepadd.dto.TransactionResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,7 +25,7 @@ import java.io.UnsupportedEncodingException;
 
 @Service
 @RestController
-public class CreditTransferApiImpl implements CreditTransferApi {
+public class CreditTransferApiImpl implements CreditTransferApiDelegate {
 
     Logger logger = LoggerFactory.getLogger(CreditTransferApiImpl.class);
     @Autowired

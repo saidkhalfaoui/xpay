@@ -1,6 +1,6 @@
-package com.henripay.sepadd.api;
+package com.henripay.sepadd.controller;
 
-import com.henripay.sepadd.api.model.TransactionStatusResponse;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.*;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-10T14:10:08.070140200+01:00[Europe/Amsterdam]")
 @Validated
 @Tag(name = "deleteTransaction", description = "the deleteTransaction API")
-public class DeleteTransactionApiImpl {
+public class DeleteTransactionApiImpl implements DeleteTransactionApiDelegate {
     Logger logger = LoggerFactory.getLogger(DirectDebitApiImpl.class);
     @Autowired
     private TransactionService transactionService;
@@ -68,7 +68,7 @@ public class DeleteTransactionApiImpl {
     public ResponseEntity<TransactionStatusResponse> deleteTransactionDelete(
             @NotNull @Parameter(name = "transactionId", description = "ID of the transaction", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "transactionId", required = true) String transactionId
     ) {
-        TransactionStatusResponse response = transactionService.deleteTransaction(transactionId);  // to fix
+        var response = transactionService.deleteTransaction(transactionId);  // to fix
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

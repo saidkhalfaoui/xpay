@@ -1,8 +1,8 @@
 package com.henripay.sepadd.iso20022.sepa;
 
-import com.henripay.sepadd.api.model.Accountinformation;
-import com.henripay.sepadd.api.model.CreditTransferRequestData;
-import com.henripay.sepadd.api.model.CreditorInfo;
+import com.henripay.sepadd.dto.Accountinformation;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
+import com.henripay.sepadd.dto.CreditorInfo;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
 import iso.std.iso._20022.tech.xsd.pain_001_001.*;
 import org.joda.time.LocalDate;
@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
@@ -194,7 +195,7 @@ public class CreditTransferPainFile extends BasePainFile {
         paymentInstructionInformation.setPmtTpInf(paymentTypeInformation);
 
         // This is the date on which the debtor's account is to be debited.
-        paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(creditTransferRequestData.getScheduledExecutionDate()));
+        //paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(creditTransferRequestData.getScheduledExecutionDate()));
 
         // Party that owes an amount of money to the (ultimate) creditor.
 

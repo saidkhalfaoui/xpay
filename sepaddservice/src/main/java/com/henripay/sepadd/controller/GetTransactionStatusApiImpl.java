@@ -3,10 +3,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package com.henripay.sepadd.api;
+package com.henripay.sepadd.controller;
 
 
-import com.henripay.sepadd.api.model.TransactionStatusResponse;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,15 @@ import javax.validation.constraints.NotNull;
 @Service
 @RestController
 
-public class GetTransactionStatusApiImpl implements GetTransactionStatusApi {
+public class GetTransactionStatusApiImpl implements GetTransactionStatusApiDelegate {
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    public void GetTransactionService(TransactionService transactionService) {
+        this.transactionService = transactionService;
+
+    }
 
     /**
      * GET /getTransactionStatus : Get Transaction Status
@@ -37,12 +43,6 @@ public class GetTransactionStatusApiImpl implements GetTransactionStatusApi {
      * @param transactionId ID of the transaction (required)
      * @return Transaction status retrieved successfully (status code 200)
      */
-    @Autowired
-    public void GetTransactionService(TransactionService transactionService) {
-        this.transactionService = transactionService;
-
-    }
-
     @ApiOperation(value = "Get Transaction Status", nickname = "getTransactionStatusGet", notes = "", response = TransactionStatusResponse.class, tags = {})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Transaction status retrieved successfully", response = TransactionStatusResponse.class)})

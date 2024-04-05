@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
 import org.jdom2.Document;
 
 /* To Be removed

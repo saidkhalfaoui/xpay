@@ -2,10 +2,10 @@ package com.henripay.sepadd.dataaccess;
 
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
-import com.henripay.sepadd.api.model.CreditTransferRequest;
-import com.henripay.sepadd.api.model.CreditTransferRequestData;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
-import com.henripay.sepadd.api.model.TransactionStatusResponse;
+import com.henripay.sepadd.dto.CreditTransferRequest;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;

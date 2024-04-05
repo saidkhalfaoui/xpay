@@ -1,7 +1,7 @@
 package com.henripay.sepadd.dataaccess.model;
 
 import com.google.common.collect.Maps;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
 
 import java.util.Map;
 

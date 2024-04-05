@@ -1,7 +1,7 @@
 package com.henripay.sepadd.mapper;
 
 import com.henripay.domainservice.entity.TransactionEntity;
-import com.henripay.sepadd.api.model.TransactionStatusResponse;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
-package com.henripay.sepadd.api;
+package com.henripay.sepadd.controller;
 
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
-import com.henripay.sepadd.api.model.DirectDebitRequest;
-import com.henripay.sepadd.api.model.TransactionResponse;
+import com.henripay.sepadd.dto.DirectDebitRequest;
+import com.henripay.sepadd.dto.TransactionResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-public class DirectDebitApiImpl implements DirectDebitApi {
+public class DirectDebitApiImpl implements DirectDebitApiDelegate {
 
     Logger logger = LoggerFactory.getLogger(DirectDebitApiImpl.class);
     @Autowired

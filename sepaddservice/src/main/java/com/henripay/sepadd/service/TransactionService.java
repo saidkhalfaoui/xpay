@@ -2,7 +2,7 @@ package com.henripay.sepadd.service;
 
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
-import com.henripay.sepadd.api.model.*;
+import com.henripay.sepadd.dto.*;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;

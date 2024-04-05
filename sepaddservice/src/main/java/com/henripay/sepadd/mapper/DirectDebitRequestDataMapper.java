@@ -1,7 +1,7 @@
 package com.henripay.sepadd.mapper;
 
 import com.henripay.domainservice.entity.TransactionEntity;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 

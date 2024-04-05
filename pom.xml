@@ -20,7 +20,7 @@
         <module>henripayapi</module>
         <module>mandateservice</module>
         <module>sepaddservice</module>
-        <module>spellclientservice</module>
+<!--        <module>spellclientservice</module>-->
     </modules>
 
 </project>

@@ -165,7 +165,7 @@ components:
           type: string
         end_to_end_transaction_reference:
           type: string
-          nullable: true
+          #nullable: true
         status:
           $ref: '#/components/schemas/statusenum'
         processingStatus:
