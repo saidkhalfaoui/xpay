@@ -1,15 +1,19 @@
 package com.henripay.sepadd.dataaccess;
 
-import com.henripay.sepadd.api.model.*;
-
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.dto.CreditTransferRequest;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
 public interface TransactionDAO {
+    static final String DD_COLLECTION = "direct_debit_collection";
+    static final String CT_COLLECTION = "credit_transfer_collection";
     String addTransaction(String id, String type, Map<String, Object> data) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException;
     //  String addCreditTransferTransaction(String id , Map<String, Object> data) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException;
 

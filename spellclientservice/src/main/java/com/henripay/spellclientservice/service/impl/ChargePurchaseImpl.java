@@ -1,9 +1,9 @@
 package com.henripay.spellclientservice.service.impl;
 
-import com.henripay.spellclientservice.api.model.ChargePurchaseDto;
-import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
+import com.henripay.spellclientservice.dto.ChargePurchaseDto;
+import com.henripay.spellclientservice.dto.PurchaseResponseDto;
 import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
 import com.henripay.spellclientservice.service.ChargePurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;

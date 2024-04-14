@@ -1,7 +1,7 @@
 package com.henripay.sepadd.dataaccess.model;
 
 import com.google.common.collect.Maps;
-import com.henripay.sepadd.api.model.CreditTransferRequestData;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
 
 import java.util.Map;
 

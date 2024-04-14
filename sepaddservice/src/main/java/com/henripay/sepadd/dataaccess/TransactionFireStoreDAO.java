@@ -4,12 +4,10 @@ package com.henripay.sepadd.dataaccess;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
-
-
-import com.henripay.sepadd.api.model.*;
-import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
+import com.henripay.sepadd.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 
 
@@ -26,8 +27,6 @@ public class TransactionFireStoreDAO implements TransactionDAO {
 
     private CollectionReference transactionCollection;
 
-    private static final String DD_COLLECTION = "direct_debit_collection";
-    private static final String CT_COLLECTION = "credit_transfer_collection";
     @Autowired
     private FireStoreDatabase fireStoreDatabase;
     private Firestore database;

@@ -1,13 +1,10 @@
 package com.henripay.spellclientservice.mapper;
 
-import com.henripay.spellclientservice.api.model.PurchaseRequestDto;
-import com.henripay.spellclientservice.api.model.PurchaseResDto;
+import com.henripay.spellclientservice.dto.PurchaseRequestDto;
+import com.henripay.spellclientservice.dto.PurchaseResDto;
 import com.spell.model.ClientDetails;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
-import java.util.Map;
 
 @Mapper(componentModel = "spring")
 public interface ClientDetailsMapper {

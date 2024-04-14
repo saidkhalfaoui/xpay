@@ -1,16 +1,13 @@
 package com.henripay.sepadd.service;
 
-import com.henripay.sepadd.api.model.*;
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.dto.*;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface TransactionService {
-    void loadConfigurations();
-
-    void processDirectDebitTransaction();
 
     TransactionStatusResponse queryTransactionByTransactionId(String transactionId);
 
