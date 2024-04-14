@@ -1,0 +1,26 @@
+package com.henripay.henripayapi.testcontainers;
+
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+@Testcontainers
+@ActiveProfiles("test")
+public interface DomainServiceTestContainer {
+
+    String DOCKER_IMAGE_NAME = "henripay/domain-service";
+    int PORT = 8080;
+
+    @Container
+    GenericContainer<?> container = new GenericContainer<>(DOCKER_IMAGE_NAME)
+            .withExposedPorts(PORT);
+
+    @DynamicPropertySource
+    static void registerProperties(DynamicPropertyRegistry registry) {
+        registry.add("app.ws.domain-service-url",
+                () -> String.format("http://localhost:%d", container.getMappedPort(PORT)));
+    }
+}
