@@ -1,9 +1,9 @@
 package com.henripay.spellclientservice.service.impl;
 
+import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
+import com.henripay.spellclientservice.api.model.DirectPostResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
-import com.henripay.spellclientservice.dto.DirectPostRequestDto;
-import com.henripay.spellclientservice.dto.DirectPostResponseDto;
 import com.henripay.spellclientservice.service.DirectPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;

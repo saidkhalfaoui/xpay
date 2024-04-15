@@ -39,8 +39,8 @@ public class TransactionDataJpaImpl implements TransactionDAO {
         TransactionEntity transactionEntity = new TransactionEntity();
         transactionEntity.setStatus(data.get("status").toString().toUpperCase());
         transactionEntity.setProcessingStatus(Processingstatusenum.PENDING.toString());
-        transactionEntity.setCreationDate(LocalDateTime.now());
-        transactionEntity.setLastUpdated(LocalDateTime.now());
+        transactionEntity.setCreationDate((LocalDateTime) data.get("creationDate"));
+        transactionEntity.setLastUpdated((LocalDateTime) data.get("lastUpdated"));
         transactionEntity.setTransactionId(id);
         transactionEntity.setNature(type);
         transactionRepository.save(transactionEntity);

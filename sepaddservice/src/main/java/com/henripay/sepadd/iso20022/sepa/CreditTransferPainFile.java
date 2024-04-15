@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
@@ -194,7 +195,7 @@ public class CreditTransferPainFile extends BasePainFile {
         paymentInstructionInformation.setPmtTpInf(paymentTypeInformation);
 
         // This is the date on which the debtor's account is to be debited.
-        paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(creditTransferRequestData.getScheduledExecutionDate()));
+        paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(Date.from(creditTransferRequestData.getScheduledExecutionDate().atZone(ZoneId.systemDefault()).toInstant())));
 
         // Party that owes an amount of money to the (ultimate) creditor.
 

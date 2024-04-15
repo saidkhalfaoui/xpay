@@ -1,6 +1,6 @@
 package com.henripay.spellclientservice.mapper;
 
-import com.henripay.spellclientservice.dto.ProductDto;
+import com.henripay.spellclientservice.api.model.ProductDto;
 import com.spell.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

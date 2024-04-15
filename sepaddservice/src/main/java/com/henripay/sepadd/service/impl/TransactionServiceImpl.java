@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -51,8 +51,8 @@ public class TransactionServiceImpl implements TransactionService {
         BeanUtils.copyProperties(request, directDebitRequestData);
         directDebitRequestData.setStatus(Statusenum.CREATED);
         directDebitRequestData.setProcessingStatus(Processingstatusenum.PENDING);
-        directDebitRequestData.setCreationDate(new Date());
-        directDebitRequestData.setLastUpdated(new Date());
+        directDebitRequestData.setCreationDate(LocalDateTime.now());
+        directDebitRequestData.setLastUpdated(LocalDateTime.now());
         Map<String, Object> data = DirectDebitJsonObjectMapper.toHashMap(directDebitRequestData);
         String id = UUID.randomUUID().toString().replaceAll("-", "");
         String transactionId = dao.addTransaction(id, DD_COLLECTION, data);
@@ -66,8 +66,8 @@ public class TransactionServiceImpl implements TransactionService {
         BeanUtils.copyProperties(request, creditTransferRequestData);
         creditTransferRequestData.setStatus(Statusenum.CREATED);
         creditTransferRequestData.setProcessingStatus(Processingstatusenum.PENDING);
-        creditTransferRequestData.setCreationDate(new Date());
-        creditTransferRequestData.setLastUpdated(new Date());
+        creditTransferRequestData.setCreationDate(LocalDateTime.now());
+        creditTransferRequestData.setLastUpdated(LocalDateTime.now());
         Map<String, Object> data = CreditTransferJsonObjectMapper.toHashMap(creditTransferRequestData);
         String id = UUID.randomUUID().toString().replaceAll("-", "");
 

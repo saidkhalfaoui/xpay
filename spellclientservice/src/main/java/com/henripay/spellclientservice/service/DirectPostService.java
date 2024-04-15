@@ -1,6 +1,6 @@
 package com.henripay.spellclientservice.service;
 
-import com.henripay.spellclientservice.dto.DirectPostRequestDto;
+import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
 
 import java.io.IOException;
 

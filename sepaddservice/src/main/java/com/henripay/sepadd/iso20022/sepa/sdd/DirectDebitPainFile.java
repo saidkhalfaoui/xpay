@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -123,7 +123,7 @@ public class DirectDebitPainFile extends BasePainFile {
         if (!IBAN.isEmpty()) {
             String bic = getBIC(IBANUtils.getBankCode(IBAN));
             PaymentInstruction paymentInstruction = new PaymentInstruction(
-                    directDebitRequestData.getEndToEndTransactionReference() /* change this */, Date.from(directDebitRequestData.getScheduledExecutionDate().toInstant()),
+                    directDebitRequestData.getEndToEndTransactionReference() /* change this */, Date.from(directDebitRequestData.getScheduledExecutionDate().atZone(ZoneId.systemDefault()).toInstant()),
                     creditorInfo.getAccountInfo().getName(), SequenceType1Code.fromValue(directDebitRequestData.getTransactionType().getValue()),
                     IBANUtils.getCountry(IBAN), addressLines, IBAN, bic);
 
@@ -200,7 +200,7 @@ public class DirectDebitPainFile extends BasePainFile {
             //adding Mandate Information :
             Mandateinformation mandateinformation = directDebitRequestData.getMandateInformation();
             if (mandateinformation != null) {
-                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), LocalDateTime.of(mandateinformation.getDateOfsignature()), mandateinformation.getPersonId()));
+                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), new LocalDate(mandateinformation.getDateOfsignature().toLocalDate().getYear(), mandateinformation.getDateOfsignature().toLocalDate().getMonthValue(), mandateinformation.getDateOfsignature().toLocalDate().getDayOfMonth()), mandateinformation.getPersonId()));
             }
 
             // adding Account infor

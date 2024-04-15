@@ -1,6 +1,6 @@
 package com.henripay.spellclientservice.service;
 
-import com.henripay.spellclientservice.dto.ChargePurchaseDto;
+import com.henripay.spellclientservice.api.model.ChargePurchaseDto;
 
 import java.io.IOException;
 
