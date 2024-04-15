@@ -1,4 +1,4 @@
-package com.henripay.sepadd.dataaccess;
+package com.henripay.sepadd.dataaccess.config;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
@@ -6,9 +6,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.henripay.sepadd.dto.CreditorInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,15 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @Component
 public class ConfigurationFireStoreDAO implements ConfigurationDAO {
 
     private static final String CREDITOR_INFO = "creditor-info";
     private static final String BIC = "BIC";
-    Logger logger = LoggerFactory.getLogger(ConfigurationFireStoreDAO.class);
-    @Autowired
-    FireStoreDatabase fireStoreDatabase;
+    private final FireStoreDatabase fireStoreDatabase;
     private Firestore database;
+
+    public ConfigurationFireStoreDAO(FireStoreDatabase fireStoreDatabase) {
+        this.fireStoreDatabase = fireStoreDatabase;
+    }
 
 
     public Firestore getDatabase() {
@@ -77,7 +78,7 @@ public class ConfigurationFireStoreDAO implements ConfigurationDAO {
 
             bic = document.get(bankCode).toString();
             if (bic.isEmpty()) {
-                logger.warn("BIC not found for this iban , returning empty string");
+                log.warn("BIC not found for this iban , returning empty string");
             }
             return bic;
 

@@ -37,6 +37,18 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                    <image>
+                        <name>${parent.artifactId}/${project.artifactId}:${project.version}</name>
+                    </image>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.3.0</version>
@@ -59,7 +71,6 @@
                             <generatorName>spring</generatorName>
                             <apiPackage>com.henripay.customerservice.controller</apiPackage>
                             <modelPackage>com.henripay.customerservice.dto</modelPackage>
-
                             <supportingFilesToGenerate>
                                 ApiUtil.java
                             </supportingFilesToGenerate>

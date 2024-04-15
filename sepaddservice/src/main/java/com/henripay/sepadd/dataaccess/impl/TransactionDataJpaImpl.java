@@ -1,12 +1,12 @@
-package com.henripay.sepadd.dataaccess;
+package com.henripay.sepadd.dataaccess.impl;
 
 
 import com.henripay.domainservice.entity.TransactionEntity;
 import com.henripay.domainservice.repository.TransactionRepository;
+import com.henripay.sepadd.dataaccess.TransactionDAO;
 import com.henripay.sepadd.dto.*;
 import com.henripay.sepadd.dto.mapper.TransactionDataJpaMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -19,12 +19,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Component
 public class TransactionDataJpaImpl implements TransactionDAO {
 
     private final TransactionRepository transactionRepository;
     private final TransactionDataJpaMapper transactionDataJpaMapper;
-    Logger logger = LoggerFactory.getLogger(TransactionDataJpaImpl.class);
 
     public TransactionDataJpaImpl(TransactionRepository transactionRepository, TransactionDataJpaMapper transactionDataJpaMapper) {
         this.transactionRepository = transactionRepository;

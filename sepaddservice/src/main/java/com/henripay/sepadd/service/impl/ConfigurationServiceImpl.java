@@ -1,6 +1,6 @@
 package com.henripay.sepadd.service.impl;
 
-import com.henripay.sepadd.dataaccess.ConfigurationDAO;
+import com.henripay.sepadd.dataaccess.config.ConfigurationDAO;
 import com.henripay.sepadd.dto.CreditorInfo;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;

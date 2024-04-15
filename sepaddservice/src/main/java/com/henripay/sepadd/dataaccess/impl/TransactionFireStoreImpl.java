@@ -1,4 +1,4 @@
-package com.henripay.sepadd.dataaccess;
+package com.henripay.sepadd.dataaccess.impl;
 
 
 import com.google.api.core.ApiFuture;
@@ -6,11 +6,11 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import com.henripay.common.firebase4j.error.FirebaseException;
 import com.henripay.common.firebase4j.error.JacksonUtilityException;
-import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
+import com.henripay.sepadd.dataaccess.config.FireStoreDatabase;
+import com.henripay.sepadd.dataaccess.TransactionDAO;
+import com.henripay.sepadd.dto.mapper.TransactionJsonObjectMapper;
 import com.henripay.sepadd.dto.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -21,17 +21,18 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutionException;
 
-
+@Slf4j
 @Component
-public class TransactionFireStoreDAO implements TransactionDAO {
+public class TransactionFireStoreImpl implements TransactionDAO {
 
     private CollectionReference transactionCollection;
 
-    @Autowired
-    private FireStoreDatabase fireStoreDatabase;
+    private final FireStoreDatabase fireStoreDatabase;
     private Firestore database;
 
-    Logger logger = LoggerFactory.getLogger(TransactionFireStoreDAO.class);
+    public TransactionFireStoreImpl(FireStoreDatabase fireStoreDatabase) {
+        this.fireStoreDatabase = fireStoreDatabase;
+    }
 
     public Firestore getDatabase() {
 
@@ -51,7 +52,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
         DocumentReference docRef = database.collection(type).document(id);
         try {
             WriteResult result = docRef.set(data).get();
-            logger.info(result.getUpdateTime().toString());
+            log.info(result.getUpdateTime().toString());
             // lo result.getUpdateTime()
             //return  id;
         } catch (InterruptedException e) {
@@ -132,7 +133,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
             if (documentReference1.exists()) {
                 DirectDebitRequestData request = documentReference1.toObject(DirectDebitRequestData.class);  // to do , DirectDebitTransactionData and CreditTransferTransactionData should inherit from TransactionRequestData
                 if (request.getStatus() != null) {
-                    logger.info("Status:" + request.getStatus().getValue());
+                    log.info("Status:" + request.getStatus().getValue());
                     transactionStatusResponse.setStatus(request.getStatus());
                     transactionStatusResponse.setProcessingStatus(request.getProcessingStatus());
                 }
@@ -142,7 +143,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
                 return transactionStatusResponse;
             }
 
-            logger.warn("no Transaction found");
+            log.warn("no Transaction found");
             transactionStatusResponse.status(Statusenum.NOT_FOUND);
 
             return transactionStatusResponse;
@@ -186,7 +187,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
                 docRef1.update(TransactionJsonObjectMapper.LAST_UPDATED, Timestamp.now());
                 WriteResult result = docRef1.update("status", Statusenum.DELETED).get();
                 if (result.getUpdateTime() != null) {
-                    logger.info("deleted transaction" + result.getUpdateTime());
+                    log.info("deleted transaction" + result.getUpdateTime());
                     transactionStatusResponse.setTransactionId(transactionId);
                     transactionStatusResponse.setLastUpdated(result.getUpdateTime().toString());
                     transactionStatusResponse.setStatus(Statusenum.DELETED);
@@ -205,7 +206,7 @@ public class TransactionFireStoreDAO implements TransactionDAO {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (NoSuchElementException e) {
-            logger.error("Transaction Not found");
+            log.error("Transaction Not found");
             transactionStatusResponse.setStatus(Statusenum.NOT_FOUND);
             return transactionStatusResponse;
         }

@@ -1,4 +1,4 @@
-package com.henripay.sepadd.dataaccess;
+package com.henripay.sepadd.dataaccess.config;
 
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;

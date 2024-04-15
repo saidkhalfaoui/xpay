@@ -1,7 +1,6 @@
 package com.henripay.sepadd.dto.mapper;
 
 import com.henripay.domainservice.entity.TransactionEntity;
-import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
 import com.henripay.sepadd.dto.*;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;

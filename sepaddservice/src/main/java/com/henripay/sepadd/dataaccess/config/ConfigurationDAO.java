@@ -1,4 +1,4 @@
-package com.henripay.sepadd.dataaccess;
+package com.henripay.sepadd.dataaccess.config;
 
 import com.henripay.sepadd.dto.CreditorInfo;
 

@@ -1,4 +1,4 @@
-package com.henripay.sepadd.dataaccess.model;
+package com.henripay.sepadd.dto.mapper;
 
 import java.util.HashMap;
 

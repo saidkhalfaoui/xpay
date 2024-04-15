@@ -1,6 +1,6 @@
 package com.henripay.sepadd.iso20022.sepa.sdd;
 
-import com.henripay.sepadd.dataaccess.model.CreditorInfoJsonObjectMapper;
+import com.henripay.sepadd.dto.mapper.CreditorInfoJsonObjectMapper;
 import com.henripay.sepadd.dto.CreditorInfo;
 import com.henripay.sepadd.dto.DirectDebitRequestData;
 import com.henripay.sepadd.dto.Mandateinformation;
