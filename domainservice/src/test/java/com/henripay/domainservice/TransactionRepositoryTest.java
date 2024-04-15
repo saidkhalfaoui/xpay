@@ -42,7 +42,7 @@ public class TransactionRepositoryTest {
         entityManager.persist(transaction);
         entityManager.flush();
 
-        TransactionEntity found = transactionRepository.findById(transaction.getTransactionId()).orElse(null);
+        TransactionEntity found = transactionRepository.findById(transaction.getId()).orElse(null);
 
         assertThat(found).isNotNull();
         assertThat(found.getTransactionType()).isEqualTo("Payment");
@@ -59,7 +59,7 @@ public class TransactionRepositoryTest {
 
         // Test deletion
         transactionRepository.delete(transaction);
-        assertThat(transactionRepository.existsById(transaction.getTransactionId())).isFalse();
+        assertThat(transactionRepository.existsById(transaction.getId())).isFalse();
     }
 
     public UserEntity createSampleUser() {

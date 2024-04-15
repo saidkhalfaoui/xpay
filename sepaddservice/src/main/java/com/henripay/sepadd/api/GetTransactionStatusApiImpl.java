@@ -6,15 +6,17 @@
 package com.henripay.sepadd.api;
 
 
-import com.henripay.sepadd.api.model.TransactionStatusResponse;
+import com.henripay.sepadd.controller.GetTransactionStatusApiDelegate;
+import com.henripay.sepadd.dto.TransactionStatusResponse;
 import com.henripay.sepadd.service.TransactionService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Service
 @RestController
 
-public class GetTransactionStatusApiImpl implements GetTransactionStatusApi {
+public class GetTransactionStatusApiImpl implements GetTransactionStatusApiDelegate {
     @Autowired
     private TransactionService transactionService;
 

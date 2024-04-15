@@ -6,9 +6,6 @@ import com.spell.model.ClientDetails;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-import java.util.Map;
-
 @Mapper(componentModel = "spring")
 public interface ClientDetailsMapper {
     ClientDetailsMapper INSTANCE = Mappers.getMapper( ClientDetailsMapper.class );

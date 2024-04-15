@@ -1,8 +1,8 @@
 package com.henripay.sepadd;
 
 
-import com.henripay.sepadd.api.model.JobStatus;
-import com.henripay.sepadd.api.model.Statusenum;
+import com.henripay.sepadd.dto.JobStatus;
+import com.henripay.sepadd.dto.Statusenum;
 import com.henripay.sepadd.jobs.CreditTransferJob;
 import com.henripay.sepadd.jobs.DirectDebitJob;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -62,7 +62,7 @@ public class ScheduledJobController {
         }
 
 
-        status.setStartDate(new Date());
+        status.setStartDate(LocalDateTime.now());
         return new ResponseEntity<>(status, HttpStatus.OK);
 
 
@@ -96,7 +96,7 @@ public class ScheduledJobController {
         }
 
 
-        status.setStartDate(new Date());
+        status.setStartDate(LocalDateTime.now());
         return new ResponseEntity<>(status, HttpStatus.OK);
 
 

@@ -1,6 +1,6 @@
 package com.henripay.sepadd.dataaccess.model;
 
-import com.henripay.sepadd.api.model.Accountinformation;
+import com.henripay.sepadd.dto.Accountinformation;
 
 public class CreditorInfoJsonObjectMapper {
 

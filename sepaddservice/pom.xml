@@ -26,6 +26,12 @@
             <version>${project.version}</version>
             <classifier>arbitrary</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.henripay</groupId>
+            <artifactId>domainservice</artifactId>
+            <version>${project.version}</version>
+            <classifier>arbitrary</classifier>
+        </dependency>
     </dependencies>
 
     <build>
@@ -33,28 +39,35 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.5.0</version>
+                <version>7.3.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>integer=Long,int=Long</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/sepaddservice.yaml
+                                ${project.basedir}/src/main/resources/swagger/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.henripay.sepadd.api</apiPackage>
-                            <modelPackage>com.henripay.sepadd.api.model</modelPackage>
+                            <apiPackage>com.henripay.sepadd.controller</apiPackage>
+                            <modelPackage>com.henripay.sepadd.dto</modelPackage>
 
+                            <supportingFilesToGenerate>
+                                ApiUtil.java
+                            </supportingFilesToGenerate>
                             <configOptions>
-                                <java8>true</java8>
-                                <dateLibrary>custom</dateLibrary>
-                                <openApiNullable>false</openApiNullable>
-                                <interfaceOnly>true</interfaceOnly>
-
+                                <delegatePattern>true</delegatePattern>
+                                <serializableModel>true</serializableModel>
+                                <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
-
                         </configuration>
                     </execution>
                 </executions>
