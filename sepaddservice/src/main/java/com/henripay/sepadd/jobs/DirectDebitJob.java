@@ -1,18 +1,15 @@
 package com.henripay.sepadd.jobs;
 
 
-import com.henripay.sepadd.api.model.CreditorInfo;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
-
+import com.henripay.sepadd.dto.CreditorInfo;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
 import com.henripay.sepadd.iso20022.sepa.sdd.DirectDebitPainFile;
 import com.henripay.sepadd.service.TransactionService;
-
 import com.henripay.sepadd.service.configuration.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;

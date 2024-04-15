@@ -1,9 +1,9 @@
 package com.henripay.spellclientservice.service;
 
-import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
-import com.henripay.spellclientservice.api.model.DirectPostResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
+import com.henripay.spellclientservice.dto.DirectPostRequestDto;
+import com.henripay.spellclientservice.dto.DirectPostResponseDto;
 import com.henripay.spellclientservice.service.impl.DirectPostServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,9 +15,8 @@ import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 

@@ -1,37 +1,27 @@
 package com.henripay.sepadd.iso20022.sepa;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.henripay.sepadd.iso20022.sepa.Utils.*;
-
-import com.henripay.sepadd.api.model.Accountinformation;
-import com.henripay.sepadd.api.model.CreditTransferRequestData;
-import com.henripay.sepadd.api.model.CreditorInfo;
+import com.henripay.sepadd.dto.Accountinformation;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
+import com.henripay.sepadd.dto.CreditorInfo;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
-import iso.std.iso._20022.tech.xsd.pain_001_001.ChargeBearerType1Code;
-import iso.std.iso._20022.tech.xsd.pain_001_001.CreditTransferTransactionInformation10;
-import iso.std.iso._20022.tech.xsd.pain_001_001.CustomerCreditTransferInitiationV03;
-import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
-import iso.std.iso._20022.tech.xsd.pain_001_001.GroupHeader32;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentIdentification1;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentInstructionInformation3;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentMethod3Code;
-import iso.std.iso._20022.tech.xsd.pain_001_001.PaymentTypeInformation19;
-import iso.std.iso._20022.tech.xsd.pain_001_001.ServiceLevel8Choice;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.UUID;
+import iso.std.iso._20022.tech.xsd.pain_001_001.*;
+import org.joda.time.LocalDate;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.UUID;
 
-import org.joda.time.LocalDate;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.henripay.sepadd.iso20022.sepa.Utils.*;
 
 /**
  * The Customer SEPA Credit Transfer Initiation message is sent by the initiating party to the debtor bank. It
@@ -205,7 +195,7 @@ public class CreditTransferPainFile extends BasePainFile {
         paymentInstructionInformation.setPmtTpInf(paymentTypeInformation);
 
         // This is the date on which the debtor's account is to be debited.
-        paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(creditTransferRequestData.getScheduledExecutionDate()));
+        paymentInstructionInformation.setReqdExctnDt(createXMLGregorianCalendarDate(Date.from(creditTransferRequestData.getScheduledExecutionDate().atZone(ZoneId.systemDefault()).toInstant())));
 
         // Party that owes an amount of money to the (ultimate) creditor.
 

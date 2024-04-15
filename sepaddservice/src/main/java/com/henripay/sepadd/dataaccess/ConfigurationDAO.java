@@ -1,6 +1,6 @@
 package com.henripay.sepadd.dataaccess;
 
-import com.henripay.sepadd.api.model.CreditorInfo;
+import com.henripay.sepadd.dto.CreditorInfo;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.henripay.sepadd.jobs;
 
-import com.henripay.sepadd.api.model.CreditTransferRequestData;
-import com.henripay.sepadd.api.model.CreditorInfo;
+import com.henripay.sepadd.dto.CreditTransferRequestData;
+import com.henripay.sepadd.dto.CreditorInfo;
 import com.henripay.sepadd.iso20022.sepa.CreditTransferPainFile;
 import com.henripay.sepadd.service.TransactionService;
 import com.henripay.sepadd.service.configuration.ConfigurationService;

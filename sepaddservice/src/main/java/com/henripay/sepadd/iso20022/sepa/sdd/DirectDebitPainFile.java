@@ -1,52 +1,30 @@
 package com.henripay.sepadd.iso20022.sepa.sdd;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createAccount;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createAmount;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createFinInstnId;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createIdParty;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createParty;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createPaymentIdentification;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createXMLGregorianCalendar;
-import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.createXMLGregorianCalendarDate;
-
-import com.henripay.sepadd.api.model.CreditorInfo;
-import com.henripay.sepadd.api.model.DirectDebitRequestData;
-import com.henripay.sepadd.api.model.Mandateinformation;
 import com.henripay.sepadd.dataaccess.model.CreditorInfoJsonObjectMapper;
+import com.henripay.sepadd.dto.CreditorInfo;
+import com.henripay.sepadd.dto.DirectDebitRequestData;
+import com.henripay.sepadd.dto.Mandateinformation;
 import com.henripay.sepadd.iso20022.sepa.BasePainFile;
 import com.henripay.sepadd.iso20022.sepa.IBANUtils;
 import com.henripay.sepadd.service.configuration.ConfigurationService;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ChargeBearerType1Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.CustomerDirectDebitInitiationV02;
-import iso.std.iso._20022.tech.xsd.pain_008_001.DirectDebitTransaction6;
-import iso.std.iso._20022.tech.xsd.pain_008_001.DirectDebitTransactionInformation9;
-import iso.std.iso._20022.tech.xsd.pain_008_001.Document;
-import iso.std.iso._20022.tech.xsd.pain_008_001.GroupHeader39;
-import iso.std.iso._20022.tech.xsd.pain_008_001.LocalInstrument2Choice;
-import iso.std.iso._20022.tech.xsd.pain_008_001.MandateRelatedInformation6;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ObjectFactory;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentInstructionInformation4;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentMethod2Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.PaymentTypeInformation20;
-import iso.std.iso._20022.tech.xsd.pain_008_001.Purpose2Choice;
-import iso.std.iso._20022.tech.xsd.pain_008_001.SequenceType1Code;
-import iso.std.iso._20022.tech.xsd.pain_008_001.ServiceLevel8Choice;
+import iso.std.iso._20022.tech.xsd.pain_008_001.*;
+import org.joda.time.LocalDate;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import org.joda.time.LocalDate;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.henripay.sepadd.iso20022.sepa.sdd.Utils.*;
 
 
 /**
@@ -145,7 +123,7 @@ public class DirectDebitPainFile extends BasePainFile {
         if (!IBAN.isEmpty()) {
             String bic = getBIC(IBANUtils.getBankCode(IBAN));
             PaymentInstruction paymentInstruction = new PaymentInstruction(
-                    directDebitRequestData.getEndToEndTransactionReference() /* change this */, Date.from(directDebitRequestData.getScheduledExecutionDate().toInstant()),
+                    directDebitRequestData.getEndToEndTransactionReference() /* change this */, Date.from(directDebitRequestData.getScheduledExecutionDate().atZone(ZoneId.systemDefault()).toInstant()),
                     creditorInfo.getAccountInfo().getName(), SequenceType1Code.fromValue(directDebitRequestData.getTransactionType().getValue()),
                     IBANUtils.getCountry(IBAN), addressLines, IBAN, bic);
 
@@ -222,7 +200,7 @@ public class DirectDebitPainFile extends BasePainFile {
             //adding Mandate Information :
             Mandateinformation mandateinformation = directDebitRequestData.getMandateInformation();
             if (mandateinformation != null) {
-                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), LocalDate.fromDateFields(mandateinformation.getDateOfsignature()), mandateinformation.getPersonId()));
+                directDebitTransactionInformation.setDrctDbtTx(t(mandateinformation.getMandateId(), new LocalDate(mandateinformation.getDateOfsignature().toLocalDate().getYear(), mandateinformation.getDateOfsignature().toLocalDate().getMonthValue(), mandateinformation.getDateOfsignature().toLocalDate().getDayOfMonth()), mandateinformation.getPersonId()));
             }
 
             // adding Account infor

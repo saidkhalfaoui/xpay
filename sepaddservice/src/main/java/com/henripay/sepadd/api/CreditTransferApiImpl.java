@@ -1,15 +1,15 @@
 package com.henripay.sepadd.api;
 
-import com.henripay.sepadd.api.model.CreditTransferRequest;
-
-import com.henripay.sepadd.api.model.TransactionResponse;
+import com.henripay.common.firebase4j.error.FirebaseException;
+import com.henripay.common.firebase4j.error.JacksonUtilityException;
+import com.henripay.sepadd.controller.CreditTransferApiDelegate;
+import com.henripay.sepadd.dto.CreditTransferRequest;
+import com.henripay.sepadd.dto.TransactionResponse;
 import com.henripay.sepadd.service.TransactionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import com.henripay.common.firebase4j.error.FirebaseException;
-import com.henripay.common.firebase4j.error.JacksonUtilityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
 @Service
 @RestController
-public class CreditTransferApiImpl implements CreditTransferApi {
+public class CreditTransferApiImpl implements CreditTransferApiDelegate {
 
     Logger logger = LoggerFactory.getLogger(CreditTransferApiImpl.class);
     @Autowired
@@ -56,14 +56,10 @@ public class CreditTransferApiImpl implements CreditTransferApi {
     public ResponseEntity<TransactionResponse> creditTransferPost(@ApiParam(value = "Credit Transfer Request") @Valid @RequestBody(required = false) CreditTransferRequest creditTransferRequest) {
         logger.info(creditTransferRequest.getAccountInfo().getIBAN());
 
-        TransactionResponse response = new TransactionResponse();
+        TransactionResponse response;
         try {
             response = transactionService.addCreditTransferTransaction(creditTransferRequest);
-        } catch (JacksonUtilityException e) {
-            throw new RuntimeException(e);
-        } catch (FirebaseException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (JacksonUtilityException | FirebaseException | IOException e) {
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());

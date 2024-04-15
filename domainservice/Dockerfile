@@ -2,7 +2,7 @@
 FROM postgres:14.5
 
 # Expose PostgreSQL port
-EXPOSE 5432
+EXPOSE 5440
 
 # Copy custom initialization script for PostgreSQL
 COPY init-db.sh /docker-entrypoint-initdb.d/
