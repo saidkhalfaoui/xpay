@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
 @Service
 @RestController
@@ -56,14 +56,10 @@ public class CreditTransferApiImpl implements CreditTransferApiDelegate {
     public ResponseEntity<TransactionResponse> creditTransferPost(@ApiParam(value = "Credit Transfer Request") @Valid @RequestBody(required = false) CreditTransferRequest creditTransferRequest) {
         logger.info(creditTransferRequest.getAccountInfo().getIBAN());
 
-        TransactionResponse response = new TransactionResponse();
+        TransactionResponse response;
         try {
             response = transactionService.addCreditTransferTransaction(creditTransferRequest);
-        } catch (JacksonUtilityException e) {
-            throw new RuntimeException(e);
-        } catch (FirebaseException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (JacksonUtilityException | FirebaseException | IOException e) {
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());

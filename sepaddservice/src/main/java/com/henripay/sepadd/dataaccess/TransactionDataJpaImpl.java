@@ -1,8 +1,6 @@
 package com.henripay.sepadd.dataaccess;
 
 
-import com.henripay.common.firebase4j.error.FirebaseException;
-import com.henripay.common.firebase4j.error.JacksonUtilityException;
 import com.henripay.domainservice.entity.TransactionEntity;
 import com.henripay.domainservice.repository.TransactionRepository;
 import com.henripay.sepadd.dto.*;
@@ -14,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +32,9 @@ public class TransactionDataJpaImpl implements TransactionDAO {
     }
 
     @Override
-    public String addTransaction(String id, String type, Map<String, Object> data) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException {
+    public String addTransaction(String id, String type, Map<String, Object> data) throws IOException {
         TransactionEntity transactionEntity = new TransactionEntity();
-        transactionEntity.setStatus(data.get("status").toString().toUpperCase());
-        transactionEntity.setProcessingStatus(Processingstatusenum.PENDING.toString());
-        transactionEntity.setCreationDate((LocalDateTime) data.get("creationDate"));
-        transactionEntity.setLastUpdated((LocalDateTime) data.get("lastUpdated"));
+        transactionDataJpaMapper.mapToTransactionEntity(data, transactionEntity);
         transactionEntity.setTransactionId(id);
         transactionEntity.setNature(type);
         transactionRepository.save(transactionEntity);
@@ -62,8 +56,8 @@ public class TransactionDataJpaImpl implements TransactionDAO {
         if (transaction.isEmpty()) {
             transactionStatusResponse.setStatus(Statusenum.NOT_FOUND);
         } else {
-            transactionStatusResponse.setStatus(Statusenum.valueOf(transaction.get().getStatus()));
-            transactionStatusResponse.setProcessingStatus(Processingstatusenum.valueOf(transaction.get().getProcessingStatus()));
+            transactionStatusResponse.setStatus(Statusenum.fromValue(transaction.get().getStatus()));
+            transactionStatusResponse.setProcessingStatus(Processingstatusenum.fromValue(transaction.get().getProcessingStatus()));
             transactionStatusResponse.setLastUpdated(transaction.get().getLastUpdated().toString());
         }
         return transactionStatusResponse;

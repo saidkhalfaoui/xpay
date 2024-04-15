@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionResponse addDirectDebitTransaction(DirectDebitRequest request) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException {
+    public TransactionResponse addDirectDebitTransaction(DirectDebitRequest request) throws JacksonUtilityException, FirebaseException, IOException {
         DirectDebitRequestData directDebitRequestData = new DirectDebitRequestData();
         BeanUtils.copyProperties(request, directDebitRequestData);
         directDebitRequestData.setStatus(Statusenum.CREATED);
@@ -61,7 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionResponse addCreditTransferTransaction(CreditTransferRequest request) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException {
+    public TransactionResponse addCreditTransferTransaction(CreditTransferRequest request) throws JacksonUtilityException, FirebaseException, IOException {
         CreditTransferRequestData creditTransferRequestData = new CreditTransferRequestData();
         BeanUtils.copyProperties(request, creditTransferRequestData);
         creditTransferRequestData.setStatus(Statusenum.CREATED);

@@ -1,15 +1,19 @@
 package com.henripay.sepadd.dto.mapper;
 
 import com.henripay.domainservice.entity.TransactionEntity;
+import com.henripay.sepadd.dataaccess.model.TransactionJsonObjectMapper;
 import com.henripay.sepadd.dto.*;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @Component
-public class TransactionDataJpaMapper {
+public class TransactionDataJpaMapper extends TransactionJsonObjectMapper {
 
 
     public DirectDebitRequestData mapToDirectDebitRequestData(TransactionEntity transaction) throws IOException {
@@ -61,4 +65,28 @@ public class TransactionDataJpaMapper {
 
         return creditTransferRequestData;
     }
+
+    public void mapToTransactionEntity(Map<String, Object> data, TransactionEntity transaction) throws IOException {
+
+        transaction.setAccountInfo(convertToJson(data.getOrDefault(ACCOUNT_INFO, null)));
+        transaction.setEndToEndTransactionReference((String) data.getOrDefault(END_TO_END_REFERENCE, null));
+        transaction.setAmount((BigDecimal) data.getOrDefault(AMOUNT, null));
+        transaction.setMandateInformation(convertToJson(data.getOrDefault(MANDATE_INFORMATION, null)));
+        transaction.setTransactionType((Transactiontype.fromValue(data.getOrDefault(TRANSACTION_TYPE, null).toString())).toString());
+        transaction.setStatus((Statusenum.fromValue(data.getOrDefault(STATUS, null).toString())).toString());
+        transaction.setProcessingStatus((Processingstatusenum.fromValue(data.getOrDefault(ProcessingStatus, null).toString())).toString());
+        transaction.setScheduledExecutionDate((LocalDateTime) data.getOrDefault(SCHEDULED_EXECUTION_DATE, null));
+        transaction.setCreationDate((LocalDateTime) data.getOrDefault(CREATION_DATE, null));
+        transaction.setLastUpdated((LocalDateTime) data.getOrDefault(LAST_UPDATED, null));
+    }
+
+    public String convertToJson(Object o) throws IOException {
+        if (o == null) {
+            return null;
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(o);
+    }
+
+
 }

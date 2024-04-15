@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
 @RestController
 public class DirectDebitApiImpl implements DirectDebitApiDelegate {
@@ -55,14 +55,10 @@ public class DirectDebitApiImpl implements DirectDebitApiDelegate {
     public ResponseEntity<TransactionResponse> directDebitPost(@ApiParam(value = "Direct Debit Request") @Valid @RequestBody(required = false) DirectDebitRequest directDebitRequest) {
         logger.info(directDebitRequest.getAccountInfo().getIBAN());
 
-        TransactionResponse response = new TransactionResponse();
+        TransactionResponse response;
         try {
             response = transactionService.addDirectDebitTransaction(directDebitRequest);
-        } catch (JacksonUtilityException e) {
-            throw new RuntimeException(e);
-        } catch (FirebaseException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (FirebaseException | JacksonUtilityException | IOException e) {
             throw new RuntimeException(e);
         }
         response.setStatus(response.getStatus());

@@ -7,14 +7,15 @@ import com.henripay.sepadd.dto.CreditTransferRequestData;
 import com.henripay.sepadd.dto.DirectDebitRequestData;
 import com.henripay.sepadd.dto.TransactionStatusResponse;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public interface TransactionDAO {
     static final String DD_COLLECTION = "direct_debit_collection";
     static final String CT_COLLECTION = "credit_transfer_collection";
-    String addTransaction(String id, String type, Map<String, Object> data) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException;
+
+    String addTransaction(String id, String type, Map<String, Object> data) throws JacksonUtilityException, FirebaseException, IOException;
     //  String addCreditTransferTransaction(String id , Map<String, Object> data) throws JacksonUtilityException, FirebaseException, UnsupportedEncodingException;
 
 
