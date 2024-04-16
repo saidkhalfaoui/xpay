@@ -95,6 +95,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transactionupdateresponse'
+
+  /direct-debit-batch:
+    post:
+      summary: Generate one batch file
+      responses:
+        '200':
+          description: Batch file generation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateBatchFileResponse'
+
 components:
   schemas:
     TransactionRequest:
@@ -352,5 +364,15 @@ components:
           $ref: '#/components/schemas/accountinformation'
         isDefault:
           type: boolean
+
+    GenerateBatchFileResponse:
+      type: object
+      properties:
+        file_generated:
+          type: boolean
+          example: true
+        file_path:
+          type: string
+          example: sepadd/src/main/resources/batchFiles/file_name.csv
 
 
