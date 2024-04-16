@@ -6,9 +6,9 @@ app:
     provider: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     driverClassName: org.postgresql.Driver
-    database: henripay
+    database: mainhp
     username: henripay
-    password: henripay
+    password: pgadmin
     host: localhost
     port: 5432
     show-sql: true
@@ -21,7 +21,7 @@ app:
       id: admin
       password: QX!8V@FUF@Y2#ps
     auto-deployment: false
-  urls:
+  ws:
     mandate-service-url: http://localhost:7083/api/v1
     user-service-url:  http://localhost:7082/api/v1
     sepadd-service-url: http://localhost:7081/api/v1

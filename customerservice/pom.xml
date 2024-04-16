@@ -31,6 +31,7 @@
             <groupId>com.henripay</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
+            <classifier>arbitrary</classifier>
         </dependency>
     </dependencies>
 
