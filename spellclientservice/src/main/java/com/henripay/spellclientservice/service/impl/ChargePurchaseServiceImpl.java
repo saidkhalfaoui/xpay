@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class ChargePurchaseImpl implements ChargePurchaseService {
+public class ChargePurchaseServiceImpl implements ChargePurchaseService {
     private final ApiClient apiClient;
     private final SpellConfig spellConfig;
     private final PurchaseResponseMapper purchaseResponseMapper;
 
     @Autowired
-    public ChargePurchaseImpl(ApiClient apiClient, SpellConfig spellConfig, PurchaseResponseMapper purchaseResponseMapper) {
+    public ChargePurchaseServiceImpl(ApiClient apiClient, SpellConfig spellConfig, PurchaseResponseMapper purchaseResponseMapper) {
         this.apiClient = apiClient;
         this.spellConfig = spellConfig;
         this.purchaseResponseMapper = purchaseResponseMapper;

@@ -2,12 +2,14 @@ package com.henripay.spellclientservice.service;
 
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
-import com.henripay.spellclientservice.dto.PurchaseRequestDto;
-import com.henripay.spellclientservice.dto.PurchaseResponseDto;
+import com.henripay.spellclientservice.api.model.PurchaseRequestDto;
+import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.mapper.PurchaseMapper;
 import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
 import com.henripay.spellclientservice.service.impl.PurchaseServiceImpl;
+import com.spell.model.ClientDetails;
 import com.spell.model.Purchase;
+import com.spell.model.PurchaseDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -45,7 +48,8 @@ public class PurchaseServiceImplTest {
     @BeforeEach
     public void setUp() {
         requestDto = new PurchaseRequestDto();
-        expectedPurchase = new Purchase();
+
+        expectedPurchase = new Purchase (UUID.fromString(requestDto.getBrandId()),new ClientDetails(requestDto.getClientEmail()),new PurchaseDetails(requestDto.getProducts()));
         purchaseService = new PurchaseServiceImpl(purchaseMapper, purchaseResponseMapper, apiClient, spellConfig);
     }
 

@@ -2,6 +2,7 @@ package com.henripay.spellclientservice.api.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.spell.model.Product;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,7 +23,7 @@ public class PurchaseRequestDto {
     private String clientEmail;
 
     @NotEmpty(message = "Shouldn't be empty")
-    private List<ProductDto> products;
+    private List<Product> products;
 
     private String brandId;
 
