@@ -1162,7 +1162,7 @@ paths:
       summary: List all billing template clients for this billing template.
       tags:
         - Billing
-  /billing_templates/{id}/clients/{id_c}/:
+  /billing_templates/{id}/clients/{id}/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
@@ -1327,7 +1327,7 @@ paths:
 
       tags:
         - Clients
-  /clients/{id}/recurring_tokens/{id_rt}/:
+  /clients/{id}/recurring_tokens/{id}/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:

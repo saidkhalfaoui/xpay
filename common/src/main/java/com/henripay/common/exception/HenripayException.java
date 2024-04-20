@@ -7,15 +7,13 @@ import java.time.ZonedDateTime;
 
 @Data
 public class HenripayException {
-    ;
+
     private final String message;
-    private final Throwable throwable;
     private final HttpStatus httpStatus;
     private final ZonedDateTime timestamp;
 
-    HenripayException(String message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime timestamp) {
+    HenripayException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
-        this.throwable = throwable;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
     }

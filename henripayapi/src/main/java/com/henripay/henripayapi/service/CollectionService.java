@@ -1,5 +1,6 @@
 package com.henripay.henripayapi.service;
 
+import com.henripay.common.exception.HenripayRequestException;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
@@ -50,7 +51,8 @@ public class CollectionService {
         if (processInstance instanceof ProcessInstanceWithVariables) {
             Object bpmnError = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnError");
             if (bpmnError != null && bpmnError.equals("TransactionFailed")) {
-                //throw new RuntimeException("Process error");
+                var errorMessage = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnErrorMessage");
+                throw new HenripayRequestException(String.valueOf(errorMessage));
             }
         }
 

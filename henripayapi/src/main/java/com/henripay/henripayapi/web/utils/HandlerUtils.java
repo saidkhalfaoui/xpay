@@ -9,6 +9,7 @@ public class HandlerUtils {
 
     public static void throwBpmnError(DelegateExecution execution, String message) {
         execution.setVariable("bpmnError", "TransactionFailed");
+        execution.setVariable("bpmnErrorMessage", message);
         throw new BpmnError("TransactionFailed", message);
     }
 
@@ -16,7 +17,6 @@ public class HandlerUtils {
         if (data.isPresent())
             return;
         //
-        execution.setVariable("bpmnError", "TransactionFailed");
-        throw new BpmnError("TransactionFailed", message);
+        throwBpmnError(execution, message);
     }
 }
