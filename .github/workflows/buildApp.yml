@@ -29,7 +29,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          repository: 'HenriPay/henripay-parent.git'
+          repository: 'saidkhalfaoui/henripay-parent.git'
           ref: '3.2.3'
           token: ${{ secrets.ACCESS_TOKEN }}
 
@@ -38,7 +38,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          repository: 'HenriPay/henripay-parent.git'
+          repository: 'saidkhalfaoui/henripay-parent.git'
           ref: '3.1.10'
           token: ${{ secrets.ACCESS_TOKEN }}
 
