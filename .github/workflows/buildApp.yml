@@ -2,7 +2,7 @@ name: HenriPay CI with Maven
 
 on:
   push:
-    branches: [ "feature/HEN-CI" ]
+    branches: [ "main" ]
 
 jobs:
   build-maven:
