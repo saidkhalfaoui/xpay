@@ -28,7 +28,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - uses: actions/checkout@v3
+        with:
+          repository: 'saidkhalfaoui/henripay-sdk.git'
+          ref: '1.0.1'
+          token: ${{ secrets.ACCESS_TOKEN }}
 
+      - name: Install sdk project version:1.0.1
+        run: mvn clean install
       - uses: actions/checkout@v3
         with:
           repository: 'saidkhalfaoui/henripay-parent.git'
@@ -48,14 +55,7 @@ jobs:
         run: mvn clean install
 
 
-      - uses: actions/checkout@v3
-        with:
-          repository: 'saidkhalfaoui/henripay-sdk.git'
-          ref: '1.0.1'
-          token: ${{ secrets.ACCESS_TOKEN }}
-
-      - name: Install parent project version:1.0.1
-        run: mvn clean install
+    
 
       - uses: actions/checkout@v3
       - name: Clean with Maven
