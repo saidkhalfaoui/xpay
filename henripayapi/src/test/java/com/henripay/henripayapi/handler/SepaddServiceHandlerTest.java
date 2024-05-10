@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.Mono;
 
 import static org.mockito.Mockito.*;
 
@@ -36,7 +35,7 @@ public class SepaddServiceHandlerTest {
         DirectDebitRequest directDebitRequest = new DirectDebitRequest();
         TransactionResponse expectedResponse = new TransactionResponse();
         when(execution.getVariable("directDebitRequest")).thenReturn(directDebitRequest);
-        when(sepaddClient.addDirectDebitTransaction(directDebitRequest)).thenReturn(Mono.just(expectedResponse));
+        when(sepaddClient.addDirectDebitTransaction(directDebitRequest)).thenReturn(expectedResponse);
 
         // Act
         sepaddServiceHandler.addDirectDebitTransaction().execute(execution);
@@ -51,7 +50,7 @@ public class SepaddServiceHandlerTest {
         CreditTransferRequest creditTransferRequest = new CreditTransferRequest();
         TransactionResponse expectedResponse = new TransactionResponse();
         when(execution.getVariable("creditTransferRequest")).thenReturn(creditTransferRequest);
-        when(sepaddClient.addCreditTransaction(creditTransferRequest)).thenReturn(Mono.just(expectedResponse));
+        when(sepaddClient.addCreditTransaction(creditTransferRequest)).thenReturn(expectedResponse);
 
         // Act
         sepaddServiceHandler.addCreditTransferTransaction().execute(execution);
@@ -66,7 +65,7 @@ public class SepaddServiceHandlerTest {
         String transactionId = "12345";
         TransactionResponse expectedResponse = new TransactionResponse();
         when(execution.getVariable("transactionId")).thenReturn(transactionId);
-        when(sepaddClient.deleteTransaction(transactionId)).thenReturn(Mono.just(expectedResponse));
+        when(sepaddClient.deleteTransaction(transactionId)).thenReturn(expectedResponse);
 
         // Act
         sepaddServiceHandler.cancelAddDirectDebitTransaction().execute(execution);

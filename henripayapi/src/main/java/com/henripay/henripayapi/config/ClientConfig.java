@@ -5,8 +5,8 @@ import com.henripay.henripayapi.client.SepaddClient;
 import com.henripay.henripayapi.client.UserClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 @Configuration
@@ -20,6 +20,7 @@ public class ClientConfig {
 
     @Bean
     UserClient userClient() {
+        /*
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->
@@ -31,14 +32,20 @@ public class ClientConfig {
 //                )
                 .baseUrl(appUrlsConfig.getUserServiceUrl())
                 .build();
-
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
+         */
+
+        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getUserServiceUrl()).build();
+        RestClientAdapter adapter = RestClientAdapter.create(restClient);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
+
         return factory.createClient(UserClient.class);
     }
 
     @Bean
     MandateClient mandateClient() {
+        /*
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->
@@ -52,11 +59,16 @@ public class ClientConfig {
                 .build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
+         */
+        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getMandateServiceUrl()).build();
+        RestClientAdapter adapter = RestClientAdapter.create(restClient);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
         return factory.createClient(MandateClient.class);
     }
 
     @Bean
     SepaddClient sepaddClient() {
+        /*
         WebClient client = WebClient
                 .builder()
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, resp ->
@@ -70,6 +82,11 @@ public class ClientConfig {
                 .build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
+         */
+
+        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getSepaddServiceUrl()).build();
+        RestClientAdapter adapter = RestClientAdapter.create(restClient);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
         return factory.createClient(SepaddClient.class);
     }
 }

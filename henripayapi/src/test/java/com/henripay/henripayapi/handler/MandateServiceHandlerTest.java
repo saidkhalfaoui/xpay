@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.Mono;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,7 +34,7 @@ public class MandateServiceHandlerTest {
         Long mandateId = 1L;
         MandateDTO expectedMandateDTO = new MandateDTO();
         when(execution.getVariable("mandateId")).thenReturn(mandateId);
-        when(mandateClient.getMandateDetails(mandateId)).thenReturn(Mono.just(expectedMandateDTO));
+        when(mandateClient.getMandateDetails(mandateId)).thenReturn(expectedMandateDTO);
 
         // Act
         mandateServiceHandler.getMandateDetails().execute(execution);
@@ -49,7 +48,7 @@ public class MandateServiceHandlerTest {
         // Arrange
         Long mandateId = 1L;
         when(execution.getVariable("mandateId")).thenReturn(mandateId);
-        when(mandateClient.getMandateDetails(mandateId)).thenReturn(Mono.error(new RuntimeException("Service unavailable")));
+        when(mandateClient.getMandateDetails(mandateId)).thenThrow(new RuntimeException("Service unavailable"));
 
         // Act & Assert
         assertThrows(RuntimeException.class, () -> mandateServiceHandler.getMandateDetails().execute(execution));

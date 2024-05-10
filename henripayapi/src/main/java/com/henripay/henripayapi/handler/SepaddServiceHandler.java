@@ -32,12 +32,11 @@ public class SepaddServiceHandler {
                 DirectDebitRequest directDebitRequest = new DirectDebitRequest();
                 mapToDirectDebitRequest(directDebitRequest, collectionInformation, mandateDetails, userDetails);
                 //
-                var addDirectDebitTransactionResponse = this.sepaddClient.addDirectDebitTransaction(directDebitRequest)
-                        .blockOptional();
-                if (addDirectDebitTransactionResponse.isEmpty()) {
+                var addDirectDebitTransactionResponse = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
+                if (addDirectDebitTransactionResponse != null) {
                     throwBpmnError(execution, "Error adding direct debit transaction");
                 } else {
-                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse.get());
+                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
                 }
             } catch (Exception e) {
                 throwBpmnError(execution, "Error adding direct debit transaction");
@@ -49,15 +48,15 @@ public class SepaddServiceHandler {
     public JavaDelegate addCreditTransferTransaction() {
         return execution -> {
             log.info("Running addCreditTransferTransaction");
-            try {
+//            try {
 //                var creditTransferRequest = (CreditTransferRequest) execution.getVariable("creditTransferRequest");
 //                var response = this.sepaddClient.addCreditTransaction(creditTransferRequest);
 //                response.subscribe(addCreditTransactionResponse -> {
 //                    execution.setVariable("addCreditTransactionResponse",addCreditTransactionResponse);
 //                });
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
 
         };
     }

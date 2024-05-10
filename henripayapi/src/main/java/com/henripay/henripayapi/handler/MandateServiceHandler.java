@@ -24,12 +24,11 @@ public class MandateServiceHandler {
             log.info("Running getMandateDetails");
             try {
                 Long mandateId = (Long) execution.getVariable("mandateId");
-                var mandateDetails = this.mandateClient.getMandateDetails(mandateId)
-                        .blockOptional();
-                if (mandateDetails.isEmpty()) {
+                var mandateDetails = this.mandateClient.getMandateDetails(mandateId);
+                if (mandateDetails == null) {
                     throwBpmnError(execution, "Mandate not found");
                 } else {
-                    execution.setVariable("mandateDetails", mandateDetails.get());
+                    execution.setVariable("mandateDetails", mandateDetails);
                 }
             } catch (Throwable e) {
                  throwBpmnError(execution, "Error fetching mandate details");

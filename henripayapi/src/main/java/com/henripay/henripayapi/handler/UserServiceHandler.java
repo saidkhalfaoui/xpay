@@ -2,8 +2,6 @@ package com.henripay.henripayapi.handler;
 
 import com.henripay.henripayapi.client.UserClient;
 import lombok.extern.slf4j.Slf4j;
-import com.henripay.henripayapi.client.UserClient;
-import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.context.annotation.Bean;
@@ -26,12 +24,11 @@ public class UserServiceHandler {
             log.info("Running getUserDetails");
             try {
                 Long customerId = (Long) execution.getVariable("customerId");
-                var userDTO = this.userClient.getUserDetails(customerId)
-                        .blockOptional();
-                if (userDTO.isEmpty())
+                var userDTO = this.userClient.getUserDetails(customerId);
+                if (userDTO != null)
                     throwBpmnError(execution, "User not found");
                 else {
-                    execution.setVariable("userDetails", userDTO.get());
+                    execution.setVariable("userDetails", userDTO);
                 }
             } catch (Throwable e) {
                 throwBpmnError(execution, "Error fetching user details" + e.getMessage());

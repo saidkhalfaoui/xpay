@@ -30,9 +30,8 @@ public class CollectionService {
         var processDefinitionKey = ProcessConstants.COLLECTION_PROCESS_KEY;
 
         var userDetails = userServiceClient
-                .getUserDetails(collectioninformation.getCustomerIdIdentifier())
-                .blockOptional();
-        if (userDetails.isEmpty()) {
+                .getUserDetails(collectioninformation.getCustomerIdIdentifier());
+        if (userDetails != null) {
             throw new InvalidInput("User not found");
         }
 
@@ -44,7 +43,7 @@ public class CollectionService {
         vars.put("collectionInformation", collectioninformation);
         vars.put("mandateId", collectioninformation.getMandateId());
         vars.put("customerId", collectioninformation.getCustomerIdIdentifier());
-        vars.put("customerDetails", userDetails.get());
+        vars.put("customerDetails", userDetails);
         //
         var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
         //

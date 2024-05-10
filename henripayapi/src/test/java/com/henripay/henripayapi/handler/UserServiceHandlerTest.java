@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.Mono;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -35,7 +34,7 @@ public class UserServiceHandlerTest {
         Long customerId = 1L;
         UserDTO expectedUserDTO = new UserDTO();
         when(execution.getVariable("customerId")).thenReturn(customerId);
-        when(userClient.getUserDetails(customerId)).thenReturn(Mono.just(expectedUserDTO));
+        when(userClient.getUserDetails(customerId)).thenReturn(expectedUserDTO);
 
         // Act
         userServiceHandler.getUserDetails().execute(execution); // apply(execution);
@@ -45,11 +44,11 @@ public class UserServiceHandlerTest {
     }
 
     @Test
-    public void testGetUserDetails_Exception() throws Exception {
+    public void testGetUserDetails_Exception() {
         // Arrange
         Long customerId = 1L;
         when(execution.getVariable("customerId")).thenReturn(customerId);
-        when(userClient.getUserDetails(customerId)).thenReturn(Mono.error(new RuntimeException("Service unavailable")));
+        when(userClient.getUserDetails(customerId)).thenThrow(new RuntimeException("Service unavailable"));
 
         // Act & Assert
         // The test should not throw an exception since the exception is caught in the method
