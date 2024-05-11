@@ -36,7 +36,7 @@ public class ClientConfig {
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
          */
 
-        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getUserServiceUrl()).build();
+        RestClient restClient = RestClient.builder().baseUrl(appWsConfig.getUserServiceUrl()).build();
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
 
@@ -60,7 +60,7 @@ public class ClientConfig {
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
          */
-        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getMandateServiceUrl()).build();
+        RestClient restClient = RestClient.builder().baseUrl(appWsConfig.getMandateServiceUrl()).build();
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
         return factory.createClient(MandateClient.class);
@@ -84,7 +84,7 @@ public class ClientConfig {
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
          */
 
-        RestClient restClient = RestClient.builder().baseUrl(appUrlsConfig.getSepaddServiceUrl()).build();
+        RestClient restClient = RestClient.builder().baseUrl(appWsConfig.getSepaddServiceUrl()).build();
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
         return factory.createClient(SepaddClient.class);

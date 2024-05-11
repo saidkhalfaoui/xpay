@@ -22,6 +22,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.spell</groupId>
+            <artifactId>spell</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 
