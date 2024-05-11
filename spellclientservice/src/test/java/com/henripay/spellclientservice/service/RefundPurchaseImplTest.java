@@ -4,6 +4,8 @@ import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.api.model.RefundPurchaseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
+import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
+import com.henripay.spellclientservice.api.model.RefundPurchaseDto;
 import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
 import com.henripay.spellclientservice.service.impl.RefundPurchaseImpl;
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 

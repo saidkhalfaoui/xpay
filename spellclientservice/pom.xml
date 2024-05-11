@@ -21,11 +21,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.spell</groupId>
-            <artifactId>spell</artifactId>
-            <version>1.0</version>
-        </dependency>
+
 
     </dependencies>
 
@@ -60,6 +56,20 @@
                     </execution>
                 </executions>
             </plugin>
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>-->
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -90,28 +100,29 @@
                 </executions>
             </plugin>
 
-            <plugin>
+
+           <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>install-henripay-sdk</id>
-                        <phase>clean</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <file>src/main/resources/lib/spell-1.0.jar</file>
-                            <groupId>com.spell</groupId>
-                            <artifactId>spell</artifactId>
-                            <version>1.0</version>
+                            <file>src/main/resources/lib/spell-sdk-1.0-SNAPSHOT.jar</file>
+                            <groupId>com.henripay</groupId>
+                            <artifactId>spell-sdk</artifactId>
+                            <version>1.0-SNAPSHOT</version>
                             <packaging>jar</packaging>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
+-->
         </plugins>
     </build>
 

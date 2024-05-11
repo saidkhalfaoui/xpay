@@ -12,10 +12,10 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 public class ClientConfig {
 
-    private final AppUrlsConfig appUrlsConfig;
+    private final AppWsConfig appWsConfig;
 
-    public ClientConfig(AppUrlsConfig appUrlsConfig) {
-        this.appUrlsConfig = appUrlsConfig;
+    public ClientConfig(AppWsConfig appWsConfig) {
+        this.appWsConfig = appWsConfig;
     }
 
     @Bean
@@ -30,7 +30,7 @@ public class ClientConfig {
 //                .defaultStatusHandler(HttpStatusCode::is5xxServerError, resp ->
 //                        Mono.just(new RuntimeException(resp.statusCode().toString()))
 //                )
-                .baseUrl(appUrlsConfig.getUserServiceUrl())
+                .baseUrl(appWsConfig.getUserServiceUrl())
                 .build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
@@ -55,7 +55,7 @@ public class ClientConfig {
 //                .defaultStatusHandler(HttpStatusCode::is5xxServerError, resp ->
 //                        Mono.just(new RuntimeException(resp.statusCode().toString()))
 //                )
-                .baseUrl(appUrlsConfig.getMandateServiceUrl())
+                .baseUrl(appWsConfig.getMandateServiceUrl())
                 .build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();
@@ -78,7 +78,7 @@ public class ClientConfig {
 //                .defaultStatusHandler(HttpStatusCode::is5xxServerError, resp ->
 //                        Mono.just(new RuntimeException(resp.statusCode().toString()))
 //                )
-                .baseUrl(appUrlsConfig.getSepaddServiceUrl())
+                .baseUrl(appWsConfig.getSepaddServiceUrl())
                 .build();
         WebClientAdapter webClientAdapter = WebClientAdapter.forClient(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(webClientAdapter).build();

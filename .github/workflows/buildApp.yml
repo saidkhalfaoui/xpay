@@ -1,8 +1,10 @@
 name: HenriPay CI with Maven
 
-on:
-  push:
-    branches: [ "feature/HEN-CI" ]
+on:  workflow_dispatch
+
+
+
+  
 
 jobs:
   build-maven:
@@ -26,10 +28,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-
       - uses: actions/checkout@v3
         with:
-          repository: 'HenriPay/henripay-parent.git'
+          repository: 'saidkhalfaoui/henripay-sdk.git'
+          ref: 'main'
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Install sdk project version:1.0.1
+        run: mvn clean install
+      - uses: actions/checkout@v3
+        with:
+          repository: 'saidkhalfaoui/henripay-parent.git'
           ref: '3.2.3'
           token: ${{ secrets.ACCESS_TOKEN }}
 
@@ -38,12 +47,15 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          repository: 'HenriPay/henripay-parent.git'
+          repository: 'saidkhalfaoui/henripay-parent.git'
           ref: '3.1.10'
           token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Install parent project version:3.1.10
         run: mvn clean install
+
+
+    
 
       - uses: actions/checkout@v3
       - name: Clean with Maven
@@ -60,7 +72,7 @@ jobs:
           echo "<settings><servers><server><id>github</id><username>${{ secrets.MAVEN_USERNAME }}</username><password>${{ secrets.MAVEN_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
 
       - name: Build with Maven
-        run: mvn install -DskipTests
+        run: mvn install
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       #      - name: Update dependency graph

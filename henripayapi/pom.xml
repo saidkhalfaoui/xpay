@@ -91,6 +91,47 @@
             <groupId>org.camunda.spin</groupId>
             <artifactId>camunda-spin-dataformat-all</artifactId>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+        <!--            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+        <!--            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.bpm</groupId>-->
+        <!--            <artifactId>camunda-engine-plugin-spin</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.camunda.spin</groupId>-->
+        <!--            <artifactId>camunda-spin-dataformat-all</artifactId>-->
+        <!--        </dependency>-->
+
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.19.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.18.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.15.3</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

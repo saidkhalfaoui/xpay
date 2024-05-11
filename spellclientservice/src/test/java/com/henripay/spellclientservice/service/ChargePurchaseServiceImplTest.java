@@ -5,7 +5,7 @@ import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
 import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
-import com.henripay.spellclientservice.service.impl.ChargePurchaseImpl;
+import com.henripay.spellclientservice.service.impl.ChargePurchaseServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,11 +17,12 @@ import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ChargePurchaseImplTest {
+class ChargePurchaseServiceImplTest {
 
     @Mock
     private ApiClient apiClient;
@@ -33,11 +34,11 @@ class ChargePurchaseImplTest {
     private PurchaseResponseMapper purchaseResponseMapper;
 
     @InjectMocks
-    private ChargePurchaseImpl chargePurchaseService;
+    private ChargePurchaseServiceImpl chargePurchaseService;
 
     @BeforeEach
     void setUp() {
-        chargePurchaseService = new ChargePurchaseImpl(apiClient, spellConfig, purchaseResponseMapper);
+        chargePurchaseService = new ChargePurchaseServiceImpl(apiClient, spellConfig, purchaseResponseMapper);
     }
 
     @Test
@@ -60,7 +61,8 @@ class ChargePurchaseImplTest {
                 .thenReturn("{}");
 
         // Call the doChargePurchase method
-        PurchaseResponseDto result = chargePurchaseService.doChargePurchase(purchaseId, chargePurchaseDto);
+        // not sure cast works here
+        PurchaseResponseDto result = (PurchaseResponseDto) chargePurchaseService.doChargePurchase(purchaseId, chargePurchaseDto);
 
         // Verify the mock interactions
         verify(spellConfig, times(1)).getBaseUrl();
