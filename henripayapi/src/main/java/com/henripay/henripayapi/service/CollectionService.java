@@ -29,9 +29,8 @@ public class CollectionService {
 
         var processDefinitionKey = ProcessConstants.COLLECTION_PROCESS_KEY;
 
-        var userDetails = userServiceClient
-                .getUserDetails(collectioninformation.getCustomerIdIdentifier());
-        if (userDetails != null) {
+        var userDetails = userServiceClient.getUserDetails(collectioninformation.getCustomerIdIdentifier());
+        if (userDetails == null) {
             throw new InvalidInput("User not found");
         }
 

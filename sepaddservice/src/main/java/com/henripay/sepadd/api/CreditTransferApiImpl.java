@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,18 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.io.IOException;
 
+@Slf4j
 @Service
 @RestController
 public class CreditTransferApiImpl implements CreditTransferApiDelegate {
 
-    Logger logger = LoggerFactory.getLogger(CreditTransferApiImpl.class);
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    public void GetTransactionService(TransactionService transactionService) {
+    public CreditTransferApiImpl(TransactionService transactionService) {
         this.transactionService = transactionService;
-
     }
 
     /**
@@ -44,7 +39,7 @@ public class CreditTransferApiImpl implements CreditTransferApiDelegate {
      * @param creditTransferRequest Credit Transfer Request (optional)
      * @return Successful transaction (status code 200)
      */
-    @ApiOperation(value = "Add Credit Transfer Transaction", nickname = "creditTransferPost", notes = "", response = TransactionResponse.class, tags = {})
+    @ApiOperation(value = "Add Credit Transfer Transaction", nickname = "creditTransferPost", response = TransactionResponse.class, tags = {})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class)})
     @RequestMapping(
@@ -54,7 +49,7 @@ public class CreditTransferApiImpl implements CreditTransferApiDelegate {
             consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> creditTransferPost(@ApiParam(value = "Credit Transfer Request") @Valid @RequestBody(required = false) CreditTransferRequest creditTransferRequest) {
-        logger.info(creditTransferRequest.getAccountInfo().getIBAN());
+        log.info(creditTransferRequest.getAccountInfo().getIBAN());
 
         TransactionResponse response;
         try {

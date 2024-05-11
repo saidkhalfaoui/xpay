@@ -25,7 +25,7 @@ public class UserServiceHandler {
             try {
                 Long customerId = (Long) execution.getVariable("customerId");
                 var userDTO = this.userClient.getUserDetails(customerId);
-                if (userDTO != null)
+                if (userDTO == null)
                     throwBpmnError(execution, "User not found");
                 else {
                     execution.setVariable("userDetails", userDTO);

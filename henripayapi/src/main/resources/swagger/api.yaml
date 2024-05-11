@@ -3602,7 +3602,6 @@ components:
           type: string
         end_to_end_transaction_reference:
           type: string
-          nullable: true
         status:
           $ref: '#/components/schemas/statusenum'
         status_description:
@@ -3639,7 +3638,6 @@ components:
           $ref: '#/components/schemas/statusenum'
         processingStatus:
           $ref: '#/components/schemas/processingstatusenum'
-          nullable: true
         lastUpdated:
           type: string
 

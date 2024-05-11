@@ -12,7 +12,7 @@ public class HenripayException {
     private final HttpStatus httpStatus;
     private final ZonedDateTime timestamp;
 
-    HenripayException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
+    public HenripayException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;

@@ -13,13 +13,13 @@ import java.time.ZonedDateTime;
 @RestControllerAdvice
 public class HenripayExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {HenripayRequestException.class})
+    @ExceptionHandler(value = {HenripayRequestException.class, InvalidInput.class})
     public ResponseEntity<Object> handleHenripayBadRequestException(HenripayRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         HenripayException henripayException = new HenripayException(e.getMessage(),
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("Z")));
-        logger.error(e.getMessage(), e);
+        logger.error(e.getMessage());
         return new ResponseEntity<>(henripayException, badRequest);
     }
 

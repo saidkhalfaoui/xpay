@@ -30,6 +30,9 @@ public class DirectDebitRequestMapper {
         //
         directDebitRequest.setAccountInfo(accountinformationRequest);
 
+        //todo: see if we need to set the following fields
+        directDebitRequest.endToEndTransactionReference("f47ac10b58cc4372a5670e02b2c3d479");
+
         return directDebitRequest;
     }
 }

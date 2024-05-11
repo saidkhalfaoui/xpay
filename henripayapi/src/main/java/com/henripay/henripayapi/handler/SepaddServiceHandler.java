@@ -32,11 +32,11 @@ public class SepaddServiceHandler {
                 DirectDebitRequest directDebitRequest = new DirectDebitRequest();
                 mapToDirectDebitRequest(directDebitRequest, collectionInformation, mandateDetails, userDetails);
                 //
-                var addDirectDebitTransactionResponse = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
-                if (addDirectDebitTransactionResponse != null) {
+                TransactionResponse transactionResponse = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
+                if (transactionResponse == null) {
                     throwBpmnError(execution, "Error adding direct debit transaction");
                 } else {
-                    execution.setVariable("addDirectDebitTransactionResponse", addDirectDebitTransactionResponse);
+                    execution.setVariable("transactionResponse", transactionResponse);
                 }
             } catch (Exception e) {
                 throwBpmnError(execution, "Error adding direct debit transaction");
