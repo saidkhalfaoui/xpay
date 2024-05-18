@@ -12,13 +12,14 @@ import java.time.ZonedDateTime;
 
 @RestControllerAdvice
 public class HenripayExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(value = {HenripayRequestException.class})
+
+    @ExceptionHandler(value = {HenripayRequestException.class, InvalidInput.class})
     public ResponseEntity<Object> handleHenripayBadRequestException(HenripayRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         HenripayException henripayException = new HenripayException(e.getMessage(),
-                e,
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("Z")));
+        logger.error(e.getMessage());
         return new ResponseEntity<>(henripayException, badRequest);
     }
 
@@ -27,10 +28,10 @@ public class HenripayExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
         HenripayException henripayException = new HenripayException(
                 "An error occurred while accessing the data store",
-                e,
                 internalServerError,
                 ZonedDateTime.now(ZoneId.of("Z"))
         );
+        logger.error(e.getMessage(), e);
         return new ResponseEntity<>(henripayException, internalServerError);
     }
 

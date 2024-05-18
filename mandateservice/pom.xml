@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>3.2.3-SNAPSHOT</version>
+        <version>3.2.5-SNAPSHOT</version>
     </parent>
 
     <artifactId>mandateservice</artifactId>
@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>

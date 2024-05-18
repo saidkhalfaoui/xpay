@@ -3,11 +3,10 @@ package com.henripay.henripayapi.client;
 import com.henripay.henripayapi.dto.UserDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
-import reactor.core.publisher.Mono;
 
 
 public interface UserClient {
 
     @GetExchange("/users/{id}")
-    Mono<UserDTO> getUserDetails(@PathVariable("id") Long userId);
+    UserDTO getUserDetails(@PathVariable("id") Long userId);
 }

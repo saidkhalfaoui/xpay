@@ -24,8 +24,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/TransactionResponse'
 
-
-
   /credit-transfer:
     post:
       summary: Add Credit Transfer Transaction
@@ -42,6 +40,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionResponse'
+
   /get-transaction-status:
     get:
       summary: Get Transaction Status
@@ -78,7 +77,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/TransactionStatusResponse'
 
-
   /update_transaction:
     post:
       summary: Update Direct Debit mandate
@@ -114,8 +112,6 @@ components:
       properties:
         account_info:
           $ref: '#/components/schemas/accountinformation'
-
-
         amount:
           type: number
           example: "10.23"
@@ -128,10 +124,6 @@ components:
         end_to_end_transaction_reference:
           type: string
           example: "f47ac10b58cc4372a5670e02b2c3d479"
-
-
-
-
 
     DirectDebitRequest:
       allOf:
@@ -148,14 +140,6 @@ components:
             internal_transaction_reference:
               type: string
               example: "f47ac10b58cc4372a5670e02b2c3d479"
-
-
-
-
-
-
-
-
 
     CreditTransferRequest:
       allOf:
@@ -174,15 +158,12 @@ components:
           type: string
         end_to_end_transaction_reference:
           type: string
-          nullable: true
         status:
           $ref: '#/components/schemas/statusenum'
         processingStatus:
           $ref: '#/components/schemas/processingstatusenum'
-          nullable: true
         lastUpdated:
           type: string
-
 
     TransactionResponse:
       type: object
@@ -191,16 +172,10 @@ components:
           type: string
         end_to_end_transaction_reference:
           type: string
-          nullable: true
         status:
           $ref: '#/components/schemas/statusenum'
         status_description:
           type: string
-
-
-
-
-
 
     TransactionUpdateRequest:
       type: object
@@ -233,14 +208,10 @@ components:
           example: "Paying Guy"
         address:
           $ref: '#/components/schemas/address'
-
-
-
         alternativeaccountnumber:
           type: string
         taxinfo:
           $ref: '#/components/schemas/taxinfo'
-
 
     mandateinformation:
       type: object
@@ -258,8 +229,6 @@ components:
           type: boolean
         electronicsignature:
           type: string
-
-
     address:
       type: object
       properties:
@@ -356,7 +325,6 @@ components:
               type: string
               format: date-time
 
-
     CreditorInfo:
       type: object
       properties:
@@ -374,5 +342,3 @@ components:
         file_path:
           type: string
           example: sepadd/src/main/resources/batchFiles/file_name.csv
-
-

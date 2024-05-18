@@ -3,7 +3,6 @@ package com.henripay.sepadd.api;
 import com.henripay.sepadd.dto.GenerateBatchFileResponse;
 import com.henripay.sepadd.controller.DirectDebitBatchApiDelegate;
 import com.henripay.sepadd.service.BatchFileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BatchFileApiImpl implements DirectDebitBatchApiDelegate {
 
-    @Autowired
-    private BatchFileService batchFileService;
+    private final BatchFileService batchFileService;
 
-    @Autowired
-    public void GetBatchFileService(BatchFileService batchFileService) {
+    public BatchFileApiImpl(BatchFileService batchFileService) {
         this.batchFileService = batchFileService;
     }
 
@@ -28,11 +25,10 @@ public class BatchFileApiImpl implements DirectDebitBatchApiDelegate {
     public ResponseEntity<GenerateBatchFileResponse> directDebitBatchPost() {
         try {
             return ResponseEntity.ok(this.batchFileService.generateBatchFile());
-        }catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
-
 
 
 }

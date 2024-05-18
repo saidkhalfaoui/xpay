@@ -1,10 +1,13 @@
 package com.henripay.spellclientservice.service;
 
+import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
+import com.henripay.spellclientservice.api.model.DirectPostResponseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
 import com.henripay.spellclientservice.api.model.DirectPostRequestDto;
 import com.henripay.spellclientservice.api.model.DirectPostResponseDto;
 import com.henripay.spellclientservice.service.impl.DirectPostServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -53,7 +56,7 @@ class DirectPostServiceImplTest {
         DirectPostResponseDto actualResponseDto = directPostService.doDirectPost(directPostUrl, requestDto);
 
         // Assert
-        assertEquals(expectedResponseDto, actualResponseDto);
+        Assertions.assertEquals(expectedResponseDto, actualResponseDto);
         verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(directPostUrl + "?s2s=true"), eq(requestDto), eq(apiKey), eq(DirectPostResponseDto.class));
     }
 

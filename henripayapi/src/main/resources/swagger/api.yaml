@@ -1162,7 +1162,7 @@ paths:
       summary: List all billing template clients for this billing template.
       tags:
         - Billing
-  /billing_templates/{id}/clients/{id_c}/:
+  /billing_templates/clients/{id}/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
@@ -1324,10 +1324,10 @@ paths:
                     type: string
 
       summary: List recurring tokens saved for a client.
-
       tags:
         - Clients
-  /clients/{id}/recurring_tokens/{id_rt}/:
+
+  /clients/{id}/recurring_tokens2/:
     parameters:
       - $ref: '#/components/parameters/id'
     get:
@@ -3602,7 +3602,6 @@ components:
           type: string
         end_to_end_transaction_reference:
           type: string
-          nullable: true
         status:
           $ref: '#/components/schemas/statusenum'
         status_description:
@@ -3639,7 +3638,6 @@ components:
           $ref: '#/components/schemas/statusenum'
         processingStatus:
           $ref: '#/components/schemas/processingstatusenum'
-          nullable: true
         lastUpdated:
           type: string
 

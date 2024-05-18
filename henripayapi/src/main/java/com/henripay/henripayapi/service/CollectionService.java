@@ -1,5 +1,6 @@
 package com.henripay.henripayapi.service;
 
+import com.henripay.common.exception.HenripayRequestException;
 import com.henripay.henripayapi.client.UserClient;
 import com.henripay.henripayapi.config.ProcessConstants;
 import com.henripay.henripayapi.dto.Collectioninformation;
@@ -28,10 +29,8 @@ public class CollectionService {
 
         var processDefinitionKey = ProcessConstants.COLLECTION_PROCESS_KEY;
 
-        var userDetails = userServiceClient
-                .getUserDetails(collectioninformation.getCustomerIdIdentifier())
-                .blockOptional();
-        if (userDetails.isEmpty()) {
+        var userDetails = userServiceClient.getUserDetails(collectioninformation.getCustomerIdIdentifier());
+        if (userDetails == null) {
             throw new InvalidInput("User not found");
         }
 
@@ -43,14 +42,15 @@ public class CollectionService {
         vars.put("collectionInformation", collectioninformation);
         vars.put("mandateId", collectioninformation.getMandateId());
         vars.put("customerId", collectioninformation.getCustomerIdIdentifier());
-        vars.put("customerDetails", userDetails.get());
+        vars.put("customerDetails", userDetails);
         //
         var processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, uuid.toString(), vars);
         //
         if (processInstance instanceof ProcessInstanceWithVariables) {
             Object bpmnError = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnError");
             if (bpmnError != null && bpmnError.equals("TransactionFailed")) {
-                //throw new RuntimeException("Process error");
+                var errorMessage = ((ProcessInstanceWithVariables) processInstance).getVariables().get("bpmnErrorMessage");
+                throw new HenripayRequestException(String.valueOf(errorMessage));
             }
         }
 

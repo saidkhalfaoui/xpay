@@ -1,11 +1,14 @@
 package com.henripay.spellclientservice.service;
 
+import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
+import com.henripay.spellclientservice.api.model.RefundPurchaseDto;
 import com.henripay.spellclientservice.apiClient.ApiClient;
 import com.henripay.spellclientservice.config.SpellConfig;
 import com.henripay.spellclientservice.api.model.PurchaseResponseDto;
 import com.henripay.spellclientservice.api.model.RefundPurchaseDto;
 import com.henripay.spellclientservice.mapper.PurchaseResponseMapper;
 import com.henripay.spellclientservice.service.impl.RefundPurchaseImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -67,7 +70,7 @@ class RefundPurchaseImplTest {
         verify(apiClient, times(1)).makeCall(eq(HttpMethod.POST), eq(baseUrl + "/purchases/123/refund/"), eq(refundPurchaseDto), eq(apiKey), eq(String.class));
 
         // Assert the result
-        assertEquals(purchase, result);
+        Assertions.assertEquals(purchase, result);
     }
 
     @Test

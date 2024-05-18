@@ -9,9 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,10 +28,12 @@ import javax.validation.constraints.NotNull;
 @Validated
 @Tag(name = "deleteTransaction", description = "the deleteTransaction API")
 public class DeleteTransactionApiImpl {
-    Logger logger = LoggerFactory.getLogger(DirectDebitApiImpl.class);
-    @Autowired
-    private TransactionService transactionService;
 
+    private final TransactionService transactionService;
+
+    public DeleteTransactionApiImpl(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
 
     /**
      * DELETE /deleteTransaction : (logical) delete Transaction

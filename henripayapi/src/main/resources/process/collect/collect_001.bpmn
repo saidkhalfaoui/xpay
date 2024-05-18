@@ -69,7 +69,7 @@
     <bpmn:association id="Association_1ne94nq" associationDirection="None" sourceRef="Activity_0znh7dy" targetRef="TextAnnotation_1nkmfh4" />
     <bpmn:association id="Association_1dedkc9" associationDirection="One" sourceRef="Event_0qcjw67" targetRef="Activity_0znh7dy" />
   </bpmn:process>
-  <bpmn:error id="Error_0mdboyr" name="Collect-Failed" errorCode="Collect-Failed" />
+  <bpmn:error id="Error_0mdboyr" name="TransactionFailed" errorCode="TransactionFailed" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="WF-Collect-001">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">

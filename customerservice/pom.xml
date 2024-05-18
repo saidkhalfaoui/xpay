@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.henripay</groupId>
         <artifactId>henripay</artifactId>
-        <version>3.2.3-SNAPSHOT</version>
+        <version>3.2.5-SNAPSHOT</version>
     </parent>
 
     <artifactId>customerservice</artifactId>
@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
@@ -45,7 +45,7 @@
                         <enabled>true</enabled>
                     </layers>
                     <image>
-                        <name>${parent.artifactId}/${project.artifactId}:${project.version}</name>
+                        <name>${project.parent.artifactId}/${project.artifactId}:${project.version}</name>
                     </image>
                 </configuration>
             </plugin>

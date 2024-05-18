@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,19 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.io.IOException;
 
+@Slf4j
 @RestController
 public class DirectDebitApiImpl implements DirectDebitApiDelegate {
 
-    Logger logger = LoggerFactory.getLogger(DirectDebitApiImpl.class);
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    public void GetTransactionService(TransactionService transactionService) {
+    public DirectDebitApiImpl(TransactionService transactionService) {
         this.transactionService = transactionService;
-
     }
-
 
     /**
      * POST /direct-debit : Add Direct Debit Transaction
@@ -43,7 +37,7 @@ public class DirectDebitApiImpl implements DirectDebitApiDelegate {
      * @param directDebitRequest Direct Debit Request (optional)
      * @return Successful transaction (status code 200)
      */
-    @ApiOperation(value = "Add Direct Debit Transaction", nickname = "directDebitPost", notes = "", response = TransactionResponse.class, tags = {})
+    @ApiOperation(value = "Add Direct Debit Transaction", nickname = "directDebitPost", response = TransactionResponse.class, tags = {})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful transaction", response = TransactionResponse.class)})
     @RequestMapping(
@@ -53,7 +47,8 @@ public class DirectDebitApiImpl implements DirectDebitApiDelegate {
             consumes = {"application/json"}
     )
     public ResponseEntity<TransactionResponse> directDebitPost(@ApiParam(value = "Direct Debit Request") @Valid @RequestBody(required = false) DirectDebitRequest directDebitRequest) {
-        logger.info(directDebitRequest.getAccountInfo().getIBAN());
+        if(directDebitRequest.getAccountInfo() != null)
+            log.info(directDebitRequest.getAccountInfo().getIBAN());
 
         TransactionResponse response;
         try {

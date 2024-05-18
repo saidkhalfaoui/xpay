@@ -22,7 +22,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     private final SpellConfig spellConfig;
 
-
     @Autowired
     public PurchaseServiceImpl(PurchaseMapper purchaseMapper, PurchaseResponseMapper purchaseResponseMapper, ApiClient apiClient, SpellConfig spellConfig) {
         this.purchaseMapper = purchaseMapper;

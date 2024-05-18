@@ -1,7 +1,7 @@
 server:
   compression:
     enabled: true
-  port: 7084
+  port: 7081
   servlet:
     encoding:
       charset: UTF-8
