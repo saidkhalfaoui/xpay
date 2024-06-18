@@ -1,8 +1,14 @@
 # Use official PostgreSQL image from Docker Hub as base image
+
+
+# Add the missing GPG keys
+
+
 FROM postgres:14.5
 
 # Expose PostgreSQL port
-EXPOSE 5440
+EXPOSE 5432
+
 
 # Copy custom initialization script for PostgreSQL
 COPY init-db.sh /docker-entrypoint-initdb.d/
@@ -11,8 +17,8 @@ COPY init-db.sh /docker-entrypoint-initdb.d/
 RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh
 
 # Install Liquibase (choose one approach)
-RUN apt-get update && apt-get install -y \
-    openjdk-11-jre-headless \
+RUN apt-get update --allow-unauthenticated  && apt-get install -y \
+    --allow-unauthenticated openjdk-11-jre-headless \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Liquibase change log files

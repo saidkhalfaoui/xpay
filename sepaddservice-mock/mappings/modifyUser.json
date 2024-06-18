@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPathPattern": "/api/users/([0-9]*)",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$.first_name"
+      },
+      {
+        "matchesJsonPath": "$.last_name"
+      },
+      {
+        "matchesJsonPath": "$.birthday"
+      }
+    ]
+  },
+  "response": {
+    "status": 204
+  }
+}

@@ -3,21 +3,21 @@
 actor "Card Holder" as holder
 entity "Merchant" as merchant
 entity "service provider/partner" as mobyyou
-participant "HenriPay Engine" as HenriPay
+participant "xpay Engine" as xpay
 participant "Spell"
 participant "Issuer" as issuer
 holder->merchant: user enters credit card details
 merchant-> mobyyou: add transaction
-mobyyou->HenriPay: add credit card transaction (recurring)
-HenriPay->HenriPay: validators , business rules
-HenriPay-> "Spell": /purchace/userinfo
-"Spell"--> HenriPay : {direct_post_url}
-HenriPay->"Spell": direct_post_url/purchase {(recurring)}
+mobyyou->xpay: add credit card transaction (recurring)
+xpay->xpay: validators , business rules
+xpay-> "Spell": /purchace/userinfo
+"Spell"--> xpay : {direct_post_url}
+xpay->"Spell": direct_post_url/purchase {(recurring)}
 "Spell"->"Spell": processing checks...
 "Spell"-> issuer: authroization request
 issuer --> "Spell" : authorization response
-"Spell"-->HenriPay: transaction completion {sucess}
-HenriPay->"Spell": /direct_post_url/charge {delayed}
-HenriPay-->mobyyou: transaction completion
+"Spell"-->xpay: transaction completion {sucess}
+xpay->"Spell": /direct_post_url/charge {delayed}
+xpay-->mobyyou: transaction completion
 
 @enduml

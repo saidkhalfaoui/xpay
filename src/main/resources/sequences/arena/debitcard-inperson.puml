@@ -4,33 +4,33 @@ actor "Card Holder" as holder
 entity "POS Terminal" as POS
 
 entity "Mobyyou" as mobyyou
-participant "HenriPay" as HenriPay
+participant "xpay" as xpay
 participant "Acquirer" as Acq
 participant "Issuer" as issuer
 holder->POS: user checks in to the Grab&Go store
-POS-> HenriPay: 1 cent transaction
-HenriPay ->Acq: 1 cent transaction
+POS-> xpay: 1 cent transaction
+xpay ->Acq: 1 cent transaction
 Acq -> issuer : ISO100 message [authorization]
 issuer -> Acq : ISO110 message [authorization response]
-Acq -> HenriPay: authorization response
-HenriPay-> mobyyou : authorization response {transactionId, userid}
+Acq -> xpay: authorization response
+xpay-> mobyyou : authorization response {transactionId, userid}
 mobyyou->mobyyou: get IBAN , create mandate
 mobyyou->mobyyou : calculate amount
-mobyyou->HenriPay : initiate sepadd /colection {mandateid , amount}
-HenriPay->HenriPay: validators , business rules , add transaction to file
-HenriPay-->mobyyou : {success}
-HenriPay-->HenriPay : create payment 008.001 file
-HenriPay-->Finxp : batch payment file (scheduled job)
+mobyyou->xpay : initiate sepadd /colection {mandateid , amount}
+xpay->xpay: validators , business rules , add transaction to file
+xpay-->mobyyou : {success}
+xpay-->xpay : create payment 008.001 file
+xpay-->Finxp : batch payment file (scheduled job)
 Finxp--> Finxp : process batch file
-Finxp->HenriPay: Report file
-HenriPay->HenriPay : process reporting file , update transaction status
-HenriPay-> mobyyou : send transaction status notification
+Finxp->xpay: Report file
+xpay->xpay : process reporting file , update transaction status
+xpay-> mobyyou : send transaction status notification
 
-HenriPay-->HenriPay : create payment 002.001 file  (CT transactions)
+xpay-->xpay : create payment 002.001 file  (CT transactions)
 Finxp-->Finxp : process payment order
 Finxp -> mobyyou: Report File
-HenriPay->HenriPay : process reporting file , update transaction status
-HenriPay-> mobyyou : send transaction status notification
+xpay->xpay : process reporting file , update transaction status
+xpay-> mobyyou : send transaction status notification
 
 
 @enduml

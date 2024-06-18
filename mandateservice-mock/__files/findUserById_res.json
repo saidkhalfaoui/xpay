@@ -1,0 +1,8 @@
+{
+  "mandateIdentifier": 12345678,
+  "customer": 1234,
+  "merchant": 1225,
+  "signatureDate": "2024-06-16",
+  "startDate": "2024-06-16",
+  "endDate": "2024-06-16"
+}

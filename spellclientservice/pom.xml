@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.henripay</groupId>
-        <artifactId>henripay</artifactId>
+        <groupId>com.xpay</groupId>
+        <artifactId>xpay</artifactId>
         <version>3.2.5-SNAPSHOT</version>
     </parent>
 
@@ -42,7 +42,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>henripay/${project.artifactId}</repository>
+                    <repository>${project.artifactId}</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/spellclientservice.jar</JAR_FILE>
@@ -112,14 +112,14 @@
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>install-henripay-sdk</id>
+                        <id>install-xpay-sdk</id>
                         <phase>install</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
                             <file>src/main/resources/lib/spell-sdk-1.0-SNAPSHOT.jar</file>
-                            <groupId>com.henripay</groupId>
+                            <groupId>com.xpay</groupId>
                             <artifactId>spell-sdk</artifactId>
                             <version>1.0-SNAPSHOT</version>
                             <packaging>jar</packaging>

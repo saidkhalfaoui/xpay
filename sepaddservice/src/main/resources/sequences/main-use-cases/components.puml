@@ -2,8 +2,8 @@
 'https://plantuml.com/component-diagram
 
 
-package "HenriPay Engine" {
-  HTTPs - [HenriPay APIs]
+package "xpay Engine" {
+  HTTPs - [xpay APIs]
   [Rules Engine]
 }
 

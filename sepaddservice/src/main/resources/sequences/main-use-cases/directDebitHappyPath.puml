@@ -2,37 +2,37 @@
 'https://plantuml.com/sequence-diagram
 entity "Merchant" as merchant
 entity "service provider/partner" as mobyyou
-participant "HenriPay Engine" as HenriPay
+participant "xpay Engine" as xpay
 participant "ISO20022 Interface" as iso
 participant "Mandate Service" as mandateService
 participant "User service" as userservice
 participant "Encryption service" as encryptionService
 
 merchant -> mobyyou : Initiate collection (SepaDD)
-mobyyou -> HenriPay : Add  Direct Debit Request {accountInfo , authorization form}
-HenriPay--> HenriPay: validation , business rules
-HenriPay->userservice: get user details
-userservice-->HenriPay: user accountInfo
-HenriPay->mandateService: get mandate details
+mobyyou -> xpay : Add  Direct Debit Request {accountInfo , authorization form}
+xpay--> xpay: validation , business rules
+xpay->userservice: get user details
+userservice-->xpay: user accountInfo
+xpay->mandateService: get mandate details
 mandateService->encryptionService: decrypt sensetive data
-mandateService-->HenriPay: mandate info
-HenriPay-> iso: Add Direct Debit Transaction
-HenriPay-->mobyyou : {success}
+mandateService-->xpay: mandate info
+xpay-> iso: Add Direct Debit Transaction
+xpay-->mobyyou : {success}
 iso-->iso : create payment 008.001 file
 iso->Bank : batch payment file (scheduled job)
 Bank-->Bank: process payment
 Bank->iso: Reporting Information
 iso-->iso : update transaction status
-HenriPay-> iso : get Transaction status
-iso-->HenriPay : transaction status (success)
-HenriPay-> iso : add Credit Transfer transaction
+xpay-> iso : get Transaction status
+iso-->xpay : transaction status (success)
+xpay-> iso : add Credit Transfer transaction
 iso-->iso: create payment 002.001 file
 iso-> Bank: batch payment file (scheduled job)
 Bank--> Bank : process payment order
 Bank ->iso : Reporting Information
 iso --> iso : update transaction status
-HenriPay --> iso : get transaction status
-iso-->HenriPay : transaction status (success)
-HenriPay -> mobyyou : Completion notification
+xpay --> iso : get transaction status
+iso-->xpay : transaction status (success)
+xpay -> mobyyou : Completion notification
 
 @enduml

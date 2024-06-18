@@ -1,16 +1,13 @@
 
 
 app:
-  name: henripay-api
+  name: xpay-api
   db:
     provider: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     driverClassName: org.postgresql.Driver
-    database: mainhp
-    username: henripay
-    password: pgadmin
-    host: localhost
-    port: 5432
+
+
     show-sql: true
     hibernate:
       ddl-auto: none
@@ -25,7 +22,7 @@ management:
 
 logging:
   level:
-    com.henripay: DEBUG
+    com.xpay: DEBUG
 #    org.springframework.web.client: INFO
 #    org.springframework.web: DEBUG
 #    org.springframework.security: DEBUG

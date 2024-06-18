@@ -7,11 +7,11 @@ Bank->RaboISO20022: Reporting Information (Reject)
 
 RaboISO20022-->RaboISO20022 : update transaction status
 Bank->RaboISO20022: Reporting Information (Reject)
-"HenriPay Engine"-> RaboISO20022 : get Transaction status
-"HenriPay Engine"-> "HenriPay Engine": execute rules
+"xpay Engine"-> RaboISO20022 : get Transaction status
+"xpay Engine"-> "xpay Engine": execute rules
 loop x times
-"HenriPay Engine" ->RaboISO20022 : Add Direct Debit (Retry)
+"xpay Engine" ->RaboISO20022 : Add Direct Debit (Retry)
 end
-"HenriPay Engine" -> mobyyou: Reject Notification
+"xpay Engine" -> mobyyou: Reject Notification
 
 @enduml

@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.henripay</groupId>
-        <artifactId>henripay</artifactId>
+        <groupId>com.xpay</groupId>
+        <artifactId>xpay</artifactId>
         <version>3.2.5-SNAPSHOT</version>
     </parent>
 
@@ -57,7 +57,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.7</version>
                 <configuration>
-                    <repository>henripay/${project.artifactId}</repository>
+                    <repository>${project.artifactId}</repository>
                     <tag>${project.version}</tag>
                     <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>

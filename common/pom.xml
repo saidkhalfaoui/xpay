@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.henripay</groupId>
-        <artifactId>henripay</artifactId>
+        <groupId>com.xpay</groupId>
+        <artifactId>xpay</artifactId>
         <version>3.2.5-SNAPSHOT</version>
     </parent>
 

@@ -6,16 +6,16 @@ autonumber
 Bank -> "Customer" : Fund Return
 Bank --> RaboISO20022: Reporting Info (CAMT.52 with Reject Code REFUNDED)
 RaboISO20022--> RaboISO20022: Process reports
-"HenriPay Engine"-> RaboISO20022: get Transaction status
-"HenriPay Engine"-> "HenriPay Engine" : execute rules
-"HenriPay Engine"--> mobyyou : Refund Notification
-"HenriPay Engine"--> RaboISO20022: add Direct debit Business (Refund)
+"xpay Engine"-> RaboISO20022: get Transaction status
+"xpay Engine"-> "xpay Engine" : execute rules
+"xpay Engine"--> mobyyou : Refund Notification
+"xpay Engine"--> RaboISO20022: add Direct debit Business (Refund)
 RaboISO20022->Bank : batch payment file (scheduled job)
 Bank-->Bank: process payment
 Bank->RaboISO20022: Reporting Information
 RaboISO20022-->RaboISO20022 : update transaction status
-"HenriPay Engine"-> RaboISO20022 : get Transaction status
-RaboISO20022-->"HenriPay Engine" : transaction status (success)
+"xpay Engine"-> RaboISO20022 : get Transaction status
+RaboISO20022-->"xpay Engine" : transaction status (success)
 
 
 @enduml

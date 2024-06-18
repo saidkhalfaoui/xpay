@@ -6,9 +6,9 @@ app:
     provider: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     driverClassName: org.postgresql.Driver
-    database: mainhp
-    username: henripay
-    password: pgadmin
+    database: postgres
+    username: postgres
+    password: postgres
     host: localhost
     port: 5432
     show-sql: true
@@ -25,7 +25,7 @@ management:
 
 logging:
   level:
-    com.henripay: DEBUG
+    com.xpay: DEBUG
 #    org.springframework.web.client: INFO
 #    org.springframework.web: DEBUG
 #    org.springframework.security: DEBUG

@@ -2,26 +2,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.henripay</groupId>
-    <artifactId>henripay</artifactId>
+    <groupId>com.xpay</groupId>
+    <artifactId>xpay</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>HenriPay</name>
-    <description>HenriPay modules</description>
+    <name>xpay</name>
+    <description>xpay modules</description>
 
     <properties>
         <java.version>21</java.version>
     </properties>
 
     <modules>
+        <module>customerservice-mock</module>
+        <module>mandateservice-mock</module>
+        <module>sepaddservice-mock</module>
         <module>common</module>
         <module>customerservice</module>
         <module>domainservice</module>
-        <module>henripayapi</module>
+        <module>xpayapi</module>
         <module>mandateservice</module>
         <module>sepaddservice</module>
 
         <module>spellclientservice</module>
+
     </modules>
 
 </project>

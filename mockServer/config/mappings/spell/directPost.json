@@ -14,10 +14,10 @@
         "jsonBody": {
           "status": "3DS_required",
           "Method": "POST",
-          "URL": "https://payments.henripay.com/s2s/test-acs/",
+          "URL": "https://payments.xpay.com/s2s/test-acs/",
           "PaReq": "txOkay",
           "MD": "SAMPLE_MD",
-          "callback_url": "https://payments.henripay.com/s2s/ee0b6470-5b4c-4bb0-95c8-501bae9f367b/3ds-redirect/zQpRP_0_zzAxRD96AAJvpB10UfAX0AW01dYjy6CjIfU/"
+          "callback_url": "https://payments.xpay.com/s2s/ee0b6470-5b4c-4bb0-95c8-501bae9f367b/3ds-redirect/zQpRP_0_zzAxRD96AAJvpB10UfAX0AW01dYjy6CjIfU/"
         }
       }
     },

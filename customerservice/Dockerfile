@@ -1,9 +1,9 @@
 # Start with a base image containing Java runtime
-FROM adoptopenjdk
+FROM openjdk:21-jdk
 
 # Make port 8080 available to the world outside this container
-EXPOSE 8081
-EXPOSE 8080
+
+EXPOSE 7080
 ADD target/customerservice-0.0.1-SNAPSHOT.jar /app/app.jar
 #HEALTHCHECK --interval=30s --timeout=3s \
 #CMD curl  -f http://localhost:8080/api/health || exit 1

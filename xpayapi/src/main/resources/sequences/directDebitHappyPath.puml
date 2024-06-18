@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+entity "Merchant" as merchant
+
+participant "xpay Engine" as xpay
+participant "SepaDD service" as iso
+participant "Mandate Service" as mandateService
+participant "User service" as userservice
+participant "Encryption service" as encryptionService
+
+merchant -> xpay : /collection {amount , customerid , mandateid}
+xpay--> xpay: validation , business rules
+xpay->userservice: get user details
+userservice->encryptionService: decrypt sensetive data
+encryptionService-->userservice : decrypted accountinfo
+userservice-->xpay: user accountInfo
+xpay->mandateService: get mandate details
+mandateService-->xpay: mandate info
+xpay-> iso: Add Direct Debit Transaction
+xpay-->merchant : {success}
+iso-->iso : create payment 008.001 file
+iso->Bank : batch payment file (scheduled job)
+Bank-->Bank: process payment
+Bank->iso: Reporting file camt.005.001
+iso-->iso : process report file
+xpay-> iso : get Transaction status
+iso-->xpay : transaction status (success)
+xpay-> iso : add Credit Transfer transaction
+iso-->iso: create payment 002.001 file
+iso-> Bank: batch payment file (scheduled job)
+Bank--> Bank : process payment order
+Bank ->iso : Reporting file camt.005.001
+iso --> iso : process report file
+xpay --> iso : get transaction status
+iso-->xpay : transaction status (success)
+xpay -> merchant : Completion notification
+
+@enduml

@@ -13,7 +13,7 @@ package Users {
   entity RaboPSP as rabo
   actor "Customer" as Customer
 }
-package "HenriPay Engine"{
+package "xpay Engine"{
 
   usecase "process Mandate" as processmandate
   usecase "process SEPA request" as UC3

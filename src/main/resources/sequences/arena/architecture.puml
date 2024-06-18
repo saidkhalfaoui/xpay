@@ -7,7 +7,7 @@ package "Mobyyou" {
   [Pos Terminal]
 }
 
-package "HenriPay" {
+package "xpay" {
   HTTP -[Spell]
   HTTP -[Sepadd]
   [orchestrator]

@@ -23,7 +23,7 @@ merchant : <img:merchants.jpg>
 
 
 }
-package "HenriPay Payment Engine"{
+package "xpay Payment Engine"{
 
 
 

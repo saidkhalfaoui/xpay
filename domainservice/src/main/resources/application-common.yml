@@ -32,7 +32,7 @@ spring:
       platform: postgres
   liquibase:
     contexts: local
-    enabled: ${app.db.liquibase.enabled}
+    enabled: true
     change-log: classpath:/db/changelog/db-changelog.yml
   jmx:
     default-domain: ${spring.application.name}

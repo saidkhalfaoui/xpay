@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPathPattern": "/api/v1/direct-debit"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\r\n  \"transactionId\": \"1233348798987\",\r\n  \"end_to_end_transaction_reference\": \"41478765655220\",\r\n  \"status\": \"created\",\r\n  \"status_description\": \"in progress\"\r\n}",
+
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "wiremock"
+    }
+  }
+}
