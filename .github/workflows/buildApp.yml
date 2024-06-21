@@ -1,7 +1,9 @@
 name: xpay CI with Maven
 
-on:  workflow_dispatch
 
+on:
+  pull_request:
+    branches: [ "main" ]
 
 
   
