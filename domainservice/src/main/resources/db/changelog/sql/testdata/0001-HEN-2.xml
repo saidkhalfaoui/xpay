@@ -52,6 +52,7 @@
         </insert>
         <insert tableName="transactions">
             <column name="transaction_type" value="sepa_direct_debit"/>
+            <column name="transaction_id" value="123344555"/>
             <column name="external_transaction_id" valueNumeric="12345"/>
             <column name="sender_id"
                     valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
@@ -109,6 +110,7 @@
         </insert>
         <insert tableName="transactions">
             <column name="transaction_type" value="sepad_credit_transfer"/>
+            <column name="transaction_id" value="1233400"/>
             <column name="external_transaction_id" valueNumeric="67890"/>
             <column name="sender_id"
                     valueComputed="(SELECT customer_id_identifier FROM users ORDER BY customer_id_identifier DESC LIMIT 1)"/>
