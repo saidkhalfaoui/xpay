@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>com.spell</groupId>
-            <artifactId>spell</artifactId>
+            <artifactId>spell-sdk</artifactId>
             <version>1.0.0</version>
         </dependency>
 
