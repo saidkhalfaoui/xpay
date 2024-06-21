@@ -26,9 +26,15 @@ class MandateserviceApplicationTests {
     @Container
     @ServiceConnection
     public static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0-alpine");
-  
+
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    void  contextLoad2()
+    {
+        
     }
 
 }
