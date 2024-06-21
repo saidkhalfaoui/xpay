@@ -27,6 +27,7 @@ spring:
     hikari:
       minimumIdle: 100
       maximumPoolSize: 1000
+
   sql:
     init:
       platform: postgres

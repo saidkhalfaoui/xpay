@@ -8,20 +8,65 @@ import com.xpay.domainservice.repository.MerchantRepository;
 import com.xpay.domainservice.repository.UserRepository;
 import com.xpay.mandateservice.dto.MandateDTO;
 import com.xpay.mandateservice.mapper.MandateMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.ws.rs.BadRequestException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ExtendWith(OutputCaptureExtension.class)
+@Testcontainers
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Slf4j
+@Transactional
 class MandateServiceTest {
+
+
+    @Container
+    @ServiceConnection
+    public static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0-alpine");
+
     @Mock
     private MandateRepository mandateRepository;
 
@@ -38,8 +83,24 @@ class MandateServiceTest {
 
     @BeforeEach
     void setUp() {
+        try (Connection connection = DriverManager.getConnection(
+                postgres.getJdbcUrl(),
+                postgres.getUsername(),
+                postgres.getPassword())) {
+            assertThat(connection).isNotNull();
+            assertThat(connection.isValid(5)).isTrue(); // Check connection validity
+            log.info("Database is ok");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         MockitoAnnotations.openMocks(this);
         mandateService = new MandateService(mandateRepository, merchantRepository, userRepository, mandateMapper);
+    }
+
+    @Test
+    void contextLoads() {
     }
 
     @Test
