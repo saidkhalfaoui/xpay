@@ -34,7 +34,7 @@ jobs:
           ref: 'main'
           token: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Install sdk project version:1.0.1
+      - name: Install sdk project version:1.0.0
         run: mvn clean install
       - uses: actions/checkout@v3
         with:
