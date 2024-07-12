@@ -7,6 +7,9 @@ import com.xpay.xpayapi.dto.Collectioninformation;
 import com.xpay.xpayapi.web.error.InvalidInput;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.EventSubscription;
+import org.camunda.bpm.engine.runtime.MessageCorrelationResult;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.springframework.stereotype.Service;
 
@@ -55,8 +58,19 @@ public class CollectionService {
             }
         }
 
-        log.info("Process : " + processInstance.getProcessInstanceId() + " ended");
+        log.info("Process  : " + processInstance.getProcessInstanceId() + " synchronous flow ended");
 
         return processInstance.getId();
     }
+
+    public void catchMessageEvent(String key , String event)
+    {
+        MessageCorrelationResult result = runtimeService.createMessageCorrelation("sepaddnotification")
+                .processInstanceBusinessKey(key)
+                .correlateWithResult();
+        log.info(result.getExecution().getId());
+
+    }
+
+
 }

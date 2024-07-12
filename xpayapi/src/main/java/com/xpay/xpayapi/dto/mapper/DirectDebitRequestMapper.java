@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class DirectDebitRequestMapper {
 
-    public static DirectDebitRequest mapToDirectDebitRequest(DirectDebitRequest directDebitRequest, Collectioninformation collectionInformation, MandateDTO mandateDetails, UserDTO userDetails) {
+    public static DirectDebitRequest mapToDirectDebitRequest(String processId ,DirectDebitRequest directDebitRequest, Collectioninformation collectionInformation, MandateDTO mandateDetails, UserDTO userDetails) {
 
         directDebitRequest.setTransactionType(Transactiontype.FINAL); //todo: set correct transaction type
         directDebitRequest.setAmount(BigDecimal.valueOf(collectionInformation.getAmount()));
@@ -31,7 +31,7 @@ public class DirectDebitRequestMapper {
         directDebitRequest.setAccountInfo(accountinformationRequest);
 
         //todo: see if we need to set the following fields
-        directDebitRequest.endToEndTransactionReference("f47ac10b58cc4372a5670e02b2c3d479");
+        directDebitRequest.endToEndTransactionReference(processId);
 
         return directDebitRequest;
     }

@@ -29,6 +29,8 @@ import org.springframework.test.context.DynamicPropertySource;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -55,7 +57,7 @@ import org.testcontainers.containers.Network;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(OutputCaptureExtension.class)
 @Testcontainers
 
@@ -86,7 +88,7 @@ class xpayIntegrationTest implements
 
 
 
-    // Configure containers to use the shared network
+
 
 
 
@@ -156,6 +158,19 @@ class xpayIntegrationTest implements
 
     @Test
     void collection_test() {
+        // Local address
+
+        try {
+            log.info(InetAddress.getLocalHost().getHostName());
+            log.info(InetAddress.getLocalHost().getHostAddress());
+            log.info(InetAddress.getLoopbackAddress().getHostAddress());
+            log.info(InetAddress.getLoopbackAddress().getHostName());
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Remote address
+
         if (CustomerServiceTestContainer.container.isRunning())
             log.info("dependent container is running");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -168,13 +183,19 @@ class xpayIntegrationTest implements
         }
 
        String  url = "http://localhost:" + port + "/api/v1/collection/";
+       log.info("sending request" + url);
         ResponseEntity<?> response = restTemplate.exchange(
                 url,
                 POST,
                 new HttpEntity<>(collectionInformation),
                 new ParameterizedTypeReference<Object>() {}
         );
-
+        try {
+            Thread.sleep(10000);
+            log.info("i have been sleeping for 10 seconds but nothing happened ");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         assertThat(response.getStatusCode().equals(HttpStatusCode.valueOf(200)) ).isTrue();
 
 
