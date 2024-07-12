@@ -11,5 +11,23 @@
       "Content-Type": "application/json",
       "Server": "wiremock"
     }
-  }
+  },
+  "serveEventListeners": [
+    {
+      "name": "webhook",
+      "parameters": {
+        "method": "POST",
+        "url": "http://10.0.75.1:8080/notification/{{jsonPath originalRequest.body '$.end_to_end_transaction_reference'}}",
+        "delay": {
+          "type": "uniform",
+          "lower": 1000,
+          "upper": 10000
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": "{ \"message\": \"success\", \"transactionId\": \"{{jsonPath originalRequest.body '$.end_to_end_transaction_reference'}}\" }"
+      }
+    }
+  ]
 }

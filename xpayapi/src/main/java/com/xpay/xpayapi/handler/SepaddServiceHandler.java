@@ -28,8 +28,9 @@ public class SepaddServiceHandler {
                 var mandateDetails = (MandateDTO) execution.getVariable("mandateDetails");
                 var userDetails = (UserDTO) execution.getVariable("userDetails");
                 //
+
                 DirectDebitRequest directDebitRequest = new DirectDebitRequest();
-                mapToDirectDebitRequest(directDebitRequest, collectionInformation, mandateDetails, userDetails);
+                mapToDirectDebitRequest(execution.getProcessBusinessKey(),directDebitRequest, collectionInformation, mandateDetails, userDetails);
                 //
                 TransactionResponse transactionResponse = this.sepaddClient.addDirectDebitTransaction(directDebitRequest);
                 if (transactionResponse == null) {
